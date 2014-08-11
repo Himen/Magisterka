@@ -13,5 +13,15 @@ namespace HR.Web_UI.Controllers
         {
             return View();
         }
+
+        public ActionResult UserView()
+        {
+            return View();
+        }
+
+        public ActionResult ManagerView()
+        {
+            return View();
+        }
     }
 }

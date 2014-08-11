@@ -94,6 +94,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\dokumenty.jpg" />
+    <Content Include="Content\Images\glyphicons-halflings-white.png" />
+    <Content Include="Content\Images\glyphicons-halflings.png" />
+    <Content Include="Content\Images\kalendarz.gif" />
+    <Content Include="Content\Images\money_bag.png" />
+    <Content Include="Content\Images\pracownicy.jpg" />
+    <Content Include="Content\Images\szkolenia.png" />
+    <Content Include="Content\Images\wykresy.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -105,6 +113,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\Information.cshtml" />
+    <Content Include="Views\Home\ManagerView.cshtml" />
+    <Content Include="Views\Home\UserView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
