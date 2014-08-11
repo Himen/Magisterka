@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HR.DataAccess.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,12 @@ namespace HR.Web_UI.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            using (var db = new HR_DataContext())
+            {
+                var x = db.Account.FirstOrDefault();
+                var z = x.DataState;
+            }
+
             return View();
         }
 

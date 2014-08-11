@@ -1,5 +1,8 @@
-﻿using System;
+﻿using HR.Core.Models;
+using HR.DataAccess.EF;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +16,7 @@ namespace HR.Web_UI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
         }
     }
 }
