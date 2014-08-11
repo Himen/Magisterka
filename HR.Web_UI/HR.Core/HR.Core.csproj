@@ -39,9 +39,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Enums\AcademicTitleType.cs" />
+    <Compile Include="Enums\AccountType.cs" />
+    <Compile Include="Enums\BenefitType.cs" />
+    <Compile Include="Enums\ContractType.cs" />
+    <Compile Include="Enums\DelegationType.cs" />
+    <Compile Include="Enums\EmploymentType.cs" />
+    <Compile Include="Enums\VacationType.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BenefitsProfit.cs" />
+    <Compile Include="Models\Collage.cs" />
+    <Compile Include="Models\Contract.cs" />
+    <Compile Include="Models\CourseMaterial.cs" />
+    <Compile Include="Models\Delegation.cs" />
+    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Employment.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\OrganiziationalUnit.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\PromotialMaterial.cs" />
+    <Compile Include="Models\Training.cs" />
+    <Compile Include="Models\Vacation.cs" />
+    <Compile Include="Models\WorkRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
