@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F903FE2-8312-46B7-94D1-404EF3AE251E}</ProjectGuid>
+    <ProjectGuid>{B8450C39-F61F-4AB8-A87C-7DA6D5B4CFDC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HR.Core</RootNamespace>
-    <AssemblyName>HR.Core</AssemblyName>
+    <RootNamespace>HR.DataAccess.NH</RootNamespace>
+    <AssemblyName>HR.DataAccess.NH</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,38 +49,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicContract\IRepository.cs" />
-    <Compile Include="BasicContract\IUnityOfWork.cs" />
-    <Compile Include="Enums\AcademicTitleType.cs" />
-    <Compile Include="Enums\AccountType.cs" />
-    <Compile Include="Enums\BenefitType.cs" />
-    <Compile Include="Enums\ContractType.cs" />
-    <Compile Include="Enums\CourseType.cs" />
-    <Compile Include="Enums\DelegationType.cs" />
-    <Compile Include="Enums\EmploymentType.cs" />
-    <Compile Include="Enums\ProfesionType.cs" />
-    <Compile Include="Enums\VacationType.cs" />
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\BankAccount.cs" />
-    <Compile Include="Models\BenefitsProfit.cs" />
-    <Compile Include="Models\Collage.cs" />
-    <Compile Include="Models\College1.cs" />
-    <Compile Include="Models\Contract.cs" />
-    <Compile Include="Models\CourseMaterial.cs" />
-    <Compile Include="Models\Delegation.cs" />
-    <Compile Include="Models\CourseDocuments_REPO.cs" />
-    <Compile Include="Models\Employment.cs" />
-    <Compile Include="Models\Job.cs" />
-    <Compile Include="Models\OrganiziationalUnit.cs" />
-    <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Position.cs" />
-    <Compile Include="Models\PromotialMaterial.cs" />
-    <Compile Include="Models\Training.cs" />
-    <Compile Include="Models\Vacation.cs" />
-    <Compile Include="Models\WorkRegistry.cs" />
+    <Compile Include="Mappings\AccountMapper.cs" />
+    <Compile Include="NHContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="UnityOfWorks\UnityOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HR.Core\HR.Core.csproj">
+      <Project>{1f903fe2-8312-46b7-94d1-404ef3ae251e}</Project>
+      <Name>HR.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

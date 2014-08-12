@@ -5,13 +5,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using HR.Core.BasicContract;
 
 namespace HR.DataAccess.EF.Repositories
 {
-    public class Repository<T> : IRepository<T> where T: class
+    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
         protected DbContext DbContext { get; set; }
-        protected DbSet<T> DbSet { get; set; }
+        protected DbSet<TEntity> DbSet { get; set; }
 
         public Repository(DbContext dbContext)
         {
@@ -22,33 +23,32 @@ namespace HR.DataAccess.EF.Repositories
             else
             {
                 DbContext = dbContext;
-                DbSet = dbContext.Set<T>();
+                DbSet = dbContext.Set<TEntity>();
             }
 
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
             return DbSet;
         }
 
-        public virtual IQueryable<T> Find(Expression<Func<T, bool>> pred)
+        public virtual IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> pred)
         {
             return DbSet.Where(pred);
         }
 
-        public virtual T GetById(long id)
+        public virtual TEntity GetById(TKey id)
         {
             return DbSet.Find(id);
         }
 
-        public virtual T GetByGuid(Guid guid)
-        {
-            return DbSet.Find(guid);
-        }
 
-        public virtual void Remove(T entity)
+        public virtual void Remove(TEntity entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+
             if (DbContext.Entry(entity).State == EntityState.Detached)
             {
                 DbSet.Attach(entity);
@@ -56,19 +56,29 @@ namespace HR.DataAccess.EF.Repositories
 
             DbSet.Remove(entity);
         }
-        public virtual void RemoveById(long id)
+        public virtual void RemoveById(TKey id)
         {
-            T entity = DbSet.Find(id);
+            TEntity entity = DbSet.Find(id);
+
+            if (entity == null)
+                throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+
             Remove(entity);
         }
 
-        public virtual void Add(T entity)
+        public virtual void Add(TEntity entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+
             DbSet.Add(entity);
         }
 
-        public virtual void Update(T entity)
+        public virtual void Update(TEntity entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+
             DbSet.Attach(entity);
             DbContext.Entry(entity).State = EntityState.Modified;
         }

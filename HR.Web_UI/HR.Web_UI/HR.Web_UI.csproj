@@ -191,6 +191,10 @@
       <Project>{92f20bab-4478-48d8-bdba-3a16225b4ce8}</Project>
       <Name>HR.DataAccess.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HR.DataAccess.NH\HR.DataAccess.NH.csproj">
+      <Project>{b8450c39-f61f-4ab8-a87c-7da6d5b4cfdc}</Project>
+      <Name>HR.DataAccess.NH</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
