@@ -28,6 +28,12 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult ManagerView()
         {
+
+            using (var db = new HR_DataContext())
+            {
+                var x = db.Persons.ToList();
+                var z = x.Count();
+            }
             return View();
         }
     }
