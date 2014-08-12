@@ -20,6 +20,10 @@ namespace HR.DataAccess.NH.Repositories
 
         protected ISession Session { get { return session; } }
 
+        /// <summary>
+        /// To trzeba wstrzyknac w Ninject z NHContext
+        /// </summary>
+        /// <param name="_session"></param>
         public Repository(ISession _session)
 	    {
             session =  _session;

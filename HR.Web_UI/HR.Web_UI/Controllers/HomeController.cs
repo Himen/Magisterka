@@ -1,4 +1,5 @@
-﻿using HR.DataAccess.EF;
+﻿using HR.Core.BasicContract;
+using HR.DataAccess.EF;
 using HR.DataAccess.EF.UnityOfWorks;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,17 @@ namespace HR.Web_UI.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+        //private readonly IRepository<HR.Core.Models.Account, long> unityOfWork;
+        private IGlobalUnityOfWork<HR_DataContext, HR_DataContext, HR_DataContext, HR.DataAccess.EF.Repositories.Repository<HR.Core.Models.Account, long>> unityOfWork;
+
+        public HomeController(IGlobalUnityOfWork<HR_DataContext, HR_DataContext, HR_DataContext, HR.DataAccess.EF.Repositories.Repository<HR.Core.Models.Account, long>> _unityOfWork)
+        {
+            this.unityOfWork = _unityOfWork;
+        }
+
         public ActionResult Index()
         {
-            UnityOfWork u = new UnityOfWork();
-            var account = u.AccountRepository.GetAll().ToList();
+            var account = unityOfWork.AccountRepository.GetAll().ToList();
 
             using (var db = new HR_DataContext())
             {
