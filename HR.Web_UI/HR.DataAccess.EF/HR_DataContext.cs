@@ -11,7 +11,7 @@ namespace HR.DataAccess.EF
     {
         public HR_DataContext(): base("HR_Database")
         {
-            Database.SetInitializer<HR_DataContext>(new SchoolDBInitializer());
+            Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
         }
 
         public DbSet<Account> Account { get; set; }
@@ -33,7 +33,7 @@ namespace HR.DataAccess.EF
             base.OnModelCreating(modelBuilder);
         }
     }
-    public class SchoolDBInitializer : DropCreateDatabaseIfModelChanges<HR_DataContext>
+    public class HRDBInitializer : DropCreateDatabaseIfModelChanges<HR_DataContext>
     {
         protected override void Seed(HR_DataContext context)
         {

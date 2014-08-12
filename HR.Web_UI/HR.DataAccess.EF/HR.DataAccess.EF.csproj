@@ -56,6 +56,10 @@
     <Compile Include="Mapping\CourseMaterialMapper.cs" />
     <Compile Include="Mapping\PersonMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="UnityOfWorks\IUnityOfWork.cs" />
+    <Compile Include="UnityOfWorks\UnityOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HR.Core\HR.Core.csproj">

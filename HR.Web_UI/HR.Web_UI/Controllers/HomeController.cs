@@ -1,4 +1,5 @@
 ﻿using HR.DataAccess.EF;
+using HR.DataAccess.EF.UnityOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,13 @@ namespace HR.Web_UI.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            UnityOfWork u = new UnityOfWork();
+            var account = u.AccountRepository.GetAll().ToList();
+
             using (var db = new HR_DataContext())
             {
-                var x = db.Account.FirstOrDefault();
-                var z = x.DataState;
+                var x = db.Account.ToList();
+                var z = x.Count;
             }
 
             return View();
@@ -32,7 +36,7 @@ namespace HR.Web_UI.Controllers
             using (var db = new HR_DataContext())
             {
                 var x = db.Persons.ToList();
-                var z = x.Count();
+                var z = x.Count;
             }
             return View();
         }
