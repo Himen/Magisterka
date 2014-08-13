@@ -1,11 +1,10 @@
 ﻿
+using HR.Core.BasicContract;
 namespace HR.Core.Models
 {
-    public class Contract
+    public class Contract:BaseEntity<long>
     {
-        public long Id { get; set; }
         public long IdEmployment { get; set; }
-        public int DataState { get; set; }
         public decimal? MonthBenefit { get; set; }
         public decimal? BenefitPerHour { get; set; }
 

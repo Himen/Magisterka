@@ -72,6 +72,7 @@ using HR.Core.BasicContract;
                       .To<HR.DataAccess.EF.Repositories.Repository<Account, long>>()
                       .WithConstructorArgument("dbContext", new HR_DataContext());
 
+                    //jeszcze przemyslec takie rozwiazanie, jak sie nie bedzie dalo to robic tak jak wyzej 
                      kernel.Bind<IGlobalUnityOfWork<HR_DataContext, HR_DataContext, HR_DataContext, HR.DataAccess.EF.Repositories.Repository<Account, long>>>().
                          To<HR.DataAccess.EF.UnityOfWorks.UnityOfWork>();
 

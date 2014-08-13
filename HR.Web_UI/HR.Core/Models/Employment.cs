@@ -1,13 +1,12 @@
-﻿using HR.Core.Enums;
+﻿using HR.Core.BasicContract;
+using HR.Core.Enums;
 using System;
 
 namespace HR.Core.Models
 {
-    public class Employment
+    public class Employment : BaseEntity<long>
     {
-        public long Id { get; set; }
         public long IdPerson { get; set; }
-        public int DataState { get; set; }
         public string PositionCode { get; set; }
         public string OrganiziationalUnitCode { get; set; }
         public DateTime StartDate { get; set; }

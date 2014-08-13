@@ -1,10 +1,10 @@
-﻿
+﻿using HR.Core.BasicContract;
 using HR.Core.Enums;
+
 namespace HR.Core.Models
 {
-    public class CourseMaterial
+    public class CourseMaterial : BaseEntity<long>
     {
-        public long Id { get; set; }
         public string Name { get; set; }
         /// <summary>
         /// Mozna potem na enuma zmienic

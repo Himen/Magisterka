@@ -1,4 +1,5 @@
-﻿using HR.Core.Enums;
+﻿using HR.Core.BasicContract;
+using HR.Core.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -7,11 +8,9 @@ namespace HR.Core.Models
     /// <summary>
     /// To moze byc pracownik jak i rowniez kandydat
     /// </summary>
-    public class Person
+    public class Person : BaseEntity<long>
     {
-        public long Id { get; set; }
-        public long? DirectorId { get; set; }
-        public int DataState { get; set; }
+        public long? ManagerId { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -37,5 +36,9 @@ namespace HR.Core.Models
         //jeszcze relacje z innymi tabelami 
 
         public virtual ICollection<College> Colleges { get; set; }
+
+        public virtual Delegation Delegation { get; set; }
+
+        public virtual Person Manager { get; set; }
     }
 }

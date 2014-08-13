@@ -1,10 +1,10 @@
-﻿using System;
+﻿using HR.Core.BasicContract;
+using System;
 
 namespace HR.Core.Models
 {
-    public class CourseDocuments_REPO
+    public class CourseDocuments_REPO: BaseEntity<Guid>
     {
-        public Guid Guid { get; set; }
         public byte[] Content { get; set; }//dooooooooooooookument itd
         public string FileName { get; set; }
         public string FileType { get; set; }

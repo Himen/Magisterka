@@ -1,4 +1,5 @@
-﻿using HR.Core.Enums;
+﻿using HR.Core.BasicContract;
+using HR.Core.Enums;
 using System;
 
 namespace HR.Core.Models
@@ -6,14 +7,12 @@ namespace HR.Core.Models
     /// <summary>
     /// Opisuje dni wolne pracownika. Musi byc porownywane z WorkRegistry
     /// </summary>
-    public class Vacation
+    public class Vacation : BaseEntity<long>
     {
-        public long Id { get; set; }
         public long IdPerson { get; set; }
         /// <summary>
         /// Pracodawca musi zatwierdzic urlop pracownika
         /// </summary>
-        public int DataState { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 

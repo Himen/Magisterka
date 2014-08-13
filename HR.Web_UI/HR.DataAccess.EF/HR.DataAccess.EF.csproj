@@ -54,7 +54,12 @@
     <Compile Include="Mapping\ContractMapper.cs" />
     <Compile Include="Mapping\CourseDocument_REPO_Mapper.cs" />
     <Compile Include="Mapping\CourseMaterialMapper.cs" />
+    <Compile Include="Mapping\DelegationMapper.cs" />
+    <Compile Include="Mapping\EmploymentMapper.cs" />
+    <Compile Include="Mapping\JobMapper.cs" />
+    <Compile Include="Mapping\OrganiziationalUnitMapper.cs" />
     <Compile Include="Mapping\PersonMapper.cs" />
+    <Compile Include="Mapping\PositionMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="UnityOfWorks\UnityOfWork.cs" />

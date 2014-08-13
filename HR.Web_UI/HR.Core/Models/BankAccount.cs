@@ -1,10 +1,9 @@
 ﻿
+using HR.Core.BasicContract;
 namespace HR.Core.Models
 {
-    public class BankAccount
+    public class BankAccount : BaseEntity<long>
     {
-        public long Id { get; set; }
-        public int DataState { get; set; }
         public string BankName { get; set; }
         public string BankAddress { get; set; }
         public long AccountNumber { get; set; }

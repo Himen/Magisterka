@@ -1,9 +1,9 @@
 ﻿
+using HR.Core.BasicContract;
 namespace HR.Core.Models
 {
-    public class Position
+    public class Position : BaseEntity<long>
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } // nie zmieniac na enum, zeby latwo mozna bylo dodawac pozycje
     }
 }

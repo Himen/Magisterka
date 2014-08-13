@@ -11,8 +11,8 @@ namespace HR.DataAccess.EF.Mapping
         {
             this.ToTable("REPO.CourseDocuments");
 
-            this.HasKey(c=>c.Guid);
-            this.Property(c => c.Guid).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).IsRequired();
+            this.HasKey(c=>c.Id);
+            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).IsRequired();
 
             this.Property(c=>c.Content).IsRequired();
 

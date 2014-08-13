@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HR.Core.BasicContract;
+using System;
 
 namespace HR.Core.Models
 {
@@ -6,9 +7,8 @@ namespace HR.Core.Models
     /// Umożliwić wielokrotne wychodzenie i wchodzenie.
     /// Przemyslec nadgodziny. Uwzględnic wolne, swieta, urlopy. Kalendarz pracy.
     /// </summary>
-    public class WorkRegistry
+    public class WorkRegistry : BaseEntity<long>
     {
-        public long Id { get; set; }
         public long IdPerson { get; set; }
         public DateTime Date { get; set; }
         public DateTime? DateIn { get; set; }

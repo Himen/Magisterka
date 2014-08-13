@@ -1,10 +1,12 @@
 ﻿
+using HR.Core.BasicContract;
 namespace HR.Core.Models
 {
-    public class OrganiziationalUnit
+    public class OrganiziationalUnit : BaseEntity<long>
     {
-        public long Id { get; set; }
         public string Name { get; set; }
-        public long IdDirector { get; set; }
+        public long IdManager { get; set; }
+
+        public virtual Person Manager { get; set; }
     }
 }

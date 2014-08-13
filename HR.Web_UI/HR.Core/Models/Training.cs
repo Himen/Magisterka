@@ -1,14 +1,12 @@
-﻿using System;
+﻿using HR.Core.BasicContract;
+using System;
 
 namespace HR.Core.Models
 {
-    public class Training
+    public class Training : BaseEntity<long>
     {
-        public int Id { get; set; }
-        public int DataState { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
         public DateTime DateOfPass { get; set; }
-
     }
 }
