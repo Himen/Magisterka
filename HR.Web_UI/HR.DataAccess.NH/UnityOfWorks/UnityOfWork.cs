@@ -12,12 +12,16 @@ namespace HR.DataAccess.NH.UnityOfWorks
 {
     public class UnityOfWork :  IUnityOfWork
     {
-        private readonly ISession session;
-        private ITransaction transaction;
+        public readonly ISession session;
+        private static ITransaction transaction;
 
-        private Repository<Account, long> accountRepository;
+        public UnityOfWork()
+        {
+            session = NHContext.OpenSession();
+            transaction = session.BeginTransaction();
+        }
 
-        public UnityOfWork(ISession _session)
+        public UnityOfWork(ISession _session )
         {
             session = _session;
             transaction = _session.BeginTransaction();

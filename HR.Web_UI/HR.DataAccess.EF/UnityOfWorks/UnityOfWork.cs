@@ -16,25 +16,9 @@ namespace HR.DataAccess.EF.UnityOfWorks
     /// mozna jeszcze rozszezyc od rzeczy bedace tam;
     /// http://www.asp.net/mvc/tutorials/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
     /// </summary>
-    public class UnityOfWork : IGlobalUnityOfWork<HR_DataContext, HR_DataContext, HR_DataContext, HR.DataAccess.EF.Repositories.Repository<Account, long>>, IUnityOfWork
+    public class UnityOfWork : IUnityOfWork
     {
-        private Repository<Account,long> accountRepository;
-        HR_DataContext context = new HR_DataContext();
-
-        #region Repository Classes
-        public override Repository<Account, long> AccountRepository 
-        {
-            get 
-            {
-                if (this.accountRepository == null)
-                    this.accountRepository = new Repository<Account, long>(context);
-                return accountRepository;
-            }
-        }
-
-        //other classes
-
-        #endregion
+        public HR_DataContext context = new HR_DataContext();    
 
         public void SaveChanges()
         {

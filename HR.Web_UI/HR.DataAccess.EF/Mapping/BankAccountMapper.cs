@@ -14,7 +14,11 @@ namespace HR.DataAccess.EF.Mapping
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c=>c.Id);
 
-            this.Property(c=>c.DataState);
+            this.Property(c => c.DataState).HasColumnType("tinyint");
+
+            this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
+
+            this.Property(c => c.EditDate).HasColumnType("date");
 
             this.Property(c => c.BankName);
 

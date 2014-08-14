@@ -1,4 +1,6 @@
-﻿using HR.Core.Models;
+﻿
+
+using HR.Core.Models;
 using HR.DataAccess.EF;
 using System;
 using System.Collections.Generic;

@@ -16,8 +16,21 @@ namespace HR.DataAccess.EF
 
         public DbSet<Account> Account { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<BenefitsProfit> BenefitsProfits { get; set; }
         public DbSet<College> Colleges { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<CourseDocuments_REPO> CourseDocuments_REPOs { get; set; }
+        public DbSet<CourseMaterial> CourseMaterials { get; set; }
+        public DbSet<Delegation> Delegations { get; set; }
+        public DbSet<Employment> Employments { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<OrganiziationalUnit> OrganiziationalUnits { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<PromotialMaterial> PromotialMaterials { get; set; }
+        public DbSet<Training> Trainings { get; set; }
+        public DbSet<Vacation> Vacations { get; set; }
+        public DbSet<WorkRegistry> WorkRegistrys { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,7 +41,12 @@ namespace HR.DataAccess.EF
             modelBuilder.Configurations.Add(new ContractMapper());
             modelBuilder.Configurations.Add(new CourseDocument_REPO_Mapper());
             modelBuilder.Configurations.Add(new CourseMaterialMapper());
+            modelBuilder.Configurations.Add(new DelegationMapper());
+            modelBuilder.Configurations.Add(new EmploymentMapper());
+            modelBuilder.Configurations.Add(new JobMapper());
+            modelBuilder.Configurations.Add(new OrganiziationalUnitMapper());
             modelBuilder.Configurations.Add(new PersonMapper());
+            modelBuilder.Configurations.Add(new PositionMapper());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -47,7 +65,7 @@ namespace HR.DataAccess.EF
                 context.Account.Add(item);
             }
 
-            List<Person> personsList = new List<Person>();
+            /*List<Person> personsList = new List<Person>();
             personsList.Add(new Person() { ApartmentNumber=12, BuildingNumber=2, City="Częstochowa", DataState=1, DateOfBirth=new DateTime(1999,2,18),FirstName="Tomasz", Surname="Jasiński",Street="Kokosowa",Profession=ProfesionType.Programista_ASP_NET_MVC,PostalCode="204-12",NIP=1478523697 , IDCard="AED159753", PESEL="15875235874" });
             personsList.Add(new Person() { ApartmentNumber = 12, BuildingNumber = 2, City = "Częstochowa", DataState = 1, DateOfBirth = new DateTime(1999, 2, 18), FirstName = "Tomasz", Surname = "Jasiński", Street = "Kokosowa", Profession = ProfesionType.Human_Resource, PostalCode = "204-12", NIP = 1478523697, IDCard = "DEF153453", PESEL="35874528568" });
             personsList.Add(new Person() { ApartmentNumber = 12, BuildingNumber = 2, City = "Częstochowa", DataState = 1, DateOfBirth = new DateTime(1999, 2, 18), FirstName = "Tomasz", Surname = "Jasiński", Street = "Kokosowa", Profession = ProfesionType.CEO, PostalCode = "204-12", NIP = 1478523697, IDCard = "BVD158853" , PESEL="584586853589"});
@@ -56,7 +74,7 @@ namespace HR.DataAccess.EF
             foreach (var item in personsList)
             {
                 context.Persons.Add(item);
-            }
+            }*/
 
             base.Seed(context);
         }

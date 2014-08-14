@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HR.Core.BasicContract
 {
-    public abstract class IGlobalUnityOfWork<TSession,TTransaction,TContext,TRepository> 
+    public abstract class GlobalUnityOfWorkBase<TSession, TTransaction, TContext> 
     where TSession : class 
     where TTransaction : class
     where TContext : class
@@ -21,7 +21,5 @@ namespace HR.Core.BasicContract
             public TContext context;
         #endregion
 
-            protected TRepository accountRepository;
-            public abstract TRepository AccountRepository {get;}
     }
 }

@@ -8,7 +8,7 @@ namespace HR.DataAccess.EF.Mapping
     {
         public ContractMapper()
         {
-            this.ToTable("Contract");
+            this.ToTable("Contracts");
 
             this.HasKey(c=>c.Id);
             this.Property(c => c.Id).IsRequired();
@@ -16,13 +16,16 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c=>c.IdEmployment);
 
-            this.Property(c => c.DataState);
+            this.Property(c => c.DataState).HasColumnType("tinyint");
+
+            this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
+
+            this.Property(c => c.EditDate).HasColumnType("date");
 
             this.Property(c => c.BenefitPerHour);
 
             this.Property(c => c.MonthBenefit);
 
-            this.HasRequired<Employment>(c => c.Employment).WithRequiredDependent(c=>c.Contract);
         }
     }
 }

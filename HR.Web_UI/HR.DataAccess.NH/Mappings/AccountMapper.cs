@@ -8,10 +8,10 @@ namespace HR.DataAccess.NH.Mappings
         {
             Table("Accounts");
             Id(c => c.Id).GeneratedBy.Identity();
-            Map(c => c.Password).CustomSqlType("nvarchar(30)");
+            Map(c => c.Password);
             Map(c=>c.Photo);
             Map(c=>c.UserName);
-            Map(c=>c.AccountType);
+            Map(c => c.AccountType).CustomType<int>(); ;
             Map(c=>c.DataState);
         }
     }

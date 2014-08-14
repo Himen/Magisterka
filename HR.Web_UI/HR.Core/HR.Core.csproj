@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicContract\BaseEntity.cs" />
-    <Compile Include="BasicContract\IGlobalUnityOfWork.cs" />
+    <Compile Include="BasicContract\GlobalUnityOfWorkBase.cs" />
     <Compile Include="BasicContract\IRepository.cs" />
     <Compile Include="BasicContract\IUnityOfWork.cs" />
     <Compile Include="Enums\AcademicTitleType.cs" />

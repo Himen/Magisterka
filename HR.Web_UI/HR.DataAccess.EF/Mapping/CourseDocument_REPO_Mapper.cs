@@ -14,6 +14,12 @@ namespace HR.DataAccess.EF.Mapping
             this.HasKey(c=>c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).IsRequired();
 
+            this.Property(c => c.DataState).HasColumnType("tinyint");
+
+            this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
+
+            this.Property(c => c.EditDate).HasColumnType("date");
+
             this.Property(c=>c.Content).IsRequired();
 
             this.Property(c=>c.FileName);

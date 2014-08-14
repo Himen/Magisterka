@@ -13,6 +13,10 @@ using System.Web.Configuration;
 using HR.Core.BasicContract;
     using HR.DataAccess.EF;
     using HR.Core.Models;
+    using HR.DataAccess.GLOBAL.UnityOfWork;
+    using NHibernate;
+    using HR.DataAccess.EF.Repositories;
+    using HR.DataAccess.GLOBAL.UnityOfWorks;
 
     public static class NinjectWebCommon 
     {
@@ -68,16 +72,14 @@ using HR.Core.BasicContract;
             switch (ormType)
             {
                 case "EF":
-                     kernel.Bind<IRepository<Account, long>>()
-                      .To<HR.DataAccess.EF.Repositories.Repository<Account, long>>()
-                      .WithConstructorArgument("dbContext", new HR_DataContext());
 
-                    //jeszcze przemyslec takie rozwiazanie, jak sie nie bedzie dalo to robic tak jak wyzej 
-                     kernel.Bind<IGlobalUnityOfWork<HR_DataContext, HR_DataContext, HR_DataContext, HR.DataAccess.EF.Repositories.Repository<Account, long>>>().
-                         To<HR.DataAccess.EF.UnityOfWorks.UnityOfWork>();
+                    kernel.Bind<IAdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
+                        .To<AdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
 
                     break;
                 case "NH":
+                    kernel.Bind<IAdminUnityOfWork<HR.DataAccess.NH.Repositories.Repository<Account, long>, HR.DataAccess.NH.UnityOfWorks.UnityOfWork>>()
+                        .To<AdminUnityOfWork<HR.DataAccess.NH.Repositories.Repository<Account, long>, HR.DataAccess.NH.UnityOfWorks.UnityOfWork>>();
 
                     break;
 

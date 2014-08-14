@@ -3,6 +3,7 @@ using FluentNHibernate.Cfg.Db;
 using HR.Core.Models;
 using HR.DataAccess.NH.Mappings;
 using NHibernate;
+using NHibernate.Cache;
 using NHibernate.Cfg;
 using NHibernate.Connection;
 using NHibernate.Dialect;
@@ -18,7 +19,7 @@ namespace HR.DataAccess.NH
     public class NHContext
     {
         //powinien byc const ale nie dzialalo, spr potem
-        private static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["HR_Database"].ToString();
+        //private static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["HR_Database"].ToString();
 
         private static ISessionFactory sessionFactory;
 
@@ -36,12 +37,13 @@ namespace HR.DataAccess.NH
         private static void InitializeSessionFactory()
         {
             sessionFactory = Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(CONNECTION_STRING).ShowSql())
-                .Mappings(m => m.FluentMappings
-                            .AddFromAssemblyOf<Account>()
-                         )
-                .ExposeConfiguration(c => new SchemaExport(c).Create(true, true))
-                .BuildSessionFactory();
+                            .Database(MsSqlConfiguration.MsSql2008.ConnectionString(c =>
+                                c.FromConnectionStringWithKey("HR_Database1")))
+                            .Cache(c => c.UseQueryCache().ProviderClass<HashtableCacheProvider>())
+                            .Mappings(m => m.FluentMappings.AddFromAssemblyOf<AccountMapper>())
+                            .ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true, true))
+                            .BuildConfiguration()
+                            .BuildSessionFactory();
         }
 
         public static ISession OpenSession()
