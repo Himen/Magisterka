@@ -14,6 +14,8 @@ namespace HR.Core.BasicContract
         TEntity GetById(TKey id);
         void Remove(TEntity entity);
         void RemoveById(TKey id);
+        void RemoveFinaly(TEntity entity);
+        void RemoveFinalyById(TKey id);
         void Add(TEntity entity);
         void Update(TEntity entity);
     }

@@ -79,5 +79,16 @@ namespace HR.DataAccess.NH.Repositories
 
             session.SaveOrUpdate(entity);
         }
+
+
+        public void RemoveFinaly(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveFinalyById(TKey id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -58,8 +58,10 @@ namespace HR.Web_UI.Controllers
             foreach (var item in list)
             {
                 admUnityOfWork.AccountRepo.Add(item);
+                admUnityOfWork.UnityOfWork.SaveChanges();
+                admUnityOfWork.AccountRepo.Remove(item);
             }
-            admUnityOfWork.UnityOfWork.SaveChanges();
+            
 
             return View();
         }

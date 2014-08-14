@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using HR.Core.BasicContract;
+using System.Reflection;
 
 namespace HR.DataAccess.EF.Repositories
 {
@@ -43,8 +44,29 @@ namespace HR.DataAccess.EF.Repositories
             return DbSet.Find(id);
         }
 
+        public void Remove(TEntity entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+#warning do sprawdzenia
+            // trzeba pobrac nazwe atrybutu DataState i modified date
+            //http://stackoverflow.com/questions/9113020/get-attribute-info-with-generics
+            //http://stackoverflow.com/questions/1089123/setting-a-property-by-reflection-with-a-string-valuev
 
-        public virtual void Remove(TEntity entity)
+            PropertyInfo propertyInfo = entity.GetType().GetProperty("DataState");
+            propertyInfo.SetValue(entity, Convert.ChangeType(0, propertyInfo.PropertyType), null);
+
+            DbSet.Attach(entity);
+            DbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void RemoveById(TKey id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public virtual void RemoveFinaly(TEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
@@ -56,14 +78,14 @@ namespace HR.DataAccess.EF.Repositories
 
             DbSet.Remove(entity);
         }
-        public virtual void RemoveById(TKey id)
+        public virtual void RemoveFinalyById(TKey id)
         {
             TEntity entity = DbSet.Find(id);
 
             if (entity == null)
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
 
-            Remove(entity);
+            RemoveFinaly(entity);
         }
 
         public virtual void Add(TEntity entity)
@@ -82,5 +104,6 @@ namespace HR.DataAccess.EF.Repositories
             DbSet.Attach(entity);
             DbContext.Entry(entity).State = EntityState.Modified;
         }
+
     }
 }
