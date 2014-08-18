@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HR.Core.BasicContract;
 using System.Linq.Expressions;
 using NHibernate.Linq;
+using System.Reflection;
 
 namespace HR.DataAccess.NH.Repositories
 {
@@ -40,6 +41,11 @@ namespace HR.DataAccess.NH.Repositories
             return session.Query<TEntity>().Where(pred);
         }
 
+        /// <summary>
+        /// Trzeba jeszcze zapewnic zeby byly pobierane tylko te dane, ktorych Data State jest 1
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public TEntity GetById(TKey id)
         {
             return session.Get<TEntity>(id);
@@ -49,8 +55,14 @@ namespace HR.DataAccess.NH.Repositories
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
-            
-            session.Delete(entity);
+
+            PropertyInfo propertyInfo = entity.GetType().GetProperty("DataState");
+            propertyInfo.SetValue(entity, Convert.ChangeType(0, propertyInfo.PropertyType), null);
+
+            propertyInfo = entity.GetType().GetProperty("EditDate");
+            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
+
+            session.SaveOrUpdate(entity);
         }
 
         public void RemoveById(TKey id)
@@ -60,8 +72,13 @@ namespace HR.DataAccess.NH.Repositories
             if (entity == null)
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
 
-            Remove(entity);
+            PropertyInfo propertyInfo = entity.GetType().GetProperty("DataState");
+            propertyInfo.SetValue(entity, Convert.ChangeType(0, propertyInfo.PropertyType), null);
 
+            propertyInfo = entity.GetType().GetProperty("EditDate");
+            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
+
+            session.SaveOrUpdate(entity);
         }
 
         public void Add(TEntity entity)
@@ -77,18 +94,29 @@ namespace HR.DataAccess.NH.Repositories
             if (entity == null)
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
 
+            PropertyInfo propertyInfo = entity.GetType().GetProperty("EditDate");
+            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
+
             session.SaveOrUpdate(entity);
         }
 
 
         public void RemoveFinaly(TEntity entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+                throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+
+            session.Delete(entity);
         }
 
         public void RemoveFinalyById(TKey id)
         {
-            throw new NotImplementedException();
+            TEntity entity = session.Get<TEntity>(id);
+
+            if (entity == null)
+                throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+
+            RemoveFinaly(entity);
         }
     }
 }

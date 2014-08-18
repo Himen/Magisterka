@@ -48,13 +48,16 @@ namespace HR.DataAccess.EF.Repositories
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
-#warning do sprawdzenia
+
             // trzeba pobrac nazwe atrybutu DataState i modified date
             //http://stackoverflow.com/questions/9113020/get-attribute-info-with-generics
             //http://stackoverflow.com/questions/1089123/setting-a-property-by-reflection-with-a-string-valuev
 
             PropertyInfo propertyInfo = entity.GetType().GetProperty("DataState");
             propertyInfo.SetValue(entity, Convert.ChangeType(0, propertyInfo.PropertyType), null);
+
+            propertyInfo = entity.GetType().GetProperty("EditDate");
+            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
 
             DbSet.Attach(entity);
             DbContext.Entry(entity).State = EntityState.Modified;
@@ -100,6 +103,9 @@ namespace HR.DataAccess.EF.Repositories
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
+
+            PropertyInfo propertyInfo = entity.GetType().GetProperty("EditDate");
+            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
 
             DbSet.Attach(entity);
             DbContext.Entry(entity).State = EntityState.Modified;
