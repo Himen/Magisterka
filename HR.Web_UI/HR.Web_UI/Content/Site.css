@@ -67,3 +67,24 @@ textarea {
     margin-left: 25px;
     margin-top: 10px;
 }
+
+#loading-indicator {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.m_b_30
+{
+    margin-bottom: 30px;
+}
+
+.w_200
+{
+    width: 200px;
+}
+
+.h_300
+{
+    height: 300px;
+}

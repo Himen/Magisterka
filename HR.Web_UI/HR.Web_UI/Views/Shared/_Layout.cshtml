@@ -60,8 +60,21 @@
             </div><!-- /.container-fluid -->
         </nav>
         @RenderBody()
+
+        <img src="/Content/Images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+
     </div>
 
+    <script>
+        //do optymalizajci
+        $(document).ajaxSend(function (event, request, settings) {
+            $('#loading-indicator').show();
+        });
+
+        $(document).ajaxComplete(function (event, request, settings) {
+            $('#loading-indicator').hide();
+        });
+    </script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>

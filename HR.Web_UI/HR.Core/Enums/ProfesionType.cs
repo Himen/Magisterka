@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace HR.Core.Enums
 {
-    [Flags]
     public enum ProfesionType: byte
     {
         Programista_ASP_NET_MVC=1,
