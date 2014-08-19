@@ -2,6 +2,7 @@
 using HR.Core.Enums;
 using System;
 using System.Collections.Generic;
+using HR.Core.Models.RepoModels;
 
 namespace HR.Core.Models
 {
@@ -94,5 +95,10 @@ namespace HR.Core.Models
         /// Osoba kontaktowa
         /// </summary>
         public virtual ContactPerson ContactPerson { get; set; }
+
+        /// <summary>
+        /// Lista dokumentow pracownika
+        /// </summary>
+        public virtual List<Document> Documents { get; set; }
     }
 }

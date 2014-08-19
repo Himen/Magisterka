@@ -77,7 +77,7 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\DictionaryModels\Position.cs" />
     <Compile Include="Models\RepoModels\PromotialMaterial.cs" />
-    <Compile Include="Models\RepoModels\Documents.cs" />
+    <Compile Include="Models\RepoModels\Document.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\Vacation.cs" />
     <Compile Include="Models\RepoModels\VacationDocument.cs" />

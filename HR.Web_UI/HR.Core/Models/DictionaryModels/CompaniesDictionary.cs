@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HR.Core.BasicContract;
+using System;
 
 namespace HR.Core.Models.DictionaryModels
 {
     /// <summary>
     /// Slownik zawierajacy nazwy firm
     /// </summary>
-    public class CompaniesDictionary
+    public class CompaniesDictionary : BaseEntity<long>
     {
         /// <summary>
         /// Nazwa firmy

@@ -49,10 +49,12 @@
     <Compile Include="HR_DataContext.cs" />
     <Compile Include="Mapping\AccountMapper.cs" />
     <Compile Include="Mapping\BankAccountMapper.cs" />
+    <Compile Include="Mapping\BankDictionaryMapper.cs" />
     <Compile Include="Mapping\BenefitsProfitMapper.cs" />
     <Compile Include="Mapping\CollageMapper.cs" />
+    <Compile Include="Mapping\CollegesDictionaryMapper.cs" />
+    <Compile Include="Mapping\CompaniesDictionaryMapper.cs" />
     <Compile Include="Mapping\ContractMapper.cs" />
-    <Compile Include="Mapping\CourseDocument_REPO_Mapper.cs" />
     <Compile Include="Mapping\CourseMaterialMapper.cs" />
     <Compile Include="Mapping\DelegationMapper.cs" />
     <Compile Include="Mapping\EmploymentMapper.cs" />

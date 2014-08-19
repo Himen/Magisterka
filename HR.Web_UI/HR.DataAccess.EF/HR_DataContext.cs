@@ -4,6 +4,8 @@ using System.Data.Entity;
 using HR.Core.Models;
 using HR.DataAccess.EF.Mapping;
 using HR.Core.Enums;
+using HR.Core.Models.RepoModels;
+using HR.Core.Models.DictionaryModels;
 
 namespace HR.DataAccess.EF
 {
@@ -13,24 +15,44 @@ namespace HR.DataAccess.EF
         {
             Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
         }
+        #region Models
 
-        public DbSet<Account> Account { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountLog> AccountLogs { get; set; }
+        public DbSet<AdditionalInformation> AdditionalInformations { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<BenefitsProfit> BenefitsProfits { get; set; }
         public DbSet<College> Colleges { get; set; }
+        public DbSet<ContactPerson> ContactPersons { get; set; }
         public DbSet<Contract> Contracts { get; set; }
-        public DbSet<CourseDocuments_REPO> CourseDocuments_REPOs { get; set; }
-        public DbSet<CourseMaterial> CourseMaterials { get; set; }
         public DbSet<Delegation> Delegations { get; set; }
         public DbSet<Employment> Employments { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<OrganiziationalUnit> OrganiziationalUnits { get; set; }
         public DbSet<Person> Persons { get; set; }
-        public DbSet<Position> Positions { get; set; }
-        public DbSet<PromotialMaterial> PromotialMaterials { get; set; }
         public DbSet<Training> Trainings { get; set; }
         public DbSet<Vacation> Vacations { get; set; }
         public DbSet<WorkRegistry> WorkRegistrys { get; set; }
+
+        #endregion
+
+        #region Repos
+
+        public DbSet<CourseMaterial> CourseMaterials { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<PromotialMaterial> PromotialMaterials { get; set; }
+        public DbSet<VacationDocument> VacationDocuments { get; set; }
+
+        #endregion
+
+        #region Dictionaries
+
+        public DbSet<BankDictionary> BankDictionaries { get; set; }
+        public DbSet<CollegesDictionary> CollegesDictionaries { get; set; }
+        public DbSet<CompaniesDictionary> CompaniesDictionaries { get; set; }
+        public DbSet<Position> Positions { get; set; }
+
+        #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,14 +61,11 @@ namespace HR.DataAccess.EF
             modelBuilder.Configurations.Add(new BenefitsProfitMapper());
             modelBuilder.Configurations.Add(new CollageMapper());
             modelBuilder.Configurations.Add(new ContractMapper());
-            modelBuilder.Configurations.Add(new CourseDocument_REPO_Mapper());
-            modelBuilder.Configurations.Add(new CourseMaterialMapper());
             modelBuilder.Configurations.Add(new DelegationMapper());
             modelBuilder.Configurations.Add(new EmploymentMapper());
             modelBuilder.Configurations.Add(new JobMapper());
             modelBuilder.Configurations.Add(new OrganiziationalUnitMapper());
             modelBuilder.Configurations.Add(new PersonMapper());
-            modelBuilder.Configurations.Add(new PositionMapper());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -62,7 +81,7 @@ namespace HR.DataAccess.EF
 
             foreach (var item in list)
             {
-                context.Account.Add(item);
+                context.Accounts.Add(item);
             }
 
             /*List<Person> personsList = new List<Person>();

@@ -1,15 +1,15 @@
-﻿using HR.Core.Models.RepoModels;
+﻿using HR.Core.Models.DictionaryModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HR.DataAccess.EF.Mapping
 {
-    public class CourseMaterialMapper: EntityTypeConfiguration<CourseMaterial>
+    public class CollegesDictionaryMapper : EntityTypeConfiguration<CollegesDictionary>
     {
-        public CourseMaterialMapper ()
-	    {
-            this.ToTable("CourseMaterials",schemaName:"REPO");
+        public CollegesDictionaryMapper()
+        {
+            this.ToTable("Colleges", schemaName: "DIC");
 
             this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -21,18 +21,12 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c=>c.Name);
+            this.Property(c => c.Name).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
-            this.Property(c => c.CourseType);
+            this.Property(c=>c.Country).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
-            this.Property(c => c.Document);
+            this.Property(c => c.Address).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
-            this.Property(c => c.DocumentName);
-
-            this.Property(c => c.Description);
-
-            //poczytac o mapowaniu bo kurde nadmiarowe to jest
-            //this.HasRequired(c=>c.Person).WithRequiredDependent(c=>c.Id,)
-	    }
+        }
     }
 }
