@@ -46,34 +46,47 @@
     <Compile Include="BasicContract\IUnityOfWork.cs" />
     <Compile Include="Enums\AcademicTitleType.cs" />
     <Compile Include="Enums\AccountType.cs" />
+    <Compile Include="Enums\ActionType.cs" />
     <Compile Include="Enums\BenefitType.cs" />
+    <Compile Include="Enums\CollageProgressType.cs" />
+    <Compile Include="Enums\ContractDimensionType.cs" />
     <Compile Include="Enums\ContractType.cs" />
     <Compile Include="Enums\CourseType.cs" />
     <Compile Include="Enums\DelegationType.cs" />
     <Compile Include="Enums\EmploymentType.cs" />
     <Compile Include="Enums\ProfesionType.cs" />
+    <Compile Include="Enums\TrainingType.cs" />
     <Compile Include="Enums\VacationType.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountLog.cs" />
+    <Compile Include="Models\AdditionalInformation.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\BenefitsProfit.cs" />
     <Compile Include="Models\Collage.cs" />
     <Compile Include="Models\College1.cs" />
+    <Compile Include="Models\ContactPerson.cs" />
     <Compile Include="Models\Contract.cs" />
-    <Compile Include="Models\CourseMaterial.cs" />
+    <Compile Include="Models\DictionaryModels\BankDictionary.cs" />
+    <Compile Include="Models\DictionaryModels\CollegesDictionary.cs" />
+    <Compile Include="Models\DictionaryModels\CompaniesDictionary.cs" />
+    <Compile Include="Models\RepoModels\CourseMaterial.cs" />
     <Compile Include="Models\Delegation.cs" />
-    <Compile Include="Models\CourseDocuments_REPO.cs" />
     <Compile Include="Models\Employment.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\OrganiziationalUnit.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Position.cs" />
-    <Compile Include="Models\PromotialMaterial.cs" />
+    <Compile Include="Models\DictionaryModels\Position.cs" />
+    <Compile Include="Models\RepoModels\PromotialMaterial.cs" />
+    <Compile Include="Models\RepoModels\Documents.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\Vacation.cs" />
+    <Compile Include="Models\RepoModels\VacationDocument.cs" />
     <Compile Include="Models\WorkRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\SpatialModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

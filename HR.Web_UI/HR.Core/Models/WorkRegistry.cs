@@ -9,9 +9,29 @@ namespace HR.Core.Models
     /// </summary>
     public class WorkRegistry : BaseEntity<long>
     {
-        public long IdPerson { get; set; }
+        /// <summary>
+        /// Data przyjscia do pracy. Jest po to zeby wykluczyc jedno wejscie i wyjscie w innych dniach
+        /// </summary>
         public DateTime Date { get; set; }
+
+        /// <summary>
+        /// Data wejscia do firmy
+        /// </summary>
         public DateTime? DateIn { get; set; }
+
+        /// <summary>
+        /// Data wyjscia z firmy
+        /// </summary>
         public DateTime? DateOut { get; set; }
+
+        /// <summary>
+        /// Id osoby ktora wszedla do firmy
+        /// </summary>
+        public long PersonId { get; set; }
+
+        /// <summary>
+        /// Osoba ktora weszla do firmy
+        /// </summary>
+        public virtual Person Person { get; set; }
     }
 }

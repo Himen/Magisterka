@@ -23,6 +23,9 @@ namespace HR.Web_UI.Controllers
         [HttpPost]
         public ActionResult CreateWorker(PersonViewModel vm)
         {
+#warning Sprawdzic dzialanie ajaxa,  bo nie dziala
+            if(Request.IsAjaxRequest())
+                return Content("asdasdadsa");
             return View();
         }
     }

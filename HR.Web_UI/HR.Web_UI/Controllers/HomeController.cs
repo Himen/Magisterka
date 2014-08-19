@@ -20,6 +20,9 @@ using NH_U = HR.DataAccess.NH.UnityOfWorks;
 
 namespace HR.Web_UI.Controllers
 {
+    /// <summary>
+    /// Test Controller 
+    /// </summary>
     public class HomeController : Controller
     {
         #region Controler Construktors

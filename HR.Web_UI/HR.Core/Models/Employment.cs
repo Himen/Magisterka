@@ -4,25 +4,61 @@ using System;
 
 namespace HR.Core.Models
 {
+    /// <summary>
+    /// Zatrudnienie
+    /// </summary>
     public class Employment : BaseEntity<long>
     {
-        public long IdPerson { get; set; }
+        /// <summary>
+        /// Id pozycji ktora się obejmuje
+        /// </summary>
         public string PositionCode { get; set; }
-        public string OrganiziationalUnitCode { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public ContractType ContractType { get; set; }
-
-        public EmploymentType EmploymentType { get; set; }
 
         /// <summary>
-        /// Opisuje czy jest 1/2 i 1/3      .. etatu
+        /// Id jednostki organizacyjnej do ktorej jest sie przypisanym
         /// </summary>
-        public string ContractDimmension { get; set; }
+        public string OrganiziationalUnitCode { get; set; }
 
+        /// <summary>
+        /// Data zatrudnienia
+        /// </summary>
+        public DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// Data zwolnienia
+        /// </summary>
+        public DateTime? EndDate { get; set; }
+
+        /// <summary>
+        /// Id pracownika
+        /// </summary>
+        public long PersonId { get; set; }
+
+        /// <summary>
+        /// Pracownik
+        /// </summary>
+        public virtual Person Person { get; set; }
+
+        /// <summary>
+        /// Id umowy
+        /// </summary>
+        public long ContractId { get; set; }
+
+        /// <summary>
+        /// Umowa
+        /// </summary>
         public virtual Contract Contract { get; set; }
 
-        public virtual BenefitsProfit BenefitsProfit { get; set; }
+        /// <summary>
+        /// Id konta bankowego
+        /// </summary>
+        public long BankAccountId { get; set; }
+
+        /// <summary>
+        /// Konto bankowe
+        /// </summary>
+        public virtual BankAccount BankAccount { get; set; }
+
 
     }
 }
