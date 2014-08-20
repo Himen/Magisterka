@@ -1,13 +1,14 @@
 ﻿using HR.Core.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+
 namespace HR.DataAccess.EF.Mapping
 {
-    public class ContractMapper : EntityTypeConfiguration<Contract>
+    public class VacationMapper : EntityTypeConfiguration<Vacation>
     {
-        public ContractMapper()
+        public VacationMapper()
         {
-            this.ToTable("Contracts");
+            this.ToTable("Vacations");
 
             this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -23,14 +24,17 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EndDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.ContractType).HasColumnType("int").IsRequired();
+            this.Property(c => c.VacationType).HasColumnType("int").IsRequired();
 
-            this.Property(c => c.ContractDimension).HasColumnType("int").IsRequired();
+            this.Property(c => c.VacationAcceptation).HasColumnType("tinyint").IsRequired();
 
-            this.Property(c => c.BenefitPerHour).HasColumnType("decimal").HasPrecision(10,2).IsOptional();
+            this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(300).IsOptional();
 
-            this.Property(c => c.MonthBenefit).HasColumnType("decimal").HasPrecision(10, 2).IsOptional();
+            this.Property(c => c.PersonId).HasColumnType("bigint");
 
+#warning sprawdzic czy uniqueidentifier jest poprawny
+            this.Property(c => c.VacationDocumentId).HasColumnType("uniqueidentifier");
+#warning mapowanie do person i VacationDocument dodac
         }
     }
 }

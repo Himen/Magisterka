@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HR.Core.BasicContract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HR.Core.Models.RepoModels
 {
-    public class Document
+    public class Document : BaseEntity<Guid>
     {
         public string Name { get; set; }
         public string Type { get; set; }

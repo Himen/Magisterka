@@ -14,33 +14,35 @@ namespace HR.DataAccess.EF.Mapping
         {
             this.ToTable("Collages");
 
-            this.HasKey(c=>c.Id);
+            this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(c => c.Id).IsRequired();
+            this.Property(c => c.Id).HasColumnType("bigint").IsRequired();
 
-            this.Property(c => c.DataState).HasColumnType("tinyint");
+            this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
             this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.EditDate).HasColumnType("date");
+            this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c=>c.IdPerson);
+            this.Property(c=>c.Name).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
-            this.Property(c=>c.Name);
+            this.Property(c => c.FieldOfStudy).HasColumnType("varchar").HasMaxLength(30).IsRequired(); 
 
-            this.Property(c => c.Progres);
+            this.Property(c => c.Specialization).HasColumnType("varchar").HasMaxLength(40).IsRequired(); 
 
-            this.Property(c => c.StartDate);
+            this.Property(c => c.AcademicTitle).HasColumnType("int").IsRequired();
 
-            this.Property(c => c.EndDate);
+            this.Property(c => c.TitleOfResearch).HasColumnType("varchar").HasMaxLength(60).IsRequired();
 
-            this.Property(c => c.TitleOfResearch);
+            this.Property(c => c.Progres).HasColumnType("int").IsRequired(); 
 
-            this.Property(c => c.FieldOfStudy);
+            this.Property(c => c.StartDate).HasColumnType("date").IsRequired(); 
 
-            this.Property(c => c.AcademicTitle);
+            this.Property(c => c.EndDate).HasColumnType("date").IsOptional(); 
 
-            this.HasRequired<Person>(c => c.Person).WithMany(c => c.Colleges).HasForeignKey(c => c.IdPerson);
+            this.Property(c => c.PersonId).HasColumnType("bigint");
+
+#warning //this.HasRequired<Person>(c => c.Person).WithMany(c => c.Colleges).HasForeignKey(c => c.IdPerson);
         }
     }
 }

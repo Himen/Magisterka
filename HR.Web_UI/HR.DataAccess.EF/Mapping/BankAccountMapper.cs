@@ -10,21 +10,21 @@ namespace HR.DataAccess.EF.Mapping
         {
             this.ToTable("BankAccounts");
 
-            this.HasKey(c=>c.Id);
+            this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(c=>c.Id);
+            this.Property(c => c.Id).HasColumnType("bigint").IsRequired();
 
-            this.Property(c => c.DataState).HasColumnType("tinyint");
+            this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
             this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.EditDate).HasColumnType("date");
+            this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.BankName);
+            this.Property(c => c.BankName).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
-            this.Property(c => c.AccountNumber);
-
-            this.Property(c => c.BankAddress);
+            this.Property(c => c.BankAddress).HasColumnType("varchar").HasMaxLength(100).IsRequired();
+#warning numeric sprawdzic
+            this.Property(c => c.AccountNumber).HasColumnType("Numeric").IsRequired();
         }
     }
 }

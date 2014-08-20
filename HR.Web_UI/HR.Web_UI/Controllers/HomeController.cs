@@ -51,9 +51,12 @@ namespace HR.Web_UI.Controllers
         #endregion
 
         public ActionResult Index()
-        {          
-
-            List<Account> list = new List<Account>();
+        {
+            using (var db = new HR_DataContext())
+            {
+                var x = db.Accounts.Count();
+            }
+           /* List<Account> list = new List<Account>();
             list.Add(new Account() { AccountType = Core.Enums.AccountType.HR, UserName = "Jacek", Photo = null, Password = "sdadsa", DataState = 1 });
             list.Add(new Account() { AccountType = Core.Enums.AccountType.Kierownik, UserName = "Jacek", Photo = null, Password = "sdadsa",  DataState = 1 });
             list.Add(new Account() { AccountType = Core.Enums.AccountType.Pracownik, UserName = "Jacek", Photo = null, Password = "sdadsa",  DataState = 1 });
@@ -64,7 +67,7 @@ namespace HR.Web_UI.Controllers
                 admUnityOfWork.UnityOfWork.SaveChanges();
                 admUnityOfWork.AccountRepo.Remove(item);
             }
-            
+            */
 
             return View();
         }

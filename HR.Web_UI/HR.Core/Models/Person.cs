@@ -100,5 +100,15 @@ namespace HR.Core.Models
         /// Lista dokumentow pracownika
         /// </summary>
         public virtual List<Document> Documents { get; set; }
+
+        /// <summary>
+        /// Id konta
+        /// </summary>
+        /*public long AccountId { get; set; }
+
+        /// <summary>
+        /// EF: Konto
+        /// </summary>
+        public virtual Account Account { get; set; }*/
     }
 }

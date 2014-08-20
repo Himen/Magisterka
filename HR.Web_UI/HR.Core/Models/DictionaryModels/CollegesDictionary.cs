@@ -6,7 +6,7 @@ namespace HR.Core.Models.DictionaryModels
     /// <summary>
     /// Slownik przechowujacy najpopularniejsze uczelnie
     /// </summary>
-    public class CollegesDictionary : BaseEntity<Guid>
+    public class CollegesDictionary : BaseEntity<long>
     {
         /// <summary>
         /// Nazwa uczelni

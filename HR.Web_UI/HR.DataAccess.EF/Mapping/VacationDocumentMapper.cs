@@ -1,19 +1,18 @@
-﻿using HR.Core.Models;
+﻿using HR.Core.Models.RepoModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-
 namespace HR.DataAccess.EF.Mapping
 {
-    public class OrganiziationalUnitMapper : EntityTypeConfiguration<OrganiziationalUnit>
+    public class VacationDocumentMapper:EntityTypeConfiguration<VacationDocument>
     {
-        public OrganiziationalUnitMapper()
+        public VacationDocumentMapper()
         {
-            this.ToTable("OrganiziationalUnits");
+            this.ToTable("VacationDocuments", schemaName: "REPO");
 
             this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(c => c.Id).HasColumnType("varchar").HasMaxLength(10).IsRequired();
+            this.Property(c => c.Id).HasColumnType("uniqueidentifier").IsRequired();
 
             this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
@@ -23,10 +22,12 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Name).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
-            this.Property(c => c.ManagerId).HasColumnType("bigint");
+            this.Property(c => c.Type).HasColumnType("varchar").HasMaxLength(30).IsRequired();
 
-#warning do sprawdzenia
-            this.HasRequired(c => c.Manager).WithRequiredPrincipal(); //sprawdzic to czy to bedzie dobrze dzialac, ze nie wymaga klasy w person
+            this.Property(c => c.Content).HasColumnType("binary").IsRequired();
+
+            this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(1000).IsOptional();
+
         }
     }
 }

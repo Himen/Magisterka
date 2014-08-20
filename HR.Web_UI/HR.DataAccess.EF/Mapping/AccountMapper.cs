@@ -12,8 +12,8 @@ namespace HR.DataAccess.EF.Mapping
             this.ToTable("Accounts");
 
             this.HasKey(c=>c.Id);
-            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(c => c.Id).HasColumnType("bigint").IsRequired();
+
+            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).HasColumnType("bigint").IsRequired();
 
             this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
@@ -31,8 +31,9 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.PersonId).HasColumnType("bigint");
 
-            //jeszcze do przemyslenia
-            this.HasRequired(c => c.Person).WithRequiredPrincipal();
+            //this.HasRequired(c => c.Person).WithRequiredDependent(c=>c.Account);
+
+            //this.HasRequired(c => c.Person).WithMany().HasForeignKey(c=>c.PersonId).WillCascadeOnDelete();
             
         }
     }

@@ -5,7 +5,7 @@ namespace HR.Core.Models.DictionaryModels
     /// <summary>
     /// Slownik zawierajacy stanowiska ktore mozna objac w firmie
     /// </summary>
-    public class Position : BaseEntity<long>
+    public class Position : BaseEntity<string>
     {
         /// <summary>
         /// Nazwa obejnowanej pozycji

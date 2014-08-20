@@ -13,7 +13,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(c => c.Id).HasColumnType("bigint").IsRequired();
+            this.Property(c => c.Id).HasColumnType("uniqueidentifier").IsRequired();
 
             this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
@@ -21,15 +21,17 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c=>c.Name);
+            this.Property(c=>c.Name).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
-            this.Property(c => c.CourseType);
+            this.Property(c => c.CourseType).HasColumnType("int").IsRequired();
 
-            this.Property(c => c.Document);
+            this.Property(c => c.Document).HasColumnType("binary").IsRequired();
 
-            this.Property(c => c.DocumentName);
+            this.Property(c => c.DocumentName).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
-            this.Property(c => c.Description);
+            this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(100).IsOptional();
+
+            this.Property(c => c.PersonId).HasColumnType("bigint");
 
             //poczytac o mapowaniu bo kurde nadmiarowe to jest
             //this.HasRequired(c=>c.Person).WithRequiredDependent(c=>c.Id,)

@@ -10,27 +10,40 @@ namespace HR.DataAccess.EF.Mapping
         {
             this.ToTable("BenefitsProfits");
 
-            this.HasKey(c=>c.Id);
-            this.Property(c => c.Id).IsRequired();
+            this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(c => c.Id).HasColumnType("bigint").IsRequired();
 
-            this.Property(c => c.DataState).HasColumnType("tinyint");
+            this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
             this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.EditDate).HasColumnType("date");
+            this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.Benefit);
+            this.Property(c => c.StartDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.BenefitType);
+            this.Property(c => c.EndDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.StartDate);
+            this.Property(c => c.BenefitBrutto).HasColumnType("decimal").HasPrecision(10,2).IsRequired();
 
-            this.Property(c => c.EndDate);
+            this.Property(c => c.BenefitNetto).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
 
-            this.Property(c => c.IdEmployment);
+            this.Property(c => c.BenefitType).HasColumnType("int").IsRequired();
 
-            //tu nie ma mapowania na employment bo jest nie potrzebne
+            this.Property(c => c.Retirement).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+
+            this.Property(c => c.Disability).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+
+            this.Property(c => c.Sikness).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+
+            this.Property(c => c.Health).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+
+            this.Property(c => c.Taxable).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+
+            this.Property(c => c.AdvanceAt_PIT).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+
+            this.Property(c => c.PersonId);
+#warning perosn
         }
     }
 }

@@ -15,7 +15,7 @@ namespace HR.Core.BasicContract
         public virtual TKey Id { get; set; }
         public virtual byte DataState { get; set; }
         public virtual DateTime CreateDate { get; set; }
-        public virtual DateTime EditDate { get; set; }
+        public virtual DateTime? EditDate { get; set; }
 
         public BaseEntity()
         {

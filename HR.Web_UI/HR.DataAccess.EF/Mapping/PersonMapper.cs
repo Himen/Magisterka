@@ -14,41 +14,51 @@ namespace HR.DataAccess.EF.Mapping
         {
             this.ToTable("Persons");
 
-            this.HasKey(c=>c.Id);
+            this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(c => c.Id).IsRequired();
+            this.Property(c => c.Id).HasColumnType("bigint").IsRequired();
 
-            this.Property(c => c.DataState).HasColumnType("tinyint");
+            this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
             this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.EditDate).HasColumnType("date");
+            this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.FirstName);
+            this.Property(c => c.FirstName).HasColumnType("varchar").HasMaxLength(20).IsRequired();
 
-            this.Property(c => c.Surname);
+            this.Property(c => c.Surname).HasColumnType("varchar").HasMaxLength(20).IsRequired();
 
-            this.Property(c => c.IDCard);
+            this.Property(c => c.DateOfBirth).HasColumnType("date").IsRequired(); 
 
-            this.Property(c => c.NIP);// jakos dodac.HasMaxLength(50);
+            this.Property(c => c.City).HasColumnType("varchar").HasMaxLength(20).IsRequired();
 
-            this.Property(c => c.PESEL);
+            this.Property(c => c.PostalCode).HasColumnType("varchar").HasMaxLength(10).IsRequired();
 
-            this.Property(c => c.DateOfBirth);
+            this.Property(c => c.Street).HasColumnType("varchar").HasMaxLength(30).IsRequired(); 
 
-            this.Property(c => c.Profession);
+            this.Property(c => c.BuildingNumber).HasColumnType("int").IsRequired();
 
-            this.Property(c=>c.ApartmentNumber);
+            this.Property(c => c.ApartmentNumber).HasColumnType("int").IsOptional(); ;
 
-            this.Property(c => c.BuildingNumber);
+            this.Property(c => c.Phone).HasColumnType("numeric").IsRequired();
 
-            this.Property(c => c.City);
+            this.Property(c => c.Email).HasColumnType("varchar").HasMaxLength(30).IsRequired();
 
-            this.Property(c => c.PostalCode);
+            this.Property(c => c.NIP).HasColumnType("numeric").IsRequired();;
 
-            this.Property(c => c.DataState);
+            this.Property(c => c.IDCard).HasColumnType("varchar").HasMaxLength(10).IsRequired();
 
-            this.HasMany<College>(c => c.Colleges).WithRequired(c => c.Person).HasForeignKey(c => c.IdPerson);
+            this.Property(c => c.PESEL).HasColumnType("varchar").HasMaxLength(11).IsRequired();;
+
+            this.Property(c=>c.ManagerId).HasColumnType("bigint");
+
+            this.Property(c => c.ContactPersonId).HasColumnType("bigint");
+
+
+
+#warning //this.HasMany<College>(c => c.Colleges).WithRequired(c => c.Person).HasForeignKey(c => c.IdPerson);
+
+            //this.HasRequired(c => c.Account).WithRequiredDependent(c => c.Person).Map(c => c.MapKey("Id"));
 
         }
     }

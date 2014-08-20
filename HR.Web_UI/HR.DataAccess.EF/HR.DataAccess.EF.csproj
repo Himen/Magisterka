@@ -47,21 +47,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HR_DataContext.cs" />
+    <Compile Include="Mapping\AccountLogMapper.cs" />
     <Compile Include="Mapping\AccountMapper.cs" />
+    <Compile Include="Mapping\AdditionalInformationMapper.cs" />
     <Compile Include="Mapping\BankAccountMapper.cs" />
     <Compile Include="Mapping\BankDictionaryMapper.cs" />
     <Compile Include="Mapping\BenefitsProfitMapper.cs" />
     <Compile Include="Mapping\CollageMapper.cs" />
     <Compile Include="Mapping\CollegesDictionaryMapper.cs" />
     <Compile Include="Mapping\CompaniesDictionaryMapper.cs" />
+    <Compile Include="Mapping\ContactPersonMapper.cs" />
     <Compile Include="Mapping\ContractMapper.cs" />
     <Compile Include="Mapping\CourseMaterialMapper.cs" />
     <Compile Include="Mapping\DelegationMapper.cs" />
+    <Compile Include="Mapping\DocumentMapper.cs" />
     <Compile Include="Mapping\EmploymentMapper.cs" />
     <Compile Include="Mapping\JobMapper.cs" />
     <Compile Include="Mapping\OrganiziationalUnitMapper.cs" />
     <Compile Include="Mapping\PersonMapper.cs" />
     <Compile Include="Mapping\PositionMapper.cs" />
+    <Compile Include="Mapping\PromotialMaterialMapper.cs" />
+    <Compile Include="Mapping\TraningMapper.cs" />
+    <Compile Include="Mapping\VacationDocumentMapper.cs" />
+    <Compile Include="Mapping\VacationMapper.cs" />
+    <Compile Include="Mapping\WorkRegistryMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="UnityOfWorks\UnityOfWork.cs" />

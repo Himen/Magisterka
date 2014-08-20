@@ -1,15 +1,14 @@
 ﻿using HR.Core.Models;
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HR.DataAccess.EF.Mapping
 {
-    public class JobMapper:EntityTypeConfiguration<Job>
+    public class AdditionalInformationMapper:EntityTypeConfiguration<AdditionalInformation>
     {
-        public JobMapper()
+        public AdditionalInformationMapper()
         {
-            this.ToTable("Jobs");
+            this.ToTable("AdditionalInformations");
 
             this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -21,15 +20,15 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c=>c.CompanyName).HasColumnType("varchar").HasMaxLength(100).IsRequired();
+            this.Property(c => c.FacebookAccount).HasColumnType("varchar").HasMaxLength(100).IsOptional();
 
-            this.Property(c => c.Position).HasColumnType("varchar").HasMaxLength(100).IsRequired();
+            this.Property(c => c.GoogleAccount).HasColumnType("varchar").HasMaxLength(100).IsOptional();
 
-            this.Property(c => c.StartDate).HasColumnType("date").IsRequired(); ;
+            this.Property(c => c.TwitterAccount).HasColumnType("varchar").HasMaxLength(100).IsOptional();
 
-            this.Property(c => c.EndDate).HasColumnType("date").IsOptional(); ;
+            this.Property(c => c.GoldenLineAccount).HasColumnType("varchar").HasMaxLength(100).IsOptional();
 
-            this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(300).IsOptional();
+            this.Property(c => c.LinkInAccount).HasColumnType("varchar").HasMaxLength(100).IsOptional();
 
             this.Property(c => c.PersonId).HasColumnType("bigint");
 
