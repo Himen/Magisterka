@@ -29,7 +29,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c=>c.Photo).HasColumnType("image").IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
             //this.HasRequired(c => c.Person).WithRequiredDependent(c=>c.Account);
 

@@ -31,7 +31,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(100).IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
             //poczytac o mapowaniu bo kurde nadmiarowe to jest
             //this.HasRequired(c=>c.Person).WithRequiredDependent(c=>c.Id,)

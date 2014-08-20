@@ -30,7 +30,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.LinkInAccount).HasColumnType("varchar").HasMaxLength(100).IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
 #warning Person
         }

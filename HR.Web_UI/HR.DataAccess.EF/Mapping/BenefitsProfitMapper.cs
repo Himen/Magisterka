@@ -42,7 +42,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.AdvanceAt_PIT).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
 
-            this.Property(c => c.PersonId);
+            this.Property(c => c.PersonId).IsOptional();
 #warning perosn
         }
     }

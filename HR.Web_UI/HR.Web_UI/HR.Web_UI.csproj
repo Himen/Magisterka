@@ -131,10 +131,6 @@
     <Content Include="App_Data\Database1_log.ldf">
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\HR_Database.mdf" />
-    <Content Include="App_Data\HR_Database_log.ldf">
-      <DependentUpon>HR_Database.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\ajax-loader.gif" />
@@ -169,6 +165,8 @@
     <Content Include="Views\HR\CreateWorker.cshtml" />
     <Content Include="Views\Common\Index.cshtml" />
     <Content Include="Views\Common\InformacjeOFirmie.cshtml" />
+    <Content Include="Views\HR\AddWorkerAdditionalInformations.cshtml" />
+    <Content Include="Views\HR\AddEmploymentInformation.cshtml" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -191,6 +189,9 @@
     </Compile>
     <Compile Include="Models\ViewModels\PersonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FileToByte.cs" />
+    <Compile Include="Services\HRServices.cs" />
+    <Compile Include="Services\ServicesInferface\IHRServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">

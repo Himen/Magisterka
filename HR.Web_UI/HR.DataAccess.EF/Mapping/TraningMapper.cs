@@ -28,7 +28,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
 #warning Person
         }

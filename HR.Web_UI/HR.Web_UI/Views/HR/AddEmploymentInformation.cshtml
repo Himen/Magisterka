@@ -1,0 +1,36 @@
+﻿@model HR.Web_UI.Models.ViewModels.PersonViewModel
+
+@{
+    ViewBag.Title = "Krok 3";
+}
+
+<h2 class="col-lg-offset-5 m_b_30">Dodaj pracownika - krok 3</h2>
+
+<div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
+    @using (Ajax.BeginForm("AddWorkerAdditionalInfoSend", "HR",
+            new AjaxOptions { UpdateTargetId = "formContener", LoadingElementId = "loading-indicator", LoadingElementDuration = 10000 }
+            , new { enctype = "multipart/form-data", method = "POST" }))
+    {
+
+        @Html.HiddenFor(p => p.FirstName)
+        @Html.HiddenFor(p => p.Surname)
+        @Html.HiddenFor(p => p.City)
+        @Html.HiddenFor(p => p.Street)
+        @Html.HiddenFor(p => p.FirstName)
+        @Html.HiddenFor(p => p.BuildingNumber)
+        @Html.HiddenFor(p => p.ApartmentNumber)
+        @Html.HiddenFor(p => p.Phone)
+        @Html.HiddenFor(p => p.Email)
+        @Html.HiddenFor(p => p.AccountType)
+        @Html.HiddenFor(p => p.Email)
+        @Html.HiddenFor(p => p.Photo)
+        @Html.HiddenFor(p => p.Facebook)
+        @Html.HiddenFor(p => p.Google)
+        @Html.HiddenFor(p => p.Twitter)
+        @Html.HiddenFor(p => p.GoldenLine)
+        @Html.HiddenFor(p => p.LinkIn)
+
+
+        <input type="submit" class="btn col-lg-offset-5" value="Przejdz do kroku 4" />
+    }
+</div>

@@ -29,7 +29,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EndDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.IdPerson).HasColumnType("bigint");
+            this.Property(c => c.IdPerson).HasColumnType("bigint").IsOptional();
 
 #warning         //this.HasRequired(c => c.Person).WithOptional(c => c.Delegation);
         }

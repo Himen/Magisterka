@@ -49,6 +49,13 @@ namespace HR.Web_UI.Models.ViewModels
         [Display(Name = "Numer mieszkania")]
         public int ApartmentNumber { get; set; }
 
+        [Display(Name = "Telefon")]
+        public long Phone { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
         [Display(Name = "NIP")]
         public long NIP { get; set; }
 
@@ -63,9 +70,20 @@ namespace HR.Web_UI.Models.ViewModels
         //lista szkol do dodania - zrobic takie kaskadowe dodawanie ze mozna dodawac ile sie chce
         //szef 
 
+        public string Facebook { get; set; }
+        public string Google { get; set; }
+        public string Twitter { get; set; }
+        public string GoldenLine { get; set; }
+        public string LinkIn { get; set; }
+
+
         public List<Person> ManagerList { get; set; }
 
         public long ManagerId { get; set; }
+
+        /// <summary>
+        /// ciag dalszy
+        /// </summary>
 
         [Display(Name = "Specializacja")]
         public ProfesionType Profession { get; set; }

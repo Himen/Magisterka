@@ -17,6 +17,8 @@ using HR.Core.BasicContract;
     using NHibernate;
     using HR.DataAccess.EF.Repositories;
     using HR.DataAccess.GLOBAL.UnityOfWorks;
+    using HR.Web_UI.Services.ServicesInferface;
+    using HR.Web_UI.Services;
 
     public static class NinjectWebCommon 
     {
@@ -75,6 +77,11 @@ using HR.Core.BasicContract;
 
                     kernel.Bind<IAdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
                         .To<AdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
+                    kernel.Bind<IHRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
+                        .To<HRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
+#warning dodac wstrzykiwanie logowania
+                        kernel.Bind<IHRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
+                        .To<HRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
 
                     break;
                 case "NH":
@@ -89,6 +96,9 @@ using HR.Core.BasicContract;
                 default: // ADO
                     break;
             }
+
+            kernel.Bind<IHRServices>().To<HRServices>();
+
         }        
     }
 }

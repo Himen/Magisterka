@@ -29,13 +29,13 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EndDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
 
-            this.Property(c => c.ContractId).HasColumnType("bigint");
+            this.Property(c => c.ContractId).HasColumnType("bigint").IsOptional();
 
 
-            this.Property(c => c.BankAccountId).HasColumnType("bigint");
+            this.Property(c => c.BankAccountId).HasColumnType("bigint").IsOptional();
 
 #warning All
 

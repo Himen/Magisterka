@@ -26,7 +26,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.DateOut).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
 #warning person
         }

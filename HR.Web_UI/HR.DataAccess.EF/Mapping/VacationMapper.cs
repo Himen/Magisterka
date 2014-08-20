@@ -30,10 +30,10 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(300).IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
 #warning sprawdzic czy uniqueidentifier jest poprawny
-            this.Property(c => c.VacationDocumentId).HasColumnType("uniqueidentifier");
+            this.Property(c => c.VacationDocumentId).HasColumnType("uniqueidentifier").IsOptional();
 #warning mapowanie do person i VacationDocument dodac
         }
     }

@@ -38,9 +38,9 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.StartDate).HasColumnType("date").IsRequired(); 
 
-            this.Property(c => c.EndDate).HasColumnType("date").IsOptional(); 
+            this.Property(c => c.EndDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint");
+            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
 #warning //this.HasRequired<Person>(c => c.Person).WithMany(c => c.Colleges).HasForeignKey(c => c.IdPerson);
         }

@@ -1,0 +1,87 @@
+﻿@model HR.Web_UI.Models.ViewModels.PersonViewModel
+
+@{
+    ViewBag.Title = "Krok 2";
+}
+
+<h2 class="col-lg-offset-5 m_b_30">Dodaj pracownika - krok 2</h2>
+<div id="message" class="col-lg-offset-3 col-lg-6 alert alert-success" role="alert">
+    <label class="col-lg-offset-5">@ViewBag.Message</label>
+</div><br />
+
+<div id="information" class="col-lg-offset-3 col-lg-6 alert alert-info" role="alert">
+    <label class="col-lg-offset-2">Teraz mozesz dodac dodatkowe informacje o nim tj. konta spolecznosciowe</label>
+</div>
+
+<div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
+    @using (Ajax.BeginForm("AddWorkerAdditionalInfoSend", "HR",
+            new AjaxOptions { UpdateTargetId = "formContener", LoadingElementId = "loading-indicator", LoadingElementDuration = 10000 }
+            , new { enctype = "multipart/form-data", method = "POST" }))
+    {
+
+        @Html.HiddenFor(p => p.FirstName)
+        @Html.HiddenFor(p => p.Surname)
+        @Html.HiddenFor(p => p.City)
+        @Html.HiddenFor(p => p.Street)
+        @Html.HiddenFor(p => p.FirstName)
+        @Html.HiddenFor(p => p.BuildingNumber)
+        @Html.HiddenFor(p => p.ApartmentNumber)
+        @Html.HiddenFor(p => p.Phone)
+        @Html.HiddenFor(p => p.Email)
+        @Html.HiddenFor(p => p.AccountType)
+        @Html.HiddenFor(p => p.Email)
+        @Html.HiddenFor(p => p.Photo)
+
+
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(p => p.Facebook)</span>
+            <input type="text" class="form-control" placeholder="Facebook" name="Facebook" id="Facebook">
+
+        </div>
+        @Html.ValidationMessageFor(p => p.Facebook)<br />
+
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(p => p.Google)</span>
+            <input type="text" class="form-control" placeholder="Google" name="Google" id="Google">
+
+        </div>
+        @Html.ValidationMessageFor(p => p.Google)<br />
+
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(p => p.Twitter)</span>
+            <input type="text" class="form-control" placeholder="Twitter" name="Twitter" id="Twitter">
+
+        </div>
+        @Html.ValidationMessageFor(p => p.Twitter)<br />
+
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(p => p.GoldenLine)</span>
+            <input type="text" class="form-control" placeholder="GoldenLine" name="GoldenLine" id="GoldenLine">
+
+        </div>
+        @Html.ValidationMessageFor(p => p.GoldenLine)<br />
+
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(p => p.LinkIn)</span>
+            <input type="text" class="form-control" placeholder="LinkIn" name="LinkIn" id="LinkIn">
+
+        </div>
+        @Html.ValidationMessageFor(p => p.LinkIn)<br />
+
+
+        <div class="btn-group col-lg-offset-5">
+            @* @Ajax.ActionLink("Wroc do kroku nr 1", "BackToCreateWorker", new RouteValueDictionary { { "FirstName", Model.FirstName } }, new AjaxOptions { UpdateTargetId = "formContener" }, new { @class = "btn" })*@
+            <input type="submit" class="btn" value="Przejdz do kroku 3" />
+        </div>
+    }
+</div>
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#message").delay(4000).fadeToggle(1000, "linear");
+    });
+
+    jQuery(document).ready(function () {
+        jQuery("#information").delay(6000).fadeToggle(1000, "linear");
+    });
+</script>

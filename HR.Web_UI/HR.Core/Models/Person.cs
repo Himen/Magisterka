@@ -89,7 +89,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id osoby kontaktowej
         /// </summary>
-        public long ContactPersonId { get; set; }
+        public long? ContactPersonId { get; set; }
 
         /// <summary>
         /// Osoba kontaktowa

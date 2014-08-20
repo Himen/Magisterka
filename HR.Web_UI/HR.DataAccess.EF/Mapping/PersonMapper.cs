@@ -50,9 +50,9 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.PESEL).HasColumnType("varchar").HasMaxLength(11).IsRequired();;
 
-            this.Property(c=>c.ManagerId).HasColumnType("bigint");
+            this.Property(c=>c.ManagerId).HasColumnType("bigint").IsOptional();
 
-            this.Property(c => c.ContactPersonId).HasColumnType("bigint");
+            this.Property(c => c.ContactPersonId).HasColumnType("bigint").IsOptional();;
 
 
 
