@@ -1,4 +1,5 @@
-﻿using HR.Web_UI.Models.ViewModels;
+﻿using HR.Core.Models;
+using HR.Web_UI.Models.ViewModels;
 using HR.Web_UI.Services.ServicesInferface;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,11 @@ namespace HR.Web_UI.Controllers
 
             if (ModelState.IsValid)
             {
-                if (hrServices.CreateWorker(vm))
+                Person p = new Person();
+                p = hrServices.CreateWorker(vm);
+                if (p!=null)
                 {
+                    Session["Person"] = p;
                     return RedirectToAction("AddWorkerAdditionalInformations", vm);
                 }
                 else
@@ -102,8 +106,11 @@ namespace HR.Web_UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (hrServices.CreateEmployment(eVM))
+                Person p = Session["Person"] as Person;
+                Employment e = hrServices.CreateEmployment(eVM);
+                if (e!= null)
                 {
+                    Session["Employment"] = e;
                     return RedirectToAction("AddContactPerson");
                 }
                 else
@@ -126,12 +133,44 @@ namespace HR.Web_UI.Controllers
         [HttpPost]
         public ActionResult ContactPersonSave(ContactPersonViewModel cpVM)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                ContactPerson cp = hrServices.CreateContactPerson(cpVM);
+                if (cp!= null)
+                {
+                    Session["ContactPerson"] = cp;
+                    return RedirectToAction("DisplaySuccessOfAddWorker");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nieznany blad");
+                    return View("AddEmploymentInformation", cpVM);
+                }
+            }
+            else
+            {
+                return View("AddEmploymentInformation", cpVM);
+            }
         }
+        
+        //potem mozna jeszcze dac zatwierdzanie osoby ze wszystko sie zgadza
 
+        /// <summary>
+        /// HR ma mozliwosc edycji danych
+        /// </summary>
+        /// <returns></returns>
         public ActionResult DisplaySuccessOfAddWorker()
         {
-            return View();
+            Person p = Session["Person"] as Person;
+
+            PersonDisplayViewModel pdVM = new PersonDisplayViewModel();
+            pdVM.accountType = Core.Enums.AccountType.Kierownik;
+            if (p != null)
+            {
+                ViewBag.Message = "Osoba została pomyslnie dodana: " + p.FirstName + " " + p.Surname;
+            }
+            //globalny ViewModelZrobic
+            return View(pdVM);
         }
     }
 }

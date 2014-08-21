@@ -4,7 +4,7 @@
     ViewBag.Title = "Krok 3";
 }
 
-<h2 class="col-lg-offset-5 m_b_30">Dodaj pracownika - zatrudnienie</h2>
+<h2 class="col-lg-offset-4 m_b_30">Dodaj pracownika - osoba kontaktowa</h2>
 
 <div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
     @using (Ajax.BeginForm("ContactPersonSave", "HR",
@@ -49,13 +49,6 @@
 
                 </div>
                 @Html.ValidationMessageFor(p => p.BuildingNumber)<br />
-
-                <div class="input-group">
-                    <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>
-                    <input type="text" class="form-control" placeholder="Numer mieszkania" name="ApartmentNumber" id="ApartmentNumber">
-
-                </div>
-                @Html.ValidationMessageFor(p => p.ApartmentNumber)<br />
 
                 <div class="input-group">
                     <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>

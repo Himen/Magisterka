@@ -1,0 +1,184 @@
+﻿@model HR.Web_UI.Models.ViewModels.PersonDisplayViewModel
+@{
+    ViewBag.Title = "DisplaySuccessOfAddWorker";
+}
+
+<h2 class="col-lg-offset-4 m_b_30">Dane pracownika: @Model.FirstName + " " + @Model.Surname</h2>
+
+<div id="message" class="col-lg-offset-3 col-lg-6 alert alert-success" role="alert">
+    <label class="col-lg-offset-5">@ViewBag.Message</label>
+</div><br />
+
+<div class="panel panel-primary col-lg-offset-1 col-lg-10">
+    <div class="panel-heading">Dane pracownika</div>
+    <div class="panel-body">
+
+        <div class="panel panel-title">
+            <div class="panel-heading">Dane osobowe</div>
+            <div class="panel-body">
+                <div class=" col-lg-offset-1 col-lg-5">
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p=>p.FirstName)</span>
+                        @Html.TextBoxFor(p => p.FirstName, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Surname)</span>
+                        @Html.TextBoxFor(p => p.Surname, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.AccountType)</span>
+                        @Html.TextBoxFor(p => p.AccountType, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.DateOfBirth)</span>
+                        @Html.TextBoxFor(p => p.DateOfBirth, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+
+                        <span class="input-group-addon">@Html.LabelFor(p => p.City)</span>
+                        @Html.TextBoxFor(p => p.City, new { @class = "form-control" })
+
+                        <span class="input-group-addon">@Html.LabelFor(p => p.PostalCode)</span>
+                        @Html.TextBoxFor(p => p.PostalCode, new { @class = "form-control" })
+
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Street)</span>
+                        @Html.TextBoxFor(p => p.Street, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+
+                        <span class="input-group-addon">@Html.LabelFor(p => p.BuildingNumber)</span>
+                        @Html.TextBoxFor(p => p.BuildingNumber, new { @class = "form-control" })
+
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>
+                        @Html.TextBoxFor(p => p.ApartmentNumber, new { @class = "form-control" })
+
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Phone)</span>
+                        @Html.TextBoxFor(p => p.Phone, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Email)</span>
+                        @Html.TextBoxFor(p => p.Email, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.NIP)</span>
+                        @Html.TextBoxFor(p => p.NIP, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.IDCard)</span>
+                        @Html.TextBoxFor(p => p.IDCard, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.PESEL)</span>
+                        @Html.TextBoxFor(p => p.PESEL, new { @class = "form-control" })
+                    </div><br />
+
+                </div>
+
+                <div class="col-lg-5">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Photo)</span><br />
+                    <img class="h_300 w_20 m_l_150" src="~/Content/Images/money_bag.png" /><br /><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Facebook)</span>
+                        @Html.TextBoxFor(p => p.Facebook, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Google)</span>
+                        @Html.TextBoxFor(p => p.Google, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Twitter)</span>
+                        @Html.TextBoxFor(p => p.Twitter, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.GoldenLine)</span>
+                        @Html.TextBoxFor(p => p.GoldenLine, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.LinkIn)</span>
+                        @Html.TextBoxFor(p => p.LinkIn, new { @class = "form-control" })
+                    </div><br />
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="panel panel-title col-lg-offset-1 col-lg-5">
+            <div class="panel-heading">Dane osobowe</div>
+            <div class="panel-body">
+                <div class=" col-lg-offset-1 col-lg-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@@</span>
+                        <input type="text" class="form-control" placeholder="Username">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-title col-lg-5">
+            <div class="panel-heading">Dane zatrudnienia</div>
+            <div class="panel-body">
+                <div class=" col-lg-offset-1 col-lg-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@@</span>
+                        <input type="text" class="form-control" placeholder="Username">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-title col-lg-offset-1 col-lg-5">
+            <div class="panel-heading">Dane osobowe</div>
+            <div class="panel-body">
+                <div class=" col-lg-offset-1 col-lg-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@@</span>
+                        <input type="text" class="form-control" placeholder="Username">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-title col-lg-5">
+            <div class="panel-heading">Dane zatrudnienia</div>
+            <div class="panel-body">
+                <div class=" col-lg-offset-1 col-lg-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@@</span>
+                        <input type="text" class="form-control" placeholder="Username">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#message").delay(4000).fadeToggle(1000, "linear");
+    });
+</script>
+

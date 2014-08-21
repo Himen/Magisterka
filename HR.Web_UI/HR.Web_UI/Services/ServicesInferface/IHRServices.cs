@@ -1,4 +1,5 @@
-﻿using HR.Web_UI.Models.ViewModels;
+﻿using HR.Core.Models;
+using HR.Web_UI.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace HR.Web_UI.Services.ServicesInferface
 {
     public interface IHRServices
     {
-        bool CreateWorker(PersonViewModel pVM);
+        Person CreateWorker(PersonViewModel pVM);
 
         List<SelectListItem> BanksSelectListItem();
         List<SelectListItem> CollegesSelectListItem();
@@ -19,9 +20,9 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         List<SelectListItem> OrganizationalUnitSelectListItem();
 
-        bool CreateAdditionalInfo();
-        bool CreateEmployment(EmploymentViewModel eVM);
-        bool CreateContactPerson(ContactPersonViewModel cpVM);
+        AdditionalInformation CreateAdditionalInfo();
+        Employment CreateEmployment(EmploymentViewModel eVM);
+        ContactPerson CreateContactPerson(ContactPersonViewModel cpVM);
 
     }
 }

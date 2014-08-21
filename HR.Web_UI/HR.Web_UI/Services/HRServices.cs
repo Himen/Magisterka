@@ -36,7 +36,7 @@ namespace HR.Web_UI.Services
             this.employmentUnityOfWork = _employmentUnityOfWork;
         }
 
-        public bool CreateWorker(PersonViewModel pVM)
+        public Person CreateWorker(PersonViewModel pVM)
         {
             try
             {
@@ -92,12 +92,12 @@ namespace HR.Web_UI.Services
                 logUnityOfWork.AccountLogRepo.Add(al);
                 logUnityOfWork.UnityOfWork.SaveChanges();
 
-                return true;
+                return p;
             }
             catch
             {
                 //tutaj dac logowanie do log4net
-                return false;
+                return null;
             }
             finally
             {
@@ -173,7 +173,7 @@ namespace HR.Web_UI.Services
                 List<SelectListItem> list = new List<SelectListItem>();
                 foreach (var item in x)
                 {
-                    list.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                    list.Add(new SelectListItem { Text = item.Name, Value = item.Id });
                 }
                 return list;
             }
@@ -193,7 +193,7 @@ namespace HR.Web_UI.Services
                 List<SelectListItem> list = new List<SelectListItem>();
                 foreach (var item in x)
                 {
-                    list.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                    list.Add(new SelectListItem { Text = item.Name, Value = item.Id });
                 }
                 return list;
             }
@@ -205,12 +205,12 @@ namespace HR.Web_UI.Services
         }
 
 
-        public bool CreateAdditionalInfo()
+        public AdditionalInformation CreateAdditionalInfo()
         {
             throw new NotImplementedException();
         }
 
-        public bool CreateEmployment(EmploymentViewModel eVM)
+        public Employment CreateEmployment(EmploymentViewModel eVM)
         {
             try
             {
@@ -244,14 +244,14 @@ namespace HR.Web_UI.Services
                     EndDate = eVM.EndDate,
                     EmploymentType = eVM.EmploymentType,
                     OrganiziationalUnitCode = eVM.Organization,
-                    Person = personUnityOfWork.PersonRepo.GetAll().Last(),// nie powinno tak byc!!!! trzeba to zmienic
-                    PersonId = personUnityOfWork.PersonRepo.GetAll().Last().Id,
+                    //Person = personUnityOfWork.PersonRepo.GetAll().Last(),// nie powinno tak byc!!!! trzeba to zmienic
+                    //PersonId = personUnityOfWork.PersonRepo.GetAll().Last().Id,
 
                 };
-                employmentUnityOfWork.EmploymentRepo.Add(e);
-                employmentUnityOfWork.UnityOfWork.SaveChanges();
+                //employmentUnityOfWork.EmploymentRepo.Add(e);
+                //employmentUnityOfWork.UnityOfWork.SaveChanges();
 
-                return true;
+                return e;
             }
             catch (Exception)
             {
@@ -265,7 +265,7 @@ namespace HR.Web_UI.Services
         }
 
 
-        public bool CreateContactPerson(ContactPersonViewModel cpVM)
+        public ContactPerson CreateContactPerson(ContactPersonViewModel cpVM)
         {
             try
             {
@@ -274,7 +274,7 @@ namespace HR.Web_UI.Services
                     ApartmentNumber =cpVM.ApartmentNumber,
                     BuildingNumber = cpVM.BuildingNumber,
                     City = cpVM.City,
-                    Email = cpVM.Email,
+                    Email = cpVM.Email, 
                     FirstName = cpVM.FirstName,
                     Phone = cpVM.Phone,
                     PostalCode = cpVM.PostalCode,
@@ -285,11 +285,12 @@ namespace HR.Web_UI.Services
                 employmentUnityOfWork.ContactPersonRepo.Add(c);
 #warning do sprawdzenia jak sie to ma z encjami itd
 
-                Person p = personUnityOfWork.PersonRepo.GetAll().Last();
+                //w pracy ogarnac jak dodawac encje
+                /*Person p = personUnityOfWork.PersonRepo.GetAll().Last();
                 p.ContactPerson = c;
-                personUnityOfWork.PersonRepo.Update(p);
+                personUnityOfWork.PersonRepo.Update(p);*/
 
-                return true;
+                return c;
             }
             catch (Exception)
             {
