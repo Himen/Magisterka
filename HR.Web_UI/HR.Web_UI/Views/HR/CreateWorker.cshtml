@@ -16,7 +16,7 @@
     }
 </script>
 
-<h2 class="col-lg-offset-5 m_b_30">Dodaj pracownika</h2>
+<h2 class="col-lg-offset-4 m_b_30">Dodaj pracownika - dane osobowe</h2>
 
 <div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
     @using (Ajax.BeginForm("CreateWorker", "HR",
@@ -30,114 +30,123 @@
         @Html.HiddenFor(p => p.GoldenLine)
         @Html.HiddenFor(p => p.LinkIn)
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.FirstName)</span>
-            <input type="text" class="form-control" placeholder="Imię" name="FirstName" id="FirstName">
-        </div>
-        @Html.ValidationMessageFor(p => p.FirstName)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.Surname)</span>
-            <input type="text" class="form-control" placeholder="Nazwisko" name="Surname" id="Surname">
+    <div class="panel panel-default">
+        <div class="panel-heading">Dane pracownika</div>
+        <div class="panel-body">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.Surname)<br />
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.FirstName)</span>
+                <input type="text" class="form-control" placeholder="Imię" name="FirstName" id="FirstName">
+            </div>
+            @Html.ValidationMessageFor(p => p.FirstName)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.City)</span>
-            <input type="text" class="form-control" placeholder="Miasto" name="City" id="City">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.Surname)</span>
+                <input type="text" class="form-control" placeholder="Nazwisko" name="Surname" id="Surname">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.City)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.Surname)<br />
 
-    <div class="input-group">
-        <span class="input-group-addon">@Html.LabelFor(p => p.DateOfBirth)</span>
-        <input type="date" class="form-control" placeholder="Data urodzenia" name="DateOfBirth" id="DateOfBirth">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.City)</span>
+                <input type="text" class="form-control" placeholder="Miasto" name="City" id="City">
 
-    </div>
-    @Html.ValidationMessageFor(p => p.City)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.City)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.Street)</span>
-            <input type="text" class="form-control" placeholder="Ulica" name="Street" id="Street">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.DateOfBirth)</span>
+                <input type="date" class="form-control" placeholder="Data urodzenia" name="DateOfBirth" id="DateOfBirth">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.Street)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.City)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.PostalCode)</span>
-            <input type="text" class="form-control" placeholder="Kod pocztowy" name="PostalCode" id="PostalCode">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.Street)</span>
+                <input type="text" class="form-control" placeholder="Ulica" name="Street" id="Street">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.PostalCode)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.Street)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.BuildingNumber)</span>
-            <input type="text" class="form-control" placeholder="Numer budynku" name="BuildingNumber" id="BuildingNumber">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.PostalCode)</span>
+                <input type="text" class="form-control" placeholder="Kod pocztowy" name="PostalCode" id="PostalCode">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.BuildingNumber)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.PostalCode)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>
-            <input type="text" class="form-control" placeholder="Numer mieszkania" name="ApartmentNumber" id="ApartmentNumber">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.BuildingNumber)</span>
+                <input type="text" class="form-control" placeholder="Numer budynku" name="BuildingNumber" id="BuildingNumber">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.ApartmentNumber)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.BuildingNumber)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.Phone)</span>
-            <input type="tel" class="form-control" placeholder="Telefon" name="Phone" id="Phone">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>
+                <input type="text" class="form-control" placeholder="Numer mieszkania" name="ApartmentNumber" id="ApartmentNumber">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.Phone)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.ApartmentNumber)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.Email)</span>
-            <input type="email" class="form-control" placeholder="Email" name="Email" id="Email">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.Phone)</span>
+                <input type="tel" class="form-control" placeholder="Telefon" name="Phone" id="Phone">
 
-        </div>
-        @Html.ValidationMessageFor(p => p.Email)<br />
+            </div>
+            @Html.ValidationMessageFor(p => p.Phone)<br />
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.AccountType)</span>
-            @Html.EnumDropDownListFor(p => p.AccountType, new { @class = "form-control" })
-        </div>
-        @Html.ValidationMessageFor(p => p.AccountType)<br />
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.Email)</span>
+                <input type="email" class="form-control" placeholder="Email" name="Email" id="Email">
 
-        @*<div class="input-group">
+            </div>
+            @Html.ValidationMessageFor(p => p.Email)<br />
+
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.AccountType)</span>
+                @Html.EnumDropDownListFor(p => p.AccountType, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(p => p.AccountType)<br />
+
+            @*<div class="input-group">
             <span class="input-group-addon">@Html.LabelFor(p => p.Profession)</span>
             @Html.EnumDropDownListFor(p => p.Profession, new { @class = "form-control" })
         </div>
         @Html.ValidationMessageFor(p => p.Profession)<br />*@
 
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.NIP)</span>
-            <input type="text" class="form-control" placeholder="Nip" name="NIP" id="NIP">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.NIP)</span>
+                <input type="text" class="form-control" placeholder="Nip" name="NIP" id="NIP">
 
+            </div>
+            @Html.ValidationMessageFor(p => p.NIP)<br />
+
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.IDCard)</span>
+                <input type="text" class="form-control" placeholder="Numer dowodu" name="IDCard" id="IDCard">
+
+            </div>
+            @Html.ValidationMessageFor(p => p.IDCard)<br />
+
+            <div class="input-group">
+                <span class="input-group-addon">@Html.LabelFor(p => p.PESEL)</span>
+                <input type="text" class="form-control" placeholder="Pesel" name="PESEL" id="PESEL">
+
+            </div>
+            @Html.ValidationMessageFor(p => p.PESEL)<br />
+
+            <div class="input-group col-lg-6" style="float:none">
+                <span class="input-group-addon">@Html.LabelFor(p => p.Photo)</span>
+            </div>
+            <input type="file" name="Photo" class="btn" id="Photo" onchange="ShowpImagePreview(this);" />
+            <img id="imgprvw" alt="uploaded image preview" class="h_300 w_200" style="float:left" />
+            <br />
         </div>
-        @Html.ValidationMessageFor(p => p.NIP)<br />
-
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.IDCard)</span>
-            <input type="text" class="form-control" placeholder="Numer dowodu" name="IDCard" id="IDCard">
-
-        </div>
-        @Html.ValidationMessageFor(p => p.IDCard)<br />
-
-        <div class="input-group">
-            <span class="input-group-addon">@Html.LabelFor(p => p.PESEL)</span>
-            <input type="text" class="form-control" placeholder="Pesel" name="PESEL" id="PESEL">
-
-        </div>
-        @Html.ValidationMessageFor(p => p.PESEL)<br />
-
-        <div class="input-group col-lg-6" style="float:none">
-            <span class="input-group-addon">@Html.LabelFor(p => p.Photo)</span>
-        </div>
-        <input type="file" name="Photo" class="btn" id="Photo" onchange="ShowpImagePreview(this);" />
-        <img id="imgprvw" alt="uploaded image preview" class="h_300 w_200" style="float:left" />
-        <br />
+    </div>
+        
+        
 
         //to bedzie powstawac z imienia i nazwiska przy pomocy knockouta albo angulara
         //@Html.TextBoxFor(p => p.UserName);

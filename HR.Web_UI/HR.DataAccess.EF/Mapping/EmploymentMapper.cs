@@ -25,6 +25,8 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.OrganiziationalUnitCode).HasColumnType("varchar").HasMaxLength(10).IsRequired();
 
+            this.Property(c => c.EmploymentType).HasColumnType("int").IsRequired();
+
             this.Property(c => c.StartDate).HasColumnType("date").IsRequired();
 
             this.Property(c => c.EndDate).HasColumnType("date").IsOptional();

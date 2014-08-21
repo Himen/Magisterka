@@ -20,6 +20,11 @@ namespace HR.Core.Models
         public string OrganiziationalUnitCode { get; set; }
 
         /// <summary>
+        /// Rodzaj zatrudnienia. Np. kandydat, zwolniony
+        /// </summary>
+        public EmploymentType EmploymentType { get; set; }
+
+        /// <summary>
         /// Data zatrudnienia
         /// </summary>
         public DateTime StartDate { get; set; }

@@ -24,7 +24,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.BankAddress).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 #warning numeric sprawdzic
-            this.Property(c => c.AccountNumber).HasColumnType("Numeric").IsRequired();
+            this.Property(c => c.AccountNumber).HasColumnType("varchar").HasMaxLength(24).IsRequired();
         }
     }
 }

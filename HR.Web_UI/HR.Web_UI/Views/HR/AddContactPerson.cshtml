@@ -1,0 +1,93 @@
+﻿@model HR.Web_UI.Models.ViewModels.ContactPersonViewModel
+
+@{
+    ViewBag.Title = "Krok 3";
+}
+
+<h2 class="col-lg-offset-5 m_b_30">Dodaj pracownika - zatrudnienie</h2>
+
+<div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
+    @using (Ajax.BeginForm("ContactPersonSave", "HR",
+            new AjaxOptions { UpdateTargetId = "formContener", LoadingElementId = "loading-indicator", LoadingElementDuration = 10000 }
+            , new { enctype = "multipart/form-data", method = "POST" }))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">Dane kontaktowe osoby, która ma zostać powiadomiona w nagłym wypadku</div>
+            <div class="panel-body">
+                
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.FirstName)</span>
+                    <input type="text" class="form-control" placeholder="Imię" name="FirstName" id="FirstName">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.FirstName)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Surname)</span>
+                    <input type="text" class="form-control" placeholder="Nazwisko" name="Surname" id="Surname">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.Surname)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.City)</span>
+                    <input type="text" class="form-control" placeholder="Miasto" name="City" id="City">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.City)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Street)</span>
+                    <input type="text" class="form-control" placeholder="Ulica" name="Street" id="Street">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.Street)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.BuildingNumber)</span>
+                    <input type="text" class="form-control" placeholder="Numer budynku" name="BuildingNumber" id="BuildingNumber">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.BuildingNumber)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>
+                    <input type="text" class="form-control" placeholder="Numer mieszkania" name="ApartmentNumber" id="ApartmentNumber">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.ApartmentNumber)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>
+                    <input type="text" class="form-control" placeholder="Numer mieszkania" name="ApartmentNumber" id="ApartmentNumber">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.ApartmentNumber)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.PostalCode)</span>
+                    <input type="text" class="form-control" placeholder="Kod pocztowy" name="PostalCode" id="PostalCode">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.PostalCode)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Phone)</span>
+                    <input type="tel" class="form-control" placeholder="Telefon" name="Phone" id="Phone">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.Phone)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Email)</span>
+                    <input type="email" class="form-control" placeholder="Email" name="Email" id="Email">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.Phone)<br />
+
+            </div>
+        </div>
+        
+        <input type="submit" class="btn col-lg-offset-5" value="Przejdz do kroku 4" />
+    }
+</div>

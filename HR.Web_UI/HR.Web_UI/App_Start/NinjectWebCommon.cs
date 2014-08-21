@@ -19,6 +19,7 @@ using HR.Core.BasicContract;
     using HR.DataAccess.GLOBAL.UnityOfWorks;
     using HR.Web_UI.Services.ServicesInferface;
     using HR.Web_UI.Services;
+    using HR.Core.Models.DictionaryModels;
 
     public static class NinjectWebCommon 
     {
@@ -79,9 +80,12 @@ using HR.Core.BasicContract;
                         .To<AdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
                     kernel.Bind<IHRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
                         .To<HRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
-#warning dodac wstrzykiwanie logowania
-                        kernel.Bind<IHRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
-                        .To<HRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
+                    kernel.Bind<ILogUnityOfWork< HR.DataAccess.EF.Repositories.Repository<AccountLog, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
+                        .To<LogUnityOfWork<HR.DataAccess.EF.Repositories.Repository<AccountLog, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
+                    kernel.Bind<IDicUnityOfWork<HR.DataAccess.EF.Repositories.Repository<BankDictionary, long>, HR.DataAccess.EF.Repositories.Repository<CollegesDictionary, long>, HR.DataAccess.EF.Repositories.Repository<CompaniesDictionary, long>, HR.DataAccess.EF.Repositories.Repository<Position, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
+                        .To<DicUnityOfWork<HR.DataAccess.EF.Repositories.Repository<BankDictionary, long>, HR.DataAccess.EF.Repositories.Repository<CollegesDictionary, long>, HR.DataAccess.EF.Repositories.Repository<CompaniesDictionary, long>, HR.DataAccess.EF.Repositories.Repository<Position, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
+                    kernel.Bind<IEmploymentUnityOfWork<HR.DataAccess.EF.Repositories.Repository<OrganiziationalUnit, long>, HR.DataAccess.EF.Repositories.Repository<BankAccount, long>, HR.DataAccess.EF.Repositories.Repository<Employment, long>, HR.DataAccess.EF.Repositories.Repository<Contract, long>, HR.DataAccess.EF.Repositories.Repository<ContactPerson, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
+                        .To<EmploymentUnityOfWork<HR.DataAccess.EF.Repositories.Repository<OrganiziationalUnit, long>, HR.DataAccess.EF.Repositories.Repository<BankAccount, long>, HR.DataAccess.EF.Repositories.Repository<Employment, long>, HR.DataAccess.EF.Repositories.Repository<Contract, long>, HR.DataAccess.EF.Repositories.Repository<ContactPerson, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
 
                     break;
                 case "NH":

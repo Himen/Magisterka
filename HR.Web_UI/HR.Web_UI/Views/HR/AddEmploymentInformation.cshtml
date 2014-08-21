@@ -1,36 +1,139 @@
-﻿@model HR.Web_UI.Models.ViewModels.PersonViewModel
+﻿@model HR.Web_UI.Models.ViewModels.EmploymentViewModel
 
 @{
     ViewBag.Title = "Krok 3";
 }
 
-<h2 class="col-lg-offset-5 m_b_30">Dodaj pracownika - krok 3</h2>
+<h2 class="col-lg-offset-5 m_b_30">Dodaj pracownika - zatrudnienie</h2>
 
 <div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
-    @using (Ajax.BeginForm("AddWorkerAdditionalInfoSend", "HR",
+    @using (Ajax.BeginForm("AddEmploymentInformationSend", "HR",
             new AjaxOptions { UpdateTargetId = "formContener", LoadingElementId = "loading-indicator", LoadingElementDuration = 10000 }
             , new { enctype = "multipart/form-data", method = "POST" }))
     {
+        <div class="panel panel-default">
+            <div class="panel-heading">Dane zatrudnienia</div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Position)</span>
+                    @Html.DropDownListFor(p => p.Position, Model.Positions, new { @class = "btn-group" })
+                </div>
+                @Html.ValidationMessageFor(p => p.Position)<br />
 
-        @Html.HiddenFor(p => p.FirstName)
-        @Html.HiddenFor(p => p.Surname)
-        @Html.HiddenFor(p => p.City)
-        @Html.HiddenFor(p => p.Street)
-        @Html.HiddenFor(p => p.FirstName)
-        @Html.HiddenFor(p => p.BuildingNumber)
-        @Html.HiddenFor(p => p.ApartmentNumber)
-        @Html.HiddenFor(p => p.Phone)
-        @Html.HiddenFor(p => p.Email)
-        @Html.HiddenFor(p => p.AccountType)
-        @Html.HiddenFor(p => p.Email)
-        @Html.HiddenFor(p => p.Photo)
-        @Html.HiddenFor(p => p.Facebook)
-        @Html.HiddenFor(p => p.Google)
-        @Html.HiddenFor(p => p.Twitter)
-        @Html.HiddenFor(p => p.GoldenLine)
-        @Html.HiddenFor(p => p.LinkIn)
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.EmploymentType)</span>
+                    @Html.EnumDropDownListFor(p => p.EmploymentType, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(p => p.EmploymentType)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.StartDate)</span>
+                    <input type="date" class="form-control" placeholder="Data rozpoczecia" name="StartDate" id="StartDate">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.StartDate)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.EndDate)</span>
+                    <input type="date" class="form-control" placeholder="Data zakonczenia" name="EndDate" id="EndDate">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.EndDate)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.ContractType)</span>
+                    @Html.EnumDropDownListFor(p => p.ContractType, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(p => p.ContractType)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.ContractDimension)</span>
+                    @Html.EnumDropDownListFor(p => p.ContractDimension, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(p => p.ContractDimension)<br />
+
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.IsMonthBenefit)</span>
+                    @Html.CheckBoxFor(p => p.IsMonthBenefit)
+                </div>
+                
+
+                <div class="input-group" id="MonthBenefitCH">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.MonthBenefit)</span>
+                    <input type="date" class="form-control" placeholder="Pensja miesieczna brutto" name="MonthBenefit" id="MonthBenefit">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.MonthBenefit)<br />
+
+                <div class="input-group" id="BenefitPerHourCH">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.BenefitPerHour)</span>
+                    <input type="date" class="form-control" placeholder="Pensja placona na godzine brutto" name="BenefitPerHour" id="BenefitPerHour">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.BenefitPerHour)<br />
+
+            </div>
+        </div>
+
+        
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">Dane bankowe</div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.BankName)</span>
+                    <input type="text" class="form-control" placeholder="Nazwa banku" name="BankName" id="BankName">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.BankName)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.BankAddress)</span>
+                    <input type="text" class="form-control" placeholder="Adress banku" name="BankAddress" id="BankAddress">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.BankAddress)<br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.AccountNumber)</span>
+                    <input type="text" class="form-control" placeholder="Numer konta" name="AccountNumber" id="AccountNumber">
+
+                </div>
+                @Html.ValidationMessageFor(p => p.AccountNumber)<br />
+            </div>
+        </div>
+
+        
+
 
 
         <input type="submit" class="btn col-lg-offset-5" value="Przejdz do kroku 4" />
     }
 </div>
+
+<script>
+    jQuery(document).ready(function () {
+            if ($("#IsMonthBenefit").is(':checked')) {
+                $("#MonthBenefitCH").show();
+                $("#BenefitPerHourCH").hide();
+            }
+            else
+            {
+                $("#MonthBenefitCH").hide();
+                $("#BenefitPerHourCH").show();
+            }
+
+            $('#IsMonthBenefit').change(function () {
+                if ($("#IsMonthBenefit").is(':checked')) {
+                    $("#MonthBenefitCH").show();
+                    $("#BenefitPerHourCH").hide();
+                }
+                else {
+                    $("#MonthBenefitCH").hide();
+                    $("#BenefitPerHourCH").show();
+                }
+            });
+
+    });
+</script>

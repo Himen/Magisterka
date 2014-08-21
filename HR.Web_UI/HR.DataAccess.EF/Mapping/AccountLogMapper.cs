@@ -31,7 +31,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.AccountId).HasColumnType("bigint").IsRequired();
 
-            this.HasRequired(c => c.Account).WithRequiredDependent();
+            //this.HasRequired(c => c.Account).WithRequiredDependent();
 #warning Account
         }
     }

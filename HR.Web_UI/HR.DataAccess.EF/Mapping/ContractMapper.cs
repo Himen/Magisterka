@@ -27,9 +27,9 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.ContractDimension).HasColumnType("int").IsRequired();
 
-            this.Property(c => c.BenefitPerHour).HasColumnType("decimal").HasPrecision(10,2).IsOptional();
+            this.Property(c => c.BenefitPerHour).HasColumnType("float").IsOptional();
 
-            this.Property(c => c.MonthBenefit).HasColumnType("decimal").HasPrecision(10, 2).IsOptional();
+            this.Property(c => c.MonthBenefit).HasColumnType("float").IsOptional();
 
         }
     }

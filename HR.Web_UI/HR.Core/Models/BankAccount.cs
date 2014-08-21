@@ -20,6 +20,6 @@ namespace HR.Core.Models
         /// <summary>
         /// Numer konta
         /// </summary>
-        public long AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
     }
 }

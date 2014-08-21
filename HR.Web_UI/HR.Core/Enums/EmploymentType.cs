@@ -7,6 +7,7 @@ namespace HR.Core.Enums
         Kandydat,
         DoZatwierdzenia,
         Zatrudniony,
-        Zwolniony
+        Zwolniony,
+        PracowalUnas
     }
 }

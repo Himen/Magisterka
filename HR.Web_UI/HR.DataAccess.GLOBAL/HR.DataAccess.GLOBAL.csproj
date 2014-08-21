@@ -54,7 +54,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityOfWorks\AdminUnityOfWork.cs" />
+    <Compile Include="UnityOfWorks\DicUnityOfWork.cs" />
+    <Compile Include="UnityOfWorks\EmploymentUnityOfWork.cs" />
     <Compile Include="UnityOfWorks\HRUnityOfWork.cs" />
+    <Compile Include="UnityOfWorks\IDicUnityOfWork.cs" />
+    <Compile Include="UnityOfWorks\IEmploymentUnityOfWork.cs" />
     <Compile Include="UnityOfWorks\IHRUnityOfWork.cs" />
     <Compile Include="UnityOfWorks\IAdminUnityOfWork.cs" />
     <Compile Include="UnityOfWorks\ILogUnityOfWork.cs" />

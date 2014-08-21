@@ -32,11 +32,11 @@ namespace HR.Core.Models
         /// <summary>
         /// Wynagrodzenie miesieczne
         /// </summary>
-        public decimal? MonthBenefit { get; set; }
+        public double? MonthBenefit { get; set; }
 
         /// <summary>
         /// Wynagrodzenie na godzine, jezeli nie wystepuje wynagrodzenie miesieczne
         /// </summary>
-        public decimal? BenefitPerHour { get; set; }
+        public double? BenefitPerHour { get; set; }
     }
 }

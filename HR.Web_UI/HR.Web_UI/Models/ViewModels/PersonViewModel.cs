@@ -77,7 +77,7 @@ namespace HR.Web_UI.Models.ViewModels
         public string LinkIn { get; set; }
 
 
-        public List<Person> ManagerList { get; set; }
+       /* public List<Person> ManagerList { get; set; }
 
         public long ManagerId { get; set; }
 
@@ -86,6 +86,6 @@ namespace HR.Web_UI.Models.ViewModels
         /// </summary>
 
         [Display(Name = "Specializacja")]
-        public ProfesionType Profession { get; set; }
+        public ProfesionType Profession { get; set; }*/
     }
 }
