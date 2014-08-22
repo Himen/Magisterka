@@ -43,7 +43,9 @@ namespace HR.DataAccess.EF.Mapping
             this.Property(c => c.AdvanceAt_PIT).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
 
             this.Property(c => c.PersonId).IsOptional();
-#warning perosn
+
+            this.HasRequired(p => p.Person).WithMany(c => c.BenefitsProfits).HasForeignKey(c => c.PersonId).WillCascadeOnDelete(true);
+
         }
     }
 }

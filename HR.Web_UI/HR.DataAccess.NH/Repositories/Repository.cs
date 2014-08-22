@@ -118,5 +118,11 @@ namespace HR.DataAccess.NH.Repositories
 
             RemoveFinaly(entity);
         }
+
+
+        public void Attach(ref TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

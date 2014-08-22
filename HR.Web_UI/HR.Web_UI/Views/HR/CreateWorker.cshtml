@@ -24,82 +24,76 @@
             , new { enctype = "multipart/form-data", method = "POST" }))
     {
 
-        @Html.HiddenFor(p => p.Facebook)
-        @Html.HiddenFor(p => p.Google)
-        @Html.HiddenFor(p => p.Twitter)
-        @Html.HiddenFor(p => p.GoldenLine)
-        @Html.HiddenFor(p => p.LinkIn)
-
-
     <div class="panel panel-default">
         <div class="panel-heading">Dane pracownika</div>
         <div class="panel-body">
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.FirstName)</span>
-                <input type="text" class="form-control" placeholder="Imię" name="FirstName" id="FirstName">
+                @Html.TextBoxFor(p => p.FirstName, new { type = "text", @class = "form-control", placeholder = "Imię" })
+
             </div>
             @Html.ValidationMessageFor(p => p.FirstName)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.Surname)</span>
-                <input type="text" class="form-control" placeholder="Nazwisko" name="Surname" id="Surname">
+                @Html.TextBoxFor(p => p.Surname, new { type = "text", @class = "form-control", placeholder = "Nazwisko" })
 
             </div>
             @Html.ValidationMessageFor(p => p.Surname)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.City)</span>
-                <input type="text" class="form-control" placeholder="Miasto" name="City" id="City">
+                @Html.TextBoxFor(p => p.City, new { type = "text", @class = "form-control", placeholder = "Miasto" })
 
             </div>
             @Html.ValidationMessageFor(p => p.City)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.DateOfBirth)</span>
-                <input type="date" class="form-control" placeholder="Data urodzenia" name="DateOfBirth" id="DateOfBirth">
+                @Html.TextBoxFor(p => p.DateOfBirth, new { type = "date", @class = "form-control", placeholder = "Data urodzenia" })
 
             </div>
             @Html.ValidationMessageFor(p => p.DateOfBirth)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.Street)</span>
-                <input type="text" class="form-control" placeholder="Ulica" name="Street" id="Street">
+                @Html.TextBoxFor(p => p.Street, new { type = "text", @class = "form-control", placeholder = "Ulica" })
 
             </div>
             @Html.ValidationMessageFor(p => p.Street)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.PostalCode)</span>
-                <input type="text" class="form-control" placeholder="Kod pocztowy" name="PostalCode" id="PostalCode">
+                @Html.TextBoxFor(p => p.PostalCode, new { type = "text", @class = "form-control", placeholder = "Kod pocztowy" })
 
             </div>
             @Html.ValidationMessageFor(p => p.PostalCode)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.BuildingNumber)</span>
-                <input type="text" class="form-control" placeholder="Numer budynku" name="BuildingNumber" id="BuildingNumber">
+                @Html.TextBoxFor(p => p.BuildingNumber, new { type = "text", @class = "form-control", placeholder = "Numer budynku" })
 
             </div>
             @Html.ValidationMessageFor(p => p.BuildingNumber)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.ApartmentNumber)</span>
-                <input type="text" class="form-control" placeholder="Numer mieszkania" name="ApartmentNumber" id="ApartmentNumber">
+                @Html.TextBoxFor(p => p.ApartmentNumber, new { type = "text", @class = "form-control", placeholder = "Numer mieszkania" })
 
             </div>
             @Html.ValidationMessageFor(p => p.ApartmentNumber)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.Phone)</span>
-                <input type="tel" class="form-control" placeholder="Telefon" name="Phone" id="Phone">
+                @Html.TextBoxFor(p => p.Phone, new { type = "tel", @class = "form-control", placeholder = "Telefon" })
 
             </div>
             @Html.ValidationMessageFor(p => p.Phone)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.Email)</span>
-                <input type="email" class="form-control" placeholder="Email" name="Email" id="Email">
+                @Html.TextBoxFor(p => p.Email, new { type = "email", @class = "form-control", placeholder = "Email" })
 
             </div>
             @Html.ValidationMessageFor(p => p.Email)<br />
@@ -118,22 +112,21 @@
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.NIP)</span>
-                <input type="text" class="form-control" placeholder="Nip" name="NIP" id="NIP">
+                @Html.TextBoxFor(p => p.NIP, new { type = "text", @class = "form-control", placeholder = "NIP" })
 
             </div>
             @Html.ValidationMessageFor(p => p.NIP)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.IDCard)</span>
-                <input type="text" class="form-control" placeholder="Numer dowodu" name="IDCard" id="IDCard">
+                @Html.TextBoxFor(p => p.IDCard, new { type = "text", @class = "form-control", placeholder = "Numer dowodu" })
 
             </div>
             @Html.ValidationMessageFor(p => p.IDCard)<br />
 
             <div class="input-group">
                 <span class="input-group-addon">@Html.LabelFor(p => p.PESEL)</span>
-                <input type="text" class="form-control" placeholder="Pesel" name="PESEL" id="PESEL">
-
+                @Html.TextBoxFor(p => p.PESEL, new { type="text", @class="form-control", placeholder="Pesel"})
             </div>
             @Html.ValidationMessageFor(p => p.PESEL)<br />
 

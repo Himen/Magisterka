@@ -38,5 +38,7 @@ namespace HR.Core.Models
         /// Wynagrodzenie na godzine, jezeli nie wystepuje wynagrodzenie miesieczne
         /// </summary>
         public double? BenefitPerHour { get; set; }
+
+        public virtual Employment Employment { get; set; }
     }
 }

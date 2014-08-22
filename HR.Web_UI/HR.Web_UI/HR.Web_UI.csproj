@@ -189,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\AdditionalInformationViewModel.cs" />
     <Compile Include="Models\ViewModels\ContactPersonViewModel.cs" />
     <Compile Include="Models\ViewModels\EmploymentViewModel.cs" />
     <Compile Include="Models\ViewModels\PersonDisplayViewModel.cs" />

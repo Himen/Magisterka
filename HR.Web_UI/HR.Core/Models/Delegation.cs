@@ -32,7 +32,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id osoby ktora jest w delegacji
         /// </summary>
-        public long IdPerson { get; set; }
+        //public long IdPerson { get; set; }
 
         /// <summary>
         /// Osoba ktora jest w delegacji

@@ -31,15 +31,17 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EndDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
+            //this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
+            this.HasRequired(c => c.Person).WithOptional(c => c.Employment).Map(m => m.MapKey("PersonId")).WillCascadeOnDelete(true);
 
-            this.Property(c => c.ContractId).HasColumnType("bigint").IsOptional();
+            //this.Property(c => c.ContractId).HasColumnType("bigint").IsOptional();
 
+            this.HasRequired(c => c.Contract).WithOptional(c => c.Employment).Map(m => m.MapKey("ContractId")).WillCascadeOnDelete(true); ;
 
-            this.Property(c => c.BankAccountId).HasColumnType("bigint").IsOptional();
+            //this.Property(c => c.BankAccountId).HasColumnType("bigint").IsOptional();
 
-#warning All
+            this.HasRequired(c => c.BankAccount).WithOptional(c => c.Employment).Map(m => m.MapKey("BankAccountId")).WillCascadeOnDelete(true); ;
 
         }
     }

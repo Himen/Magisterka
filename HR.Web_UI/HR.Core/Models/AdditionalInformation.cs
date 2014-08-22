@@ -36,7 +36,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id osoby
         /// </summary>
-        public long PersonId { get; set; }
+        //public long PersonId { get; set; }
 
         /// <summary>
         /// Osoba

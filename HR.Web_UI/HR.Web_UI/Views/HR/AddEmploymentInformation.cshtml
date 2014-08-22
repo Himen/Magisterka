@@ -21,6 +21,12 @@
                 @Html.ValidationMessageFor(p => p.Position)<br />
 
                 <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Organization)</span>
+                    @Html.DropDownListFor(p => p.Organization, Model.Organizations, new { @class = "btn-group" })
+                </div>
+                @Html.ValidationMessageFor(p => p.Organization)<br />
+
+                <div class="input-group">
                     <span class="input-group-addon">@Html.LabelFor(p => p.EmploymentType)</span>
                     @Html.EnumDropDownListFor(p => p.EmploymentType, new { @class = "form-control" })
                 </div>
@@ -61,14 +67,14 @@
 
                 <div class="input-group" id="MonthBenefitCH">
                     <span class="input-group-addon">@Html.LabelFor(p => p.MonthBenefit)</span>
-                    <input type="date" class="form-control" placeholder="Pensja miesieczna brutto" name="MonthBenefit" id="MonthBenefit">
+                    <input type="text" class="form-control" placeholder="Pensja miesieczna brutto" name="MonthBenefit" id="MonthBenefit">
 
                 </div>
                 @Html.ValidationMessageFor(p => p.MonthBenefit)<br />
 
                 <div class="input-group" id="BenefitPerHourCH">
                     <span class="input-group-addon">@Html.LabelFor(p => p.BenefitPerHour)</span>
-                    <input type="date" class="form-control" placeholder="Pensja placona na godzine brutto" name="BenefitPerHour" id="BenefitPerHour">
+                    <input type="text" class="form-control" placeholder="Pensja placona na godzine brutto" name="BenefitPerHour" id="BenefitPerHour">
 
                 </div>
                 @Html.ValidationMessageFor(p => p.BenefitPerHour)<br />

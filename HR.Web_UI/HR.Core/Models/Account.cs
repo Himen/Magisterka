@@ -33,11 +33,13 @@ namespace HR.Core.Models
         /// <summary>
         /// Id osoby powiazanej z kontem
         /// </summary>
-        public virtual long PersonId { get; set; }
+        //public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba powiazana z kontem
         /// </summary>
         public virtual Person Person { get; set; }
+
+        public AccountLog AccountLog { get; set; }
     }
 }

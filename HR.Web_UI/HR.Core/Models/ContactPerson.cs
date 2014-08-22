@@ -53,5 +53,7 @@ namespace HR.Core.Models
         /// Email
         /// </summary>
         public string Email { get; set; }
+
+        public virtual Person Person { get; set; }
     }
 }

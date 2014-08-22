@@ -10,6 +10,7 @@ namespace HR.Core.BasicContract
     public interface IRepository<TEntity, in TKey> where TEntity : class
     {
         IQueryable<TEntity> GetAll();
+        void Attach(ref TEntity entity);
         IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> pred);
         TEntity GetById(TKey id);
         void Remove(TEntity entity);

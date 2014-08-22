@@ -84,7 +84,7 @@ namespace HR.DataAccess.EF
             base.OnModelCreating(modelBuilder);
         }
     }
-    public class HRDBInitializer : DropCreateDatabaseAlways<HR_DataContext>
+    public class HRDBInitializer : CreateDatabaseIfNotExists<HR_DataContext>
     {
         //olac to narazie
         protected override void Seed(HR_DataContext context)

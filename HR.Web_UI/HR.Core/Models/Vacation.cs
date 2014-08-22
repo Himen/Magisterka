@@ -50,7 +50,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id dokumentu powiazanego z urlopem
         /// </summary>
-        public Guid VacationDocumentId { get; set; }
+        //public Guid VacationDocumentId { get; set; }
 
         /// <summary>
         /// Dokument powiazany z urlopem

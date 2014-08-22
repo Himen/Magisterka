@@ -20,9 +20,9 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();
 
-            this.Property(c => c.CreateDate).HasColumnType("date").IsRequired();
+            this.Property(c => c.CreateDate).HasColumnType("datetime2").IsRequired();
 
-            this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
+            this.Property(c => c.EditDate).HasColumnType("datetime2").IsOptional();
 
             this.Property(c => c.FirstName).HasColumnType("varchar").HasMaxLength(20).IsRequired();
 
@@ -52,13 +52,12 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c=>c.ManagerId).HasColumnType("bigint").IsOptional();
 
-            this.Property(c => c.ContactPersonId).HasColumnType("bigint").IsOptional();;
+            this.HasOptional(c => c.Manager);
 
+            //this.Property(c => c.ContactPersonId).HasColumnType("bigint").IsOptional();;
+            this.HasOptional(c => c.AdditionalInformation).WithRequired(c => c.Person).Map(c => c.MapKey("AdditionalInformationId")).WillCascadeOnDelete(true);
 
-
-#warning //this.HasMany<College>(c => c.Colleges).WithRequired(c => c.Person).HasForeignKey(c => c.IdPerson);
-
-            //this.HasRequired(c => c.Account).WithRequiredDependent(c => c.Person).Map(c => c.MapKey("Id"));
+            this.HasOptional(c => c.ContactPerson).WithRequired(c => c.Person).Map(c => c.MapKey("ContactPersonId")).WillCascadeOnDelete(true);
 
         }
     }

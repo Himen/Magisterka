@@ -21,5 +21,7 @@ namespace HR.Core.Models
         /// Numer konta
         /// </summary>
         public string AccountNumber { get; set; }
+
+        public virtual Employment Employment { get; set; }
     }
 }

@@ -89,7 +89,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id osoby kontaktowej
         /// </summary>
-        public long? ContactPersonId { get; set; }
+        //public long? ContactPersonId { get; set; }
 
         /// <summary>
         /// Osoba kontaktowa
@@ -105,10 +105,37 @@ namespace HR.Core.Models
         /// Id konta
         /// </summary>
         /*public long AccountId { get; set; }
-
+        */
         /// <summary>
         /// EF: Konto
         /// </summary>
-        public virtual Account Account { get; set; }*/
+        public virtual Account Account { get; set; }
+
+        public virtual AdditionalInformation AdditionalInformation { get; set; }
+
+        public virtual List<BenefitsProfit> BenefitsProfits { get; set; }
+
+        //public long BankAccountId { get; set; }
+
+        public virtual List<College> Colleges { get; set; }
+
+        public virtual List<CourseMaterial> CourseMaterials { get; set; }
+
+        public virtual Delegation Delegation { get; set; }
+
+        public virtual Employment Employment { get; set; }
+
+        public virtual List<Job> Jobs { get; set; }
+
+        public virtual OrganiziationalUnit OrganiziationalUnit { get; set; }
+
+        public virtual List<PromotialMaterial> PromotialMaterials { get; set; }
+
+        public virtual List<Training> Trainings { get; set; }
+
+        public virtual List<Vacation> Vacations { get; set; }
+
+        public virtual List<WorkRegistry> WorkRegistrys { get; set; }
+
     }
 }

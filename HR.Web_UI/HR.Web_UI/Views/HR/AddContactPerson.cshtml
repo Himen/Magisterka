@@ -6,6 +6,10 @@
 
 <h2 class="col-lg-offset-4 m_b_30">Dodaj pracownika - osoba kontaktowa</h2>
 
+<div id="message" class="col-lg-offset-3 col-lg-6 alert alert-success" role="alert">
+    <label class="col-lg-offset-5">@ViewBag.Message</label>
+</div><br />
+
 <div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
     @using (Ajax.BeginForm("ContactPersonSave", "HR",
             new AjaxOptions { UpdateTargetId = "formContener", LoadingElementId = "loading-indicator", LoadingElementDuration = 10000 }
@@ -84,3 +88,10 @@
         <input type="submit" class="btn col-lg-offset-5" value="Przejdz do kroku 4" />
     }
 </div>
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#message").delay(4000).fadeToggle(1000, "linear");
+        jQuery("#information").delay(6000).fadeToggle(1000, "linear");
+    });
+</script>

@@ -31,7 +31,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
-#warning tu powinnobyc jesszcze mapowanie person
+            this.HasOptional(c => c.Person).WithMany(c => c.Documents).HasForeignKey(c => c.PersonId).WillCascadeOnDelete(true);
         }
     }
 }

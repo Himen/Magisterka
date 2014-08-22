@@ -37,7 +37,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id konta z ktorego zostało wykonane
         /// </summary>
-        public long AccountId { get; set; }
+        //public long AccountId { get; set; }
 
         /// <summary>
         /// Konto z ktorego zostalo wykonane. Narazie rowno znaczne z kontem ktore edytujemy

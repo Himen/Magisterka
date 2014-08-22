@@ -27,6 +27,8 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
+            this.HasRequired(c => c.Person).WithMany(c => c.PromotialMaterials).HasForeignKey(c => c.PersonId).WillCascadeOnDelete(true);
+
         }
     }
 }

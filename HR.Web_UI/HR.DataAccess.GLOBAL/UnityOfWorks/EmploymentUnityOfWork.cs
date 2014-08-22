@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HR.DataAccess.GLOBAL.UnityOfWorks
 {
-    public class EmploymentUnityOfWork<TRepo, TRepo1, TRepo2, TRepo3, TRepo4, TUnityOfWork> : IEmploymentUnityOfWork<TRepo, TRepo1, TRepo2, TRepo3, TRepo4, TUnityOfWork>
+    public class EmploymentUnityOfWork<TRepo, TRepo1, TRepo2, TRepo3, TRepo4,TRepo5, TUnityOfWork> : IEmploymentUnityOfWork<TRepo, TRepo1, TRepo2, TRepo3, TRepo4,TRepo5, TUnityOfWork>
     {
         public TUnityOfWork UnityOfWork { get; set; }
         public TRepo OrganizationalUnitRepo { get; set; }
@@ -14,6 +14,7 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
         public TRepo2 EmploymentRepo { get; set; }
         public TRepo3 ContractRepo { get; set; }
         public TRepo4 ContactPersonRepo { get; set; }
+        public TRepo5 PersonRepo { get; set; }
 
         public EmploymentUnityOfWork()
         {
@@ -26,6 +27,7 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
                 EmploymentRepo = (TRepo2)Activator.CreateInstance(typeof(TRepo2), x.context);
                 ContractRepo = (TRepo3)Activator.CreateInstance(typeof(TRepo3), x.context);
                 ContactPersonRepo = (TRepo4)Activator.CreateInstance(typeof(TRepo4), x.context);
+                PersonRepo = (TRepo5)Activator.CreateInstance(typeof(TRepo5), x.context);
             }
             else
             {
@@ -35,6 +37,7 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
                 EmploymentRepo = (TRepo2)Activator.CreateInstance(typeof(TRepo2), x.session);
                 ContractRepo = (TRepo3)Activator.CreateInstance(typeof(TRepo3), x.session);
                 ContactPersonRepo = (TRepo4)Activator.CreateInstance(typeof(TRepo4), x.session);
+                PersonRepo = (TRepo5)Activator.CreateInstance(typeof(TRepo5), x.session);
             }
         }
 

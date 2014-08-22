@@ -37,7 +37,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id pracownika
         /// </summary>
-        public long PersonId { get; set; }
+        //public long PersonId { get; set; }
 
         /// <summary>
         /// Pracownik
@@ -47,7 +47,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id umowy
         /// </summary>
-        public long ContractId { get; set; }
+        //public long ContractId { get; set; }
 
         /// <summary>
         /// Umowa
@@ -57,7 +57,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id konta bankowego
         /// </summary>
-        public long BankAccountId { get; set; }
+        //public long BankAccountId { get; set; }
 
         /// <summary>
         /// Konto bankowe

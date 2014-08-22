@@ -25,5 +25,6 @@ namespace HR.Core.Models.RepoModels
         /// </summary>
         public string Description { get; set; }
 
+        public virtual Vacation Vacation { get; set; }
     }
 }

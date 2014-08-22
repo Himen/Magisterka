@@ -32,9 +32,12 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
-#warning sprawdzic czy uniqueidentifier jest poprawny
-            this.Property(c => c.VacationDocumentId).HasColumnType("uniqueidentifier").IsOptional();
-#warning mapowanie do person i VacationDocument dodac
+            this.HasRequired(c => c.Person).WithMany(c => c.Vacations).HasForeignKey(c=>c.PersonId).WillCascadeOnDelete();
+
+            //this.Property(c => c.VacationDocumentId).HasColumnType("uniqueidentifier").IsOptional();
+
+            this.HasRequired(c => c.VacationDocument).WithOptional(c => c.Vacation).Map(m => m.MapKey("VacationDocumentId")).WillCascadeOnDelete(true);
+
         }
     }
 }

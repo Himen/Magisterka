@@ -29,9 +29,9 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c=>c.Photo).HasColumnType("image").IsOptional();
 
-            this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
+            //this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
-            //this.HasRequired(c => c.Person).WithRequiredDependent(c=>c.Account);
+            this.HasRequired(c => c.Person).WithOptional(c => c.Account).Map(m => m.MapKey("PersonId")).WillCascadeOnDelete(true);
 
             //this.HasRequired(c => c.Person).WithMany().HasForeignKey(c=>c.PersonId).WillCascadeOnDelete();
             

@@ -20,9 +20,11 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         List<SelectListItem> OrganizationalUnitSelectListItem();
 
-        AdditionalInformation CreateAdditionalInfo();
-        Employment CreateEmployment(EmploymentViewModel eVM);
-        ContactPerson CreateContactPerson(ContactPersonViewModel cpVM);
+        AdditionalInformation CreateAdditionalInfo(AdditionalInformationViewModel aiVM, Person p);
+        Employment CreateEmployment(EmploymentViewModel eVM,Person p);
+        ContactPerson CreateContactPerson(ContactPersonViewModel cpVM, Person p);
+
+        PersonDisplayViewModel GetAllPersonData(long id);
 
     }
 }

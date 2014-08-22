@@ -29,10 +29,8 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EndDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.AccountId).HasColumnType("bigint").IsRequired();
+            this.HasRequired(c => c.Account).WithOptional(c => c.AccountLog).Map(m => m.MapKey("AccountId")).WillCascadeOnDelete(true);
 
-            //this.HasRequired(c => c.Account).WithRequiredDependent();
-#warning Account
         }
     }
 }

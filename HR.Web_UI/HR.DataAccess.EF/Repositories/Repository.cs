@@ -105,11 +105,16 @@ namespace HR.DataAccess.EF.Repositories
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
 
             PropertyInfo propertyInfo = entity.GetType().GetProperty("EditDate");
-            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
+            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, typeof(DateTime)), null);
+            //propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
 
             DbSet.Attach(entity);
             DbContext.Entry(entity).State = EntityState.Modified;
         }
 
+        public void Attach(ref TEntity entity)
+        {
+            DbSet.Attach(entity);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model HR.Web_UI.Models.ViewModels.PersonViewModel
+﻿@model HR.Web_UI.Models.ViewModels.AdditionalInformationViewModel
 
 @{
     ViewBag.Title = "Dodaj pracownika - portale spolecznosciowe";
@@ -18,19 +18,6 @@
             new AjaxOptions { UpdateTargetId = "formContener", LoadingElementId = "loading-indicator", LoadingElementDuration = 10000 }
             , new { enctype = "multipart/form-data", method = "POST" }))
     {
-
-        @Html.HiddenFor(p => p.FirstName)
-        @Html.HiddenFor(p => p.Surname)
-        @Html.HiddenFor(p => p.City)
-        @Html.HiddenFor(p => p.Street)
-        @Html.HiddenFor(p => p.FirstName)
-        @Html.HiddenFor(p => p.BuildingNumber)
-        @Html.HiddenFor(p => p.ApartmentNumber)
-        @Html.HiddenFor(p => p.Phone)
-        @Html.HiddenFor(p => p.Email)
-        @Html.HiddenFor(p => p.AccountType)
-        @Html.HiddenFor(p => p.Email)
-        @Html.HiddenFor(p => p.Photo)
 
     <div class="panel panel-default">
         <div class="panel-heading">Portale spolecznosciowe</div>

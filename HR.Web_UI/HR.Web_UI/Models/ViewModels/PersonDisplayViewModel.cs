@@ -11,7 +11,7 @@ namespace HR.Web_UI.Models.ViewModels
     {
 
         [Display(Name = "Zdjęcie")]
-        public HttpPostedFileBase Photo { get; set; }
+        public byte[] Photo { get; set; }
 
         [Display(Name = "Typ konta")]
         public AccountType accountType{ get; set; }

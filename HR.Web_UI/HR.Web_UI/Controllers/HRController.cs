@@ -44,12 +44,6 @@ namespace HR.Web_UI.Controllers
         [HttpPost]
         public ActionResult CreateWorker(PersonViewModel vm)
         {
-
-            #warning Sprawdzic dzialanie ajaxa,  bo nie dziala
-          /*  if(Request.IsAjaxRequest())
-                return Content("asdasdadsa");
-            return View();*/
-
             if (ModelState.IsValid)
             {
                 Person p = new Person();
@@ -57,7 +51,7 @@ namespace HR.Web_UI.Controllers
                 if (p!=null)
                 {
                     Session["Person"] = p;
-                    return RedirectToAction("AddWorkerAdditionalInformations", vm);
+                    return RedirectToAction("AddWorkerAdditionalInformations");
                 }
                 else
                 {
@@ -71,18 +65,28 @@ namespace HR.Web_UI.Controllers
             }
         }
 
-        public ActionResult AddWorkerAdditionalInformations(PersonViewModel vm)
+        public ActionResult AddWorkerAdditionalInformations()
         {
             ViewBag.Message = "Dodano osobe!";
-            return View(vm);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult AddWorkerAdditionalInfoSend(PersonViewModel vm)
+        public ActionResult AddWorkerAdditionalInfoSend(AdditionalInformationViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("AddEmploymentInformation",vm);
+                Person p = Session["Person"] as Person;
+                AdditionalInformation ai = hrServices.CreateAdditionalInfo(vm, p);
+                if(ai != null)
+                {
+                    return RedirectToAction("AddEmploymentInformation");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Uzytkownik nie zostal dodany. Prosze powtorz dodanie uzytkownika");
+                    return View(vm);
+                }
             }
             else
             {
@@ -95,8 +99,8 @@ namespace HR.Web_UI.Controllers
             EmploymentViewModel eVM = new EmploymentViewModel();
             /*eVM.Positions = hrServices.PositionsSelectListItem();
             eVM.Organizations = hrServices.OrganizationalUnitSelectListItem();*/
-            eVM.Positions = new List<SelectListItem> { new SelectListItem{Text = "asd", Value="1"} } ;
-            eVM.Organizations = new List<SelectListItem> { new SelectListItem { Text = "asd", Value = "1" } };
+            eVM.Positions = new List<SelectListItem> { new SelectListItem{Text = "Java Developer", Value="1"} } ;
+            eVM.Organizations = new List<SelectListItem> { new SelectListItem { Text = "JAVA TEAM", Value = "1" } };
 
             return View(eVM);
         }
@@ -107,10 +111,9 @@ namespace HR.Web_UI.Controllers
             if (ModelState.IsValid)
             {
                 Person p = Session["Person"] as Person;
-                Employment e = hrServices.CreateEmployment(eVM);
+                Employment e = hrServices.CreateEmployment(eVM, p);
                 if (e!= null)
                 {
-                    Session["Employment"] = e;
                     return RedirectToAction("AddContactPerson");
                 }
                 else
@@ -127,6 +130,7 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult AddContactPerson()
         {
+            ViewBag.Message = "Dodano informacje o zatrudnieniu pracownika!";
             return View();
         }
 
@@ -135,10 +139,10 @@ namespace HR.Web_UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                ContactPerson cp = hrServices.CreateContactPerson(cpVM);
+                Person p = Session["Person"] as Person;
+                ContactPerson cp = hrServices.CreateContactPerson(cpVM,p);
                 if (cp!= null)
                 {
-                    Session["ContactPerson"] = cp;
                     return RedirectToAction("DisplaySuccessOfAddWorker");
                 }
                 else
@@ -163,8 +167,8 @@ namespace HR.Web_UI.Controllers
         {
             Person p = Session["Person"] as Person;
 
-            PersonDisplayViewModel pdVM = new PersonDisplayViewModel();
-            pdVM.accountType = Core.Enums.AccountType.Kierownik;
+            PersonDisplayViewModel pdVM = hrServices.GetAllPersonData(p.Id);
+            
             if (p != null)
             {
                 ViewBag.Message = "Osoba została pomyslnie dodana: " + p.FirstName + " " + p.Surname;

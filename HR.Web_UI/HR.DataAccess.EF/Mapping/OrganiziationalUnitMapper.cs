@@ -23,10 +23,9 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Name).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
-            this.Property(c => c.ManagerId).HasColumnType("bigint").IsOptional();
+            //this.Property(c => c.ManagerId).HasColumnType("bigint").IsOptional();
 
-#warning do sprawdzenia
-            //this.HasRequired(c => c.Manager).WithRequiredPrincipal(); //sprawdzic to czy to bedzie dobrze dzialac, ze nie wymaga klasy w person
+            this.HasRequired(c => c.Manager).WithOptional(c => c.OrganiziationalUnit).Map(m => m.MapKey("ManagerId")).WillCascadeOnDelete(true);
         }
     }
 }

@@ -17,18 +17,18 @@ namespace HR.Web_UI.Services
 {
     public class HRServices :IHRServices
     {
-        IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> personUnityOfWork;
+        IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_U.UnityOfWork> personUnityOfWork;
         ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_U.UnityOfWork> logUnityOfWork;
         IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
             EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> dicUnityOfWork;
-        IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_U.UnityOfWork> employmentUnityOfWork;
+        IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
 
-        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> _personUnityOfWork,
+        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_U.UnityOfWork> _personUnityOfWork,
                           ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_U.UnityOfWork> _logUnityOfWork,
                           IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
                           EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> _dicUnityOfWork,
                           IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>,
-                          EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_U.UnityOfWork> _employmentUnityOfWork)
+                          EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork)
         {
             this.personUnityOfWork = _personUnityOfWork;
             this.logUnityOfWork = _logUnityOfWork;
@@ -59,8 +59,7 @@ namespace HR.Web_UI.Services
                     Street = pVM.Street,
                     Surname = pVM.Surname
                 };
-
-                personUnityOfWork.PersonRepo.Add(p);
+#warning Ale potem ManagerId trzeba zmienic jak zostanie dodane do konkretnego dzialu
 
                 Account a = new Account
                 {
@@ -70,18 +69,14 @@ namespace HR.Web_UI.Services
                     EditDate = null,
                     Password = "zaq",//narazie,
                     Person = p,
-                    PersonId = p.Id,
                     Photo = FileToByte.ConvertFileToByte(pVM.Photo),
                     UserName = pVM.FirstName + "_" + pVM.Surname
                 };
 
-                personUnityOfWork.AccountRepo.Add(a);
-
-                personUnityOfWork.UnityOfWork.SaveChanges();
-
                 AccountLog al = new AccountLog
                 {
-                    AccountId = a.Id,
+#warning Trzeba dodac konto osoby ktore dodalo tego uzytkownika
+                    Account =a,
                     Action = "Dodano uzytkownika " + a.UserName,
                     ActionDescription = "Dodanie uzytkownika do bazy danych",
                     ActionType = Core.Enums.ActionType.StworzenieKonta,
@@ -89,20 +84,19 @@ namespace HR.Web_UI.Services
                     StartDate = DateTime.Now
                 };
 
+                personUnityOfWork.PersonRepo.Add(p);
+                personUnityOfWork.AccountRepo.Add(a);
                 logUnityOfWork.AccountLogRepo.Add(al);
+
                 logUnityOfWork.UnityOfWork.SaveChanges();
+                logUnityOfWork.UnityOfWork.Dispose();
 
                 return p;
             }
-            catch
+            catch (Exception)
             {
-                //tutaj dac logowanie do log4net
-                return null;
-            }
-            finally
-            {
-                personUnityOfWork.UnityOfWork.Dispose();
-                logUnityOfWork.UnityOfWork.Dispose();
+
+                throw;
             }
            
         }
@@ -205,23 +199,54 @@ namespace HR.Web_UI.Services
         }
 
 
-        public AdditionalInformation CreateAdditionalInfo()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Employment CreateEmployment(EmploymentViewModel eVM)
+        public AdditionalInformation CreateAdditionalInfo(AdditionalInformationViewModel aiVM,Person p)
         {
             try
             {
+                personUnityOfWork.PersonRepo.Attach(ref p);
+
+                AdditionalInformation ai = new AdditionalInformation
+                {
+                    Person = p,
+                    FacebookAccount = aiVM.Facebook,
+                    GoogleAccount = aiVM.Google,
+                    TwitterAccount = aiVM.Twitter,
+                    GoldenLineAccount = aiVM.GoldenLine,
+                    LinkInAccount = aiVM.LinkIn
+                };
+                p.AdditionalInformation = ai;
+
+                personUnityOfWork.AdditionalInfoRepo.Add(ai);
+
+                personUnityOfWork.PersonRepo.Update(p);
+
+                personUnityOfWork.UnityOfWork.SaveChanges();
+
+                return ai;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public Employment CreateEmployment(EmploymentViewModel eVM, Person p)
+        {
+            try
+            {
+                employmentUnityOfWork.PersonRepo.Attach(ref p);
+
                 BankAccount ba = new BankAccount
                 {
                     AccountNumber = eVM.AccountNumber,
                     BankAddress = eVM.BankAddress,
                     BankName = eVM.BankName
                 };
-
-                employmentUnityOfWork.BankAccountRepo.Add(ba);
 
                 Contract c = new Contract
                 {
@@ -230,10 +255,8 @@ namespace HR.Web_UI.Services
                     ContractType = eVM.ContractType,
                     EndDate = eVM.EndDate,
                     MonthBenefit = eVM.MonthBenefit,
-                    StartDate = eVM.StartDate
+                    StartDate = eVM.StartDate,
                 };
-
-                employmentUnityOfWork.ContractRepo.Add(c);
 
                 Employment e = new Employment
                 {
@@ -244,14 +267,58 @@ namespace HR.Web_UI.Services
                     EndDate = eVM.EndDate,
                     EmploymentType = eVM.EmploymentType,
                     OrganiziationalUnitCode = eVM.Organization,
-                    //Person = personUnityOfWork.PersonRepo.GetAll().Last(),// nie powinno tak byc!!!! trzeba to zmienic
-                    //PersonId = personUnityOfWork.PersonRepo.GetAll().Last().Id,
+                    Person = p,
 
                 };
-                //employmentUnityOfWork.EmploymentRepo.Add(e);
-                //employmentUnityOfWork.UnityOfWork.SaveChanges();
+                p.Employment = e;
+
+                employmentUnityOfWork.BankAccountRepo.Add(ba);
+                employmentUnityOfWork.ContractRepo.Add(c);
+                employmentUnityOfWork.EmploymentRepo.Add(e);
+
+                personUnityOfWork.PersonRepo.Update(p);
+
+                employmentUnityOfWork.UnityOfWork.SaveChanges();
 
                 return e;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+
+        public ContactPerson CreateContactPerson(ContactPersonViewModel cpVM, Person p)
+        {
+            try
+            {
+                employmentUnityOfWork.PersonRepo.Attach(ref p);
+
+                ContactPerson c = new ContactPerson
+                {
+                    ApartmentNumber = cpVM.ApartmentNumber,
+                    BuildingNumber = cpVM.BuildingNumber,
+                    City = cpVM.City,
+                    Email = cpVM.Email,
+                    FirstName = cpVM.FirstName,
+                    Phone = cpVM.Phone,
+                    PostalCode = cpVM.PostalCode,
+                    Street = cpVM.Street,
+                    Surname = cpVM.Surname,
+                    Person = p
+                };
+
+                employmentUnityOfWork.ContactPersonRepo.Add(c);
+                employmentUnityOfWork.PersonRepo.Update(p);
+                employmentUnityOfWork.UnityOfWork.SaveChanges();
+
+
+                return c;
             }
             catch (Exception)
             {
@@ -260,42 +327,71 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                employmentUnityOfWork.UnityOfWork.Dispose();
+                personUnityOfWork.UnityOfWork.Dispose();
             }
         }
 
 
-        public ContactPerson CreateContactPerson(ContactPersonViewModel cpVM)
+        public PersonDisplayViewModel GetAllPersonData(long id)
         {
             try
             {
-                ContactPerson c = new ContactPerson
+                Person  p = personUnityOfWork.PersonRepo.GetById(id);
+
+                PersonDisplayViewModel pdVm = new PersonDisplayViewModel
                 {
-                    ApartmentNumber =cpVM.ApartmentNumber,
-                    BuildingNumber = cpVM.BuildingNumber,
-                    City = cpVM.City,
-                    Email = cpVM.Email, 
-                    FirstName = cpVM.FirstName,
-                    Phone = cpVM.Phone,
-                    PostalCode = cpVM.PostalCode,
-                    Street = cpVM.Street,
-                    Surname = cpVM.Surname
+                    AccountNumber = p.Employment.BankAccount.ToString(),
+                    accountType = p.Account.AccountType,
+                    BankAddress = p.Employment.BankAccount.BankAddress,
+                    BankName = p.Employment.BankAccount.BankName,
+                    BenefitPerHour = p.Employment.Contract.BenefitPerHour,
+                    BuildingNumber = p.BuildingNumber,
+                    City = p.City,
+                    ContactPersonApartmentNumber = p.ContactPerson.ApartmentNumber,
+                    ContactPersonBuildingNumber = p.ContactPerson.BuildingNumber,
+                    ContactPersonCity = p.ContactPerson.City,
+                    ContactPersonEmail = p.ContactPerson.Email,
+                    ContactPersonFirstName = p.ContactPerson.FirstName,
+                    ContactPersonPhone = p.ContactPerson.Phone,
+                    ContactPersonPostalCode = p.ContactPerson.PostalCode,
+                    ContactPersonStreet = p.ContactPerson.Street,
+                    ContactPersonSurname = p.ContactPerson.Surname,
+                    ContractDimension = p.Employment.Contract.ContractDimension,
+                    ContractType = p.Employment.Contract.ContractType,
+                    DateOfBirth = p.DateOfBirth,
+                    Email = p.Email,
+                    EmploymentType = p.Employment.EmploymentType,
+                    EndDate = p.Employment.EndDate,
+                    Facebook = p.AdditionalInformation.FacebookAccount,
+                    FirstName = p.FirstName,
+                    GoldenLine = p.AdditionalInformation.GoldenLineAccount,
+                    Google = p.AdditionalInformation.GoogleAccount,
+                    IDCard = p.IDCard,
+                    LinkIn = p.AdditionalInformation.LinkInAccount,
+                    MonthBenefit = p.Employment.Contract.MonthBenefit,
+                    NIP = p.NIP,
+                    Organization = p.Employment.OrganiziationalUnitCode,
+                    PESEL = p.PESEL,
+                    Phone = p.Phone,
+                    Photo = p.Account.Photo,
+                    Position = p.Employment.PositionCode,
+                    PostalCode = p.PostalCode,
+                    StartDate = p.Employment.StartDate,
+                    Street = p.Street,
+                    Surname = p.Street,
+                    Twitter = p.AdditionalInformation.TwitterAccount
                 };
+                return pdVm;
 
-                employmentUnityOfWork.ContactPersonRepo.Add(c);
-#warning do sprawdzenia jak sie to ma z encjami itd
-
-                //w pracy ogarnac jak dodawac encje
-                /*Person p = personUnityOfWork.PersonRepo.GetAll().Last();
-                p.ContactPerson = c;
-                personUnityOfWork.PersonRepo.Update(p);*/
-
-                return c;
             }
             catch (Exception)
             {
-                
+
                 throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
             }
         }
     }

@@ -15,7 +15,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Id szefa jednostki organizacyjnej
         /// </summary>
-        public long ManagerId { get; set; }
+       // public long ManagerId { get; set; }
 
         /// <summary>
         /// Szef jednostki organizacyjnej

@@ -33,7 +33,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 
-#warning Person
+            this.HasRequired(c => c.Person).WithMany(c => c.Jobs).HasForeignKey(c => c.PersonId).WillCascadeOnDelete(true);
         }
     }
 }
