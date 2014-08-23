@@ -126,46 +126,55 @@ namespace HR.Web_UI.Models.ViewModels
         /// <summary>
         /// Imie osoby kontaktowej
         /// </summary>
+        [Display(Name = "Imię osoby kontaktowej")]
         public string ContactPersonFirstName { get; set; }
 
         /// <summary>
         /// Nazwisko osoby kontaktowej
         /// </summary>
+       [Display(Name = "Nazwisko osoby kontaktowej")]
         public string ContactPersonSurname { get; set; }
 
         /// <summary>
         /// Miasto
         /// </summary>
+        [Display(Name = "Miasto")]
         public string ContactPersonCity { get; set; }
 
         /// <summary>
         /// Kod pocztowy
         /// </summary>
+        [Display(Name = "Kod pocztowy")]
         public string ContactPersonPostalCode { get; set; }
 
         /// <summary>
         /// Ulica
         /// </summary>
+        [Display(Name = "Ulica")]
         public string ContactPersonStreet { get; set; }
 
         /// <summary>
         /// Numer budynku
         /// </summary>
+        [Display(Name = "Numer budynku")]
         public int ContactPersonBuildingNumber { get; set; }
 
         /// <summary>
         /// Numer mieszkania
         /// </summary>
+        [Display(Name = "Numer mieszkania")]
         public int ContactPersonApartmentNumber { get; set; }
 
         /// <summary>
         /// Telefon
         /// </summary>
+        [Display(Name = "Telefon")]
         public long ContactPersonPhone { get; set; }
 
         /// <summary>
         /// Email
         /// </summary>
+        [Display(Name = "Email")]
         public string ContactPersonEmail { get; set; }
 
     }

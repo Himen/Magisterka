@@ -17,13 +17,13 @@ namespace HR.Web_UI.Services
 {
     public class HRServices :IHRServices
     {
-        IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_U.UnityOfWork> personUnityOfWork;
+        IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_U.UnityOfWork> personUnityOfWork;
         ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_U.UnityOfWork> logUnityOfWork;
         IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
             EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> dicUnityOfWork;
         IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
 
-        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_U.UnityOfWork> _personUnityOfWork,
+        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_U.UnityOfWork> _personUnityOfWork,
                           ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_U.UnityOfWork> _logUnityOfWork,
                           IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
                           EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> _dicUnityOfWork,
@@ -342,6 +342,7 @@ namespace HR.Web_UI.Services
                 PersonDisplayViewModel pdVm = new PersonDisplayViewModel
                 {
                     AccountNumber = p.Employment.BankAccount.ToString(),
+                    ApartmentNumber = p.ApartmentNumber,
                     accountType = p.Account.AccountType,
                     BankAddress = p.Employment.BankAccount.BankAddress,
                     BankName = p.Employment.BankAccount.BankName,
@@ -384,6 +385,131 @@ namespace HR.Web_UI.Services
                 };
                 return pdVm;
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+
+        public bool AddNewPersonCollage(CollegesViewModel cVm,Person p)
+        {
+            try
+            {
+                College c = new College
+                {
+                    AcademicTitle = cVm.AcademicTitle,
+                    EndDate = cVm.EndDate,
+                    FieldOfStudy = cVm.FieldOfStudy,
+                    Name = cVm.Name,
+                    Person = p,
+                    Progres = cVm.Progres,
+                    Specialization = cVm.Specialization,
+                    StartDate = cVm.StartDate,
+                    TitleOfResearch = cVm.TitleOfResearch
+                };
+
+                personUnityOfWork.CollageRepo.Add(c);
+                personUnityOfWork.UnityOfWork.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public bool AddNewPersonJob(EmploymentsViewModel eVM, Person p)
+        {
+            try
+            {
+                Job j = new Job 
+                {
+                    CompanyName = eVM.CompanyName,
+                    Description= eVM.Description,
+                    EndDate= eVM.EndDate,
+                    Person=p,
+                    Position= eVM.Position,
+                    StartDate=eVM.StartDate
+                };
+
+                personUnityOfWork.JobRepo.Add(j);
+                personUnityOfWork.UnityOfWork.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public IEnumerable<CollegesViewModel> GetAllColleges(long id)
+        {
+            try
+            {
+                var x = (from p in personUnityOfWork.CollageRepo.GetAll()
+                        where p.Person.Id == id
+                        select new CollegesViewModel
+                        {
+                            AcademicTitle = p.AcademicTitle,
+                            EndDate = p.EndDate,
+                            FieldOfStudy = p.FieldOfStudy,
+                            Id = p.Id,
+                            Name= p.Name,
+                            Progres= p.Progres,
+                            Specialization=p.Specialization,
+                            StartDate= p.StartDate,
+                            TitleOfResearch= p.TitleOfResearch
+                        }).ToList();
+
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public IEnumerable<EmploymentsViewModel> GetAllJobs(long id)
+        {
+            try
+            {
+                var x = (from e in personUnityOfWork.JobRepo.GetAll()
+                        where e.Person.Id == id
+                        select new EmploymentsViewModel 
+                        {
+                            CompanyName = e.CompanyName,
+                            Description= e.Description,
+                            EndDate= e.EndDate,
+                            Id=e.Id,
+                            Position=e.Position,
+                            StartDate=e.StartDate
+                        }).ToList();
+
+                return x;
             }
             catch (Exception)
             {

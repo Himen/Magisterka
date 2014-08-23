@@ -26,5 +26,13 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         PersonDisplayViewModel GetAllPersonData(long id);
 
+        bool AddNewPersonCollage(CollegesViewModel cVm, Person p);
+
+        bool AddNewPersonJob(EmploymentsViewModel eVM, Person p);
+
+        IEnumerable<CollegesViewModel> GetAllColleges(long id);
+
+        IEnumerable<EmploymentsViewModel> GetAllJobs(long id);
+
     }
 }

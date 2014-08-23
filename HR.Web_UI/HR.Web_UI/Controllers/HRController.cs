@@ -167,14 +167,101 @@ namespace HR.Web_UI.Controllers
         {
             Person p = Session["Person"] as Person;
 
+            if (p == null)
+            {
+                p = new Person();
+                p.Id = 6;
+            }
+
             PersonDisplayViewModel pdVM = hrServices.GetAllPersonData(p.Id);
-            
+
             if (p != null)
             {
                 ViewBag.Message = "Osoba została pomyslnie dodana: " + p.FirstName + " " + p.Surname;
             }
             //globalny ViewModelZrobic
             return View(pdVM);
+        }
+
+        public ActionResult AddCollage(CollegesViewModel cVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Person p = Session["Person"] as Person;
+
+                if(hrServices.AddNewPersonCollage(cVM,p))
+                {
+
+                    return RedirectToAction("DisplaySuccessOfAddWorker");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nieznany blad");
+                    return View("DisplaySuccessOfAddWorker");
+                }
+            }
+            else
+            {
+ 
+            }
+
+            return View();
+        }
+
+        public ActionResult DisplayAllCollages()
+        {
+            Person p = Session["Person"] as Person;
+
+            if (p == null)
+            {
+                p = new Person();
+                p.Id = 6;
+            }
+
+            var x=hrServices.GetAllColleges(p.Id);
+
+            return PartialView("_LearnHistory",x);
+        }
+
+        public ActionResult AddJob(EmploymentsViewModel cVM)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Person p = Session["Person"] as Person;
+
+                if (hrServices.AddNewPersonJob(cVM, p))
+                {
+
+                    return RedirectToAction("DisplaySuccessOfAddWorker");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nieznany blad");
+                    return View("DisplaySuccessOfAddWorker");
+                }
+            }
+            else
+            {
+
+            }
+
+            return View();
+        }
+
+        public ActionResult DisplayAllJobs()
+        {
+            Person p = Session["Person"] as Person;
+
+            if (p == null)
+            {
+                p = new Person();
+                p.Id = 6;
+            }
+
+            var x = hrServices.GetAllJobs(p.Id);
+
+            return PartialView("_EmploymentHistory",x);
         }
     }
 }

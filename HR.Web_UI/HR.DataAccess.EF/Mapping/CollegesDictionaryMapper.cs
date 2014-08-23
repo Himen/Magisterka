@@ -25,6 +25,8 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c=>c.Country).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
+            this.Property(c => c.City).HasColumnType("varchar").HasMaxLength(40).IsRequired();
+
             this.Property(c => c.Address).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
         }
