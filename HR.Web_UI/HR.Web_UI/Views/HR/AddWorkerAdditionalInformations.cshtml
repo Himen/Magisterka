@@ -14,7 +14,7 @@
 </div>
 
 <div id="formContener" class="col-lg-6 col-lg-offset-3 form-group">
-    @using (Ajax.BeginForm("AddEmploymentInformation", "HR",
+    @using (Ajax.BeginForm("AddWorkerAdditionalInfoSend", "HR",
             new AjaxOptions { UpdateTargetId = "formContener", LoadingElementId = "loading-indicator", LoadingElementDuration = 10000 }
             , new { enctype = "multipart/form-data", method = "POST" }))
     {

@@ -338,6 +338,7 @@ namespace HR.Web_UI.Services
             {
                 Person  p = personUnityOfWork.PersonRepo.GetById(id);
 
+#warning Tutaj moga nulle wystepowac do zabezpieczenia pozniejszego
                 PersonDisplayViewModel pdVm = new PersonDisplayViewModel
                 {
                     AccountNumber = p.Employment.BankAccount.ToString(),

@@ -37,6 +37,8 @@ namespace HR.DataAccess.EF.Mapping
             this.Property(c => c.Phone).HasColumnType("numeric").IsRequired();
 
             this.Property(c => c.Email).HasColumnType("varchar").HasMaxLength(30).IsRequired();
+
+            this.HasRequired(c => c.Person).WithOptional(c => c.ContactPerson).Map(c => c.MapKey("PersonId")).WillCascadeOnDelete(true);
         }
     }
 }
