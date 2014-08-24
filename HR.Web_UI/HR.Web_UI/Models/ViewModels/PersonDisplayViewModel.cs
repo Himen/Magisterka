@@ -88,6 +88,9 @@ namespace HR.Web_UI.Models.ViewModels
         [Display(Name = "Dział")]
         public string Organization { get; set; }
 
+        [Display(Name = "Kierownik")]
+        public string Manager { get; set; }
+
         [Display(Name = "Rodzaj zatrudnienia")]
         public EmploymentType EmploymentType { get; set; }
 

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList.Mvc;
+using PagedList;
 
 namespace HR.Web_UI.Controllers
 {
@@ -97,10 +99,11 @@ namespace HR.Web_UI.Controllers
         public ActionResult AddEmploymentInformation()
         {
             EmploymentViewModel eVM = new EmploymentViewModel();
-            /*eVM.Positions = hrServices.PositionsSelectListItem();
-            eVM.Organizations = hrServices.OrganizationalUnitSelectListItem();*/
-            eVM.Positions = new List<SelectListItem> { new SelectListItem{Text = "Java Developer", Value="1"} } ;
-            eVM.Organizations = new List<SelectListItem> { new SelectListItem { Text = "JAVA TEAM", Value = "1" } };
+            eVM.Positions = hrServices.PositionsSelectListItem();
+            eVM.Organizations = hrServices.OrganizationalUnitSelectListItem();
+            eVM.ListOfManagers = hrServices.GetAllManagersSelectList();
+            /*eVM.Positions = new List<SelectListItem> { new SelectListItem{Text = "Java Developer", Value="1"} } ;
+            eVM.Organizations = new List<SelectListItem> { new SelectListItem { Text = "JAVA TEAM", Value = "1" } };*/
 
             return View(eVM);
         }
@@ -124,6 +127,10 @@ namespace HR.Web_UI.Controllers
             }
             else
             {
+                eVM.Positions = hrServices.PositionsSelectListItem();
+                eVM.Organizations = hrServices.OrganizationalUnitSelectListItem();
+                eVM.ListOfManagers = hrServices.GetAllManagersSelectList();
+
                 return View("AddEmploymentInformation", eVM);
             }
         }
@@ -262,6 +269,54 @@ namespace HR.Web_UI.Controllers
             var x = hrServices.GetAllJobs(p.Id);
 
             return PartialView("_EmploymentHistory",x);
+        }
+
+        public ActionResult DisplayListOfWorkers(string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No)
+        {
+
+            /*ViewBag.CurrentSortOrder = Sorting_Order;
+            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
+            ViewBag.SortingDate = Sorting_Order == "Date_Enroll" ? "Date_Description" : "Date";
+
+            if (Search_Data != null)
+            {
+                Page_No = 1;
+            }
+            else
+            {
+                Search_Data = Filter_Value;
+            }
+
+            ViewBag.FilterValue = Search_Data;
+
+            var workers = hrServices.GetAllWorkers();
+
+            if (!String.IsNullOrEmpty(Search_Data))
+            {
+                students = students.Where(stu => stu.FirstName.ToUpper().Contains(Search_Data.ToUpper())
+                    || stu.LastName.ToUpper().Contains(Search_Data.ToUpper()));
+            }
+            switch (Sorting_Order)
+            {
+                case "Name_Description":
+                    students = students.OrderByDescending(stu => stu.FirstName);
+                    break;
+                case "Date_Enroll":
+                    students = students.OrderBy(stu => stu.EnrollmentDate);
+                    break;
+                case "Date_Description":
+                    students = students.OrderByDescending(stu => stu.EnrollmentDate);
+                    break;
+                default:
+                    students = students.OrderBy(stu => stu.FirstName);
+                    break;
+            }
+
+            int Size_Of_Page = 10;
+            int No_Of_Page = (Page_No ?? 1);
+
+            return View(workers.ToPagedList());*/
+            return null;
         }
     }
 }

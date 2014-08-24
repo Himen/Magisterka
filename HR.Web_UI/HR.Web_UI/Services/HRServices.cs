@@ -13,6 +13,7 @@ using HR.Core.Models.DictionaryModels;
 using System.Web.Mvc;
 using HR.Web_UI.Models.ViewModels;
 
+
 namespace HR.Web_UI.Services
 {
     public class HRServices :IHRServices
@@ -270,21 +271,28 @@ namespace HR.Web_UI.Services
                     Person = p,
 
                 };
+
                 p.Employment = e;
+                
 
                 employmentUnityOfWork.BankAccountRepo.Add(ba);
                 employmentUnityOfWork.ContractRepo.Add(c);
                 employmentUnityOfWork.EmploymentRepo.Add(e);
 
-                personUnityOfWork.PersonRepo.Update(p);
+                long managerId = long.Parse(eVM.Manager);
+                Person manager = employmentUnityOfWork.PersonRepo.GetById(managerId);
+                employmentUnityOfWork.PersonRepo.Attach(ref manager);
+                p.ManagerId = managerId;
 
+                employmentUnityOfWork.PersonRepo.Update(p);
                 employmentUnityOfWork.UnityOfWork.SaveChanges();
 
                 return e;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -370,6 +378,7 @@ namespace HR.Web_UI.Services
                     Google = p.AdditionalInformation.GoogleAccount,
                     IDCard = p.IDCard,
                     LinkIn = p.AdditionalInformation.LinkInAccount,
+                    Manager = p.Manager.FirstName + " "+p.Manager.Surname,
                     MonthBenefit = p.Employment.Contract.MonthBenefit,
                     NIP = p.NIP,
                     Organization = p.Employment.OrganiziationalUnitCode,
@@ -519,6 +528,49 @@ namespace HR.Web_UI.Services
             finally
             {
                 personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+
+        public IEnumerable<Person> GetAllWorkers()
+        {
+            try
+            {
+                var x = personUnityOfWork.PersonRepo.GetAll();
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.SaveChanges();
+            }
+        }
+
+
+        public List<SelectListItem> GetAllManagersSelectList()
+        {
+            try
+            {
+                var x = personUnityOfWork.PersonRepo.GetAll().Where(p=>p.Account.AccountType == Core.Enums.AccountType.Kierownik);
+                List<SelectListItem> list = new List<SelectListItem>();
+                foreach (var item in x)
+                {
+                    list.Add(new SelectListItem { Text = item.FirstName + " " + item.Surname , Value = item.Id.ToString() });
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.SaveChanges();
             }
         }
     }

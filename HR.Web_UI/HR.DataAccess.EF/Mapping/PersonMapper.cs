@@ -52,7 +52,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c=>c.ManagerId).HasColumnType("bigint").IsOptional();
 
-            this.HasOptional(c => c.Manager);
+            this.HasOptional(c => c.Manager).WithMany().HasForeignKey(c=>c.ManagerId);
 
             //this.Property(c => c.ContactPersonId).HasColumnType("bigint").IsOptional();;
             

@@ -142,6 +142,11 @@
                     </div><br />
 
                     <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Manager)</span>
+                        @Html.TextBoxFor(p => p.Manager, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
                         <span class="input-group-addon">@Html.LabelFor(p => p.EmploymentType)</span>
                         @Html.TextBoxFor(p => p.EmploymentType, new { @class = "form-control" })
                     </div><br />

@@ -34,5 +34,9 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         IEnumerable<EmploymentsViewModel> GetAllJobs(long id);
 
+        IEnumerable<Person> GetAllWorkers();
+
+        List<SelectListItem> GetAllManagersSelectList();
+
     }
 }
