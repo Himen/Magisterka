@@ -3,8 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HR.Core.Enums
 {
-    [Flags]
-    public enum AcademicTitleType : byte
+    public enum AcademicTitleType 
     {
         [Display(Name="Inżynier")]
         Inzynier = 1,

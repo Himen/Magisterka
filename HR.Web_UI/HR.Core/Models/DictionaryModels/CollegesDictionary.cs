@@ -19,6 +19,11 @@ namespace HR.Core.Models.DictionaryModels
         public string Country { get; set; }
 
         /// <summary>
+        /// Miasto
+        /// </summary>
+        public string City { get; set; }
+
+        /// <summary>
         /// Adress tej uczelni
         /// </summary>
         public string Address { get; set; }

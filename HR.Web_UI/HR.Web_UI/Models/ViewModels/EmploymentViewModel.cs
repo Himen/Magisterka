@@ -25,6 +25,11 @@ namespace HR.Web_UI.Models.ViewModels
         public string Organization { get; set; }
         public List<SelectListItem> Organizations { get; set; }
 
+        [Display(Name = "Kierownik")]
+        public string Manager { get; set; }
+
+        public List<SelectListItem> ListOfManagers { get; set; }
+
         [Display(Name = "Rodzaj zatrudnienia")]
         public EmploymentType EmploymentType { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HR.DataAccess.GLOBAL.UnityOfWorks
 {
-    public class HRUnityOfWork<TRepo, TRepo2, TRepo3, TUnityOfWork> : IHRUnityOfWork<TRepo, TRepo2, TRepo3, TUnityOfWork>
+    public class HRUnityOfWork<TRepo, TRepo2, TRepo3, TRepo4, TRepo5, TUnityOfWork> : IHRUnityOfWork<TRepo, TRepo2, TRepo3, TRepo4, TRepo5, TUnityOfWork>
     {
         //powinno byc tak ze przekazywany jest tu repo EF lun NH i tutaj zutowaner na konkretna klase ale narazie sie nie da
         //public TRepo<object,int> MyProperty { get; set; }
@@ -14,6 +14,9 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
         public TRepo PersonRepo { get; set; }
         public TRepo2 AccountRepo { get; set; }
         public TRepo3 AdditionalInfoRepo { get; set; }
+        public TRepo4 CollageRepo { get; set; }
+        public TRepo5 JobRepo { get; set; }
+
 
         public HRUnityOfWork()
         {
@@ -24,6 +27,8 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
                 PersonRepo = (TRepo)Activator.CreateInstance(typeof(TRepo), x.context);
                 AccountRepo = (TRepo2)Activator.CreateInstance(typeof(TRepo2), x.context);
                 AdditionalInfoRepo = (TRepo3)Activator.CreateInstance(typeof(TRepo3), x.context);
+                CollageRepo = (TRepo4)Activator.CreateInstance(typeof(TRepo4), x.context);
+                JobRepo = (TRepo5)Activator.CreateInstance(typeof(TRepo5), x.context);
             }
             else
             {
@@ -31,6 +36,8 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
                 PersonRepo = (TRepo)Activator.CreateInstance(typeof(TRepo), x.session);
                 AccountRepo = (TRepo2)Activator.CreateInstance(typeof(TRepo2), x.session);
                 AdditionalInfoRepo = (TRepo3)Activator.CreateInstance(typeof(TRepo3), x.session);
+                CollageRepo = (TRepo4)Activator.CreateInstance(typeof(TRepo4), x.session);
+                JobRepo = (TRepo5)Activator.CreateInstance(typeof(TRepo5), x.session);
             }
         }
     }

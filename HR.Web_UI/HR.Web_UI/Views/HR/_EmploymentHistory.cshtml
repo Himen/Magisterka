@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HR.Web_UI.Models.ViewModels.EmploymentsViewModel>
+@using HR.Web_UI.Models.ViewModels;
+
+@{
+    ViewBag.Title = "_EmploymentHistory";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nazwa firmy</th>
+            <th>Stanowisko</th>
+            <th>Od</th>
+            <th>Do</th>
+            <th>Opis</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CompanyName</td>
+                <td>@item.Position</td>
+                <td>@item.StartDate</td>
+                <td>@item.EndDate</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg1">Dodaj miejsce pracy</button>
+
+<div id="myModal1" class="modal fade bs-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Dodaj pracodawce</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("AddJob", new EmploymentsViewModel())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#myModal1').modal('show');
+</script>
+

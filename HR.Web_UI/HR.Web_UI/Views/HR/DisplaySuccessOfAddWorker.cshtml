@@ -1,9 +1,10 @@
 ﻿@model HR.Web_UI.Models.ViewModels.PersonDisplayViewModel
+@using HR.Web_UI.Services;
 @{
     ViewBag.Title = "DisplaySuccessOfAddWorker";
 }
 
-<h2 class="col-lg-offset-4 m_b_30">Dane pracownika: @Model.FirstName + " " + @Model.Surname</h2>
+<h2 class="col-lg-offset-4 m_b_30">Dane pracownika: @Model.FirstName  @Model.Surname</h2>
 
 <div id="message" class="col-lg-offset-3 col-lg-6 alert alert-success" role="alert">
     <label class="col-lg-offset-5">@ViewBag.Message</label>
@@ -92,7 +93,7 @@
 
                 <div class="col-lg-5">
                     <span class="input-group-addon">@Html.LabelFor(p => p.Photo)</span><br />
-                    <img class="h_300 w_20 m_l_150" src="~/Content/Images/money_bag.png" /><br /><br />
+                        @Html.Image(Model.Photo,"h_300 w_20 m_l_150")<br /><br /><br />
 
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">@Html.LabelFor(p => p.Facebook)</span>
@@ -126,49 +127,153 @@
 
 
         <div class="panel panel-title col-lg-offset-1 col-lg-5">
-            <div class="panel-heading">Dane osobowe</div>
-            <div class="panel-body">
-                <div class=" col-lg-offset-1 col-lg-5">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon">@@</span>
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-title col-lg-5">
             <div class="panel-heading">Dane zatrudnienia</div>
             <div class="panel-body">
-                <div class=" col-lg-offset-1 col-lg-5">
+                <div class="">
+
                     <div class="input-group input-group-sm">
-                        <span class="input-group-addon">@@</span>
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Position)</span>
+                        @Html.TextBoxFor(p => p.Position, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Organization)</span>
+                        @Html.TextBoxFor(p => p.Organization, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Manager)</span>
+                        @Html.TextBoxFor(p => p.Manager, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.EmploymentType)</span>
+                        @Html.TextBoxFor(p => p.EmploymentType, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContractType)</span>
+                        @Html.TextBoxFor(p => p.ContractType, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContractDimension)</span>
+                        @Html.TextBoxFor(p => p.ContractDimension, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.StartDate)</span>
+                        @Html.TextBoxFor(p => p.StartDate, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.EndDate)</span>
+                        @Html.TextBoxFor(p => p.EndDate, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.MonthBenefit)</span>
+                        @Html.TextBoxFor(p => p.MonthBenefit, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.BenefitPerHour)</span>
+                        @Html.TextBoxFor(p => p.BenefitPerHour, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.BankName)</span>
+                        @Html.TextBoxFor(p => p.BankName, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.BankAddress)</span>
+                        @Html.TextBoxFor(p => p.BankAddress, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.AccountNumber)</span>
+                        @Html.TextBoxFor(p => p.AccountNumber, new { @class = "form-control" })
+                    </div><br />
+
+
                 </div>
             </div>
         </div>
 
-        <div class="panel panel-title col-lg-offset-1 col-lg-5">
-            <div class="panel-heading">Dane osobowe</div>
+        <div class="panel col-lg-5">
+            <div class="panel-heading">Dane osoby kontaktowej</div>
             <div class="panel-body">
-                <div class=" col-lg-offset-1 col-lg-5">
+                <div class="">
+
                     <div class="input-group input-group-sm">
-                        <span class="input-group-addon">@@</span>
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonFirstName)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonFirstName, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonSurname)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonSurname, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonCity)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonCity, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonPostalCode)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonPostalCode, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonStreet)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonStreet, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonBuildingNumber)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonBuildingNumber, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonApartmentNumber)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonApartmentNumber, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonPhone)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonPhone, new { @class = "form-control" })
+                    </div><br />
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.ContactPersonEmail)</span>
+                        @Html.TextBoxFor(p => p.ContactPersonEmail, new { @class = "form-control" })
+                    </div><br />
+
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-title col-lg-offset-1 col-lg-8"></div>
+
+        <div class="panel panel-title col-lg-offset-1 col-lg-10">
+            <div class="panel-heading">Historia zatrudnienia</div>
+            <div class="panel-body">
+                <div class="" id="working">
+
+                    @Html.Action("DisplayAllJobs")
+
                 </div>
             </div>
         </div>
 
-        <div class="panel panel-title col-lg-5">
-            <div class="panel-heading">Dane zatrudnienia</div>
+        <div class="panel panel-title col-lg-offset-1 col-lg-10">
+            <div class="panel-heading">Historia edukacji</div>
             <div class="panel-body">
-                <div class=" col-lg-offset-1 col-lg-5">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon">@@</span>
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
+                <div class="" id="learning">
+
+                    @Html.Action("DisplayAllCollages")
+
                 </div>
             </div>
         </div>

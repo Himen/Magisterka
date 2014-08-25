@@ -27,6 +27,12 @@
                 @Html.ValidationMessageFor(p => p.Organization)<br />
 
                 <div class="input-group">
+                    <span class="input-group-addon">@Html.LabelFor(p => p.Manager)</span>
+                    @Html.DropDownListFor(p => p.Manager, Model.ListOfManagers, new { @class = "btn-group" })
+                </div>
+                @Html.ValidationMessageFor(p => p.Manager)<br />
+
+                <div class="input-group">
                     <span class="input-group-addon">@Html.LabelFor(p => p.EmploymentType)</span>
                     @Html.EnumDropDownListFor(p => p.EmploymentType, new { @class = "form-control" })
                 </div>
