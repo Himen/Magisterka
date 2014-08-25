@@ -14,7 +14,7 @@ namespace HR.DataAccess.EF
         public HR_DataContext(): base("HR_Database")
         {
             //zeby nie tworzyc kontekstu
-            Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
+            //Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
             
         }
         #region Models
@@ -85,7 +85,7 @@ namespace HR.DataAccess.EF
             base.OnModelCreating(modelBuilder);
         }
     }
-    public class HRDBInitializer : CreateDatabaseIfNotExists<HR_DataContext>
+    public class HRDBInitializer : DropCreateDatabaseAlways<HR_DataContext>
     {
         //olac to narazie
         protected override void Seed(HR_DataContext context)

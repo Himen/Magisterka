@@ -271,12 +271,11 @@ namespace HR.Web_UI.Controllers
             return PartialView("_EmploymentHistory",x);
         }
 
-        public ActionResult DisplayListOfWorkers(string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No)
+        public ActionResult DisplayListOfWorkers(string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No, string OrderType)
         {
-
-            /*ViewBag.CurrentSortOrder = Sorting_Order;
-            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
-            ViewBag.SortingDate = Sorting_Order == "Date_Enroll" ? "Date_Description" : "Date";
+            ViewBag.OrderType = OrderType ?? "desc";
+            ViewBag.CurrentSortOrder = Sorting_Order;
+            Sorting_Order = Sorting_Order ?? "FirstName";
 
             if (Search_Data != null)
             {
@@ -293,30 +292,105 @@ namespace HR.Web_UI.Controllers
 
             if (!String.IsNullOrEmpty(Search_Data))
             {
-                students = students.Where(stu => stu.FirstName.ToUpper().Contains(Search_Data.ToUpper())
-                    || stu.LastName.ToUpper().Contains(Search_Data.ToUpper()));
+                workers = workers.Where(stu => stu.FirstName.ToUpper().Contains(Search_Data.ToUpper()) || 
+                                               stu.Surname.ToUpper().Contains(Search_Data.ToUpper())   ||
+                                               stu.FirstName.ToUpper().Contains(Search_Data.ToUpper()));///reszta
             }
             switch (Sorting_Order)
             {
-                case "Name_Description":
-                    students = students.OrderByDescending(stu => stu.FirstName);
+                case "FirstName":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.FirstName);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.FirstName);
+                        ViewBag.OrderType = "desc";
+                    }
                     break;
-                case "Date_Enroll":
-                    students = students.OrderBy(stu => stu.EnrollmentDate);
+                case "Surname":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Surname);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Surname);
+                        ViewBag.OrderType = "desc";
+                    }
                     break;
-                case "Date_Description":
-                    students = students.OrderByDescending(stu => stu.EnrollmentDate);
+                case "Date":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.DateOfBirth);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.DateOfBirth);
+                        ViewBag.OrderType = "desc";
+                    }
                     break;
+                case "Employment":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Employment.EmploymentType);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Employment.EmploymentType);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Position":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Employment.PositionCode);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Employment.PositionCode);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                    //cd
                 default:
-                    students = students.OrderBy(stu => stu.FirstName);
+                    workers = workers.OrderBy(stu => stu.FirstName);
                     break;
             }
 
             int Size_Of_Page = 10;
             int No_Of_Page = (Page_No ?? 1);
 
-            return View(workers.ToPagedList());*/
-            return null;
+            WorkersListViewModel wlVM = new WorkersListViewModel();
+            wlVM.Workers = workers.ToPagedList(No_Of_Page, Size_Of_Page);
+            wlVM.PageCount = (int)Math.Ceiling((double)workers.Count() / Size_Of_Page);
+            wlVM.PageNumber = Page_No ?? 1;
+
+            return View(wlVM);
+        }
+
+        public ActionResult WorkerDetails(long Id)
+        {
+            //Pokazowy /HR/WorkerDetails/28
+            PersonDisplayViewModel pdVM = hrServices.GetAllPersonData(Id);
+            //np. logowac ze zmieniono statut z Kandydata na zatrudnionego
+
+            if (pdVM != null)
+                return View("DisplaySuccessOfAddWorker", pdVM);
+            else
+                return RedirectToAction("DisplayListOfWorkers");
+        }
+
+        public ActionResult DeleteWorker(long id)
+        {
+
+            return RedirectToAction("DisplayListOfWorkers");
         }
     }
 }

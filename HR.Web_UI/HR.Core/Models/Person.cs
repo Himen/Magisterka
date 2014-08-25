@@ -84,7 +84,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Manager tej osoby
         /// </summary>
-        public Person Manager { get; set; }
+        public virtual Person Manager { get; set; }
 
         /// <summary>
         /// Id osoby kontaktowej

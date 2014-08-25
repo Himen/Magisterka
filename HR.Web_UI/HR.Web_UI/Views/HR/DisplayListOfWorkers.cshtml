@@ -1,30 +1,63 @@
 ﻿@model HR.Web_UI.Models.ViewModels.WorkersListViewModel
+@using PagedList.Mvc;
 
-<p>
-    @Html.ActionLink("Dodaj nowego pracownika", "Create")
-</p>
+
+
+@using (Html.BeginForm("DisplayListOfWorkers", "HR", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+{
+    <div class="form-group">
+        @Html.ActionLink("Dodaj nowego pracownika", "CreateWorker", null, new { @class = "btn btn-success" })
+        Wyszukaj: @Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { type="text", @class="form-control" ,placeholder="Search"})
+        <input type="submit" value="Find" class="btn btn-default"  />
+    </div>
+}
+
+@Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+@Html.Hidden("firstname-to-delete", "", new { @id = "firstname-to-delete" })
+@Html.Hidden("surname-to-delete", "", new { @id = "surname-to-delete" })
 <table class="table">
     <tr>
         <th>
-            <label>Imię</label>
+            <label >
+                @Html.ActionLink("Imię", "DisplayListOfWorkers", new { Sorting_Order = "FirstName", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class="btn btn-default"})
+                <span class="glyphicon glyphicon-arrow-up"></span>
+            </label>
         </th>
         <th>
-            <label>Nazwisko</label>
+            <label>
+                @Html.ActionLink("Nazwisko", "DisplayListOfWorkers", new { Sorting_Order = "Surname", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </label>
         </th>
         <th>
-            <label>Data Urodzenia</label>
+            <label>
+                @Html.ActionLink("Data Urodzenia", "DisplayListOfWorkers", new { Sorting_Order = "Date", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </label>
         </th>
         <th>
-            <label>Zatrudnienie</label>
+            <label>
+                @Html.ActionLink("Zatrudnienie", "DisplayListOfWorkers", new { Sorting_Order = "Employment", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </label>
         </th>
         <th>
-            <label>Stanowisko</label>
+            <label>
+                @Html.ActionLink("Stanowisko", "DisplayListOfWorkers", new { Sorting_Order = "Position", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </label>
         </th>
         <th>
-            <label>Przełożony</label>
+            <label>
+                @Html.ActionLink("Przełożony", "DisplayListOfWorkers", new { Sorting_Order = "Manager", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </label>
         </th>
         <th>
-            <label>Dział</label>
+            <label>
+                @Html.ActionLink("Dział", "DisplayListOfWorkers", new { Sorting_Order = "Organization", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </label>
         </th>
     </tr>
 
@@ -41,23 +74,109 @@
             @Html.DisplayFor(modelItem => item.DateOfBirth)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
+            @Html.DisplayFor(modelItem => item.Employment.EmploymentType)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
+            @Html.DisplayFor(modelItem => item.Employment.PositionCode)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Manager.FirstName) +" "+ @Html.DisplayFor(modelItem => item.Manager.Surname)
+            @Html.DisplayFor(modelItem => item.Manager.FirstName)   @Html.DisplayFor(modelItem => item.Manager.Surname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
+            @Html.DisplayFor(modelItem => item.Employment.OrganiziationalUnitCode)
         </td>
         <td>
-            @Html.ActionLink("Edytuj", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Szczegóły", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Usuń", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Szczegóły", "WorkerDetails", new { Id = item.Id }, new { @class = "btn btn-warning" }) 
+            <button class="del btn btn-danger delete" data-toggle="modal" data-target="#myModal" data-id="@item.Id" data-firstname-to-delete="@item.FirstName" data-surname-to-delete="@item.Surname">Usuń</button>
         </td>
     </tr>
 }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model.Workers, Page_No => Url.Action("DisplayListOfWorkers",
+        new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }))
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Usuń</h4>
+            </div>
+            <div class="modal-body">
+                Czy napewno chcesz usunąć <label id ="fn"></label> <label id="sn"></label>   ??
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="mySubmit" class="btn btn-warning" data-dismiss="modal">Usuń</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    //Everytime we press delete in the table row
+    $('.delete').click(function(e) {
+        e.preventDefault();
+
+        //Update the item to delete id so our model knows which one to delete
+        var id = $(this).data('id');
+        $('#item-to-delete').val(id);
+        $('#firstname-to-delete').val($(this).data('firstname-to-delete'));
+        $('#surname-to-delete').val($(this).data('surname-to-delete'));
+        $('#fn').html($('#firstname-to-delete').val());
+        $('#sn').html($('#surname-to-delete').val());
+
+    });
+
+
+    //Everytime we press sumbit on the modal form...
+    $('#mySubmit').click(function() {
+
+        //Get the id to delete from the hidden field
+        var id = $('#item-to-delete').val();
+
+        //Call our delete actionresult and pass over this id
+        $.post("/HR/DeleteWorker", { Id : id } , function (data) {
+
+            alert("Usunięto");
+
+        });
+
+
+    });
+
+</script>
+
+
+<script>
+    /*$(function () {
+        $("#button").click(function () {
+            $(".newClass").switchClass("glyphicon glyphicon-arrow-up", "glyphicon glyphicon-arrow-down", 1000);
+            $(".anotherNewClass").switchClass("glyphicon glyphicon-arrow-down", "glyphicon glyphicon-arrow-up", 1000);
+        });
+    });*/
+    /*$(document).on("click", function (event) {
+        alert(event.target);
+        $(event.target).parent("label").closest("span").toggleClass("");
+    });*/
+
+
+    ///zrobic zeby sie strzalka zmieniala
+    /*$('a').click(function () {
+
+        $(this).parent().next("span").toggleClass(function () {
+            if ($(this).parent().next("span").hasClass("glyphicon glyphicon-arrow-up")) {
+                return 'glyphicon glyphicon-arrow-down';
+            } else {
+                return 'glyphicon glyphicon-arrow-up';
+            }
+        });
+    });*/
+
+</script>

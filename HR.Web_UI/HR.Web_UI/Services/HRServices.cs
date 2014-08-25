@@ -283,8 +283,10 @@ namespace HR.Web_UI.Services
                 Person manager = employmentUnityOfWork.PersonRepo.GetById(managerId);
                 employmentUnityOfWork.PersonRepo.Attach(ref manager);
                 p.ManagerId = managerId;
+                p.Manager = manager;
 
                 employmentUnityOfWork.PersonRepo.Update(p);
+                employmentUnityOfWork.PersonRepo.Update(manager);
                 employmentUnityOfWork.UnityOfWork.SaveChanges();
 
                 return e;
@@ -296,7 +298,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.Dispose();
+                employmentUnityOfWork.UnityOfWork.Dispose();
             }
         }
 
@@ -321,6 +323,7 @@ namespace HR.Web_UI.Services
                     Person = p
                 };
 
+                p.ContactPerson = c;
                 employmentUnityOfWork.ContactPersonRepo.Add(c);
                 employmentUnityOfWork.PersonRepo.Update(p);
                 employmentUnityOfWork.UnityOfWork.SaveChanges();
@@ -344,12 +347,12 @@ namespace HR.Web_UI.Services
         {
             try
             {
-                Person  p = personUnityOfWork.PersonRepo.GetById(id);
+                Person p = personUnityOfWork.PersonRepo.Find(d=>d.Id == id && d.DataState == 1).FirstOrDefault();
 
 #warning Tutaj moga nulle wystepowac do zabezpieczenia pozniejszego
                 PersonDisplayViewModel pdVm = new PersonDisplayViewModel
                 {
-                    AccountNumber = p.Employment.BankAccount.ToString(),
+                    AccountNumber = p.Employment.BankAccount.AccountNumber,
                     ApartmentNumber = p.ApartmentNumber,
                     accountType = p.Account.AccountType,
                     BankAddress = p.Employment.BankAccount.BankAddress,
