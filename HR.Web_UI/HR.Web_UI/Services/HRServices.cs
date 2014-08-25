@@ -12,6 +12,7 @@ using HR.Core.Models;
 using HR.Core.Models.DictionaryModels;
 using System.Web.Mvc;
 using HR.Web_UI.Models.ViewModels;
+using HR.Core.Enums;
 
 
 namespace HR.Web_UI.Services
@@ -100,6 +101,25 @@ namespace HR.Web_UI.Services
                 throw;
             }
            
+        }
+
+        public bool DeleteWorker(long id)
+        {
+            try
+            {
+                personUnityOfWork.PersonRepo.RemoveById(id);
+                personUnityOfWork.UnityOfWork.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
         }
 
         public List<SelectListItem> BanksSelectListItem()
@@ -539,7 +559,10 @@ namespace HR.Web_UI.Services
         {
             try
             {
-                var x = personUnityOfWork.PersonRepo.GetAll();
+                var x = personUnityOfWork.PersonRepo.GetAll().Where(c=>c.Employment.EmploymentType!= EmploymentType.Kandydat 
+                                                                    && c.Employment.EmploymentType!=EmploymentType.DoZatwierdzenia
+                                                                    && c.Employment.EmploymentType != EmploymentType.PracowalUnas
+                                                                    && c.Employment.EmploymentType != EmploymentType.Zwolniony);
                 return x;
             }
             catch (Exception)
@@ -576,5 +599,45 @@ namespace HR.Web_UI.Services
                 personUnityOfWork.UnityOfWork.SaveChanges();
             }
         }
+        public IEnumerable<Person> GetAllCandidats()
+        {
+            try
+            {
+                var x = personUnityOfWork.PersonRepo.GetAll().Where(c=>c.Employment.EmploymentType == Core.Enums.EmploymentType.Kandydat);
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.SaveChanges();
+            }
+        }
+        public bool EmployCandidate(long id,EmploymentType emp)
+        {
+            try
+            {
+                var x = personUnityOfWork.PersonRepo.GetById(id);
+                personUnityOfWork.PersonRepo.Attach(ref x);
+                x.Employment.EmploymentType = emp;
+
+                personUnityOfWork.UnityOfWork.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.SaveChanges();
+            }
+        }
+
     }
 }

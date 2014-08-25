@@ -1,4 +1,5 @@
-﻿using HR.Core.Models;
+﻿using HR.Core.Enums;
+using HR.Core.Models;
 using HR.Web_UI.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace HR.Web_UI.Services.ServicesInferface
     public interface IHRServices
     {
         Person CreateWorker(PersonViewModel pVM);
+        bool DeleteWorker(long id);
 
         List<SelectListItem> BanksSelectListItem();
         List<SelectListItem> CollegesSelectListItem();
@@ -36,7 +38,11 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         IEnumerable<Person> GetAllWorkers();
 
+        IEnumerable<Person> GetAllCandidats();
+
         List<SelectListItem> GetAllManagersSelectList();
+
+        bool EmployCandidate(long id, EmploymentType emp);
 
     }
 }

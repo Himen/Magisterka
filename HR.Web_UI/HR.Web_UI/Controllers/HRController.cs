@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
+using HR.Core.Enums;
 
 namespace HR.Web_UI.Controllers
 {
@@ -389,8 +390,130 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult DeleteWorker(long id)
         {
+            if (hrServices.DeleteWorker(id))
+            {
+                return RedirectToAction("DisplayListOfWorkers");
+            }
+            return View();
+        }
 
+
+
+        public ActionResult CandidatList(string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No, string OrderType)
+        {
+            ViewBag.OrderType = OrderType ?? "desc";
+            ViewBag.CurrentSortOrder = Sorting_Order;
+            Sorting_Order = Sorting_Order ?? "FirstName";
+
+            if (Search_Data != null)
+            {
+                Page_No = 1;
+            }
+            else
+            {
+                Search_Data = Filter_Value;
+            }
+
+            ViewBag.FilterValue = Search_Data;
+
+            var workers = hrServices.GetAllCandidats();
+
+            if (!String.IsNullOrEmpty(Search_Data))
+            {
+                workers = workers.Where(stu => stu.FirstName.ToUpper().Contains(Search_Data.ToUpper()) ||
+                                               stu.Surname.ToUpper().Contains(Search_Data.ToUpper()) ||
+                                               stu.FirstName.ToUpper().Contains(Search_Data.ToUpper()));///reszta
+            }
+            switch (Sorting_Order)
+            {
+                case "FirstName":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.FirstName);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.FirstName);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Surname":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Surname);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Surname);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Date":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.DateOfBirth);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.DateOfBirth);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Employment":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Employment.EmploymentType);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Employment.EmploymentType);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Position":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Employment.PositionCode);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Employment.PositionCode);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                //cd
+                default:
+                    workers = workers.OrderBy(stu => stu.FirstName);
+                    break;
+            }
+
+            int Size_Of_Page = 10;
+            int No_Of_Page = (Page_No ?? 1);
+
+            WorkersListViewModel wlVM = new WorkersListViewModel();
+            wlVM.Workers = workers.ToPagedList(No_Of_Page, Size_Of_Page);
+            wlVM.PageCount = (int)Math.Ceiling((double)workers.Count() / Size_Of_Page);
+            wlVM.PageNumber = Page_No ?? 1;
+
+            return View(wlVM);
+        }
+
+        public ActionResult EmployWorker(long id)
+        {
+            hrServices.EmployCandidate(id,EmploymentType.Zatrudniony);
             return RedirectToAction("DisplayListOfWorkers");
         }
+
+        public ActionResult DumpEmployee(long id)
+        {
+            hrServices.EmployCandidate(id, EmploymentType.Zwolniony);
+            return RedirectToAction("DisplayListOfWorkers");
+        }
+
     }
 }

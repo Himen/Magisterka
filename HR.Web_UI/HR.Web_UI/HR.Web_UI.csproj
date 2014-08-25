@@ -218,6 +218,7 @@
     <Content Include="Views\HR\AddCollage.cshtml" />
     <None Include="Views\HR\AddJob.cshtml" />
     <Content Include="Views\HR\DisplayListOfWorkers.cshtml" />
+    <Content Include="Views\HR\CandidatList.cshtml" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
