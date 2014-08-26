@@ -6,6 +6,7 @@ using HR.DataAccess.EF.Mapping;
 using HR.Core.Enums;
 using HR.Core.Models.RepoModels;
 using HR.Core.Models.DictionaryModels;
+using HR.Data.Generator;
 
 namespace HR.DataAccess.EF
 {
@@ -14,7 +15,7 @@ namespace HR.DataAccess.EF
         public HR_DataContext(): base("HR_Database")
         {
             //zeby nie tworzyc kontekstu
-            //Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
+            Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
             
         }
         #region Models
@@ -118,6 +119,38 @@ namespace HR.DataAccess.EF
             {
                 context.Persons.Add(item);
             }*/
+            Generator g = new Generator();
+
+            #region Słowniki
+            int x = g.Companies.Count;
+
+            List<CompaniesDictionary> listOfDictionaries = g.Companies;
+            foreach (var item in listOfDictionaries)
+	        {
+		        context.CompaniesDictionaries.Add(item);
+	        }
+
+            List<Position> listOfPositions = g.Positions;
+            foreach (var item in listOfPositions)
+	        {
+		        context.Positions.Add(item);
+	        }
+
+            List<CollegesDictionary> listOfColleges = g.Colleges;
+            foreach (var item in listOfColleges)
+	        {
+		        context.CollegesDictionaries.Add(item);
+	        }
+
+	        #endregion
+
+
+            #region Dane_Kierownictwo
+		 
+	        #endregion
+
+            //List<Person> personList = Generator.
+
 
             base.Seed(context);
         }

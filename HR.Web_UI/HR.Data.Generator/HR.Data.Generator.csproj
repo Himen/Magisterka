@@ -39,8 +39,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HR.Core\HR.Core.csproj">
+      <Project>{1f903fe2-8312-46b7-94d1-404ef3ae251e}</Project>
+      <Name>HR.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Zdjecia\Kobiety\1.jpeg" />
+    <Content Include="Zdjecia\Kobiety\2.jpeg" />
+    <Content Include="Zdjecia\Kobiety\3.jpeg" />
+    <Content Include="Zdjecia\Kobiety\4.jpeg" />
+    <Content Include="Zdjecia\Kobiety\5.jpeg" />
+    <Content Include="Zdjecia\Mezczyzni\1.jpeg" />
+    <Content Include="Zdjecia\Mezczyzni\2.jpeg" />
+    <Content Include="Zdjecia\Mezczyzni\3.jpeg" />
+    <Content Include="Zdjecia\Mezczyzni\4.jpeg" />
+    <Content Include="Zdjecia\Mezczyzni\5.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,7 @@ namespace HR.DataAccess.EF.Mapping
             this.ToTable("Positions",schemaName:"DIC");
 
             this.HasKey(c => c.Id);
-            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            //this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).HasColumnType("varchar").HasMaxLength(10).IsRequired();
 
             this.Property(c => c.DataState).HasColumnType("tinyint").IsRequired();

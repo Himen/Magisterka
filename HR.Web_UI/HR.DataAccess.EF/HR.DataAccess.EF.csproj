@@ -80,6 +80,10 @@
       <Project>{1f903fe2-8312-46b7-94d1-404ef3ae251e}</Project>
       <Name>HR.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HR.Data.Generator\HR.Data.Generator.csproj">
+      <Project>{c1a07caf-87b1-48ec-b73d-822b5e3cec9c}</Project>
+      <Name>HR.Data.Generator</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
