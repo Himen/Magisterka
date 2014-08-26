@@ -6,7 +6,8 @@ using System.Web.Mvc;
 
 namespace HR.Web_UI.Controllers
 {
-    public class ManagerController : Controller
+    //[Authorize(Roles="Kierownik")]
+    public class ManagerController : BaseController
     {
         // GET: Manager
         public ActionResult Index()

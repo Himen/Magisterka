@@ -1,5 +1,5 @@
 ﻿using HR.Core.Models;
-using HR.Web_UI.Models.ViewModels;
+using HR.Web_UI.Models.ViewModels.HR;
 using HR.Web_UI.Services.ServicesInferface;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,8 @@ using HR.Core.Enums;
 
 namespace HR.Web_UI.Controllers
 {
-    public class HRController : Controller
+    //[Authorize(Roles="HR")]
+    public class HRController : BaseController
     {
         IHRServices hrServices;
 

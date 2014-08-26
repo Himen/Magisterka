@@ -1,11 +1,26 @@
-﻿
+﻿@model HR.Web_UI.Models.ViewModels.Account.LoginViewModel
 @{
     ViewBag.Title = "Login";
 }
 
-<h2>Zaloguj</h2>
+<h2 class="col-lg-offset-3">Zaloguj</h2><br />
 
-<div>
-    
+<div class="loginContent col-lg-6 col-lg-offset-3">
+    @using(Html.BeginForm())
+    { 
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            <label for="inputEmail">@Html.LabelFor(m => m.UserName)</label>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Nazwa konta" })
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">@Html.LabelFor(m => m.Password)</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło" })
+        </div>
+        <div class="checkbox">
+            <label>@Html.CheckBoxFor(m=>m.RememberMe) @Html.LabelFor(m => m.RememberMe)</label>
+        </div><br />
+        <button type="submit" class="btn btn-primary">Zaloguj</button>
+    }
 </div>
 

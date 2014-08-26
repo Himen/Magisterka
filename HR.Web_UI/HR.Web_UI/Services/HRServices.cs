@@ -11,7 +11,7 @@ using NH_U = HR.DataAccess.NH.UnityOfWorks;
 using HR.Core.Models;
 using HR.Core.Models.DictionaryModels;
 using System.Web.Mvc;
-using HR.Web_UI.Models.ViewModels;
+using HR.Web_UI.Models.ViewModels.HR;
 using HR.Core.Enums;
 
 

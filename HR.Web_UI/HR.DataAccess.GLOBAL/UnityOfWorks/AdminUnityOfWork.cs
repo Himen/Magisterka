@@ -44,10 +44,11 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
     }*/
 
 
-    public class AdminUnityOfWork<TRepo, TUnityOfWork> : IAdminUnityOfWork<TRepo, TUnityOfWork>
+    public class AdminUnityOfWork<TRepo, TRepo1, TUnityOfWork> : IAdminUnityOfWork<TRepo, TRepo1, TUnityOfWork>
     {
         public TUnityOfWork UnityOfWork { get; set; }
         public TRepo AccountRepo { get; set; }
+        public TRepo1 PersonRepo { get; set; }
 
         public AdminUnityOfWork()
         {
@@ -56,11 +57,13 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
             {
                 var x = UnityOfWork as EF.UnityOfWorks.UnityOfWork;
                 AccountRepo = (TRepo)Activator.CreateInstance(typeof(TRepo), x.context);
+                PersonRepo = (TRepo1)Activator.CreateInstance(typeof(TRepo1), x.context);
             }
             else
             {
                 var x = UnityOfWork as NH.UnityOfWorks.UnityOfWork;
                 AccountRepo = (TRepo)Activator.CreateInstance(typeof(TRepo), x.session);
+                PersonRepo = (TRepo1)Activator.CreateInstance(typeof(TRepo1), x.session);
             }
         }
 

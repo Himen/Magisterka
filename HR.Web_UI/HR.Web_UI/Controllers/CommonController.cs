@@ -15,14 +15,15 @@ namespace HR.Web_UI.Controllers
     /// <summary>
     /// Tutaj zawarte sa akcje dostepne dla nie zalogowanego uzytkownika tj. strona startowa, informacje o firmie, materialy promocyjne
     /// </summary>
-    public class CommonController : Controller
+    public class CommonController : BaseController
     {
-        IAdminUnityOfWork<EF_R.Repository<PromotialMaterial, long>, EF_U.UnityOfWork> promotialMaterialUnityOfWork;
+#warning Zrobic do tego serwis
+        /*IAdminUnityOfWork<EF_R.Repository<PromotialMaterial, long>, EF_U.UnityOfWork> promotialMaterialUnityOfWork;
 
         public CommonController(IAdminUnityOfWork<EF_R.Repository<PromotialMaterial, long>, EF_U.UnityOfWork> _promotialMaterialUnityOfWork)
         {
             promotialMaterialUnityOfWork = _promotialMaterialUnityOfWork;
-        }
+        }*/
 
         // GET: Common
         /// <summary>

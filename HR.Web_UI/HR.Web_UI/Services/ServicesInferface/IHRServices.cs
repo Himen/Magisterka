@@ -1,6 +1,6 @@
 ﻿using HR.Core.Enums;
 using HR.Core.Models;
-using HR.Web_UI.Models.ViewModels;
+using HR.Web_UI.Models.ViewModels.HR;
 using System;
 using System.Collections.Generic;
 using System.Linq;

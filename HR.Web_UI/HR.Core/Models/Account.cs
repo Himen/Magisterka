@@ -38,7 +38,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Osoba powiazana z kontem
         /// </summary>
-        public virtual Person Person { get; set; }
+        public Person Person { get; set; }
 
         public AccountLog AccountLog { get; set; }
     }

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using HR.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace HR.Web_UI.Models.ViewModels
+namespace HR.Web_UI.Models.ViewModels.HR
 {
     public class EmploymentViewModel
     {

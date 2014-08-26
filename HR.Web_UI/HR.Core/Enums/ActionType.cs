@@ -10,7 +10,9 @@ namespace HR.Core.Enums
     {
         StworzenieKonta,
         EdycjaKonta,
-        UsuniecieKonta
+        UsuniecieKonta,
+        Login,
+        LogOut
         //pomyslec jeszcze nad jakimis akcjami z facebooka
     }
 }

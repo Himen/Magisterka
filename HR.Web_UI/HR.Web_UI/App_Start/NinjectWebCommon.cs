@@ -76,8 +76,8 @@ using HR.Core.BasicContract;
             {
                 case "EF":
 
-                    kernel.Bind<IAdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
-                        .To<AdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
+                    kernel.Bind<IAdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
+                        .To<AdminUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
                     kernel.Bind<IHRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.Repositories.Repository<AdditionalInformation, long>, HR.DataAccess.EF.Repositories.Repository<College, long>, HR.DataAccess.EF.Repositories.Repository<Job, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
                         .To<HRUnityOfWork<HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.EF.Repositories.Repository<Account, long>, HR.DataAccess.EF.Repositories.Repository<AdditionalInformation, long>, HR.DataAccess.EF.Repositories.Repository<College, long>, HR.DataAccess.EF.Repositories.Repository<Job, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>();
                     kernel.Bind<ILogUnityOfWork< HR.DataAccess.EF.Repositories.Repository<AccountLog, long>, HR.DataAccess.EF.UnityOfWorks.UnityOfWork>>()
@@ -89,8 +89,8 @@ using HR.Core.BasicContract;
 
                     break;
                 case "NH":
-                    kernel.Bind<IAdminUnityOfWork<HR.DataAccess.NH.Repositories.Repository<Account, long>, HR.DataAccess.NH.UnityOfWorks.UnityOfWork>>()
-                        .To<AdminUnityOfWork<HR.DataAccess.NH.Repositories.Repository<Account, long>, HR.DataAccess.NH.UnityOfWorks.UnityOfWork>>();
+                    kernel.Bind<IAdminUnityOfWork<HR.DataAccess.NH.Repositories.Repository<Account, long>, HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.NH.UnityOfWorks.UnityOfWork>>()
+                        .To<AdminUnityOfWork<HR.DataAccess.NH.Repositories.Repository<Account, long>, HR.DataAccess.EF.Repositories.Repository<Person, long>, HR.DataAccess.NH.UnityOfWorks.UnityOfWork>>();
 
                     break;
 
@@ -102,6 +102,7 @@ using HR.Core.BasicContract;
             }
 
             kernel.Bind<IHRServices>().To<HRServices>();
+            kernel.Bind<IAccountService>().To<AccountService>();
 
         }        
     }

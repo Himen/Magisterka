@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace HR.Web_UI.Models.ViewModels
+namespace HR.Web_UI.Models.ViewModels.HR
 {
     public class PersonDisplayViewModel
     {

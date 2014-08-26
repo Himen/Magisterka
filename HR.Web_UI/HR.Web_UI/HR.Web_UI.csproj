@@ -219,6 +219,7 @@
     <None Include="Views\HR\AddJob.cshtml" />
     <Content Include="Views\HR\DisplayListOfWorkers.cshtml" />
     <Content Include="Views\HR\CandidatList.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -230,28 +231,36 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HRController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModels\AdditionalInformationViewModel.cs" />
-    <Compile Include="Models\ViewModels\CollegesViewModel.cs" />
-    <Compile Include="Models\ViewModels\ContactPersonViewModel.cs" />
-    <Compile Include="Models\ViewModels\EmploymentsViewModel.cs" />
-    <Compile Include="Models\ViewModels\EmploymentViewModel.cs" />
-    <Compile Include="Models\ViewModels\PersonDisplayViewModel.cs" />
-    <Compile Include="Models\ViewModels\PersonViewModel.cs" />
-    <Compile Include="Models\ViewModels\WorkersListViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\CurrentUserModel.cs" />
+    <Compile Include="Models\ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\AdditionalInformationViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\CollegesViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\ContactPersonViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\EmploymentsViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\EmploymentViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\PersonDisplayViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\PersonViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\WorkersListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\FileToByte.cs" />
     <Compile Include="Services\HRServices.cs" />
     <Compile Include="Services\HTMLExtension.cs" />
+    <Compile Include="Services\ManagerService.cs" />
+    <Compile Include="Services\ServicesInferface\IAccountService.cs" />
     <Compile Include="Services\ServicesInferface\IHRServices.cs" />
+    <Compile Include="Services\ServicesInferface\IManagerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -272,7 +281,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HR.Core\HR.Core.csproj">
       <Project>{1f903fe2-8312-46b7-94d1-404ef3ae251e}</Project>

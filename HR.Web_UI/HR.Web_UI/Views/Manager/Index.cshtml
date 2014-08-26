@@ -1,7 +1,66 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "ManagerView";
 }
-
-<h2>Index</h2>
-
+<h2>@Session["UserName"]</h2>
+<h4>Jednostka organizacyjna</h4>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <a href="#" class="list-group-item active">
+            Free Domain Name Registration
+        </a>
+        <a href="#" class="list-group-item">24*7 support</a>
+        <a href="#" class="list-group-item">Free Window Space hosting</a>
+        <a href="#" class="list-group-item">Number of Images</a>
+        <a href="#" class="list-group-item">Renewal cost per year</a>
+    </div>
+    <div class="col-md-9 col-sm-18 col-xs-36">
+        <div class="col-md-6 col-sm-12 col-xs-24">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="#" class="list-group-item">Wyświetl pracowników</a>
+                    <img class="img_button" src="~/Content/Images/pracownicy.jpg" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-24">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="#" class="list-group-item">Wyświetl wynagrodzenia</a>
+                    <img class="img_button" src="~/Content/Images/money_bag.png" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-24">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="#" class="list-group-item">Wyświetl kalendarz pracowników</a>
+                    <img class="img_button" src="~/Content/Images/kalendarz.gif" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-24">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="#" class="list-group-item">Wyświetl zestawienia</a>
+                    <img class="img_button" src="~/Content/Images/wykresy.jpg" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-24">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="#" class="list-group-item">Wyświetl dokumenty</a>
+                    <img class="img_button" src="~/Content/Images/dokumenty.jpg" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-24">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="#" class="list-group-item">Wyświetl materiały szkoleniowe</a>
+                    <img class="img_button" src="~/Content/Images/szkolenia.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

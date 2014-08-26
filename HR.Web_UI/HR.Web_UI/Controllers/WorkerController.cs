@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace HR.Web_UI.Controllers
 {
-    public class WorkerController : Controller
+    public class WorkerController : BaseController
     {
         // GET: Worker
         public ActionResult Index()

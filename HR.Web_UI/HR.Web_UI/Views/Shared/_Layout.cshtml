@@ -30,12 +30,13 @@
                 <!-- Grupowanie elementów menu w celu lepszego wyświetlania na urządzeniach moblinych -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Panel zadań</a></li>
+                        <li><a href="/User/Index">Panel zadań</a></li>
                         <li><a href="#">Wyświetl monitor pracy</a></li>
-                        <li><a href="#">Wyświetl zestawienia</a></li>
-                        <li><a href="#">Wyświetl dokumenty</a></li>
-                        <li><a href="#">Zarządzaj pracownikami</a></li>
-
+                        @if(User.IsInRole("HR"))
+                        { 
+                            <li><a href="#">Zarządzaj pracownikami</a></li>
+                        }
+                        
                     </ul>
                     @*<form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
@@ -43,7 +44,24 @@
                             </div>
                             <button type="submit" class="btn btn-default">Wyślij</button>
                         </form>*@
+
                     <ul class="nav navbar-nav navbar-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Witaj @User.Identity.Name<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Wyloguj", "Logoff", "Account")</li>
+                                    <li class="divider"></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="dropdown">
+                                <a href="Account/Login" class="dropdown-toggle" data_toggle="dropdown">Zaloguj</a>
+                            </li>
+                        }
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Materiały<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -59,6 +77,7 @@
                             </ul>
                         </li>
                     </ul>
+
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>

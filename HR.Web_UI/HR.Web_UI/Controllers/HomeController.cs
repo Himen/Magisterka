@@ -23,7 +23,7 @@ namespace HR.Web_UI.Controllers
     /// <summary>
     /// Test Controller 
     /// </summary>
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         #region Controler Construktors
         
@@ -38,10 +38,10 @@ namespace HR.Web_UI.Controllers
             admUnityOfWork = _admUnityOfWork;
         }
 #elif EF
-        IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_U.UnityOfWork> admUnityOfWork;
+        IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> admUnityOfWork;
 
         // GET: Home
-        public HomeController(IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_U.UnityOfWork> _admUnityOfWork)
+        public HomeController(IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _admUnityOfWork)
         {
             admUnityOfWork = _admUnityOfWork;
         }
