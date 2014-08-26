@@ -59,7 +59,7 @@
                         else
                         {
                             <li class="dropdown">
-                                <a href="Account/Login" class="dropdown-toggle" data_toggle="dropdown">Zaloguj</a>
+                                <a href="@Url.Action("Login","Account")" class="dropdown-toggle" data_toggle="dropdown">Zaloguj</a>
                             </li>
                         }
                         <li class="dropdown">
@@ -84,6 +84,12 @@
         @RenderBody()
 
         <img src="/Content/Images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+
+    </div>
+
+    <div class="panel-footer" style="margin-top: 100px">
+
+        <p style="text-align:center">&copy; 2014. Paweł Chmielewski. Praca magisterska</p>
 
     </div>
 

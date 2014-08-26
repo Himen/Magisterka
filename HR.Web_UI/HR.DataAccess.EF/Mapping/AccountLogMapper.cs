@@ -28,8 +28,8 @@ namespace HR.DataAccess.EF.Mapping
             this.Property(c => c.StartDate).HasColumnType("date").IsRequired();
 
             this.Property(c => c.EndDate).HasColumnType("date").IsRequired();
-
-            this.HasRequired(c => c.Account).WithOptional(c => c.AccountLog).Map(m => m.MapKey("AccountId")).WillCascadeOnDelete(true);
+            //sprawdzic i dodac konta unikalne
+            this.HasRequired(c => c.Account).WithMany(c => c.AccountLogs).HasForeignKey(c=>c.AccountId).WillCascadeOnDelete(true);
 
         }
     }

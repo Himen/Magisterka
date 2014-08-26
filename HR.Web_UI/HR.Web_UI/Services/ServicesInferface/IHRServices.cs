@@ -12,6 +12,7 @@ namespace HR.Web_UI.Services.ServicesInferface
 {
     public interface IHRServices
     {
+        bool CheckEmailExist(PersonViewModel pVM);
         Person CreateWorker(PersonViewModel pVM);
         bool DeleteWorker(long id);
 

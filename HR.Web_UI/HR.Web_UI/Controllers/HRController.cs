@@ -51,6 +51,13 @@ namespace HR.Web_UI.Controllers
             if (ModelState.IsValid)
             {
                 Person p = new Person();
+
+                if (hrServices.CheckEmailExist(vm))
+                {
+                    ModelState.AddModelError("Email", "Podany email istnieje juz w bazie.");
+                    return View(vm);
+                }
+
                 p = hrServices.CreateWorker(vm);
                 if (p!=null)
                 {
@@ -200,7 +207,7 @@ namespace HR.Web_UI.Controllers
 
                 if(hrServices.AddNewPersonCollage(cVM,p))
                 {
-
+                    ViewBag.Message = "Pomyślnie dodano miejsce edukacji";
                     return RedirectToAction("DisplaySuccessOfAddWorker");
                 }
                 else
@@ -241,7 +248,7 @@ namespace HR.Web_UI.Controllers
 
                 if (hrServices.AddNewPersonJob(cVM, p))
                 {
-
+                    ViewBag.Message = "Pomyślnie dodano miejsce zatrudnienia";
                     return RedirectToAction("DisplaySuccessOfAddWorker");
                 }
                 else

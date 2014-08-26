@@ -20,13 +20,13 @@ namespace HR.Web_UI.Services
     public class HRServices :IHRServices
     {
         IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_U.UnityOfWork> personUnityOfWork;
-        ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_U.UnityOfWork> logUnityOfWork;
+        ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> logUnityOfWork;
         IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
             EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> dicUnityOfWork;
         IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
 
         public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_U.UnityOfWork> _personUnityOfWork,
-                          ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_U.UnityOfWork> _logUnityOfWork,
+                          ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> _logUnityOfWork,
                           IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
                           EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> _dicUnityOfWork,
                           IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>,
@@ -36,6 +36,26 @@ namespace HR.Web_UI.Services
             this.logUnityOfWork = _logUnityOfWork;
             this.dicUnityOfWork = _dicUnityOfWork;
             this.employmentUnityOfWork = _employmentUnityOfWork;
+        }
+
+        public bool CheckEmailExist(PersonViewModel pVM)
+        {
+            try
+            { 
+                if (personUnityOfWork.PersonRepo.Find(p => p.Email.ToLower().Equals(pVM.Email)).FirstOrDefault() == null)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+
+            }
         }
 
         public Person CreateWorker(PersonViewModel pVM)
@@ -72,13 +92,13 @@ namespace HR.Web_UI.Services
                     Password = "zaq",//narazie,
                     Person = p,
                     Photo = FileToByte.ConvertFileToByte(pVM.Photo),
-                    UserName = pVM.FirstName + "_" + pVM.Surname
+                    UserName = pVM.Email
                 };
 
                 AccountLog al = new AccountLog
                 {
 #warning Trzeba dodac konto osoby ktore dodalo tego uzytkownika
-                    Account =a,
+                    Account = a,
                     Action = "Dodano uzytkownika " + a.UserName,
                     ActionDescription = "Dodanie uzytkownika do bazy danych",
                     ActionType = Core.Enums.ActionType.StworzenieKonta,
@@ -90,8 +110,7 @@ namespace HR.Web_UI.Services
                 personUnityOfWork.AccountRepo.Add(a);
                 logUnityOfWork.AccountLogRepo.Add(al);
 
-                logUnityOfWork.UnityOfWork.SaveChanges();
-                logUnityOfWork.UnityOfWork.Dispose();
+                personUnityOfWork.UnityOfWork.SaveChanges();
 
                 return p;
             }
@@ -99,6 +118,10 @@ namespace HR.Web_UI.Services
             {
 
                 throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
             }
            
         }
@@ -358,7 +381,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.Dispose();
+                employmentUnityOfWork.UnityOfWork.Dispose();
             }
         }
 
@@ -425,7 +448,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.Dispose();
+                //personUnityOfWork.UnityOfWork.Dispose();
             }
         }
 
@@ -434,6 +457,8 @@ namespace HR.Web_UI.Services
         {
             try
             {
+                personUnityOfWork.PersonRepo.Attach(ref p);
+
                 College c = new College
                 {
                     AcademicTitle = cVm.AcademicTitle,
@@ -447,7 +472,10 @@ namespace HR.Web_UI.Services
                     TitleOfResearch = cVm.TitleOfResearch
                 };
 
+                p.Colleges = new List<College>();
+                p.Colleges.Add(c);
                 personUnityOfWork.CollageRepo.Add(c);
+                personUnityOfWork.PersonRepo.Update(p);
                 personUnityOfWork.UnityOfWork.SaveChanges();
 
                 return true;
@@ -467,6 +495,8 @@ namespace HR.Web_UI.Services
         {
             try
             {
+                personUnityOfWork.PersonRepo.Attach(ref p);
+
                 Job j = new Job 
                 {
                     CompanyName = eVM.CompanyName,
@@ -477,7 +507,11 @@ namespace HR.Web_UI.Services
                     StartDate=eVM.StartDate
                 };
 
+                p.Jobs = new List<Job>();
+                p.Jobs.Add(j);
+
                 personUnityOfWork.JobRepo.Add(j);
+                personUnityOfWork.PersonRepo.Update(p);
                 personUnityOfWork.UnityOfWork.SaveChanges();
 
                 return true;
@@ -521,7 +555,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.Dispose();
+                //personUnityOfWork.UnityOfWork.Dispose();
             }
         }
 
@@ -550,7 +584,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.Dispose();
+                //personUnityOfWork.UnityOfWork.Dispose();
             }
         }
 
@@ -572,7 +606,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.SaveChanges();
+                //personUnityOfWork.UnityOfWork.Dispose();
             }
         }
 
@@ -596,7 +630,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.SaveChanges();
+                //personUnityOfWork.UnityOfWork.Dispose();
             }
         }
         public IEnumerable<Person> GetAllCandidats()
@@ -613,7 +647,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.SaveChanges();
+                //personUnityOfWork.UnityOfWork.Dispose();
             }
         }
         public bool EmployCandidate(long id,EmploymentType emp)
@@ -635,7 +669,7 @@ namespace HR.Web_UI.Services
             }
             finally
             {
-                personUnityOfWork.UnityOfWork.SaveChanges();
+                personUnityOfWork.UnityOfWork.Dispose();
             }
         }
 

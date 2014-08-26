@@ -1,6 +1,7 @@
 ﻿using HR.Core.BasicContract;
 using HR.Core.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace HR.Core.Models
 {
@@ -37,11 +38,12 @@ namespace HR.Core.Models
         /// <summary>
         /// Id konta z ktorego zostało wykonane
         /// </summary>
-        //public long AccountId { get; set; }
+        public long AccountId { get; set; }
 
         /// <summary>
         /// Konto z ktorego zostalo wykonane. Narazie rowno znaczne z kontem ktore edytujemy
         /// </summary>
         public virtual Account Account { get; set; }
+
     }
 }

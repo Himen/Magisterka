@@ -1,5 +1,6 @@
 ﻿using HR.Core.BasicContract;
 using HR.Core.Enums;
+using System.Collections.Generic;
 
 namespace HR.Core.Models
 {
@@ -40,6 +41,9 @@ namespace HR.Core.Models
         /// </summary>
         public Person Person { get; set; }
 
-        public AccountLog AccountLog { get; set; }
+        /// <summary>
+        /// Logi dla konta
+        /// </summary>
+        public virtual List<AccountLog> AccountLogs { get; set; }
     }
 }

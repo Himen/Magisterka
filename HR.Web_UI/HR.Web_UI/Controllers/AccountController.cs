@@ -45,6 +45,8 @@ namespace HR.Web_UI.Controllers
                     CurrentUserModel cr = accountService.MapAccount(ac);
                     CurrentUser = cr;
                     CurrenrUserName = cr.UserName;
+                    string clientIP = Request.ServerVariables["REMOTE_ADDR"];
+                    accountService.LogAction_LOGIN(ac, clientIP);
 
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
@@ -68,6 +70,8 @@ namespace HR.Web_UI.Controllers
         }
         public ActionResult Logoff()
         {
+            string clientIP = Request.ServerVariables["REMOTE_ADDR"];
+            accountService.LogAction_LOGOUT(CurrentUser, clientIP);
             FormsAuthentication.SignOut();
             CurrentUser = null;
             CurrenrUserName = null;

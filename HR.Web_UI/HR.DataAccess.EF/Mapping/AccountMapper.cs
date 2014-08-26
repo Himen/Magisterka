@@ -1,6 +1,7 @@
 ﻿using HR.Core.Models;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HR.DataAccess.EF.Mapping
@@ -21,7 +22,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.UserName).HasColumnType("varchar").HasMaxLength(40).IsRequired();
+            this.Property(c => c.UserName).HasColumnType("varchar").HasMaxLength(40).IsRequired().HasColumnAnnotation("Index",new IndexAnnotation(new IndexAttribute("IX_Surname", 1) { IsUnique = true })); 
 
             this.Property(c => c.Password).HasColumnType("varchar").HasMaxLength(20).IsRequired();
             

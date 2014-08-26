@@ -1,6 +1,7 @@
 ﻿using HR.Core.Models;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HR.DataAccess.EF.Mapping
@@ -38,17 +39,17 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.BuildingNumber).HasColumnType("int").IsRequired();
 
-            this.Property(c => c.ApartmentNumber).HasColumnType("int").IsOptional(); ;
+            this.Property(c => c.ApartmentNumber).HasColumnType("int").IsOptional(); 
 
             this.Property(c => c.Phone).HasColumnType("numeric").IsRequired();
 
-            this.Property(c => c.Email).HasColumnType("varchar").HasMaxLength(30).IsRequired();
+            this.Property(c => c.Email).HasColumnType("varchar").HasMaxLength(30).IsRequired().HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_Email", 1) { IsUnique = true })); ;
 
-            this.Property(c => c.NIP).HasColumnType("numeric").IsRequired();;
+            this.Property(c => c.NIP).HasColumnType("numeric").IsRequired();
 
             this.Property(c => c.IDCard).HasColumnType("varchar").HasMaxLength(10).IsRequired();
 
-            this.Property(c => c.PESEL).HasColumnType("varchar").HasMaxLength(11).IsRequired();;
+            this.Property(c => c.PESEL).HasColumnType("varchar").HasMaxLength(11).IsRequired();
 
             this.Property(c=>c.ManagerId).HasColumnType("bigint").IsOptional();
 

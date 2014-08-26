@@ -1,4 +1,4 @@
-﻿@model HR.Web_UI.Models.ViewModels.PersonDisplayViewModel
+﻿@model HR.Web_UI.Models.ViewModels.HR.PersonDisplayViewModel
 @using HR.Web_UI.Services;
 @{
     ViewBag.Title = "DisplaySuccessOfAddWorker";
@@ -7,7 +7,7 @@
 <h2 class="col-lg-offset-4 m_b_30">Dane pracownika: @Model.FirstName  @Model.Surname</h2>
 
 <div id="message" class="col-lg-offset-3 col-lg-6 alert alert-success" role="alert">
-    <label class="col-lg-offset-5">@ViewBag.Message</label>
+    <label class="col-lg-offset-4">@ViewBag.Message</label>
 </div><br />
 
 <div class="panel panel-primary col-lg-offset-1 col-lg-10">

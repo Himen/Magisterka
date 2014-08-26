@@ -1,4 +1,4 @@
-﻿@model HR.Web_UI.Models.ViewModels.EmploymentViewModel
+﻿@model HR.Web_UI.Models.ViewModels.HR.EmploymentViewModel
 
 @{
     ViewBag.Title = "Krok 3";
@@ -22,13 +22,13 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">@Html.LabelFor(p => p.Organization)</span>
-                    @Html.DropDownListFor(p => p.Organization, Model.Organizations, new { @class = "btn-group" })
+                    @Html.DropDownListFor(p => p.Organization, Model.Organizations, new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(p => p.Organization)<br />
 
                 <div class="input-group">
                     <span class="input-group-addon">@Html.LabelFor(p => p.Manager)</span>
-                    @Html.DropDownListFor(p => p.Manager, Model.ListOfManagers, new { @class = "btn-group" })
+                    @Html.DropDownListFor(p => p.Manager, Model.ListOfManagers, new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(p => p.Manager)<br />
 

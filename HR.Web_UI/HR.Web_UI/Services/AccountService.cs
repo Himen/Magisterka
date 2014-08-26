@@ -10,16 +10,20 @@ using NH_R = HR.DataAccess.NH.Repositories;
 using EF_U = HR.DataAccess.EF.UnityOfWorks;
 using NH_U = HR.DataAccess.NH.UnityOfWorks;
 using HR.Web_UI.Models.ViewModels.Account;
+using HR.Core.Enums;
 
 namespace HR.Web_UI.Services
 {
     public class AccountService : IAccountService
     {
         IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> admUnityOfWork;
+        ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> logUnityOfWork;
 
-        public AccountService(IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _admUnityOfWork)
+        public AccountService(IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _admUnityOfWork,
+                              ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> _logUnityOfWork)
         {
             this.admUnityOfWork = _admUnityOfWork;
+            this.logUnityOfWork = _logUnityOfWork;
         }
 
         public Account GetUserByName(string name)
@@ -57,6 +61,63 @@ namespace HR.Web_UI.Services
             {
                 
                 throw;
+            }
+        }
+        public bool LogAction_LOGIN(Account ac,string clientIP)
+        {
+            try
+            {
+                AccountLog al = new AccountLog
+                {
+                    Account = ac,
+                    Action = "Uzytkownik "+ ac.UserName + " logował się do konta z adresu "  + clientIP,
+                    ActionDescription = "Użytkownik zalogowal się pomyślnie o "+ DateTime.Now,
+                    ActionType = ActionType.Login,
+                    EndDate = DateTime.Now,
+                    StartDate = DateTime.Now
+                };
+
+                logUnityOfWork.AccountLogRepo.Add(al);
+                logUnityOfWork.UnityOfWork.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public bool LogAction_LOGOUT(CurrentUserModel cuM, string clientIP)
+        {
+            try
+            {
+#warning do poprawy
+                Account ac = logUnityOfWork.AccountRepo.GetById(cuM.AccountId);
+                logUnityOfWork.AccountRepo.Attach(ref ac);
+                AccountLog al = new AccountLog
+                {
+
+                    Account = ac,
+                    Action = "Uzytkownik " + cuM.UserName + " wylogował się do konta z adresu " + clientIP,
+                    ActionDescription = "Użytkownik wylogowal się pomyślnie o " + DateTime.Now,
+                    ActionType = ActionType.LogOut,
+                    EndDate = DateTime.Now,
+                    StartDate = DateTime.Now
+                };
+
+                logUnityOfWork.AccountLogRepo.Add(al);
+                logUnityOfWork.UnityOfWork.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                logUnityOfWork.UnityOfWork.Dispose();
             }
         }
     }
