@@ -228,11 +228,7 @@ namespace HR.Web_UI.Controllers
         {
             Person p = Session["Person"] as Person;
 
-            if (p == null)
-            {
-                p = new Person();
-                p.Id = 6;
-            }
+#warning Uwaga trzba inna akcje dac zeby wyswietlac szczególy pracownika
 
             var x=hrServices.GetAllColleges(p.Id);
 
@@ -267,13 +263,8 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult DisplayAllJobs()
         {
+#warning Uwaga trzba inna akcje dac zeby wyswietlac szczególy pracownika
             Person p = Session["Person"] as Person;
-
-            if (p == null)
-            {
-                p = new Person();
-                p.Id = 6;
-            }
 
             var x = hrServices.GetAllJobs(p.Id);
 
