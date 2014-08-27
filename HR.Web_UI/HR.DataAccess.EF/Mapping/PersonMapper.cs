@@ -25,17 +25,17 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EditDate).HasColumnType("datetime2").IsOptional();
 
-            this.Property(c => c.FirstName).HasColumnType("varchar").HasMaxLength(20).IsRequired();
+            this.Property(c => c.FirstName).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
-            this.Property(c => c.Surname).HasColumnType("varchar").HasMaxLength(20).IsRequired();
+            this.Property(c => c.Surname).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
             this.Property(c => c.DateOfBirth).HasColumnType("date").IsRequired(); 
 
-            this.Property(c => c.City).HasColumnType("varchar").HasMaxLength(20).IsRequired();
+            this.Property(c => c.City).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
             this.Property(c => c.PostalCode).HasColumnType("varchar").HasMaxLength(10).IsRequired();
 
-            this.Property(c => c.Street).HasColumnType("varchar").HasMaxLength(30).IsRequired(); 
+            this.Property(c => c.Street).HasColumnType("varchar").HasMaxLength(50).IsRequired(); 
 
             this.Property(c => c.BuildingNumber).HasColumnType("int").IsRequired();
 
@@ -43,7 +43,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Phone).HasColumnType("numeric").IsRequired();
 
-            this.Property(c => c.Email).HasColumnType("varchar").HasMaxLength(30).IsRequired().HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_Email", 1) { IsUnique = true })); ;
+            this.Property(c => c.Email).HasColumnType("varchar").HasMaxLength(80).IsRequired().HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_Email", 1) { IsUnique = true })); ;
 
             this.Property(c => c.NIP).HasColumnType("numeric").IsRequired();
 

@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 using HR.Core.Models;
 using HR.Core.Models.DictionaryModels;
 using System.IO;
+using HR.Core.Enums;
 
 namespace HR.Data.Generator
 {
     public class Generator
     {
+        Random r;
+        public Generator()
+        {
+             r= new Random();
+        }
 
         public List<Position> Positions = new List<Position>
         {
@@ -39,7 +45,22 @@ namespace HR.Data.Generator
             new Position {Id="SPP" ,Name ="Starszy programista Pyton"},
             new Position {Id="SPR" ,Name ="Starszy programista Ruby"},
             new Position {Id="SPC" ,Name ="Starszy programista Cobol"},
+            new Position {Id="T" ,Name ="Tester"},
             new Position {Id="WD" ,Name ="Wicedyrektor"}
+        };
+
+        public List<OrganiziationalUnit> OrganiziationalUnits = new List<OrganiziationalUnit>
+        {
+            new OrganiziationalUnit { Id="RN", Name="Rada Nadzorcza"},
+            new OrganiziationalUnit { Id="DH", Name="Dział Human Resource"},
+            new OrganiziationalUnit { Id="DK", Name="Dział Księgowy"},
+            new OrganiziationalUnit { Id="DA", Name="Dział Administracyjny"},
+            new OrganiziationalUnit { Id="DT", Name="Dział Testerów"},
+            new OrganiziationalUnit { Id="DPJ", Name="Dział Programistów Java"},
+            new OrganiziationalUnit { Id="DPN", Name="Dział Programistów .NET"},
+            new OrganiziationalUnit { Id="DPP", Name="Dział Programistów Python"},
+            new OrganiziationalUnit { Id="DPR", Name="Dział Programistów Ruby"},
+            new OrganiziationalUnit { Id="DPC", Name="Dział Programistów Cobol"}
         };
 
         public List<CollegesDictionary> Colleges = new List<CollegesDictionary>
@@ -99,9 +120,9 @@ namespace HR.Data.Generator
             "Laura", "Lucyna", "Łucja", "Magdalena", "Małgorzata", "Maria", "Marta", "Marzena", "Monika", "Natalia", "Nina", "Olga", "Patrycja", "Paulina",
             "Renata", "Sabina", "Sylwia", "Teresa", "Urszula", "Weronika", "Wiktoria", "Zofia","Żaneta",
 
-            "Adam","Adrian","Aleksander","Andrzej","Arkadiusz","Artur Bogusław","Bolesław Cezary","Cyprian","CzesławDamian","Daniel","Dariusz","Dawid",
-            "Emil","Eryk Filip Grzegorz Hubert Ireneusz Jacek","Jakub","Jan Kamil","Karol","Konrad","Krzysztof Leszek Łukasz Maciej","Marcin","Marek",
-            "Mariusz","Mateusz","Michał","Mirosław Norbert Patryk","Paweł","Piotr Radosław","Rafał","Robert", "Szymon", "Tomasz", "Wojciech", "Zbigniew"
+            "Adam","Adrian","Aleksander","Andrzej","Arkadiusz","Artur", "Bogusław","Bolesław", "Cezary","Cyprian","Czesław","Damian","Daniel","Dariusz","Dawid",
+            "Emil","Eryk","Filip","Grzegorz","Hubert","Ireneusz","Jacek","Jakub","Jan", "Kamil","Karol","Konrad","Krzysztof", "Leszek", "Łukasz", "Maciej","Marcin","Marek",
+            "Mariusz","Mateusz","Michał","Mirosław","Norbert","Patryk","Paweł","Piotr","Radosław","Rafał","Robert", "Szymon", "Tomasz", "Wojciech", "Zbigniew"
         };
         public List<string> Nazwiska = new List<string>
         {
@@ -134,9 +155,26 @@ namespace HR.Data.Generator
 
         };
 
+        public List<long> Payment = new List<long> { 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 };
+        public List<long> PaymentPerHour = new List<long> { 10,15,18,20,25,28,30,35,40,45,50 };
+        public Dictionary<string, string> FieldsOfStudies = new Dictionary<string, string>
+        {
+            {"Aplikacje internetowe","Informatyka"},
+            {"Sieci komputerowe","Informatyka"},
+            {"Aplikacje biznesowe","Informatyka"},
+            {"Inżynieria oprogramowania","Informatyka"}, 
+            {"Informatyka i Ekonometria","Literatura"},
+            {"Fizyka przemysłowa","Fizyka"},
+            {"Mechanika samochodów","Mechanika"},
+            {"Robotyka","Mechatronika"},
+            {"Systemy sterowania","Budowa maszyn"},
+            {"Księgowośc","Ekonomia"},
+            {"Sociologia społeczna","Sociologia"},
+            {"Literatura","Filologia polska"}
+        };
+
         public string GeneratorBlednegoPESEL()
         {
-            Random r = new Random();
             string pesel = null;
             for (int i = 0; i < 11; i++)
             {
@@ -145,20 +183,41 @@ namespace HR.Data.Generator
             return pesel;
         }
 
-        public string GeneratorBlednegoNIP()
+        public long GeneratorTelefonu()
         {
-            Random r = new Random();
+            string pesel = null;
+            for (int i = 0; i < 9; i++)
+            {
+                pesel += r.Next(0, 10);
+            }
+            return long.Parse(pesel);
+        }
+
+        public long GeneratorBlednegoNIP()
+        {
             string pesel = null;
             for (int i = 0; i < 10; i++)
             {
                 pesel += r.Next(0, 10);
             }
-            return pesel;
+            return long.Parse(pesel);
+        }
+
+        public string GeneratorKoduPocztowego()
+        {
+            string kod = null;
+            kod += r.Next(0, 10);
+            kod += r.Next(0, 10);
+            kod += "-";
+            kod += r.Next(0, 10);
+            kod += r.Next(0, 10);
+            kod += r.Next(0, 10);
+
+            return kod;
         }
 
         public char GetLetter()
         {
-            Random r = new Random();
             int num = r.Next(0, 26); // Zero to 25
             char let = (char)('A' + num);
             return let;
@@ -172,7 +231,6 @@ namespace HR.Data.Generator
                 numerDowodu += GetLetter();
 			}
 
-            Random r = new Random();
             for (int i = 0; i < 6; i++)
             {
                 numerDowodu += r.Next(0, 10);
@@ -183,12 +241,11 @@ namespace HR.Data.Generator
 
         public byte[] GenerateMenPhoto()
         {
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");//Assuming Test is your Folder
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
-            Random r = new Random();
-
-            FileInfo fileInfo = Files[r.Next(1, 6)];
+            FileInfo fileInfo = Files[r.Next(0, 5)];
 
             // The byte[] to save the data in
             byte[] data = new byte[fileInfo.Length];
@@ -200,19 +257,60 @@ namespace HR.Data.Generator
             }
 
             // Delete the temporary file
-            fileInfo.Delete();
+            //fileInfo.Delete();
 
             return data;
+        }
+        public string GenerateAccountNumber()
+        {
+            string account= null;
+            for (int i = 0; i < 24; i++)
+            {
+                account += r.Next(0, 10);
+            }
+            return account;
+        }
+
+        public int GenerateRandom_1_to_100()
+        {
+            return r.Next(1, 101);
+        }
+
+        public string GenerateRandom_City()
+        {
+            return Miasta.ElementAt(r.Next(0, Miasta.Count)).Key;
+        }
+
+        public CollageProgressType GenerateCollageProgress()
+        {
+            int x = r.Next(0, 13);
+            if (x < 3)
+                return CollageProgressType.Zakonczono;
+            else if(x>3 && x<6)
+                return CollageProgressType.Nie_ukonczono;
+            else if(x>6 && x<9)
+                return CollageProgressType.Urlop_dziekanski;
+            else
+                return CollageProgressType.W_trakcie;
+        }
+
+        public long GenerateRandom_Payment()
+        {
+            return Payment.ElementAt(r.Next(0, Payment.Count));
+        }
+
+        public long GenerateRandom_HourPayment()
+        {
+            return Payment.ElementAt(r.Next(0, Payment.Count));
         }
 
         public byte[] GenerateWomenPhoto()
         {
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");//Assuming Test is your Folder
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
-            Random r = new Random();
-
-            FileInfo fileInfo = Files[r.Next(1, 6)];
+            FileInfo fileInfo = Files[r.Next(0, 5)];
 
             // The byte[] to save the data in
             byte[] data = new byte[fileInfo.Length];
@@ -224,10 +322,630 @@ namespace HR.Data.Generator
             }
 
             // Delete the temporary file
-            fileInfo.Delete();
+            //fileInfo.Delete();
 
             return data;
         }
+
+        public DateTime RandomDay()
+        {
+            DateTime start = new DateTime(1995, 1, 1);
+
+            int range = (DateTime.Today - start).Days;
+            return start.AddDays(r.Next(range));
+        }
+        public string RandomFirstName()
+        {
+             return Imiona[r.Next(0, Imiona.Count)];
+        }
+
+        public CompaniesDictionary RandomCompanyName()
+        {
+            return Companies[r.Next(0, Companies.Count)];
+        }
+
+        public Position RandomPosition()
+        {
+            return Positions[r.Next(0, Positions.Count)];
+        }
+
+        public string RandomSurname()
+        {
+            return Nazwiska[r.Next(0, Nazwiska.Count)];
+        }
+        public string RandomStreet()
+        {
+            return Ulice[r.Next(0, Ulice.Count)];
+        }
+        public string RandomDomain()
+        {
+            return Domain[r.Next(0, Domain.Count)];
+        }
+
+        public KeyValuePair<string,string> RandomFieldOfStudy()
+        {
+            return FieldsOfStudies.ElementAt(r.Next(0, FieldsOfStudies.Count));
+        }
+
+        public CollegesDictionary RandomCollege()
+        {
+            return Colleges[r.Next(0, Colleges.Count)];
+        }
+
+
+        public BankDictionary RandomBank()
+        {
+            return Banks[r.Next(0, Banks.Count)];
+        }
+
+
+        public List<Person> GeneratePersons(int count)
+        {
+            List<Person> p = new List<Person>();
+
+            
+            for (int i = 0; i < count; i++)
+            {
+                Person p1 =  new Person (){ 
+                                  ApartmentNumber = GenerateRandom_1_to_100(), 
+                                  BuildingNumber = GenerateRandom_1_to_100(), 
+                                  City = GenerateRandom_City (),
+                                  DateOfBirth = RandomDay(),
+                                  FirstName = RandomFirstName(),
+                                  IDCard = GeneratorBłednegoNumeruDowodu(), 
+                                  NIP = GeneratorBlednegoNIP(),
+                                  PESEL = GeneratorBlednegoPESEL(),
+                                  Phone = GeneratorTelefonu(),
+                                  PostalCode = GeneratorKoduPocztowego(),
+                                  Street = RandomStreet(),
+                                  Surname = RandomSurname()
+                                  };
+
+                p1.Email = p1.FirstName + "_" + p1.Surname + "_" + GenerateRandom_1_to_100() + RandomDomain();
+                while (p.Select(c => c.Email).Equals(p1.Email))
+                {
+                    p1.Email = p1.FirstName + "_" + p1.Surname + "_" + GenerateRandom_1_to_100() + RandomDomain();
+                }
+
+                p1.Account = new Account() { AccountType = Core.Enums.AccountType.Pracownik, Password = "zaq", UserName = p1.Email };
+                p1.Account.Photo = p1.FirstName.Last() =='a'  ? GenerateWomenPhoto() : GenerateMenPhoto();
+                p1.Account.AccountLogs = new List<AccountLog>();
+                p1.Account.AccountLogs.Add(new AccountLog ()
+                                            {  
+                                                Action = "Dodano pracownika "+ p1.FirstName + " " + p1.Surname, 
+                                                ActionDescription="Dodano nowego pracownika dnia "+ DateTime.Now,
+                                                ActionType = Core.Enums.ActionType.StworzenieKonta,
+                                                StartDate = DateTime.Now,
+                                                EndDate = DateTime.Now
+                                            });
+                p1.AdditionalInformation = new AdditionalInformation()
+                                               {
+                                                   FacebookAccount = r.Next(0, 100) > 50 ? "https://www.facebook.com/" + p1.FirstName.ToLower() + "." + p1.Surname.ToLower() + GenerateRandom_1_to_100() : null,
+                                                   GoldenLineAccount =r.Next(0,100) > 50 ? "http://www.goldenline.pl/" + p1.FirstName.ToLower() + "_" + p1.Surname.ToLower() + GenerateRandom_1_to_100(): null,
+                                                   TwitterAccount = r.Next(0, 100) > 50 ? "https://twitter.com/" + p1.FirstName.ToUpper()[0] + p1.Surname + GenerateRandom_1_to_100() : null,
+                                                   LinkInAccount = r.Next(0, 100) > 50 ? "http://pl.linkedin.com/in/" + p1.FirstName.ToLower() + "_" + p1.Surname.ToLower() + GenerateRandom_1_to_100() : null,
+                                                   GoogleAccount = "https://plus.google.com/" + r.Next(10000, 1000000).ToString() + r.Next(10000, 1000000).ToString() + "/posts"
+                                               };
+                p1.ContactPerson = new ContactPerson()
+                                    {
+                                        ApartmentNumber = GenerateRandom_1_to_100(),
+                                        BuildingNumber = GenerateRandom_1_to_100(),
+                                        City = GenerateRandom_City(), 
+                                        FirstName = RandomFirstName(),
+                                        Phone = GeneratorTelefonu(),
+                                        PostalCode = GeneratorKoduPocztowego(),
+                                        Street = RandomStreet(),
+                                        Surname = p1.Surname
+                                    };
+
+                p1.ContactPerson.Email = p1.ContactPerson.FirstName + "_" + p1.ContactPerson.Surname + "_" + GenerateRandom_1_to_100() + RandomDomain();
+
+                //add collegess 
+                p1.Colleges = new List<College>();
+                KeyValuePair<string,string> col = RandomFieldOfStudy();
+                DateTime date = RandomDay();
+
+                College c1 = new College
+                        {
+                            AcademicTitle = AcademicTitleType.Inzynier,
+                            EndDate = date.AddYears(4),
+                            FieldOfStudy = col.Value,
+                            Name = RandomCollege().Name,
+                            Progres = CollageProgressType.Zakonczono,
+                            Specialization = col.Key,
+                            StartDate = date,
+                            TitleOfResearch = "Ładny tytuł pracy inżynierskiej"
+                        };
+                p1.Colleges.Add(c1);
+
+                College c2 = null;
+                if(r.Next(0,4)>1)
+                {
+                    c2= new College
+                    {
+                        AcademicTitle = AcademicTitleType.Magister,
+                        EndDate = date.AddYears(1),
+                        FieldOfStudy = c1.FieldOfStudy,
+                        Name = RandomCollege().Name,
+                        Progres = GenerateCollageProgress(),
+                        Specialization = c1.Specialization,
+                        StartDate = date.AddYears(4),
+                        TitleOfResearch = "Ładny tytuł pracy magisterskiej"
+                    };
+                    p1.Colleges.Add(c2);
+                 }
+
+                if (r.Next(0, 10) < 2 && c2 !=null)
+                {
+                    if(c2.Progres == CollageProgressType.Zakonczono)
+                    {
+                        College c3 = new College
+                        {
+                            AcademicTitle = AcademicTitleType.Doktor,
+                            EndDate = date.AddYears(9),
+                            FieldOfStudy = c1.FieldOfStudy,
+                            Name = RandomCollege().Name,
+                            Progres = GenerateCollageProgress(),
+                            Specialization = c1.Specialization,
+                            StartDate = date.AddYears(5),
+                            TitleOfResearch = "Ładny tytuł pracy doktorskiej"
+                        };
+                        p1.Colleges.Add(c3);
+                    }
+                }
+
+                //add job
+                p1.Jobs = new List<Job>();
+                date = RandomDay();
+
+                Job j = new Job
+                        {
+                            CompanyName = RandomCompanyName().Name,
+                            Description = "opis",
+                            Position = RandomPosition().Name,
+                            StartDate = date,
+                            EndDate = date.AddYears(2),
+                        };
+
+                p1.Jobs.Add(j);
+
+                Job j1 = null;
+                if(r.Next(0,10) > 2)
+                {
+                    j1 = new Job
+                    {
+                        CompanyName = RandomCompanyName().Name,
+                        Description = "opis",
+                        Position = RandomPosition().Name,
+                        StartDate = j.EndDate.Value,
+                        EndDate = j.EndDate.Value.AddYears(r.Next(1, 3)),
+                    };
+                    p1.Jobs.Add(j1);
+                }
+
+                if (r.Next(0, 10) > 6 && j1 != null)
+                {
+                    Job j2 = new Job
+                    {
+                        CompanyName = RandomCompanyName().Name,
+                        Description = "opis",
+                        Position = RandomPosition().Name,
+                        StartDate = j1.EndDate.Value,
+                        EndDate = j1.EndDate.Value.AddYears(r.Next(1, 3)),
+                    };
+                    p1.Jobs.Add(j2);
+                }
+
+
+                p.Add(p1);
+                p1 = null;
+            }
+            return p;
+        }
+
+
+
+        public List<OrganiziationalUnit> OrganizeOrganiziationalUnit(ref List<Person> managers)
+        {
+            for (int i = 0; i < OrganiziationalUnits.Count; i++)
+            {
+                OrganiziationalUnits[i].Manager = managers[i];
+            }
+
+            return OrganiziationalUnits;
+        }
+
+        public Employment EmployWorker(Person p, string stanowisko, string dział, Person manager)
+        {
+            var bank = RandomBank();
+            p.Manager = manager;
+
+            Employment e = new Employment
+                            {
+
+                                EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                                Person = p,
+                                BankAccount = new BankAccount()
+                                {
+                                    AccountNumber = GenerateAccountNumber(),
+                                    BankAddress = bank.Address,
+                                    BankName = bank.Name
+                                },
+                                PositionCode = stanowisko,
+                                OrganiziationalUnitCode = dział,
+                                StartDate = DateTime.Now,
+                                EndDate = DateTime.Now,
+                                Contract = new Contract()
+                                {
+                                    ContractDimension = ContractDimensionType.CalyEtat,
+                                    ContractType = ContractType.Umowa_o_prace,
+                                    EndDate = DateTime.Now.AddYears(2),
+                                    StartDate = DateTime.Now
+                                }
+                            };
+
+            if(r.Next(0,2)<1)
+                e.Contract.MonthBenefit = GenerateRandom_Payment();
+            else
+                e.Contract.BenefitPerHour = GenerateRandom_HourPayment();
+
+            return e;
+        }
+
+        public List<Employment> EmployManagers(ref List<Person> managers)
+        {
+            if (managers.Count >= 11)
+            {
+                managers[0].Account.AccountType = AccountType.Kierownik;
+
+                var bank = RandomBank();
+                List<Employment> employment = new List<Employment>()
+                {
+                    new Employment
+                    {
+                        
+                        EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                        Person = managers[0],
+                        BankAccount = new BankAccount()
+                        {
+                            AccountNumber = GenerateAccountNumber(),
+                            BankAddress = bank.Address,
+                            BankName = bank.Name
+                        },
+                        PositionCode = "D",
+                        OrganiziationalUnitCode = "RN",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        Contract = new Contract()
+                        {
+                            ContractDimension = ContractDimensionType.CalyEtat,
+                            ContractType = ContractType.Umowa_o_prace,
+                            MonthBenefit = 20000,
+                            BenefitPerHour= null,
+                            EndDate = DateTime.Now.AddYears(2),
+                            StartDate = DateTime.Now
+                        }
+                    }
+
+                };
+                //WIC
+                bank = RandomBank();
+                managers[1].Account.AccountType = AccountType.Kierownik;
+
+                Employment e = new Employment()
+                {
+
+                        EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                        Person = managers[1],
+                        BankAccount = new BankAccount()
+                        {
+                            AccountNumber = GenerateAccountNumber(),
+                            BankAddress = bank.Address,
+                            BankName = bank.Name
+                        },
+                        PositionCode = "WD",
+                        OrganiziationalUnitCode = "RN",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        Contract = new Contract()
+                        {
+                            ContractDimension = ContractDimensionType.CalyEtat,
+                            ContractType = ContractType.Umowa_o_prace,
+                            MonthBenefit = 15000,
+                            BenefitPerHour = null,
+                            EndDate = DateTime.Now.AddYears(2),
+                            StartDate = DateTime.Now
+                        }
+                };
+                employment.Add(e);
+
+                //Human Resource Manager
+                bank = RandomBank();
+                managers[2].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[2],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "R",
+                    OrganiziationalUnitCode = "DH",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 8000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[3].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[3],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "K",
+                    OrganiziationalUnitCode = "DK",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 10000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[4].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[4],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "A",
+                    OrganiziationalUnitCode = "DA",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 8000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[5].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[5],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "T",
+                    OrganiziationalUnitCode = "DT",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 10000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[6].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[6],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "SPJ",
+                    OrganiziationalUnitCode = "DPJ",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 15000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[7].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[7],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "SPN",
+                    OrganiziationalUnitCode = "DPN",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 15000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[8].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[8],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "SPP",
+                    OrganiziationalUnitCode = "DPP",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 15000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[9].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[9],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "SPR",
+                    OrganiziationalUnitCode = "DPR",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 15000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+                bank = RandomBank();
+                managers[10].Account.AccountType = AccountType.Kierownik;
+                e = new Employment()
+                {
+
+                    EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                    Person = managers[10],
+                    BankAccount = new BankAccount()
+                    {
+                        AccountNumber = GenerateAccountNumber(),
+                        BankAddress = bank.Address,
+                        BankName = bank.Name
+                    },
+                    PositionCode = "SPC",
+                    OrganiziationalUnitCode = "DPC",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Contract = new Contract()
+                    {
+                        ContractDimension = ContractDimensionType.CalyEtat,
+                        ContractType = ContractType.Umowa_o_prace,
+                        MonthBenefit = 15000,
+                        BenefitPerHour = null,
+                        EndDate = DateTime.Now.AddYears(2),
+                        StartDate = DateTime.Now
+                    }
+                };
+                employment.Add(e);
+
+
+                return employment;
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+
+        public List<string> Domain = new List<string>
+        {
+            "@o2.pl",
+            "@wp.pl",
+            "@gmail.pl",
+            "@onet.pl",
+            "@buziaczek.pl",
+            "@outlook.pl",
+            "@wimii.pl",
+            "@interia.pl",
+            "@gazeta.pl",
+            "@epam.pl",
+            "@yahoo.pl",
+            "@microsoft.pl",
+
+        };
 
         public Dictionary<string, string> Miasta = new Dictionary<string, string>
         {
@@ -1146,5 +1864,123 @@ namespace HR.Data.Generator
             ,{"Żywiec","ŚL"}
 
         };
+
+        public List<string> Ulice = new List<string>
+        {
+            "12 Pułku Piechoty",
+            "Ady Sari",
+            "Bałysa",
+            "Barska",
+            "Baśniowa",
+            "Batorego",
+            "Beskidzka",
+            "Błonie",
+            "Bohaterów Getta",
+            "Bohaterów Monte Cassino",
+            "Brzozowa",
+            "Chopina",
+            "Cicha",
+            "Doktora Edmunda Wojtyły",
+            "dr. J. Putka",
+            "Emilii i Karola Wojtyłów",
+            "Energetyków",
+            "Fabryczna",
+            "Gimnazjalna",
+            "Gotowizna",
+            "Graniczna",
+            "Groble",
+            "Iwańskiego",
+            "Jagiellońska",
+            "Jana III Sobieskiego",
+            "Jana Pawła II",
+            "Janiny Brzostowskiej",
+            "Jaśminowa",
+            "Jasna",
+            "Jaworowa",
+            "Jedność",
+            "Jesionowe",
+            "Karmelicka",
+            "Kasztanowa",
+            "Klonowa",
+            "Kochanowskiego",
+            "Konstytucji 3 Maja",
+            "Kopernika",
+            "Kościelna",
+            "Kościuszki",
+            "Krakowska",
+            "Krasińskiego",
+            "Krótka",
+            "Kwiatowa",
+            "Łąki",
+            "Łazówka",
+            "Legionów",
+            "Leśna",
+            "Leszczynowa",
+            "Lipowa",
+            "Lwowska",
+            "marsz. Józefa Piłsudskiego",
+            "Matejki",
+            "Matki Bożej Fatimskiej",
+            "Mickiewicza",
+            "Miedzne",
+            "Miejski",
+            "Młyńska",
+            "Mydlarska",
+            "M. Wadowity",
+            "Nadbrzeżna",
+            "Niecała",
+            "Niwy",
+            "Obrońców Westerplatte",
+            "Olbrychta",
+            "Parkowa",
+            "Piaskowa",
+            "Piastowskie",
+            "Podgórska",
+            "Podmiejska",
+            "Podstawie",
+            "Pod Skarpą",
+            "Pogodna",
+            "Polna",
+            "Poprzeczna",
+            "prof. Nikliborca",
+            "Pułaskiego",
+            "Rodziny Nowobilskich",
+            "Sadowa",
+            "Sienkiewicza",
+            "Sikorskiego",
+            "Słoneczne",
+            "Słowackiego",
+            "Sosnowa",
+            "Spadzista",
+            "Spokojna",
+            "Spółdzielców",
+            "Sportowców",
+            "Świerkowa",
+            "Szkolna",
+            "Szpitalna",
+            "Tatrzańska",
+            "Teatralna",
+            "Topolowa",
+            "Trybunalska",
+            "Wadowity",
+            "Wałowa",
+            "Wenecja",
+            "Widok",
+            "Wiosenna",
+            "Wiśniowa",
+            "Wojska Polskiego",
+            "Wolności",
+            "Wowry",
+            "XX-lecia PRL",
+            "Zaskawie",
+            "Zatorska",
+            "Zegadłowicza",
+            "Żeromskiego",
+            "Zielona",
+            "Źródlana",
+            "Żwirki i Wigury",
+            "Zygmunta I Starego"
+        };
+
     }
 }

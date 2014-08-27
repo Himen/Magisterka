@@ -431,13 +431,14 @@ namespace HR.Web_UI.Services
                     PESEL = p.PESEL,
                     Phone = p.Phone,
                     Photo = p.Account.Photo,
-                    Position = p.Employment.PositionCode,
+                    Position = p.Employment.PositionCode,  
                     PostalCode = p.PostalCode,
                     StartDate = p.Employment.StartDate,
                     Street = p.Street,
-                    Surname = p.Street,
+                    Surname = p.Surname,
                     Twitter = p.AdditionalInformation.TwitterAccount
                 };
+#warning Pozycja do pobarania z slowników i dział
                 return pdVm;
 
             }

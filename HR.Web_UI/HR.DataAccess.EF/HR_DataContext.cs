@@ -91,38 +91,10 @@ namespace HR.DataAccess.EF
         //olac to narazie
         protected override void Seed(HR_DataContext context)
         {
-            
-            /*Person p = new Person { ApartmentNumber = 1, BuildingNumber = 12, City = "Krakow"
-                ,ContactPerson = new ContactPerson{ ApartmentNumber = 1, BuildingNumber = 3, City = "Krakow", CreateDate = DateTime.Now, DataState =1, EditDate = null, Email = "sabina@wp.pl", FirstName ="Sabina", Surname="Jackiewicz", Id = 1, Phone = 159852357, PostalCode = "15-753", Street="Malinowa"}
-                ,ContactPersonId = 0, CreateDate = DateTime.Now, DataState =1, DateOfBirth = new DateTime(1987,2,3), Documents= null, EditDate = null, Email ="jacekp@wp.pl" ,FirstName="Jacek", Surname = "Placek", Street="Brzydka", NIP=159951, Id = 1, IDCard="AW123432", PESEL= "15858586257", Manager = null, ManagerId = null, Phone=159852357, PostalCode="12-432" };
-            
-            List<Account> list = new List<Account>();
-            list.Add(new Account() { CreateDate= DateTime.Now, EditDate= null, AccountType= Core.Enums.AccountType.Pracownik, UserName="Jacek_Placek", Photo = null, Password="zaq", Id=1, DataState=1, PersonId = 1, Person = p});/*
-            list.Add(new Account() { CreateDate = DateTime.Now, EditDate = null, AccountType = Core.Enums.AccountType.Kierownik, UserName = "Tomek_Domek", Photo = null, Password = "zaq", Id = 2, DataState = 1,  });
-            list.Add(new Account() { CreateDate = DateTime.Now, EditDate = null, AccountType = Core.Enums.AccountType.HR, UserName = "Halina_Malina", Photo = null, Password = "zaq", Id = 3, DataState = 1 });
-            list.Add(new Account() { CreateDate = DateTime.Now, EditDate = null, AccountType = Core.Enums.AccountType.Pracownik, UserName = "Karolina_Nowak", Photo = null, Password = "zaq", Id = 4, DataState = 1 });
-            list.Add(new Account() { CreateDate = DateTime.Now, EditDate = null, AccountType = Core.Enums.AccountType.Pracownik, UserName = "Grzesiek_Tomczyk", Photo = null, Password = "zaq", Id = 5, DataState = 1 });*/
-
-           /* foreach (var item in list)
-            {
-                context.Accounts.Add(item);
-            }
-            context.SaveChanges();*/
-
-            /*List<Person> personsList = new List<Person>();
-            personsList.Add(new Person() { ApartmentNumber=12, BuildingNumber=2, City="Częstochowa", DataState=1, DateOfBirth=new DateTime(1999,2,18),FirstName="Tomasz", Surname="Jasiński",Street="Kokosowa",Profession=ProfesionType.Programista_ASP_NET_MVC,PostalCode="204-12",NIP=1478523697 , IDCard="AED159753", PESEL="15875235874" });
-            personsList.Add(new Person() { ApartmentNumber = 12, BuildingNumber = 2, City = "Częstochowa", DataState = 1, DateOfBirth = new DateTime(1999, 2, 18), FirstName = "Tomasz", Surname = "Jasiński", Street = "Kokosowa", Profession = ProfesionType.Human_Resource, PostalCode = "204-12", NIP = 1478523697, IDCard = "DEF153453", PESEL="35874528568" });
-            personsList.Add(new Person() { ApartmentNumber = 12, BuildingNumber = 2, City = "Częstochowa", DataState = 1, DateOfBirth = new DateTime(1999, 2, 18), FirstName = "Tomasz", Surname = "Jasiński", Street = "Kokosowa", Profession = ProfesionType.CEO, PostalCode = "204-12", NIP = 1478523697, IDCard = "BVD158853" , PESEL="584586853589"});
-            personsList.Add(new Person() { ApartmentNumber = 12, BuildingNumber = 2, City = "Częstochowa", DataState = 1, DateOfBirth = new DateTime(1999, 2, 18), FirstName = "Tomasz", Surname = "Jasiński", Street = "Kokosowa", Profession = ProfesionType.Programista_Cpp, PostalCode = "204-12", NIP = 1478523697, IDCard = "WDC157523", PESEL="58458483214" });
-
-            foreach (var item in personsList)
-            {
-                context.Persons.Add(item);
-            }*/
+            base.Seed(context);
             Generator g = new Generator();
 
             #region Słowniki
-            int x = g.Companies.Count;
 
             List<CompaniesDictionary> listOfDictionaries = g.Companies;
             foreach (var item in listOfDictionaries)
@@ -146,13 +118,79 @@ namespace HR.DataAccess.EF
 
 
             #region Dane_Kierownictwo
-		 
+
+            List<Person> listaKierownicza = g.GeneratePersons(11);
+
+            List<OrganiziationalUnit> listaDziałów = g.OrganizeOrganiziationalUnit(ref listaKierownicza);
+
+            for (int i = 0; i < listaDziałów.Count; i++)
+            {
+                context.OrganiziationalUnits.Add(listaDziałów[i]);
+            }
+
+            List<Employment> employmentList = g.EmployManagers(ref listaKierownicza);
+            
+            for (int i = 0; i < employmentList.Count; i++)
+            {
+                context.Employments.Add(employmentList[i]);
+            }
+            context.SaveChanges();
+
+            //dodanie kierowników
+            foreach (var item in context.Persons)
+	        {
+                context.Persons.Attach(item);
+                item.Manager = context.Persons.Local[1];
+                context.Entry(item).State = EntityState.Modified;
+	        }
+            context.Persons.Local[1].Manager = context.Persons.Local[0];
+            context.Persons.Local[0].Manager = context.Persons.Local[0];
+
+            context.SaveChanges();
+            
+
 	        #endregion
 
-            //List<Person> personList = Generator.
+
+            #region Pracownicy
+            List<Person> pracownicy = g.GeneratePersons(150);
+
+            List<Employment> listWorkersToEmploy = new List<Employment>();
+            for (int i = 0; i < pracownicy.Count; i=i+15)
+            {
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[i], "MPJ", "DPJ", context.Persons.Local[6]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[1+i], "PJ", "DPJ", context.Persons.Local[6]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[2+i], "SPJ", "DPJ", context.Persons.Local[6]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[3+i], "MPN", "DPN", context.Persons.Local[7]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[4+i], "PN", "DPN", context.Persons.Local[7]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[5+i], "SPN", "DPN", context.Persons.Local[7]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[6+i], "MPP", "DPP", context.Persons.Local[8]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[7+i], "PP", "DPP", context.Persons.Local[8]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[8+i], "SPP", "DPP", context.Persons.Local[8]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[9+i], "MPR", "DPR", context.Persons.Local[9]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[10+i], "PR", "DPR", context.Persons.Local[9]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[11+i], "SPR", "DPR", context.Persons.Local[9]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[12+i], "MPC", "DPC", context.Persons.Local[10]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[13+i], "PC", "DPC", context.Persons.Local[10]));
+                listWorkersToEmploy.Add(g.EmployWorker(pracownicy[14+i], "SPC", "DPC", context.Persons.Local[10]));
+            }
+
+            foreach (var item in listWorkersToEmploy)
+            {
+                context.Employments.Add(item);
+            }
+
+            context.SaveChanges();
+
+            #endregion
 
 
-            base.Seed(context);
+            #region Godziny pracy
+            
+            #endregion
+
+
+
         }
     }
 }

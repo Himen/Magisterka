@@ -16,7 +16,7 @@
             <div class="panel-body">
                 <div class="input-group">
                     <span class="input-group-addon">@Html.LabelFor(p => p.Position)</span>
-                    @Html.DropDownListFor(p => p.Position, Model.Positions, new { @class = "btn-group" })
+                    @Html.DropDownListFor(p => p.Position, Model.Positions, new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(p => p.Position)<br />
 
