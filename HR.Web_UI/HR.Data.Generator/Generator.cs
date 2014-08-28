@@ -257,8 +257,8 @@ namespace HR.Data.Generator
 
         public byte[] GenerateMenPhoto()
         {
-            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");//Assuming Test is your Folder
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");//Assuming Test is your Folder
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
             FileInfo fileInfo = Files[r.Next(0, 5)];
@@ -322,8 +322,8 @@ namespace HR.Data.Generator
 
         public byte[] GenerateWomenPhoto()
         {
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");//Assuming Test is your Folder
-            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
             FileInfo fileInfo = Files[r.Next(0, 5)];
