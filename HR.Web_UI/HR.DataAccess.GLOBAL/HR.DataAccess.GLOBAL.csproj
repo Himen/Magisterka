@@ -62,7 +62,9 @@
     <Compile Include="UnityOfWorks\IHRUnityOfWork.cs" />
     <Compile Include="UnityOfWorks\IAdminUnityOfWork.cs" />
     <Compile Include="UnityOfWorks\ILogUnityOfWork.cs" />
+    <Compile Include="UnityOfWorks\IWorkRegistryUnityOfWork.cs" />
     <Compile Include="UnityOfWorks\LogUnityOfWork.cs" />
+    <Compile Include="UnityOfWorks\WorkRegistryUnityOfWork.cs" />
     <Compile Include="UnityOfWork\GlobalUnityOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

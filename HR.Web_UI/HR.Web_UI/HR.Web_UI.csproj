@@ -221,6 +221,9 @@
     <Content Include="Views\HR\DisplayListOfWorkers.cshtml" />
     <Content Include="Views\HR\CandidatList.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\HR\_TraningsHistory.cshtml" />
+    <Content Include="Views\HR\AddTraning.cshtml" />
+    <Content Include="Views\HR\DisplayBenefitsOfWorker.cshtml" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -246,12 +249,14 @@
     <Compile Include="Models\ViewModels\Account\CurrentUserModel.cs" />
     <Compile Include="Models\ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\AdditionalInformationViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\BenefitsViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\CollegesViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\ContactPersonViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\EmploymentsViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\EmploymentViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\PersonDisplayViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\PersonViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\TraningsViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\WorkersListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />

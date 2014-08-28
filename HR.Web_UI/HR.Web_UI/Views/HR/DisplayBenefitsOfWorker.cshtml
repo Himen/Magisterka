@@ -1,0 +1,50 @@
+﻿@using PagedList.Mvc;
+@model HR.Web_UI.Models.ViewModels.HR.BenefitsViewModel
+@using HR.Web_UI.Models.ViewModels.HR;
+@{
+    ViewBag.Title = "Benefits";
+}
+
+<h2 class="col-lg-offset-4 "><small>Tabela wynagrodzeń pracownika:</small> @Model.FirstName  @Model.Surname</h2>
+<h4 class="col-lg-offset-5"><small>Stanowisko:</small> @Model.Position  </h4>
+<h4 class="col-lg-offset-5 m_b_30"> <small>Dział:</small> @Model.Organization </h4>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Typ</th>
+            <th>Brutto</th>
+            <th>Emerytalne</th>
+            <th>Rentowe</th>
+            <th>Chorobowe</th>
+            <th>Zdrowotne</th>
+            <th>Podstawa opodatkowania</th>
+            <th>Zaliczka na PIT</th>
+            <th>Netto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Benefits)
+        {
+            <tr>
+                <td>@item.StartDate.Year  @item.StartDate.ToString("MMMM")</td>
+                <td>@item.BenefitType</td>
+                <td>@item.BenefitBrutto</td>
+                <td>@item.Retirement</td>
+                <td>@item.Disability</td>
+                <td>@item.Sikness</td>
+                <td>@item.Health</td>
+                <td>@item.Taxable</td>
+                <td>@item.AdvanceAt_PIT</td>
+                <td>@item.BenefitNetto</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model.Benefits, Page_No => Url.Action("DisplayBenefitsOfWorker",
+        new {id=ViewBag.PersonId, Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }))

@@ -63,6 +63,22 @@ namespace HR.Data.Generator
             new OrganiziationalUnit { Id="DPC", Name="Dział Programistów Cobol"}
         };
 
+        public List<Training> Tranings = new List<Training> 
+        {
+            new Training {Name = "Kurs języka angielskiego", Type=TrainingType.Certyfikat, Description="Odbycie kursu języka angielskiego. I zdobycie certyfikatu B2"}, 
+            new Training {Name = "Kurs języka niemieckiego", Type=TrainingType.Certyfikat, Description="Odbycie kursu języka niemieckiego. I zdobycie certyfikatu B2"},
+            new Training {Name = "Kurs języka rosyjskiego", Type=TrainingType.Certyfikat, Description="Odbycie kursu języka rosyjskiego. I zdobycie certyfikatu B2"},
+            new Training {Name = "Warsztaty z umiejętności miękich", Type=TrainingType.Warsztat, Description="Warsztaty polegające na zwiekszeniu swoich umiejętności wypowiadania się oraz zadawania dokładnych pytań"},
+            new Training {Name = "Kurs pierwszej pomocy", Type=TrainingType.Szkolenie, Description="Podstawowa umiejętność udzielania pierwszej pomocy"},
+            new Training {Name = "Programming in HTML5 with JavaScript and CSS3", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Obejmuje on podstawową znajomość HTML, CSS oraz JS."},
+            new Training {Name = "Developing ASP.NET MVC 4 Web Applications", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Osoba posiadająca ten certyfikat, posiada doświadczenie w programowaniu aplikacji przy pomocy ASP MVC 4."},
+            new Training {Name = "Developing Microsoft Azure and Web Services", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Informuje, że osoba posiada dużą wiedzę o serwisach REST-owych i SOAP-owych, zna również chmurę Azure."},
+            new Training {Name = "Querying Microsoft SQL Server 2012", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Osoba mająca go potrafi wykonywać skomplikowane zapytania w SQL."},
+            new Training {Name = "Administering Microsoft SQL Server 2012 Databases", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Mając ten certyfikat osoba potwierdza swoją wiedzę z administracji serwerami bazodanowymi firmy Microsoft."},
+            new Training {Name = "Implementing a Data Warehouse with Microsoft SQL Server 2012", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Zdanie go, potwierdza wiedzę o magazynach baz danych i wykorzystaniu ich."},
+            new Training {Name = "Microsoft Office Specialist (MOS) Expert", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Osoba posiada duże doświadczenie z korzystania z aplikacji biurowych z pakietu office."}
+        };
+
         public List<CollegesDictionary> Colleges = new List<CollegesDictionary>
         {
             new CollegesDictionary{Address="gen. Jana Henryka Dąbrowskiego 69",City="Częstochowa",Country ="Polska",Name="Politechnika Częstochowska"},
@@ -334,9 +350,21 @@ namespace HR.Data.Generator
             int range = (DateTime.Today - start).Days;
             return start.AddDays(r.Next(range));
         }
+
+        public DateTime RandomDay(DateTime d)
+        {
+            int range = (DateTime.Today - d).Days;
+            return d.AddDays(r.Next(range));
+        }
+
         public string RandomFirstName()
         {
              return Imiona[r.Next(0, Imiona.Count)];
+        }
+
+        public Training RandomTraining()
+        {
+            return Tranings[r.Next(0, Tranings.Count)];
         }
 
         public CompaniesDictionary RandomCompanyName()
@@ -536,6 +564,43 @@ namespace HR.Data.Generator
                     p1.Jobs.Add(j2);
                 }
 
+                //add trainings
+                p1.Trainings = new List<Training>();
+                date = RandomDay();
+                Training traning = RandomTraining();
+
+                Training t = new Training()
+                {
+                    DateOfPass = date,
+                    Description = traning.Description,
+                    Name = traning.Name,
+                    Type = traning.Type
+                };
+
+                Training t1 = null;
+                if (r.Next(0, 10) > 2)
+                {
+                    t1 = new Training
+                    {
+                        DateOfPass = date.AddYears(1),
+                        Description = traning.Description,
+                        Name = traning.Name,
+                        Type = traning.Type
+                    };
+                    p1.Trainings.Add(t1);
+                }
+
+                if (r.Next(0, 10) > 6 && t1 != null)
+                {
+                    Training t2 = new Training
+                    {
+                        DateOfPass = date.AddYears(2),
+                        Description = traning.Description,
+                        Name = traning.Name,
+                        Type = traning.Type
+                    };
+                    p1.Trainings.Add(t2);
+                }
 
                 p.Add(p1);
                 p1 = null;
@@ -559,6 +624,13 @@ namespace HR.Data.Generator
         {
             var bank = RandomBank();
             p.Manager = manager;
+            var date = RandomDay(new DateTime(2012,1,1));
+            DateTime? endDate = null;
+
+            if (r.Next(0, 10) > 6)
+            {
+                endDate = DateTime.Now;
+            }
 
             Employment e = new Employment
                             {
@@ -573,14 +645,14 @@ namespace HR.Data.Generator
                                 },
                                 PositionCode = stanowisko,
                                 OrganiziationalUnitCode = dział,
-                                StartDate = DateTime.Now,
-                                EndDate = DateTime.Now,
+                                StartDate = date,
+                                EndDate = endDate,
                                 Contract = new Contract()
                                 {
                                     ContractDimension = ContractDimensionType.CalyEtat,
                                     ContractType = ContractType.Umowa_o_prace,
-                                    EndDate = DateTime.Now.AddYears(2),
-                                    StartDate = DateTime.Now
+                                    EndDate = date.AddYears(2),
+                                    StartDate = date
                                 }
                             };
 
@@ -929,6 +1001,116 @@ namespace HR.Data.Generator
                 throw new Exception();
             }
         }
+
+        // do work registry
+        public List<WorkRegistry> GenerateWorkRegistry(Person p)
+        {
+            List<WorkRegistry> list = new List<WorkRegistry>();
+
+            DateTime start = p.Employment.StartDate;
+            DateTime? finish = p.Employment.EndDate;
+
+            finish = finish ?? DateTime.Now;
+
+            for (DateTime x = start; x <= finish; x = x.AddDays(1))
+            {
+                if (x.DayOfWeek != DayOfWeek.Sunday && x.DayOfWeek != DayOfWeek.Saturday)
+                {
+                    WorkRegistry wr = new WorkRegistry
+                    {
+                        Date = x.Date,
+                        DateIn = new TimeSpan(8, 0, 0),
+                        DateOut = new TimeSpan(16, 0, 0),
+                        Person = p
+                    };
+                    list.Add(wr);
+                }
+            }
+            p.WorkRegistrys = p.WorkRegistrys ?? new List<WorkRegistry>();
+            p.WorkRegistrys = list;
+
+            return list;
+        }
+
+#warning Podstawowa funkcjonalnosc bez brania pod uwage rodzaju umow
+        public List<BenefitsProfit> GenerateBenefitsProfit(Person p)
+        {
+            
+            List<BenefitsProfit> list = new List<BenefitsProfit>();
+
+            DateTime start = p.Employment.StartDate;
+            DateTime? finish = p.Employment.EndDate;
+
+            finish = finish ?? DateTime.Now;
+
+            if(p.Employment.Contract.MonthBenefit != null)
+            {
+                    for (DateTime x = start; x <= finish; x = x.AddMonths(1))
+                    {
+                            int numberOfDaysInMonth = DateTime.DaysInMonth(x.Year, x.Month);
+                            DateTime startOfMonth = new DateTime(x.Year, x.Month, 1);    
+                            DateTime endOfMonth = new DateTime(x.Year, x.Month, numberOfDaysInMonth);
+
+                            BenefitsProfit bp = new BenefitsProfit
+                            {
+                                BenefitBrutto = (double)p.Employment.Contract.MonthBenefit,
+                                Retirement = (double)(p.Employment.Contract.MonthBenefit* (9.76/100.00)), //9.76
+                                Disability = (double)(p.Employment.Contract.MonthBenefit* (1.50/100.00)),//1.5
+                                Sikness =  (double)(p.Employment.Contract.MonthBenefit* (2.45/100.00)),
+                                Health = (double)(p.Employment.Contract.MonthBenefit* (7.766/100.00)),
+                                Taxable = (double)(p.Employment.Contract.MonthBenefit* (80.75/100)),
+                                AdvanceAt_PIT =  (double)(p.Employment.Contract.MonthBenefit* (5.55/100)),
+                                BenefitNetto =  (double)(p.Employment.Contract.MonthBenefit* (72.974/100)),
+                                BenefitType = BenefitType.Pensja,
+                                EndDate = endOfMonth,
+                                StartDate = startOfMonth,
+                                Person = p
+                            };
+
+                            list.Add(bp);
+                
+                    }
+            }
+            else
+            {
+#warning Trzeba naliczanie godzinowe zrobic
+                for (DateTime x = start; x <= finish; x = x.AddMonths(1))
+                    {
+
+                        if (x.DayOfWeek != DayOfWeek.Sunday && x.DayOfWeek != DayOfWeek.Saturday)
+                        {
+                            int numberOfDaysInMonth = DateTime.DaysInMonth(x.Year, x.Month);
+                            DateTime startOfMonth = new DateTime(x.Year, x.Month, 1);
+                            DateTime endOfMonth = new DateTime(x.Year, x.Month, numberOfDaysInMonth);
+
+                            double totalBenefit = (double)p.Employment.Contract.BenefitPerHour * 8.00 * 30.00;
+
+                            BenefitsProfit bp = new BenefitsProfit
+                            {
+                                BenefitBrutto = totalBenefit,
+                                Retirement = (double)(totalBenefit * (9.76 / 100.00)), //9.76
+                                Disability = (double)(totalBenefit * (1.50 / 100.00)),//1.5
+                                Sikness = (double)(totalBenefit * (2.45 / 100.00)),
+                                Health = (double)(totalBenefit * (7.766 / 100.00)),
+                                Taxable = (double)(totalBenefit * (80.75 / 100)),
+                                AdvanceAt_PIT = (double)(totalBenefit * (5.55 / 100)),
+                                BenefitNetto = (double)(totalBenefit * (72.974 / 100)),
+                                BenefitType = BenefitType.Pensja,
+                                EndDate = endOfMonth,
+                                StartDate = startOfMonth,
+                                Person = p
+                            };
+
+                            list.Add(bp);
+                        }
+                    }
+            }
+            p.BenefitsProfits = p.BenefitsProfits ?? new List<BenefitsProfit>();
+            p.BenefitsProfits = list;
+
+            return list;
+        }
+
 
         public List<string> Domain = new List<string>
         {

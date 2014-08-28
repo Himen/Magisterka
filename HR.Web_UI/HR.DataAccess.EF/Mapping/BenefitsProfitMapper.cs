@@ -24,23 +24,23 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EndDate).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.BenefitBrutto).HasColumnType("decimal").HasPrecision(10,2).IsRequired();
+            this.Property(c => c.BenefitBrutto).HasColumnType("float").IsRequired();
 
-            this.Property(c => c.BenefitNetto).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+            this.Property(c => c.BenefitNetto).HasColumnType("float").IsRequired(); ;
 
             this.Property(c => c.BenefitType).HasColumnType("int").IsRequired();
 
-            this.Property(c => c.Retirement).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+            this.Property(c => c.Retirement).HasColumnType("float").IsRequired(); ;
 
-            this.Property(c => c.Disability).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+            this.Property(c => c.Disability).HasColumnType("float").IsRequired(); ;
 
-            this.Property(c => c.Sikness).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+            this.Property(c => c.Sikness).HasColumnType("float").IsRequired(); ;
 
-            this.Property(c => c.Health).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+            this.Property(c => c.Health).HasColumnType("float").IsRequired(); ;
 
-            this.Property(c => c.Taxable).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+            this.Property(c => c.Taxable).HasColumnType("float").IsRequired(); ;
 
-            this.Property(c => c.AdvanceAt_PIT).HasColumnType("decimal").HasPrecision(10, 2).IsRequired(); ;
+            this.Property(c => c.AdvanceAt_PIT).HasColumnType("float").IsRequired(); ;
 
             this.Property(c => c.PersonId).IsOptional();
 

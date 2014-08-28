@@ -13,29 +13,44 @@ using HR.Core.Models.DictionaryModels;
 using System.Web.Mvc;
 using HR.Web_UI.Models.ViewModels.HR;
 using HR.Core.Enums;
+using HR.Core.Models.RepoModels;
 
 
 namespace HR.Web_UI.Services
 {
     public class HRServices :IHRServices
     {
-        IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_U.UnityOfWork> personUnityOfWork;
+        IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, 
+            EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>, EF_U.UnityOfWork> personUnityOfWork;
+
         ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> logUnityOfWork;
+
         IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
             EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> dicUnityOfWork;
-        IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
 
-        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_U.UnityOfWork> _personUnityOfWork,
+        IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, 
+            EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>,
+            EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
+
+        IWorkRegistryUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<BenefitsProfit, long>, EF_R.Repository<WorkRegistry, long>,
+            EF_R.Repository<Vacation, long>, EF_R.Repository<Delegation, long>, EF_R.Repository<VacationDocument, Guid>,
+            EF_U.UnityOfWork> workRegistryUnityOfWork;
+
+        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>, EF_U.UnityOfWork> _personUnityOfWork,
                           ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> _logUnityOfWork,
                           IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
                           EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> _dicUnityOfWork,
                           IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>,
-                          EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork)
+                          EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork,
+                          IWorkRegistryUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<BenefitsProfit, long>, EF_R.Repository<WorkRegistry, long>,
+                          EF_R.Repository<Vacation, long>, EF_R.Repository<Delegation, long>, EF_R.Repository<VacationDocument, Guid>,
+                          EF_U.UnityOfWork> _workRegistryUnityOfWork)
         {
             this.personUnityOfWork = _personUnityOfWork;
             this.logUnityOfWork = _logUnityOfWork;
             this.dicUnityOfWork = _dicUnityOfWork;
             this.employmentUnityOfWork = _employmentUnityOfWork;
+            this.workRegistryUnityOfWork = _workRegistryUnityOfWork;
         }
 
         public bool CheckEmailExist(PersonViewModel pVM)
@@ -395,6 +410,7 @@ namespace HR.Web_UI.Services
 #warning Tutaj moga nulle wystepowac do zabezpieczenia pozniejszego
                 PersonDisplayViewModel pdVm = new PersonDisplayViewModel
                 {
+                    Id=p.Id,
                     AccountNumber = p.Employment.BankAccount.AccountNumber,
                     ApartmentNumber = p.ApartmentNumber,
                     accountType = p.Account.AccountType,
@@ -427,18 +443,17 @@ namespace HR.Web_UI.Services
                     Manager = p.Manager.FirstName + " "+p.Manager.Surname,
                     MonthBenefit = p.Employment.Contract.MonthBenefit,
                     NIP = p.NIP,
-                    Organization = p.Employment.OrganiziationalUnitCode,
+                    Organization = GetOrganizationName(p.Employment.OrganiziationalUnitCode),
                     PESEL = p.PESEL,
                     Phone = p.Phone,
                     Photo = p.Account.Photo,
-                    Position = p.Employment.PositionCode,  
+                    Position = GetPositionName( p.Employment.PositionCode), 
                     PostalCode = p.PostalCode,
                     StartDate = p.Employment.StartDate,
                     Street = p.Street,
                     Surname = p.Surname,
                     Twitter = p.AdditionalInformation.TwitterAccount
                 };
-#warning Pozycja do pobarania z slowników i dział
                 return pdVm;
 
             }
@@ -453,11 +468,37 @@ namespace HR.Web_UI.Services
             }
         }
 
-
-        public bool AddNewPersonCollage(CollegesViewModel cVm,Person p)
+        public string GetPositionName(string key)
         {
             try
             {
+                return dicUnityOfWork.PositionsRepo.Find(d => d.Id == key).FirstOrDefault().Name;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public string GetOrganizationName(string key)
+        {
+            try
+            {
+                return employmentUnityOfWork.OrganizationalUnitRepo.Find(d => d.Id == key).FirstOrDefault().Name;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public bool AddNewPersonCollage(CollegesViewModel cVm, long Id)
+        {
+            try
+            {
+                Person p = personUnityOfWork.PersonRepo.GetById(Id);
                 personUnityOfWork.PersonRepo.Attach(ref p);
 
                 College c = new College
@@ -473,7 +514,7 @@ namespace HR.Web_UI.Services
                     TitleOfResearch = cVm.TitleOfResearch
                 };
 
-                p.Colleges = new List<College>();
+                p.Colleges =p.Colleges ?? new List<College>();
                 p.Colleges.Add(c);
                 personUnityOfWork.CollageRepo.Add(c);
                 personUnityOfWork.PersonRepo.Update(p);
@@ -492,10 +533,11 @@ namespace HR.Web_UI.Services
             }
         }
 
-        public bool AddNewPersonJob(EmploymentsViewModel eVM, Person p)
+        public bool AddNewPersonJob(EmploymentsViewModel eVM, long Id)
         {
             try
             {
+                Person p = personUnityOfWork.PersonRepo.GetById(Id);
                 personUnityOfWork.PersonRepo.Attach(ref p);
 
                 Job j = new Job 
@@ -508,10 +550,45 @@ namespace HR.Web_UI.Services
                     StartDate=eVM.StartDate
                 };
 
-                p.Jobs = new List<Job>();
+                p.Jobs = p.Jobs ?? new List<Job>();
                 p.Jobs.Add(j);
 
                 personUnityOfWork.JobRepo.Add(j);
+                personUnityOfWork.PersonRepo.Update(p);
+                personUnityOfWork.UnityOfWork.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public bool AddNewPersonTrainings(TraningsViewModel tVM, long Id)
+        {
+            try
+            {
+                Person p = personUnityOfWork.PersonRepo.GetById(Id);
+                personUnityOfWork.PersonRepo.Attach(ref p);
+
+                Training t = new Training
+                {
+                    DateOfPass = tVM.DateOfPass,
+                    Description = tVM.Description,
+                    Name = tVM.Name,
+                    Person = p,
+                    Type = tVM.Type
+                };
+
+                p.Trainings = p.Trainings ?? new List<Training>();
+                p.Trainings.Add(t);
+                personUnityOfWork.TraningRepo.Add(t);
                 personUnityOfWork.PersonRepo.Update(p);
                 personUnityOfWork.UnityOfWork.SaveChanges();
 
@@ -557,6 +634,35 @@ namespace HR.Web_UI.Services
             finally
             {
                 //personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public IEnumerable<TraningsViewModel> GetAllTrainings(long id)
+        {
+            try
+            {
+                var x = (from p in personUnityOfWork.TraningRepo.GetAll()
+                        where p.PersonId == id
+                        select new TraningsViewModel 
+                        {
+                            Id=p.Id,
+                            DateOfPass = p.DateOfPass,
+                            Description = p.Description,
+                            Name = p.Name,
+                            Type = p.Type
+
+                        }).ToList();
+
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+
             }
         }
 
@@ -608,6 +714,38 @@ namespace HR.Web_UI.Services
             finally
             {
                 //personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public IEnumerable<BenefitsProfit> GetAllWorkerBenefits(long Id)
+        {
+            try
+            {
+                var x = workRegistryUnityOfWork.BenefitProfitsRepo.GetAll().Where(p => p.PersonId == Id);
+
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+ 
+            }
+        }
+
+        public Person GetWorker(long id)
+        {
+            try
+            {
+                return personUnityOfWork.PersonRepo.GetById(id);
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
 

@@ -15,6 +15,7 @@ namespace HR.Web_UI.Services.ServicesInferface
         bool CheckEmailExist(PersonViewModel pVM);
         Person CreateWorker(PersonViewModel pVM);
         bool DeleteWorker(long id);
+        Person GetWorker(long id);
 
         List<SelectListItem> BanksSelectListItem();
         List<SelectListItem> CollegesSelectListItem();
@@ -29,9 +30,11 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         PersonDisplayViewModel GetAllPersonData(long id);
 
-        bool AddNewPersonCollage(CollegesViewModel cVm, Person p);
+        bool AddNewPersonCollage(CollegesViewModel cVm, long Id);
 
-        bool AddNewPersonJob(EmploymentsViewModel eVM, Person p);
+        bool AddNewPersonJob(EmploymentsViewModel eVM, long Id);
+
+        bool AddNewPersonTrainings(TraningsViewModel tVM, long Id);
 
         IEnumerable<CollegesViewModel> GetAllColleges(long id);
 
@@ -41,9 +44,16 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         IEnumerable<Person> GetAllCandidats();
 
+        IEnumerable<TraningsViewModel> GetAllTrainings(long id);
+
         List<SelectListItem> GetAllManagersSelectList();
 
         bool EmployCandidate(long id, EmploymentType emp);
+
+        IEnumerable<BenefitsProfit> GetAllWorkerBenefits(long Id);
+
+        string GetPositionName(string key);
+        string GetOrganizationName(string key);
 
     }
 }

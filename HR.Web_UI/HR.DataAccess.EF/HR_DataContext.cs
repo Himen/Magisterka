@@ -181,12 +181,47 @@ namespace HR.DataAccess.EF
             }
 
             context.SaveChanges();
+            #endregion
+
+            #region Wypłaty
+
+            //Stworzenie wypłat dla pracowników
+            List<BenefitsProfit> benefits = null;
+            foreach (var item in context.Persons)
+            {
+                context.Persons.Attach(item);
+                context.Entry(item).State = EntityState.Modified;
+                benefits = g.GenerateBenefitsProfit(item);
+            }
+
+            foreach (var item in benefits)
+            {
+                context.BenefitsProfits.Add(item);
+            }
+
+            context.SaveChanges();
 
             #endregion
 
 
             #region Godziny pracy
-            
+
+            //Stworzenie czasów przyjscia i wyjscia
+            /*List<WorkRegistry> workRegistry = null;
+            foreach (var item in context.Persons)
+            {
+                context.Persons.Attach(item);
+                context.Entry(item).State = EntityState.Modified;
+                workRegistry = g.GenerateWorkRegistry(item);
+            }
+
+            foreach (var item in workRegistry)
+            {
+                context.WorkRegistrys.Add(item);
+            }
+
+            context.SaveChanges();*/
+
             #endregion
 
 

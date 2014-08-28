@@ -10,6 +10,8 @@
     <label class="col-lg-offset-4">@ViewBag.Message</label>
 </div><br />
 
+@Html.ActionLink("Lista wypłat pracownika", "DisplayBenefitsOfWorker", new { Id = Model.Id }, new { @class = "btn btn-info" }) 
+
 <div class="panel panel-primary col-lg-offset-1 col-lg-10">
     <div class="panel-heading">Dane pracownika</div>
     <div class="panel-body">
@@ -18,6 +20,8 @@
             <div class="panel-heading">Dane osobowe</div>
             <div class="panel-body">
                 <div class=" col-lg-offset-1 col-lg-5">
+
+                    @Html.HiddenFor(m=>m.Id)
 
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">@Html.LabelFor(p=>p.FirstName)</span>
@@ -261,7 +265,7 @@
             <div class="panel-body">
                 <div class="" id="working">
 
-                    @Html.Action("DisplayAllJobs")
+                    @Html.Action("DisplayAllJobs",Model.Id)
 
                 </div>
             </div>
@@ -272,7 +276,18 @@
             <div class="panel-body">
                 <div class="" id="learning">
 
-                    @Html.Action("DisplayAllCollages")
+                    @Html.Action("DisplayAllCollages", Model.Id)
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-title col-lg-offset-1 col-lg-10">
+            <div class="panel-heading">Certyfikaty i odbyte szkolenia</div>
+            <div class="panel-body">
+                <div class="" id="learning">
+
+                    @Html.Action("DisplayAllTranings", Model.Id)
 
                 </div>
             </div>

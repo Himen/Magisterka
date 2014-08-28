@@ -22,12 +22,12 @@ namespace HR.Core.Models
         /// <summary>
         /// Wyplata w brutto
         /// </summary>
-        public decimal BenefitBrutto { get; set; }
+        public double BenefitBrutto { get; set; }
 
         /// <summary>
         /// Wyplata w netto
         /// </summary>
-        public decimal BenefitNetto { get; set; }
+        public double BenefitNetto { get; set; }
 
         /// <summary>
         /// Rodzaj wynagrodzenia np.: Pensja, dodatek, wynagrodzenie.
@@ -37,32 +37,32 @@ namespace HR.Core.Models
         /// <summary>
         /// Skladka emerytalna
         /// </summary>
-        public decimal Retirement { get; set; }
+        public double Retirement { get; set; }
 
         /// <summary>
         /// Skladka rentowa
         /// </summary>
-        public decimal Disability { get; set; }
+        public double Disability { get; set; }
 
         /// <summary>
         /// Skladka chorobowa
         /// </summary>
-        public decimal Sikness { get; set; }
+        public double Sikness { get; set; }
 
         /// <summary>
         /// Skladka zdrowotna
         /// </summary>
-        public decimal Health { get; set; }
+        public double Health { get; set; }
 
         /// <summary>
         /// Podstawa opodatkowania
         /// </summary>
-        public decimal Taxable { get; set; }
+        public double Taxable { get; set; }
 
         /// <summary>
         /// Zaliczka na PIT
         /// </summary>
-        public decimal AdvanceAt_PIT { get; set; }
+        public double AdvanceAt_PIT { get; set; }
 
         /// <summary>
         /// Id Osoby do ktorej nalezy wynagrodzenie

@@ -9,6 +9,7 @@ namespace HR.Web_UI.Models.ViewModels.HR
 {
     public class PersonDisplayViewModel
     {
+        public long Id { get; set; }
 
         [Display(Name = "Zdjęcie")]
         public byte[] Photo { get; set; }

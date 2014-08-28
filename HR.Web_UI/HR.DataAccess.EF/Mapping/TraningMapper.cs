@@ -20,13 +20,13 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.Name).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+            this.Property(c => c.Name).HasColumnType("varchar").HasMaxLength(90).IsRequired();
 
             this.Property(c => c.Type).HasColumnType("int").IsRequired();
 
             this.Property(c => c.DateOfPass).HasColumnType("date").IsRequired();
 
-            this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+            this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(600).IsRequired();
 
             this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 

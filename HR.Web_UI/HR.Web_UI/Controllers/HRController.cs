@@ -199,13 +199,13 @@ namespace HR.Web_UI.Controllers
             return View(pdVM);
         }
 
-        public ActionResult AddCollage(CollegesViewModel cVM)
+        public ActionResult AddCollage(CollegesViewModel cVM, long Id)
         {
             if (ModelState.IsValid)
             {
-                Person p = Session["Person"] as Person;
+                //Person p = Session["Person"] as Person;
 
-                if(hrServices.AddNewPersonCollage(cVM,p))
+                if(hrServices.AddNewPersonCollage(cVM,Id))
                 {
                     ViewBag.Message = "Pomyślnie dodano miejsce edukacji";
                     return RedirectToAction("DisplaySuccessOfAddWorker");
@@ -224,13 +224,13 @@ namespace HR.Web_UI.Controllers
             return View();
         }
 
-        public ActionResult DisplayAllCollages()
+        public ActionResult DisplayAllCollages(long Id)
         {
-            Person p = Session["Person"] as Person;
+            //Person p = Session["Person"] as Person;
 
 #warning Uwaga trzba inna akcje dac zeby wyswietlac szczególy pracownika
 
-            var x=hrServices.GetAllColleges(p.Id);
+            var x = hrServices.GetAllColleges(Id);
 
             return PartialView("_LearnHistory",x);
         }
@@ -240,9 +240,9 @@ namespace HR.Web_UI.Controllers
 
             if (ModelState.IsValid)
             {
-                Person p = Session["Person"] as Person;
-
-                if (hrServices.AddNewPersonJob(cVM, p))
+                //Person p = Session["Person"] as Person;
+                
+                if (hrServices.AddNewPersonJob(cVM, cVM.Id))
                 {
                     ViewBag.Message = "Pomyślnie dodano miejsce zatrudnienia";
                     return RedirectToAction("DisplaySuccessOfAddWorker");
@@ -261,15 +261,47 @@ namespace HR.Web_UI.Controllers
             return View();
         }
 
-        public ActionResult DisplayAllJobs()
+        public ActionResult DisplayAllJobs(long Id)
         {
 #warning Uwaga trzba inna akcje dac zeby wyswietlac szczególy pracownika
-            Person p = Session["Person"] as Person;
+            //Person p = Session["Person"] as Person;
 
-            var x = hrServices.GetAllJobs(p.Id);
+            var x = hrServices.GetAllJobs(Id);
 
             return PartialView("_EmploymentHistory",x);
         }
+
+        public ActionResult DisplayAllTranings(long Id)
+        {
+            var x = hrServices.GetAllTrainings(Id);
+
+            return PartialView("_TraningsHistory",x);
+        }
+
+        public ActionResult AddTraning(TraningsViewModel tVM, long Id)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (hrServices.AddNewPersonTrainings(tVM, Id))
+                {
+                    ViewBag.Message = "Pomyślnie dodano szkolenie/certyfkiacje";
+                    return RedirectToAction("DisplaySuccessOfAddWorker");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nieznany blad");
+                    return View("DisplaySuccessOfAddWorker");
+                }
+            }
+            else
+            {
+
+            }
+
+            return View();
+        }
+
 
         public ActionResult DisplayListOfWorkers(string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No, string OrderType)
         {
@@ -512,6 +544,119 @@ namespace HR.Web_UI.Controllers
         {
             hrServices.EmployCandidate(id, EmploymentType.Zwolniony);
             return RedirectToAction("DisplayListOfWorkers");
+        }
+
+        public ActionResult DisplayBenefitsOfWorker(long id, string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No, string OrderType)
+        {
+            /*ViewBag.OrderType = OrderType ?? "desc";
+            ViewBag.CurrentSortOrder = Sorting_Order;
+            Sorting_Order = Sorting_Order ?? "FirstName";*/
+
+            if (Search_Data != null)
+            {
+                Page_No = 1;
+            }
+            else
+            {
+                Search_Data = Filter_Value;
+            }
+
+            ViewBag.FilterValue = Search_Data;
+
+            var benefitsList = hrServices.GetAllWorkerBenefits(id);
+
+            /*if (!String.IsNullOrEmpty(Search_Data))
+            {
+                benefitsList = benefitsList.Where(stu => stu.FirstName.ToUpper().Contains(Search_Data.ToUpper()) ||
+                                               stu.Surname.ToUpper().Contains(Search_Data.ToUpper()) ||
+                                               stu.FirstName.ToUpper().Contains(Search_Data.ToUpper()));///reszta
+            }*/
+            /*switch (Sorting_Order)
+            {
+                case "FirstName":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.FirstName);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.FirstName);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Surname":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Surname);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Surname);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Date":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.DateOfBirth);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.DateOfBirth);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Employment":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Employment.EmploymentType);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Employment.EmploymentType);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                case "Position":
+                    if (ViewBag.OrderType == "desc")
+                    {
+                        workers = workers.OrderByDescending(stu => stu.Employment.PositionCode);
+                        ViewBag.OrderType = "asc";
+                    }
+                    else
+                    {
+                        workers = workers.OrderBy(stu => stu.Employment.PositionCode);
+                        ViewBag.OrderType = "desc";
+                    }
+                    break;
+                //cd
+                default:
+                    workers = workers.OrderBy(stu => stu.FirstName);
+                    break;
+            }*/
+
+            int Size_Of_Page = 12;
+            int No_Of_Page = (Page_No ?? 1);
+            
+            BenefitsViewModel bVM = new BenefitsViewModel();
+            bVM.Benefits = benefitsList.OrderByDescending(p => p.StartDate).ThenByDescending(n => n.StartDate.Month).ToPagedList(No_Of_Page, Size_Of_Page);
+            bVM.PageCount = (int)Math.Ceiling((double)benefitsList.Count() / Size_Of_Page);
+            bVM.PageNumber = Page_No ?? 1;
+
+            var x = hrServices.GetWorker(id);
+
+            bVM.PersonId = id;
+            bVM.FirstName = x.FirstName;
+            bVM.Surname = x.Surname;
+            bVM.Position = hrServices.GetPositionName(x.Employment.PositionCode);
+            bVM.Organization =hrServices.GetOrganizationName(x.Employment.OrganiziationalUnitCode);
+            ViewBag.PersonId = id;
+
+            return View(bVM);
         }
 
     }

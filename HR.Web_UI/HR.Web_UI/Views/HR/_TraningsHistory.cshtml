@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<HR.Web_UI.Models.ViewModels.HR.TraningsViewModel>
+@using HR.Web_UI.Models.ViewModels.HR;
+@{
+    ViewBag.Title = "_LearnHistory";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Typ</th>
+            <th>Data zdania</th>
+            <th>Opis</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Type</td>
+                <td>@item.DateOfPass</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<button class="btn btn-primary" data-toggle="modal" data-target="traningsModal">Dodaj nowa uczelnie</button>
+
+<div id="traModal" class="modal fade traningsModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Dodaj szkolenie/certyfikacje</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("AddTraning", new TraningsViewModel())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#traModal').modal('show');
+</script>

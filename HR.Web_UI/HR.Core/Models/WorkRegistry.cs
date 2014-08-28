@@ -17,12 +17,12 @@ namespace HR.Core.Models
         /// <summary>
         /// Data wejscia do firmy
         /// </summary>
-        public DateTime? DateIn { get; set; }
+        public TimeSpan? DateIn { get; set; }
 
         /// <summary>
         /// Data wyjscia z firmy
         /// </summary>
-        public DateTime? DateOut { get; set; }
+        public TimeSpan? DateOut { get; set; }
 
         /// <summary>
         /// Id osoby ktora wszedla do firmy
