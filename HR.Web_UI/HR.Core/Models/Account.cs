@@ -39,11 +39,11 @@ namespace HR.Core.Models
         /// <summary>
         /// Osoba powiazana z kontem
         /// </summary>
-        public Person Person { get; set; }
+        public virtual Person Person { get; set; }
 
         /// <summary>
         /// Logi dla konta
         /// </summary>
-        public virtual List<AccountLog> AccountLogs { get; set; }
+        public virtual IList<AccountLog> AccountLogs { get; set; }
     }
 }

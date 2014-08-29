@@ -10,7 +10,7 @@ namespace HR.Core.Models
         /// <summary>
         /// Nazwa jednostki organizayjnej
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Id szefa jednostki organizacyjnej

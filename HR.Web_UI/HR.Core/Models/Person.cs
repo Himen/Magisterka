@@ -14,72 +14,72 @@ namespace HR.Core.Models
         /// <summary>
         /// Imie pracownika
         /// </summary>
-        public string FirstName { get; set; }
+        public virtual string FirstName { get; set; }
 
         /// <summary>
         /// Nazwisko pracownika
         /// </summary>
-        public string Surname { get; set; }
+        public virtual string Surname { get; set; }
 
         /// <summary>
         /// Data urodznia
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        public virtual DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Miasto
         /// </summary>
-        public string City { get; set; }
+        public virtual string City { get; set; }
 
         /// <summary>
         /// Kod pocztowy
         /// </summary>
-        public string PostalCode { get; set; }
+        public virtual string PostalCode { get; set; }
 
         /// <summary>
         /// Ulica
         /// </summary>
-        public string Street { get; set; }
+        public virtual string Street { get; set; }
 
         /// <summary>
         /// Numer budynku
         /// </summary>
-        public int BuildingNumber { get; set; }
+        public virtual int BuildingNumber { get; set; }
 
         /// <summary>
         /// Numer mieszkania
         /// </summary>
-        public int ApartmentNumber { get; set; }
+        public virtual int ApartmentNumber { get; set; }
 
         /// <summary>
         /// Telefon
         /// </summary>
-        public long Phone { get; set; }
+        public virtual long Phone { get; set; }
 
         /// <summary>
         /// Email
         /// </summary>
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
         /// <summary>
         /// NIP
         /// </summary>
-        public long NIP { get; set; }
+        public virtual long NIP { get; set; }
 
         /// <summary>
         /// Numer dowodu
         /// </summary>
-        public string IDCard { get; set; }
+        public virtual string IDCard { get; set; }
 
         /// <summary>
         /// Numer pesel
         /// </summary>
-        public string PESEL { get; set; }
+        public virtual string PESEL { get; set; }
 
         /// <summary>
         /// Id managera tej osoby
         /// </summary>
-        public long? ManagerId { get; set; }
+        public virtual long? ManagerId { get; set; }
 
         /// <summary>
         /// Manager tej osoby

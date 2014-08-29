@@ -26,7 +26,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Password).HasColumnType("varchar").HasMaxLength(20).IsRequired();
             
-            this.Property(c => c.AccountType).HasColumnType("smallint").IsRequired();
+            this.Property(c => c.AccountType).HasColumnType("int").IsRequired();
 
             this.Property(c=>c.Photo).HasColumnType("image").IsOptional();
 

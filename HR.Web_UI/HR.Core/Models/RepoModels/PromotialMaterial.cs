@@ -11,17 +11,17 @@ namespace HR.Core.Models.RepoModels
         /// <summary>
         /// Tytul informacji
         /// </summary>
-        public string Title { get; set; }
+        public virtual string Title { get; set; }
 
         /// <summary>
         /// Informacja
         /// </summary>
-        public string Content { get; set; }
+        public virtual string Content { get; set; }
 
         /// <summary>
         /// Id osoby ktora dodala post
         /// </summary>
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba ktora dodala post

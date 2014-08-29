@@ -12,27 +12,27 @@ namespace HR.Core.Models
         /// <summary>
         /// Id pozycji ktora się obejmuje
         /// </summary>
-        public string PositionCode { get; set; }
+        public virtual string PositionCode { get; set; }
 
         /// <summary>
         /// Id jednostki organizacyjnej do ktorej jest sie przypisanym
         /// </summary>
-        public string OrganiziationalUnitCode { get; set; }
+        public virtual string OrganiziationalUnitCode { get; set; }
 
         /// <summary>
         /// Rodzaj zatrudnienia. Np. kandydat, zwolniony
         /// </summary>
-        public EmploymentType EmploymentType { get; set; }
+        public virtual EmploymentType EmploymentType { get; set; }
 
         /// <summary>
         /// Data zatrudnienia
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public virtual DateTime StartDate { get; set; }
 
         /// <summary>
         /// Data zwolnienia
         /// </summary>
-        public DateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Id pracownika

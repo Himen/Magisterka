@@ -12,62 +12,62 @@ namespace HR.Core.Models
         /// <summary>
         /// Za jaki miesiac zostala przyznana pewnsja pracownikowi. Poczatek miesiaca
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public virtual DateTime StartDate { get; set; }
 
         /// <summary>
         /// Za jaki miesiac zostala przyznana pewnsja pracownikowi. Koniec miesiaca
         /// </summary>
-        public DateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Wyplata w brutto
         /// </summary>
-        public double BenefitBrutto { get; set; }
+        public virtual double BenefitBrutto { get; set; }
 
         /// <summary>
         /// Wyplata w netto
         /// </summary>
-        public double BenefitNetto { get; set; }
+        public virtual double BenefitNetto { get; set; }
 
         /// <summary>
         /// Rodzaj wynagrodzenia np.: Pensja, dodatek, wynagrodzenie.
         /// </summary>
-        public BenefitType BenefitType { get; set; }
+        public virtual BenefitType BenefitType { get; set; }
 
         /// <summary>
         /// Skladka emerytalna
         /// </summary>
-        public double Retirement { get; set; }
+        public virtual double Retirement { get; set; }
 
         /// <summary>
         /// Skladka rentowa
         /// </summary>
-        public double Disability { get; set; }
+        public virtual double Disability { get; set; }
 
         /// <summary>
         /// Skladka chorobowa
         /// </summary>
-        public double Sikness { get; set; }
+        public virtual double Sikness { get; set; }
 
         /// <summary>
         /// Skladka zdrowotna
         /// </summary>
-        public double Health { get; set; }
+        public virtual double Health { get; set; }
 
         /// <summary>
         /// Podstawa opodatkowania
         /// </summary>
-        public double Taxable { get; set; }
+        public virtual double Taxable { get; set; }
 
         /// <summary>
         /// Zaliczka na PIT
         /// </summary>
-        public double AdvanceAt_PIT { get; set; }
+        public virtual double AdvanceAt_PIT { get; set; }
 
         /// <summary>
         /// Id Osoby do ktorej nalezy wynagrodzenie
         /// </summary>
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba do ktorej nalezy wynagrodzenie

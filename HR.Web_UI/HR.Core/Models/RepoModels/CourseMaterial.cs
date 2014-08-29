@@ -12,32 +12,32 @@ namespace HR.Core.Models.RepoModels
         /// <summary>
         /// Nazwa szkolenia 
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Typ szkolenia //np. Programowanie C#
         /// </summary>
-        public CourseType CourseType { get; set; } 
+        public virtual CourseType CourseType { get; set; } 
 
         /// <summary>
         /// Nazwa dokumentu dodanego do szkolenia
         /// </summary>
-        public string DocumentName { get; set; }
+        public virtual string DocumentName { get; set; }
 
         /// <summary>
         /// Dokument
         /// </summary>
-        public byte[] Document { get; set; }
+        public virtual byte[] Document { get; set; }
 
         /// <summary>
         /// Opis szkolenia, co i jak
         /// </summary>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Id osoby dodajacej material szkoleniowy
         /// </summary>
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba dodajaca material szkoleniowy

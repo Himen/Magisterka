@@ -12,22 +12,22 @@ namespace HR.Core.Models
         /// <summary>
         /// Data przyjscia do pracy. Jest po to zeby wykluczyc jedno wejscie i wyjscie w innych dniach
         /// </summary>
-        public DateTime Date { get; set; }
+        public virtual DateTime Date { get; set; }
 
         /// <summary>
         /// Data wejscia do firmy
         /// </summary>
-        public TimeSpan? DateIn { get; set; }
+        public virtual TimeSpan? DateIn { get; set; }
 
         /// <summary>
         /// Data wyjscia z firmy
         /// </summary>
-        public TimeSpan? DateOut { get; set; }
+        public virtual TimeSpan? DateOut { get; set; }
 
         /// <summary>
         /// Id osoby ktora wszedla do firmy
         /// </summary>
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba ktora weszla do firmy

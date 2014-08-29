@@ -12,22 +12,22 @@ namespace HR.Core.Models
         /// <summary>
         /// Nazwa delegacji, konrefencji na ktorej byl pracownik
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Szczegolowy opis delegacji
         /// </summary>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Data rozpoczecia delegacji
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public virtual DateTime StartDate { get; set; }
 
         /// <summary>
         /// Data zakonczenia delegacji
         /// </summary>
-        public DateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Id osoby ktora jest w delegacji

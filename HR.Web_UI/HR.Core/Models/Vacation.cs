@@ -14,33 +14,33 @@ namespace HR.Core.Models
         /// <summary>
         /// Początek urlopu
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public virtual DateTime StartDate { get; set; }
 
         /// <summary>
         /// Koniec urlopu
         /// </summary>
-        public DateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Opisuje powod: urlop, zwolnienie
         /// </summary>
-        public VacationType VacationType { get; set; }
+        public virtual VacationType VacationType { get; set; }
 
         /// <summary>
         /// Pracodawca musi zatwierdzic urlop pracownika
         /// </summary>
-        public byte VacationAcceptation { get; set; }
+        public virtual byte VacationAcceptation { get; set; }
 
         
         /// <summary>
         /// Krotki opis 
         /// </summary>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Id Osoby ktora poszla na urlop
         /// </summary>
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba ktora poszla na urlop

@@ -9,18 +9,20 @@ namespace HR.DataAccess.NH.Mappings
         {
             Table("Accounts");
             Id(c => c.Id).GeneratedBy.Identity().CustomSqlType("bigint");
-            Map(c => c.DataState).CustomSqlType("tinyint");
-            Map(c => c.CreateDate).CustomSqlType("date");
+            Map(c => c.DataState).CustomSqlType("tinyint").Not.Nullable();
+            Map(c => c.CreateDate).CustomSqlType("date").Not.Nullable();
             Map(c => c.EditDate).CustomSqlType("date").Nullable();
             Map(c => c.UserName).CustomSqlType("varchar").Length(80).Unique();
-            Map(c => c.Password).CustomSqlType("varchar").Length(20);
-            Map(c => c.AccountType).CustomType<int>().CustomSqlType("smallint");
+            Map(c => c.Password).CustomSqlType("varchar").Length(20).Not.Nullable();
+            Map(c => c.AccountType).CustomType<int>().CustomSqlType("smallint").Not.Nullable();
             Map(c=>c.Photo).CustomSqlType("image").Nullable();
 
-            HasMany<AccountLog>(c => c.AccountLogs).Cascade.AllDeleteOrphan();
+            //dowiedziec jak sie klucz mapuje
+            //HasMany(c => c.AccountLogs).KeyColumn("AccountId").Cascade.Delete();
 
+            
             //powinno wystarczyc
-            References(c=>c.Person)
+            References(c => c.Person);
         }
     }
 }

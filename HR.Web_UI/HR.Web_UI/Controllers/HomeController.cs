@@ -52,6 +52,8 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult Index()
         {
+            HR.DataAccess.NH.NHContext.OpenSession();
+
             using (var db = new HR_DataContext())
             {
                 var x = db.Accounts.Count();

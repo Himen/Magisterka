@@ -9,12 +9,12 @@ namespace HR.Core.Models.RepoModels
 {
     public class Document : BaseEntity<Guid>
     {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public byte[] Content { get; set; }
-        public string Description { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Type { get; set; }
+        public virtual byte[] Content { get; set; }
+        public virtual string Description { get; set; }
 
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
         public virtual Person Person { get; set; }
     }
 }

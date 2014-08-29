@@ -12,27 +12,27 @@ namespace HR.Core.Models
         /// <summary>
         /// Nazwa szkolenia lub certyfikatu
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Typ szkolenia. Np. certyfikat
         /// </summary>
-        public TrainingType Type { get; set; }
+        public virtual TrainingType Type { get; set; }
 
         /// <summary>
         /// Data zdania lub odbycia szkolenia
         /// </summary>
-        public DateTime DateOfPass { get; set; }
+        public virtual DateTime DateOfPass { get; set; }
 
         /// <summary>
         /// Opis szkolenia/certyfikatu
         /// </summary>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Id osoby odbywajacej szkolenie
         /// </summary>
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba odbywajaca szkolenie

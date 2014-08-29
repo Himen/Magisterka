@@ -11,11 +11,11 @@ namespace HR.Core.Models.DictionaryModels
         /// <summary>
         /// Nazwa banku
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Adres banku
         /// </summary>
-        public string Address { get; set; }
+        public virtual string Address { get; set; }
     }
 }

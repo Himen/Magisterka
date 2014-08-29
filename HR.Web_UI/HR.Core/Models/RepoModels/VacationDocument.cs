@@ -8,22 +8,22 @@ namespace HR.Core.Models.RepoModels
         /// <summary>
         /// Nazwa dokumentu powiazanego z danym urlopem
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Typ np: Zwolnienie lekarskie, L4
         /// </summary>
-        public string Type { get; set; }
+        public virtual string Type { get; set; }
 
         /// <summary>
         /// Plik 
         /// </summary>
-        public byte[] Content { get; set; }
+        public virtual byte[] Content { get; set; }
 
         /// <summary>
         /// Krotki opis
         /// </summary>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         public virtual Vacation Vacation { get; set; }
     }

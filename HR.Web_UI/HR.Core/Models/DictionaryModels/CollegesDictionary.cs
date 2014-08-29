@@ -11,21 +11,21 @@ namespace HR.Core.Models.DictionaryModels
         /// <summary>
         /// Nazwa uczelni
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Panstwo w ktorej sie znajduje
         /// </summary>
-        public string Country { get; set; }
+        public virtual string Country { get; set; }
 
         /// <summary>
         /// Miasto
         /// </summary>
-        public string City { get; set; }
+        public virtual string City { get; set; }
 
         /// <summary>
         /// Adress tej uczelni
         /// </summary>
-        public string Address { get; set; }
+        public virtual string Address { get; set; }
     }
 }

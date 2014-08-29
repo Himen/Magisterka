@@ -14,47 +14,47 @@ namespace HR.Core.Models
         /// <summary>
         /// Nazwa uczelni. Bedzie pobierrana z slownika DIC.Colleges
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Kierunek na ktorym studiowal pracownik
         /// </summary>
-        public string FieldOfStudy { get; set; }
+        public virtual string FieldOfStudy { get; set; }
 
         /// <summary>
         /// Specializacja
         /// </summary>
-        public string Specialization { get; set; }
+        public virtual string Specialization { get; set; }
 
         /// <summary>
         /// Tytul akademicki jaki zostal zdobyty
         /// </summary>
-        public AcademicTitleType AcademicTitle { get; set; }
+        public virtual AcademicTitleType AcademicTitle { get; set; }
 
         /// <summary>
         /// Tytul pracy dyplomowej
         /// </summary>
-        public string TitleOfResearch { get; set; }
+        public virtual string TitleOfResearch { get; set; }
 
         /// <summary>
         /// Czy studiowanie zostalo zakonczone czy jest w trakcie
         /// </summary>
-        public CollageProgressType Progres { get; set; }
+        public virtual CollageProgressType Progres { get; set; }
 
         /// <summary>
         /// Data rozpoczecia
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public virtual DateTime StartDate { get; set; }
 
         /// <summary>
         /// Data ukonczenia
         /// </summary>
-        public DateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Id osoby studiujacej
         /// </summary>
-        public long PersonId { get; set; }
+        public virtual long PersonId { get; set; }
 
         /// <summary>
         /// Osoba studiujaca

@@ -11,21 +11,21 @@ namespace HR.Core.Models.DictionaryModels
         /// <summary>
         /// Nazwa firmy
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Panstwo w ktorej sie znajduje
         /// </summary>
-        public string Country { get; set; }
+        public virtual string Country { get; set; }
 
         /// <summary>
         /// Adress firmy
         /// </summary>
-        public string Address { get; set; }
+        public virtual string Address { get; set; }
 
         /// <summary>
         /// Krotki opis o niej
         /// </summary>
-        public string About { get; set; }
+        public virtual string About { get; set; }
     }
 }

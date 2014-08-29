@@ -10,6 +10,6 @@ namespace HR.Core.Models.DictionaryModels
         /// <summary>
         /// Nazwa obejnowanej pozycji
         /// </summary>
-        public string Name { get; set; } // nie zmieniac na enum, zeby latwo mozna bylo dodawac pozycje
+        public virtual string Name { get; set; } // nie zmieniac na enum, zeby latwo mozna bylo dodawac pozycje
     }
 }

@@ -8,7 +8,8 @@ namespace HR.DataAccess.NH.Mappings
         public AccountLogMapper()
         {
             Table("AccountLogs");
-            Schema("LOG");
+            //Schema("LOG");
+
             Id(c => c.Id).GeneratedBy.Identity().CustomSqlType("bigint");
             Map(c => c.DataState).CustomSqlType("tinyint");
             Map(c => c.CreateDate).CustomSqlType("date");
@@ -20,7 +21,7 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.EndDate).CustomSqlType("date");
 
             //nhforge.org/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-3-mapping-relations.aspx
-            //References(c=>c.Account).
+            References(c => c.Account);
         }
     }
 }

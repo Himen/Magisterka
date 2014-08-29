@@ -12,32 +12,32 @@ namespace HR.Core.Models
         /// <summary>
         /// Data rozpoczecia kontraktu
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public virtual DateTime StartDate { get; set; }
 
         /// <summary>
         /// Data zakonczenia kontraktu
         /// </summary>
-        public DateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Rodzaj kontraktu
         /// </summary>
-        public ContractType ContractType { get; set; }
+        public virtual ContractType ContractType { get; set; }
 
         /// <summary>
         /// Wymiar kontraktu
         /// </summary>
-        public ContractDimensionType ContractDimension { get; set; }
+        public virtual ContractDimensionType ContractDimension { get; set; }
 
         /// <summary>
         /// Wynagrodzenie miesieczne
         /// </summary>
-        public double? MonthBenefit { get; set; }
+        public virtual double? MonthBenefit { get; set; }
 
         /// <summary>
         /// Wynagrodzenie na godzine, jezeli nie wystepuje wynagrodzenie miesieczne
         /// </summary>
-        public double? BenefitPerHour { get; set; }
+        public virtual double? BenefitPerHour { get; set; }
 
         public virtual Employment Employment { get; set; }
     }

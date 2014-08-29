@@ -11,27 +11,27 @@ namespace HR.Core.Models
         /// <summary>
         /// Link do konta na facebook
         /// </summary>
-        public string FacebookAccount { get; set; }
+        public virtual string FacebookAccount { get; set; }
 
         /// <summary>
         /// Link do konta na google plus
         /// </summary>
-        public string GoogleAccount { get; set; }
+        public virtual string GoogleAccount { get; set; }
 
         /// <summary>
         /// link do tweetera
         /// </summary>
-        public string TwitterAccount { get; set; }
+        public virtual string TwitterAccount { get; set; }
 
         /// <summary>
         /// Link do profilu na goldenline
         /// </summary>
-        public string GoldenLineAccount { get; set; }
+        public virtual string GoldenLineAccount { get; set; }
 
         /// <summary>
         /// Link do Linkin
         /// </summary>
-        public string LinkInAccount { get; set; }
+        public virtual string LinkInAccount { get; set; }
 
         /// <summary>
         /// Id osoby
