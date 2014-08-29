@@ -1,4 +1,4 @@
-﻿#define EF 
+﻿#define  NH
 
 using HR.Core.BasicContract;
 using HR.Core.Models;
@@ -30,10 +30,10 @@ namespace HR.Web_UI.Controllers
         
 
 #if NH
-        IAdminUnityOfWork<NH_R.Repository<Account, long>, NH_U.UnityOfWork> admUnityOfWork;
+        IAdminUnityOfWork<NH_R.Repository<Account, long>, NH_R.Repository<Person, long>, NH_U.UnityOfWork> admUnityOfWork;
 
         // GET: Home
-        public HomeController(IAdminUnityOfWork<NH_R.Repository<Account, long>, NH_U.UnityOfWork> _admUnityOfWork)
+        public HomeController(IAdminUnityOfWork<NH_R.Repository<Account, long>, NH_R.Repository<Person, long>, NH_U.UnityOfWork> _admUnityOfWork)
         {
             admUnityOfWork = _admUnityOfWork;
         }

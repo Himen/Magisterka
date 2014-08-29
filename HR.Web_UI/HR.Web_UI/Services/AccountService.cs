@@ -1,4 +1,6 @@
-﻿using HR.Core.Models;
+﻿#define EF
+
+using HR.Core.Models;
 using HR.DataAccess.GLOBAL.UnityOfWorks;
 using HR.Web_UI.Services.ServicesInferface;
 using System;
@@ -16,6 +18,17 @@ namespace HR.Web_UI.Services
 {
     public class AccountService : IAccountService
     {
+#if NH
+        IAdminUnityOfWork<NH_R.Repository<Account, long>, NH_R.Repository<Person, long>, NH_U.UnityOfWork> admUnityOfWork;
+        ILogUnityOfWork<NH_R.Repository<AccountLog, long>, NH_R.Repository<Account, long>, NH_U.UnityOfWork> logUnityOfWork;
+
+        public AccountService(IAdminUnityOfWork<NH_R.Repository<Account, long>, NH_R.Repository<Person, long>, NH_U.UnityOfWork> _admUnityOfWork,
+                              ILogUnityOfWork<NH_R.Repository<AccountLog, long>, NH_R.Repository<Account, long>, NH_U.UnityOfWork> _logUnityOfWork)
+        {
+            this.admUnityOfWork = _admUnityOfWork;
+            this.logUnityOfWork = _logUnityOfWork;
+        }
+#elif EF
         IAdminUnityOfWork<EF_R.Repository<Account, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> admUnityOfWork;
         ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> logUnityOfWork;
 
@@ -25,6 +38,10 @@ namespace HR.Web_UI.Services
             this.admUnityOfWork = _admUnityOfWork;
             this.logUnityOfWork = _logUnityOfWork;
         }
+#else
+
+#endif
+
 
         public Account GetUserByName(string name)
         {

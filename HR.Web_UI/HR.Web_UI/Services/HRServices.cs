@@ -1,4 +1,6 @@
-﻿using HR.DataAccess.GLOBAL.UnityOfWorks;
+﻿#define EF
+
+using HR.DataAccess.GLOBAL.UnityOfWorks;
 using HR.Web_UI.Services.ServicesInferface;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,42 @@ namespace HR.Web_UI.Services
 {
     public class HRServices :IHRServices
     {
+
+#if NH
+        IHRUnityOfWork<NH_R.Repository<Person, long>, NH_R.Repository<Account, long>, NH_R.Repository<AdditionalInformation, long>, 
+            NH_R.Repository<College, long>, NH_R.Repository<Job, long>, NH_R.Repository<Training, long>, NH_U.UnityOfWork> personUnityOfWork;
+
+        ILogUnityOfWork<NH_R.Repository<AccountLog, long>, NH_R.Repository<Account, long>, NH_U.UnityOfWork> logUnityOfWork;
+
+        IDicUnityOfWork<NH_R.Repository<BankDictionary, long>, NH_R.Repository<CollegesDictionary, long>,
+            NH_R.Repository<CompaniesDictionary, long>, NH_R.Repository<Position, long>, NH_U.UnityOfWork> dicUnityOfWork;
+
+        IEmploymentUnityOfWork<NH_R.Repository<OrganiziationalUnit, long>, NH_R.Repository<BankAccount, long>, 
+            NH_R.Repository<Employment, long>, NH_R.Repository<Contract, long>, NH_R.Repository<ContactPerson, long>,
+            NH_R.Repository<Person, long>, NH_U.UnityOfWork> employmentUnityOfWork;
+
+        IWorkRegistryUnityOfWork<NH_R.Repository<Person, long>, NH_R.Repository<BenefitsProfit, long>, NH_R.Repository<WorkRegistry, long>,
+            NH_R.Repository<Vacation, long>, NH_R.Repository<Delegation, long>, NH_R.Repository<VacationDocument, Guid>,
+            NH_U.UnityOfWork> workRegistryUnityOfWork;
+
+        public HRServices(IHRUnityOfWork<NH_R.Repository<Person, long>, NH_R.Repository<Account, long>, NH_R.Repository<AdditionalInformation, long>, NH_R.Repository<College, long>, NH_R.Repository<Job, long>, NH_R.Repository<Training, long>, NH_U.UnityOfWork> _personUnityOfWork,
+                          ILogUnityOfWork<NH_R.Repository<AccountLog, long>, NH_R.Repository<Account, long>, NH_U.UnityOfWork> _logUnityOfWork,
+                          IDicUnityOfWork<NH_R.Repository<BankDictionary, long>, NH_R.Repository<CollegesDictionary, long>,
+                          NH_R.Repository<CompaniesDictionary, long>, NH_R.Repository<Position, long>, NH_U.UnityOfWork> _dicUnityOfWork,
+                          IEmploymentUnityOfWork<NH_R.Repository<OrganiziationalUnit, long>, NH_R.Repository<BankAccount, long>,
+                          NH_R.Repository<Employment, long>, NH_R.Repository<Contract, long>, NH_R.Repository<ContactPerson, long>, NH_R.Repository<Person, long>, NH_U.UnityOfWork> _employmentUnityOfWork,
+                          IWorkRegistryUnityOfWork<NH_R.Repository<Person, long>, NH_R.Repository<BenefitsProfit, long>, NH_R.Repository<WorkRegistry, long>,
+                          NH_R.Repository<Vacation, long>, NH_R.Repository<Delegation, long>, NH_R.Repository<VacationDocument, Guid>,
+                          NH_U.UnityOfWork> _workRegistryUnityOfWork)
+        {
+            this.personUnityOfWork = _personUnityOfWork;
+            this.logUnityOfWork = _logUnityOfWork;
+            this.dicUnityOfWork = _dicUnityOfWork;
+            this.employmentUnityOfWork = _employmentUnityOfWork;
+            this.workRegistryUnityOfWork = _workRegistryUnityOfWork;
+        }
+
+#elif EF
         IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, 
             EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>, EF_U.UnityOfWork> personUnityOfWork;
 
@@ -52,6 +90,9 @@ namespace HR.Web_UI.Services
             this.employmentUnityOfWork = _employmentUnityOfWork;
             this.workRegistryUnityOfWork = _workRegistryUnityOfWork;
         }
+#else
+
+#endif
 
         public bool CheckEmailExist(PersonViewModel pVM)
         {

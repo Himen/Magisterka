@@ -1,4 +1,6 @@
-﻿using HR.Core.Models;
+﻿#define EF
+
+using HR.Core.Models;
 using HR.DataAccess.GLOBAL.UnityOfWorks;
 using HR.Web_UI.Services.ServicesInferface;
 using System;
@@ -14,12 +16,32 @@ namespace HR.Web_UI.Services
 {
     public class ManagerService : IManagerService
     {
-        IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
+#if NH
+        IEmploymentUnityOfWork<NH_R.Repository<OrganiziationalUnit, long>, NH_R.Repository<BankAccount, long>, 
+            NH_R.Repository<Employment, long>, NH_R.Repository<Contract, long>, NH_R.Repository<ContactPerson, long>, 
+            NH_R.Repository<Person, long>, NH_U.UnityOfWork> employmentUnityOfWork;
 
-        public ManagerService(IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork)
+        public ManagerService(IEmploymentUnityOfWork<NH_R.Repository<OrganiziationalUnit, long>, 
+            NH_R.Repository<BankAccount, long>, NH_R.Repository<Employment, long>, NH_R.Repository<Contract, long>, 
+            NH_R.Repository<ContactPerson, long>, NH_R.Repository<Person, long>, NH_U.UnityOfWork> _employmentUnityOfWork)
         {
             this.employmentUnityOfWork = _employmentUnityOfWork;
         }
+
+#elif EF
+        IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, EF_R.Repository<BankAccount, long>, 
+            EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, 
+            EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
+
+        public ManagerService(IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, 
+            EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, 
+            EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork)
+        {
+            this.employmentUnityOfWork = _employmentUnityOfWork;
+        }
+#else
+
+#endif
 
         public IEnumerable<Person> GetAllWorkersFromTeam(long managerId)
         {
