@@ -1,4 +1,4 @@
-﻿#define EF
+﻿#define NH
 
 using HR.DataAccess.GLOBAL.UnityOfWorks;
 using HR.Web_UI.Services.ServicesInferface;
