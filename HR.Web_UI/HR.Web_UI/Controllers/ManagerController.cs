@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace HR.Web_UI.Controllers
 {
     [Authorize(Roles="Kierownik")]
@@ -35,5 +36,6 @@ namespace HR.Web_UI.Controllers
         {
             return View();
         }
+
     }
 }

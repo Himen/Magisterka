@@ -10,5 +10,6 @@ namespace HR.Web_UI.Services.ServicesInferface
     public interface IManagerService
     {
         IEnumerable<Person> GetAllWorkersFromTeam(long managerId);
+
     }
 }

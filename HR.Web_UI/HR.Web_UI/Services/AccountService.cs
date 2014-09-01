@@ -84,6 +84,8 @@ namespace HR.Web_UI.Services
         {
             try
             {
+                logUnityOfWork.AccountRepo.Attach(ref ac);
+
                 AccountLog al = new AccountLog
                 {
                     Account = ac,
@@ -94,6 +96,7 @@ namespace HR.Web_UI.Services
                     StartDate = DateTime.Now
                 };
 
+                
                 logUnityOfWork.AccountLogRepo.Add(al);
                 logUnityOfWork.UnityOfWork.SaveChanges();
                 return true;

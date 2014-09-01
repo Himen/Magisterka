@@ -142,6 +142,8 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DayPlot\elements.css" />
+    <Content Include="Content\DayPlot\layout.css" />
     <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Images\dokumenty.jpg" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
@@ -267,6 +269,7 @@
     <Content Include="Views\HR\AddPromotialMaterial.cshtml" />
     <Content Include="Views\HR\DisplayDocuments.cshtml" />
     <Content Include="Views\Manager\DisplayWorkers.cshtml" />
+    <Content Include="Views\HR\DisplayWorkerScheduler.cshtml" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

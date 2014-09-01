@@ -15,7 +15,7 @@ namespace HR.DataAccess.EF
         public HR_DataContext(): base("HR_Database")
         {
             //zeby nie tworzyc kontekstu
-            Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
+            //Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
             
         }
         #region Models

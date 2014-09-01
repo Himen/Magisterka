@@ -771,6 +771,76 @@ namespace HR.Web_UI.Controllers
             return View();
         }
 
+        public ActionResult DisplayWorkerScheduler()
+        {
+            return View();
+        }
+
+
+        //test
+        //http://venkatbaggu.com/calendar-in-asp-net-mvc/
+
+        public class Events
+        {
+            public string id { get; set; }
+            public string title { get; set; }
+            public string date { get; set; }
+            public string start { get; set; }
+            public string end { get; set; }
+            public string url { get; set; }
+
+            public bool allDay { get; set; }
+        }
+
+        private static DateTime ConvertFromUnixTimestamp(double timestamp)
+        {
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp);
+        }
+
+        public ActionResult GetEvents()
+        {
+            var fromDate = ConvertFromUnixTimestamp(10.00);
+            var toDate = ConvertFromUnixTimestamp(20.00);
+
+            //Get the events
+            //You may get from the repository also
+            var eventList = GetEvents1();
+
+            var rows = eventList.ToArray();
+            return Json(rows, JsonRequestBehavior.AllowGet);
+        }
+
+        private List<Events> GetEvents1()
+        {
+            List<Events> eventList = new List<Events>();
+
+            Events newEvent = new Events
+            {
+                id = "1",
+                title = "Event 1",
+                start = DateTime.Now.AddDays(1).ToString("s"),
+                end = DateTime.Now.AddDays(1).ToString("s"),
+                allDay = false
+            };
+
+
+            eventList.Add(newEvent);
+
+            newEvent = new Events
+            {
+                id = "1",
+                title = "Event 3",
+                start = DateTime.Now.AddDays(2).ToString("s"),
+                end = DateTime.Now.AddDays(3).ToString("s"),
+                allDay = false
+            };
+
+            eventList.Add(newEvent);
+
+            return eventList;
+        }
+
         #endregion
     }
 }
