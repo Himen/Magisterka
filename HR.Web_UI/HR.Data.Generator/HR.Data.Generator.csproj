@@ -50,11 +50,18 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Zdjecia\Documents\1.jpeg" />
+    <Content Include="Zdjecia\Documents\2.jpeg" />
     <Content Include="Zdjecia\Kobiety\1.jpeg" />
     <Content Include="Zdjecia\Kobiety\2.jpeg" />
     <Content Include="Zdjecia\Kobiety\3.jpeg" />
     <Content Include="Zdjecia\Kobiety\4.jpeg" />
     <Content Include="Zdjecia\Kobiety\5.jpeg" />
+    <Content Include="Zdjecia\Materialy\1.jpeg" />
+    <Content Include="Zdjecia\Materialy\2.jpeg" />
+    <Content Include="Zdjecia\Materialy\3.jpeg" />
+    <Content Include="Zdjecia\Materialy\4.jpeg" />
+    <Content Include="Zdjecia\Materialy\5.jpeg" />
     <Content Include="Zdjecia\Mezczyzni\1.jpeg" />
     <Content Include="Zdjecia\Mezczyzni\2.jpeg" />
     <Content Include="Zdjecia\Mezczyzni\3.jpeg" />

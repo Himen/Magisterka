@@ -1,13 +1,14 @@
-﻿@model HR.Web_UI.Models.ViewModels.HR.WorkersListViewModel
+﻿
+@model HR.Web_UI.Models.ViewModels.HR.WorkersListViewModel
 @using PagedList.Mvc;
 
 @Html.ActionLink("Dodaj nowego pracownika", "CreateWorker", null, new { @class = "btn btn-success col-lg-offset-5" })<br />
 @using (Html.BeginForm("DisplayListOfWorkers", "HR", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
 {
     <div class="form-group">
- 
-        Wyszukaj: @Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { type="text", @class="form-control" ,placeholder="Search"})
-        <input type="submit" value="Find" class="btn btn-default"  />
+
+        Wyszukaj: @Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { type = "text", @class = "form-control", placeholder = "Search" })
+        <input type="submit" value="Find" class="btn btn-default" />
     </div>
 }
 
@@ -17,8 +18,8 @@
 <table class="table">
     <tr>
         <th>
-            <label >
-                @Html.ActionLink("Imię", "DisplayListOfWorkers", new { Sorting_Order = "FirstName", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class="btn btn-default"})
+            <label>
+                @Html.ActionLink("Imię", "DisplayListOfWorkers", new { Sorting_Order = "FirstName", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
                 <span class="glyphicon glyphicon-arrow-up"></span>
             </label>
         </th>
@@ -60,37 +61,37 @@
         </th>
     </tr>
 
-@foreach (var item in Model.Workers)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employment.EmploymentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employment.PositionCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manager.FirstName)   @Html.DisplayFor(modelItem => item.Manager.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employment.OrganiziationalUnitCode)
-        </td>
-        <td>
-            @Html.ActionLink("Szczegóły", "WorkerDetails", new { Id = item.Id }, new { @class = "btn btn-warning" }) 
-            <button class="del btn btn-danger delete" data-toggle="modal" data-target="#myModal" data-id="@item.Id" data-firstname-to-delete="@item.FirstName" data-surname-to-delete="@item.Surname">Usuń</button>
-            @Html.ActionLink("Zwolnij", "DumpEmployee", new { Id = item.Id }, new { @class = "btn btn-info" }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Workers)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employment.EmploymentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employment.PositionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manager.FirstName)   @Html.DisplayFor(modelItem => item.Manager.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employment.OrganiziationalUnitCode)
+            </td>
+            <td>
+                @Html.ActionLink("Szczegóły", "WorkerDetails", new { Id = item.Id }, new { @class = "btn btn-warning" })
+                <button class="del btn btn-danger delete" data-toggle="modal" data-target="#myModal" data-id="@item.Id" data-firstname-to-delete="@item.FirstName" data-surname-to-delete="@item.Surname">Usuń</button>
+                @Html.ActionLink("Zwolnij", "DumpEmployee", new { Id = item.Id }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
 
 </table>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
@@ -107,7 +108,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
                 <h4 class="modal-title">Usuń</h4>
             </div>
             <div class="modal-body">
-                Czy napewno chcesz usunąć <label id ="fn"></label> <label id="sn"></label>   ??
+                Czy napewno chcesz usunąć <label id="fn"></label> <label id="sn"></label>   ??
             </div>
             <div class="modal-footer">
                 <button type="button" id="mySubmit" class="btn btn-warning" data-dismiss="modal">Usuń</button>
@@ -121,7 +122,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 <script type="text/javascript">
 
     //Everytime we press delete in the table row
-    $('.delete').click(function(e) {
+    $('.delete').click(function (e) {
         e.preventDefault();
 
         //Update the item to delete id so our model knows which one to delete
@@ -136,13 +137,13 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 
     //Everytime we press sumbit on the modal form...
-    $('#mySubmit').click(function() {
+    $('#mySubmit').click(function () {
 
         //Get the id to delete from the hidden field
         var id = $('#item-to-delete').val();
 
         //Call our delete actionresult and pass over this id
-        $.post("/HR/DeleteWorker", { Id : id } , function (data) {
+        $.post("/HR/DeleteWorker", { Id: id }, function (data) {
 
             alert("Usunięto");
 
@@ -153,30 +154,3 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 </script>
 
-
-<script>
-    /*$(function () {
-        $("#button").click(function () {
-            $(".newClass").switchClass("glyphicon glyphicon-arrow-up", "glyphicon glyphicon-arrow-down", 1000);
-            $(".anotherNewClass").switchClass("glyphicon glyphicon-arrow-down", "glyphicon glyphicon-arrow-up", 1000);
-        });
-    });*/
-    /*$(document).on("click", function (event) {
-        alert(event.target);
-        $(event.target).parent("label").closest("span").toggleClass("");
-    });*/
-
-
-    ///zrobic zeby sie strzalka zmieniala
-    /*$('a').click(function () {
-
-        $(this).parent().next("span").toggleClass(function () {
-            if ($(this).parent().next("span").hasClass("glyphicon glyphicon-arrow-up")) {
-                return 'glyphicon glyphicon-arrow-down';
-            } else {
-                return 'glyphicon glyphicon-arrow-up';
-            }
-        });
-    });*/
-
-</script>

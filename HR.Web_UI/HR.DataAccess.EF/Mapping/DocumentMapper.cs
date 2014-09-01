@@ -9,7 +9,7 @@ namespace HR.DataAccess.EF.Mapping
     {
         public DocumentMapper()
         {
-            this.ToTable("Documents",schemaName:"REPO");
+            this.ToTable("Documents", schemaName: "REPO");
 
             this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -25,7 +25,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.Type).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
-            this.Property(c => c.Content).HasColumnType("binary").IsRequired();
+            this.Property(c => c.Content).HasColumnType("image").IsRequired();
 
             this.Property(c => c.Description).HasColumnType("varchar").HasMaxLength(300).IsRequired();
 

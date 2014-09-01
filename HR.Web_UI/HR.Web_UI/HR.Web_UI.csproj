@@ -148,6 +148,7 @@
     <Content Include="Content\Images\glyphicons-halflings.png" />
     <Content Include="Content\Images\kalendarz.gif" />
     <Content Include="Content\Images\kobieta.jpg" />
+    <Content Include="Content\Images\logo.jpg" />
     <Content Include="Content\Images\mezczyzna.jpg" />
     <Content Include="Content\Images\money_bag.png" />
     <Content Include="Content\Images\pracownicy.jpg" />
@@ -253,6 +254,7 @@
     <Content Include="Views\HR\_LearnHistory.cshtml" />
     <Content Include="Views\HR\_EmploymentHistory.cshtml" />
     <Content Include="Views\HR\AddCollage.cshtml" />
+    <Content Include="Views\HR\AddDocument.cshtml" />
     <None Include="Views\HR\AddJob.cshtml" />
     <Content Include="Views\HR\DisplayListOfWorkers.cshtml" />
     <Content Include="Views\HR\CandidatList.cshtml" />
@@ -261,6 +263,10 @@
     <Content Include="Views\HR\AddTraning.cshtml" />
     <Content Include="Views\HR\DisplayBenefitsOfWorker.cshtml" />
     <Content Include="Views\HR\ChartTest.cshtml" />
+    <Content Include="Views\HR\DisplayPromotialMaterials.cshtml" />
+    <Content Include="Views\HR\AddPromotialMaterial.cshtml" />
+    <Content Include="Views\HR\DisplayDocuments.cshtml" />
+    <Content Include="Views\Manager\DisplayWorkers.cshtml" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -293,6 +299,7 @@
     <Compile Include="Models\ViewModels\HR\EmploymentViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\PersonDisplayViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\PersonViewModel.cs" />
+    <Compile Include="Models\ViewModels\HR\PromotialMaterialViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\TraningsViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\WorkersListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

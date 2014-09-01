@@ -1,4 +1,4 @@
-﻿#define  NH
+﻿#define  EF
 
 using HR.Core.BasicContract;
 using HR.Core.Models;

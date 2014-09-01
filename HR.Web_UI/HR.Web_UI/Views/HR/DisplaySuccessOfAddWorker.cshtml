@@ -10,7 +10,7 @@
     <label class="col-lg-offset-4">@ViewBag.Message</label>
 </div><br />
 
-@Html.ActionLink("Lista wypłat pracownika", "DisplayBenefitsOfWorker", new { Id = Model.Id }, new { @class = "btn btn-info" }) 
+@Html.ActionLink("Lista wypłat pracownika", "DisplayBenefitsOfWorker", new { Id = Model.Id }, new { @class = "btn btn-lg  btn-info col-lg-offset-9" }) 
 
 <div class="panel panel-primary col-lg-offset-1 col-lg-10">
     <div class="panel-heading">Dane pracownika</div>
@@ -288,6 +288,17 @@
                 <div class="" id="learning">
 
                     @Html.Action("DisplayAllTranings", Model.Id)
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-title col-lg-offset-1 col-lg-10">
+            <div class="panel-heading">Dokumenty</div>
+            <div class="panel-body">
+                <div class="" id="documents">
+
+                    @Html.Action("DisplayDocuments", Model.Id)
 
                 </div>
             </div>

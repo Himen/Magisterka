@@ -24,6 +24,16 @@ namespace HR.Core.Models.RepoModels
         public virtual long PersonId { get; set; }
 
         /// <summary>
+        /// Zdjecie 
+        /// </summary>
+        public virtual byte[] Photo { get; set; }
+
+        /// <summary>
+        /// Opis zdjecia
+        /// </summary>
+        public virtual string PhotoTitle { get; set; }
+
+        /// <summary>
         /// Osoba ktora dodala post
         /// </summary>
         public virtual Person Person { get; set; }

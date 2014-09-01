@@ -8,6 +8,7 @@ namespace HR.Core.Enums
         DoZatwierdzenia,
         Zatrudniony,
         Zwolniony,
-        PracowalUnas
+        PracowalUnas,
+        ZwolnienieDoZatwierdzenia
     }
 }

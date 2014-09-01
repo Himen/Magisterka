@@ -1,0 +1,64 @@
+﻿
+@model HR.Core.Models.RepoModels.PromotialMaterial
+
+@using (Ajax.BeginForm("AddPromotialMaterial", "HR",
+            new AjaxOptions { UpdateTargetId = "working", LoadingElementId = "loading-indicator" }
+            , new { enctype = "multipart/form-data", method = "POST" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhotoTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhotoTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhotoTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="input-group col-lg-6" style="float:none">
+            <span class="input-group-addon">@Html.LabelFor(p => p.Photo)</span>
+        </div>
+        <input type="file" name="Photo" class="btn" id="Photo" onchange="ShowpImagePreview(this);" />
+        <img id="imgprvw" alt="uploaded image preview" class="h_300 w_200" style="float:left" />
+        <br />
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Dodaj" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+    function ShowpImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgprvw').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

@@ -21,9 +21,13 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.EditDate).HasColumnType("date").IsOptional();
 
-            this.Property(c => c.Title).HasColumnType("varchar").HasMaxLength(100).IsRequired();
+            this.Property(c => c.Title).HasColumnType("varchar").HasMaxLength(500).IsRequired();
 
-            this.Property(c => c.Content).HasColumnType("varchar").HasMaxLength(1000).IsRequired();
+            this.Property(c => c.Content).HasColumnType("varchar").HasMaxLength(2000).IsRequired();
+
+            this.Property(c => c.Photo).HasColumnType("image").IsOptional();
+
+            this.Property(c => c.PhotoTitle).HasColumnType("varchar").HasMaxLength(500).IsRequired();
 
             this.Property(c => c.PersonId).HasColumnType("bigint").IsOptional();
 

@@ -1,4 +1,4 @@
-﻿#define NH
+﻿#define EF
 
 using HR.DataAccess.GLOBAL.UnityOfWorks;
 using HR.Web_UI.Services.ServicesInferface;
@@ -59,7 +59,8 @@ namespace HR.Web_UI.Services
 
 #elif EF
         IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, 
-            EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>, EF_U.UnityOfWork> personUnityOfWork;
+            EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>,EF_R.Repository<PromotialMaterial, long>,
+            EF_R.Repository<Document, long>,EF_U.UnityOfWork> personUnityOfWork;
 
         ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> logUnityOfWork;
 
@@ -74,7 +75,9 @@ namespace HR.Web_UI.Services
             EF_R.Repository<Vacation, long>, EF_R.Repository<Delegation, long>, EF_R.Repository<VacationDocument, Guid>,
             EF_U.UnityOfWork> workRegistryUnityOfWork;
 
-        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>, EF_U.UnityOfWork> _personUnityOfWork,
+        public HRServices(IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>,
+                          EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>, EF_R.Repository<PromotialMaterial, long>,
+                          EF_R.Repository<Document, long>, EF_U.UnityOfWork> _personUnityOfWork,
                           ILogUnityOfWork<EF_R.Repository<AccountLog, long>, EF_R.Repository<Account, long>, EF_U.UnityOfWork> _logUnityOfWork,
                           IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
                           EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> _dicUnityOfWork,
@@ -745,6 +748,8 @@ namespace HR.Web_UI.Services
                                                                     && c.Employment.EmploymentType!=EmploymentType.DoZatwierdzenia
                                                                     && c.Employment.EmploymentType != EmploymentType.PracowalUnas
                                                                     && c.Employment.EmploymentType != EmploymentType.Zwolniony);
+
+
                 return x;
             }
             catch (Exception)
@@ -818,6 +823,13 @@ namespace HR.Web_UI.Services
             try
             {
                 var x = personUnityOfWork.PersonRepo.GetAll().Where(c=>c.Employment.EmploymentType == Core.Enums.EmploymentType.Kandydat);
+
+                foreach (var item in x)
+                {
+                    item.Employment.OrganiziationalUnitCode = GetOrganizationName(item.Employment.OrganiziationalUnitCode);
+                    item.Employment.OrganiziationalUnitCode = GetPositionName(item.Employment.PositionCode);
+                }
+
                 return x;
             }
             catch (Exception)
@@ -838,6 +850,71 @@ namespace HR.Web_UI.Services
                 personUnityOfWork.PersonRepo.Attach(ref x);
                 x.Employment.EmploymentType = emp;
 
+                personUnityOfWork.UnityOfWork.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public IQueryable<PromotialMaterial> GetAllMaterials()
+        {
+            try
+            {
+                var x = personUnityOfWork.PromotialMaterialsRepo.GetAll();
+                return x;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        public bool AddPromotialMaterial(PromotialMaterial prom)
+        {
+            try
+            {
+                personUnityOfWork.PromotialMaterialsRepo.Add(prom);
+                personUnityOfWork.UnityOfWork.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+        public List<Document> GetWorkerDocuments(long id)
+        {
+            try
+            {
+                var x = personUnityOfWork.DocumentsRepo.GetAll().Where(c=>c.Person.Id == id);
+                return x.ToList();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        public bool SaveDocument(Document doc)
+        {
+            try
+            {
+                personUnityOfWork.DocumentsRepo.Add(doc);
                 personUnityOfWork.UnityOfWork.SaveChanges();
 
                 return true;

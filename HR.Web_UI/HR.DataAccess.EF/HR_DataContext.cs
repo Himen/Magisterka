@@ -203,6 +203,46 @@ namespace HR.DataAccess.EF
 
             #endregion
 
+            #region Inni pracownicy
+            List<Person> inniPracownicy = g.GeneratePersons(20);
+            List<Employment> listInniPracownicyToEmploy = new List<Employment>();
+
+            for (int i = 0; i < inniPracownicy.Count; i++)
+            {
+                listInniPracownicyToEmploy.Add(g.EmployWorker(inniPracownicy[i], "MPJ", "DPJ", context.Persons.Local[6]));
+            }
+
+            foreach (var item in listInniPracownicyToEmploy)
+            {
+                item.EmploymentType = EmploymentType.Kandydat;
+                item.Contract.ContractType = ContractType.Umowa_zlecenie;
+                item.Contract.ContractDimension = ContractDimensionType.PolEtatu;
+                context.Employments.Add(item);
+            }
+
+            context.SaveChanges();
+
+            inniPracownicy = g.GeneratePersons(20);
+            listInniPracownicyToEmploy = new List<Employment>();
+
+            for (int i = 0; i < inniPracownicy.Count; i++)
+            {
+                listInniPracownicyToEmploy.Add(g.EmployWorker(inniPracownicy[i], "MPP", "DPP", context.Persons.Local[8]));
+            }
+
+            foreach (var item in listInniPracownicyToEmploy)
+            {
+                item.EmploymentType = EmploymentType.PracowalUnas;
+                item.Contract.ContractType = ContractType.Kontrakt;
+                item.Contract.ContractDimension = ContractDimensionType.TrzyPiateEtatu;
+                context.Employments.Add(item);
+            }
+
+            context.SaveChanges();
+
+            #endregion
+
+
 
             #region Godziny pracy
 
@@ -221,6 +261,18 @@ namespace HR.DataAccess.EF
             }
 
             context.SaveChanges();*/
+
+            #endregion
+
+            #region Promotial Materials
+
+            List<PromotialMaterial> promMaterials = g.GenerateMaterials(30, pracownicy);
+
+            foreach (var item in promMaterials)
+            {
+                context.PromotialMaterials.Add(item);
+            }
+            context.SaveChanges();
 
             #endregion
 

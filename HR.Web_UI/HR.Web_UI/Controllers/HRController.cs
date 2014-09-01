@@ -12,6 +12,7 @@ using HR.Core.Enums;
 using DotNet.Highcharts.Options;
 using DotNet.Highcharts;
 using DotNet.Highcharts.Helpers;
+using HR.Core.Models.RepoModels;
 
 namespace HR.Web_UI.Controllers
 {
@@ -407,6 +408,12 @@ namespace HR.Web_UI.Controllers
             wlVM.PageCount = (int)Math.Ceiling((double)workers.Count() / Size_Of_Page);
             wlVM.PageNumber = Page_No ?? 1;
 
+            foreach (var item in wlVM.Workers)
+            {
+                item.Employment.OrganiziationalUnitCode = hrServices.GetOrganizationName(item.Employment.OrganiziationalUnitCode);
+                item.Employment.PositionCode = hrServices.GetPositionName(item.Employment.PositionCode);
+            }
+
             return View(wlVM);
         }
 
@@ -678,6 +685,92 @@ namespace HR.Web_UI.Controllers
             return View(chart);
         }
 
+        #region Materiały promocyjne
 
+        public ActionResult DisplayPromotialMaterials( string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No, string OrderType)
+        {
+
+            var materials = hrServices.GetAllMaterials();
+
+            int Size_Of_Page = 10;
+            int No_Of_Page = (Page_No ?? 1);
+
+            PromotialMaterialViewModel pVM = new PromotialMaterialViewModel();
+            pVM.Materials = materials.OrderByDescending(p => p.Id).ToPagedList(No_Of_Page, Size_Of_Page);
+            pVM.PageCount = (int)Math.Ceiling((double)materials.Count() / Size_Of_Page);
+            pVM.PageNumber = Page_No ?? 1;
+
+            return View(pVM);
+        }
+
+        public ActionResult AddPromotialMaterial()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddPromotialMaterial(PromotialMaterial prom)
+        {
+            if (ModelState.IsValid)
+            {
+                //Person p = Session["Person"] as Person;
+                prom.Person = hrServices.GetWorker(CurrentUser == null ? 6 : CurrentUser.PersonId);
+                if (hrServices.AddPromotialMaterial(prom))
+                {
+                    return RedirectToAction("DisplayPromotialMaterials");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nieznany blad");
+                    return View("DisplayPromotialMaterials");
+                }
+            }
+            else
+            {
+
+            }
+            return View();
+        }
+
+        public ActionResult DisplayDocuments(long Id)
+        {
+            var x = hrServices.GetWorkerDocuments(Id);
+
+            return PartialView("DisplayDocuments", x);
+        }
+
+        public ActionResult DownloadFile(byte [] file, string fileName)
+        {
+#warning jest jakis blad z pobieraniem
+            return File(file, "image/jpeg", fileName);
+        }
+
+        public ActionResult AddDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddDocument(Document doc, HttpPostedFileBase File)
+        {
+            if(ModelState.IsValid)
+            { 
+                doc.Content = HR.Web_UI.Services.FileToByte.ConvertFileToByte(File);
+                
+                if (hrServices.SaveDocument(doc))
+                {
+                    return RedirectToAction("DisplayListOfWorkers");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nieznany blad");
+                    return View("DisplayListOfWorkers");
+                }
+            }
+
+            return View();
+        }
+
+        #endregion
     }
 }

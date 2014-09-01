@@ -1,5 +1,6 @@
 ﻿using HR.Core.Enums;
 using HR.Core.Models;
+using HR.Core.Models.RepoModels;
 using HR.Web_UI.Models.ViewModels.HR;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,12 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         string GetPositionName(string key);
         string GetOrganizationName(string key);
+
+        IQueryable<PromotialMaterial> GetAllMaterials();
+        bool AddPromotialMaterial(PromotialMaterial prom);
+
+        List<Document> GetWorkerDocuments(long id);
+        bool SaveDocument(Document doc);
 
     }
 }

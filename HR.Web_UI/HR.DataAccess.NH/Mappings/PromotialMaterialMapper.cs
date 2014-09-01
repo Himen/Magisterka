@@ -15,8 +15,10 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.CreateDate).CustomSqlType("date");
             Map(c => c.EditDate).CustomSqlType("date").Nullable();
 
-            Map(c => c.Title).CustomSqlType("varchar").Length(100);
-            Map(c => c.Content).CustomSqlType("varchar").Length(1000);
+            Map(c => c.Title).CustomSqlType("varchar").Length(500);
+            Map(c => c.Content).CustomSqlType("varchar").Length(2000);
+            Map(c => c.Photo).CustomSqlType("image").Nullable();
+            Map(c => c.PhotoTitle).CustomSqlType("varchar").Length(500);
 
             //Map(c => c.PersonId).CustomSqlType("bigint");
             References(c => c.Person);//.ForeignKey("PersonId").Cascade.Delete();

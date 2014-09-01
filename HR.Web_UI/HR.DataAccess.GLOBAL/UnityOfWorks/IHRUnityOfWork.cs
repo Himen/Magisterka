@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HR.DataAccess.GLOBAL.UnityOfWorks
 {
-    public interface IHRUnityOfWork<TRepo, TRepo2, TRepo3, TRepo4, TRepo5, TRepo6, TUnityOfWork>
+    public interface IHRUnityOfWork<TRepo, TRepo2, TRepo3, TRepo4, TRepo5, TRepo6, TRepo7, TRepo8, TUnityOfWork>
     {
         TUnityOfWork UnityOfWork { get; set; }
         TRepo PersonRepo { get; set; }
@@ -15,5 +15,7 @@ namespace HR.DataAccess.GLOBAL.UnityOfWorks
         TRepo4 CollageRepo { get; set; }
         TRepo5 JobRepo { get; set; }
         TRepo6 TraningRepo { get; set; }
+        TRepo7 PromotialMaterialsRepo { get; set; }
+        TRepo8 DocumentsRepo { get; set; }
     }
 }

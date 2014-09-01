@@ -11,6 +11,7 @@ using EF_R = HR.DataAccess.EF.Repositories;
 using NH_R = HR.DataAccess.NH.Repositories;
 using EF_U = HR.DataAccess.EF.UnityOfWorks;
 using NH_U = HR.DataAccess.NH.UnityOfWorks;
+using HR.Core.Models.RepoModels;
 
 namespace HR.Web_UI.Services
 {
@@ -33,11 +34,19 @@ namespace HR.Web_UI.Services
             EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, EF_R.Repository<ContactPerson, long>, 
             EF_R.Repository<Person, long>, EF_U.UnityOfWork> employmentUnityOfWork;
 
+        IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>,
+            EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>, EF_R.Repository<PromotialMaterial, long>,
+            EF_R.Repository<Document, long>, EF_U.UnityOfWork> personUnityOfWork;
+
         public ManagerService(IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, 
             EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, 
-            EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork)
+            EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork,
+            IHRUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<Account, long>, EF_R.Repository<AdditionalInformation, long>, 
+            EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>,EF_R.Repository<PromotialMaterial, long>,
+            EF_R.Repository<Document, long>,EF_U.UnityOfWork> _personUnityOfWork)
         {
             this.employmentUnityOfWork = _employmentUnityOfWork;
+            this.personUnityOfWork = _personUnityOfWork;
         }
 #else
 

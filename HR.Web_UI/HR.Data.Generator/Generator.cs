@@ -7,6 +7,7 @@ using HR.Core.Models;
 using HR.Core.Models.DictionaryModels;
 using System.IO;
 using HR.Core.Enums;
+using HR.Core.Models.RepoModels;
 
 namespace HR.Data.Generator
 {
@@ -346,6 +347,58 @@ namespace HR.Data.Generator
             return data;
         }
 
+
+        public byte[] GenerateMaterialPhoto()
+        {
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Materialy");//Assuming Test is your Folder
+
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
+            FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
+
+            FileInfo fileInfo = Files[r.Next(0, 5)];
+
+            // The byte[] to save the data in
+            byte[] data = new byte[fileInfo.Length];
+
+            // Load a filestream and put its content into the byte[]
+            using (FileStream fs = fileInfo.OpenRead())
+            {
+                fs.Read(data, 0, data.Length);
+            }
+
+            // Delete the temporary file
+            //fileInfo.Delete();
+
+            return data;
+        }
+
+        public byte[] GenerateDocument()
+        {
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Documents");//Assuming Test is your Folder
+
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
+            FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
+
+            FileInfo fileInfo = Files[r.Next(0, 2)];
+
+            // The byte[] to save the data in
+            byte[] data = new byte[fileInfo.Length];
+
+            // Load a filestream and put its content into the byte[]
+            using (FileStream fs = fileInfo.OpenRead())
+            {
+                fs.Read(data, 0, data.Length);
+            }
+
+            // Delete the temporary file
+            //fileInfo.Delete();
+
+            return data;
+        }
+
+
         public DateTime RandomDay()
         {
             DateTime start = new DateTime(1995, 1, 1);
@@ -403,6 +456,21 @@ namespace HR.Data.Generator
             return Colleges[r.Next(0, Colleges.Count)];
         }
 
+        public string RandomTitle()
+        {
+            return Titles[r.Next(0, Titles.Count)];
+        }
+
+        public string RandomPhotoTitle()
+        {
+            return PhotoTitles[r.Next(0, PhotoTitles.Count)];
+        }
+
+        public string RandomContent()
+        {
+            return Contents[r.Next(0, Contents.Count)];
+        }
+
 
         public BankDictionary RandomBank()
         {
@@ -432,7 +500,7 @@ namespace HR.Data.Generator
                                   Surname = RandomSurname()
                                   };
 
-                p1.Email = p1.FirstName + "_" + p1.Surname + "_" + GenerateRandom_1_to_100() + RandomDomain();
+                p1.Email = p1.FirstName + "_" + p1.Surname + "_" + GenerateRandom_1_to_100().ToString() + GenerateRandom_1_to_100() + RandomDomain();
                 while (p.Select(c => c.Email).Equals(p1.Email))
                 {
                     p1.Email = p1.FirstName + "_" + p1.Surname + "_" + GenerateRandom_1_to_100() + RandomDomain();
@@ -604,6 +672,19 @@ namespace HR.Data.Generator
                     };
                     p1.Trainings.Add(t2);
                 }
+
+                //Add documents 
+                Document doc = new Document
+                {
+                    Name = p1.FirstName + " " + p1.Surname + "_CV",
+                    Person = p1,
+                    Type = "CV",
+                    Description = "CV kandydata",
+                    Content = GenerateDocument()
+                };
+                p1.Documents = new List<Document>();
+                p1.Documents.Add(doc);
+
 
                 p.Add(p1);
                 p1 = null;
@@ -1110,6 +1191,57 @@ namespace HR.Data.Generator
             }
             p.BenefitsProfits = p.BenefitsProfits ?? new List<BenefitsProfit>();
             p.BenefitsProfits = list;
+
+            return list;
+        }
+
+        public List<string> Titles = new List<string>
+        {
+            "Standardowy fragment Lorem Ipsum, używany od XV w.",
+            "Fragment 1.10.32 z 'de Finibus Bonorum et Malorum', napisanej przez Cycerona w 45 r.p.n.e.",
+            "Tłumaczenie H. Rackhama z 1914 roku",
+            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+            "Quisque imperdiet dapibus ex, nec cursus nisl interdum et. Praesent viverra a nunc id vestibulum.",
+            "Etiam ac orci eu enim commodo luctus. Maecenas nec ante consectetur, condimentum neque sit amet, placerat metus.",
+        };
+
+        public List<string> PhotoTitles = new List<string>
+        {
+            "Bardzo ładne zdjecie",
+            "Zdjecie z konferencji",
+            "Nowe urzadzenia w firmie",
+            "Nowe szkolenia u nas w firmie",
+            "Jest nas juz 1000 osob",
+            "Nasza firma obecna na IT Academic Days",
+        };
+
+        public List<string> Contents = new List<string> 
+        {
+            "Nulla placerat scelerisque ipsum. Suspendisse vestibulum mauris eu nisi aliquet, vitae ullamcorper nisl semper. Phasellus a velit leo. Nullam auctor id tellus vitae efficitur. Nam ante ligula, varius eu mollis ac, efficitur blandit lacus. Nunc vehicula eget nisi tempus pulvinar. Nam elit velit, finibus id elit quis, feugiat rutrum magna. Donec at faucibus ex, sed porttitor est. Sed accumsan velit quis ligula auctor, sed iaculis elit egestas. Cras a diam vitae eros hendrerit pretium. Nulla facilisi. Curabitur vel elementum tortor, sed suscipit lectus. Aliquam quis magna eget nisi faucibus aliquam. Etiam consequat tortor at nisi gravida, vitae condimentum tellus condimentum. Aenean et turpis ut lorem egestas aliquet. Suspendisse justo nibh, lobortis ut risus tristique, sagittis faucibus nisl.",
+            "Etiam ac orci eu enim commodo luctus. Maecenas nec ante consectetur, condimentum neque sit amet, placerat metus. Ut scelerisque, justo et gravida tempus, nisl purus venenatis justo, eget interdum lacus felis ut tortor. Mauris posuere nec metus et tincidunt. Integer tincidunt, nisi at interdum semper, nunc leo euismod massa, ac placerat sem lorem in libero. Integer est nunc, vestibulum eget dolor in, interdum lacinia purus. Mauris finibus ipsum non ultricies scelerisque. Vestibulum volutpat, tortor id vulputate varius, nisi urna laoreet neque, a sodales mauris metus sed purus. Ut convallis et ex sed tempor. Nulla malesuada pellentesque mauris vitae maximus. Integer imperdiet suscipit leo. Nullam vitae mauris id neque malesuada volutpat. Pellentesque a ultrices felis, vitae sagittis orci.",
+            "Vivamus sit amet fringilla enim. Sed condimentum libero non dui luctus, eu tempor mi suscipit. Aliquam aliquet hendrerit nibh, non maximus magna interdum et. Nunc blandit pharetra urna sit amet convallis. Nam hendrerit a nibh in pulvinar. Ut vulputate erat et tellus mollis, eget lobortis leo molestie. Vivamus mattis sodales bibendum. Maecenas pulvinar blandit varius. Phasellus faucibus convallis mi, lobortis euismod odio venenatis ac. Duis elementum suscipit justo, sed iaculis quam iaculis non. Suspendisse quis nunc et lacus interdum tincidunt. Proin gravida tellus at posuere accumsan. Fusce efficitur arcu id felis consectetur eleifend. In hac habitasse platea dictumst.",
+            "Sed at ultricies felis, quis porta dolor. Proin iaculis lectus a elit tincidunt, et accumsan libero condimentum. Nunc ultricies massa ut tristique lobortis. Duis faucibus tellus scelerisque justo luctus, ac sodales velit tempus. Nam sed elit erat. Vestibulum vehicula erat non nibh fringilla, lobortis consequat magna ultrices. Pellentesque eget porta tortor, eget finibus erat. Suspendisse in rutrum ex. Suspendisse mollis nibh vel convallis iaculis. Nunc blandit dignissim turpis vitae tincidunt. Etiam quis tempor elit. Fusce sollicitudin tortor id vestibulum varius.",
+            "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean tempus dignissim rutrum. Ut eu purus metus. Praesent at sem non ipsum bibendum viverra. Mauris sollicitudin vulputate ipsum, at egestas massa iaculis et. In sed suscipit lectus. In iaculis diam magna, a mattis risus auctor ut. Aenean interdum auctor sem, hendrerit mattis urna auctor ut. Donec pretium nibh in felis dictum elementum. Maecenas ex massa, vestibulum vitae ullamcorper at, interdum eget erat. Nunc id arcu pulvinar, aliquet est vitae, porta ligula. Sed eu felis et nibh mollis interdum nec vitae purus.",
+            "In quam velit, mollis at leo a, malesuada gravida sem. Proin in faucibus felis. Donec pretium metus non metus pulvinar, eu semper libero feugiat. Proin imperdiet euismod urna vel aliquam. Aliquam erat volutpat. Duis a pharetra tortor. Vivamus dapibus, lorem ut tincidunt ultricies, leo urna fermentum eros, et ullamcorper diam eros vel sem. Suspendisse eu viverra nisi. Proin lacinia sed urna et mattis. Praesent laoreet condimentum dui, non dignissim ex feugiat vitae. Curabitur mollis in justo nec ultrices. Vestibulum eu ligula eget neque tincidunt ornare id facilisis eros."
+ 
+        };
+
+        public List<PromotialMaterial> GenerateMaterials(long count, List<Person> per)
+        {
+            List<PromotialMaterial> list = new List<PromotialMaterial>();
+
+            for (int i = 0; i < count; i++)
+            {
+                PromotialMaterial p = new PromotialMaterial
+                {
+                    Content = RandomContent(),
+                    Title = RandomTitle(),
+                    Person = per[i],
+                    PhotoTitle = RandomPhotoTitle(),
+                    Photo = GenerateMaterialPhoto()
+                };
+                list.Add(p);
+            }
 
             return list;
         }
