@@ -16,6 +16,7 @@ using System.Web.Mvc;
 using HR.Web_UI.Models.ViewModels.HR;
 using HR.Core.Enums;
 using HR.Core.Models.RepoModels;
+using HR.Web_UI.Models.ViewModels.Calendar;
 
 
 namespace HR.Web_UI.Services
@@ -927,6 +928,31 @@ namespace HR.Web_UI.Services
             finally
             {
                 personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public List<CalendarEvent> GetWorkerEvents(long id)
+        {
+            try
+            {
+
+                var x = (from z in workRegistryUnityOfWork.WorkRegistryRepo.GetAll().Where(p => p.Person.Id == id)
+                         select new CalendarEvent
+                         {
+                             end_date = z.Date.Add(z.DateIn.Value),
+                             start_date = z.Date.Add(z.DateOut.Value),
+                             text = "Standardowe przyjscie do pracy",
+                             id = (int)z.Id
+                         }).ToList();
+
+
+
+                return x;
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
 

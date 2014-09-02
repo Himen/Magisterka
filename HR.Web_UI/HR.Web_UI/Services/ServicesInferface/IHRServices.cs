@@ -1,6 +1,7 @@
 ﻿using HR.Core.Enums;
 using HR.Core.Models;
 using HR.Core.Models.RepoModels;
+using HR.Web_UI.Models.ViewModels.Calendar;
 using HR.Web_UI.Models.ViewModels.HR;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,8 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         List<Document> GetWorkerDocuments(long id);
         bool SaveDocument(Document doc);
+
+        List<CalendarEvent> GetWorkerEvents(long id);
 
     }
 }

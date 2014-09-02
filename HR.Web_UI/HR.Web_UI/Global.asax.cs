@@ -21,7 +21,7 @@ namespace HR.Web_UI
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        CurrentUserModel CurrentUser;
+        //CurrentUserModel CurrentUser;
         /*
          http://www.dotnetcurry.com/showarticle.aspx?ID=126
             BeginRequest 

@@ -15,10 +15,14 @@ namespace HR.Web_UI.Controllers
     public class WorkerController : BaseController
     {
         IWorkerService workerService;
+        IAccountService accountService;
 
-        public WorkerController(IWorkerService _workerService)
+        public WorkerController(IWorkerService _workerService, IAccountService _accountService)
         {
             this.workerService = _workerService;
+            this.accountService = _accountService;
+
+            //CurrentUser = CurrentUser ?? accountService.GetUserByName();
         }
 
         // GET: Worker
@@ -37,6 +41,7 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult DisplayWorkBoard()
         {
+            //dzisiaj przyszedles do pracy o...
             return View();
         }
 
@@ -135,6 +140,11 @@ namespace HR.Web_UI.Controllers
             ViewBag.PersonId = x.Id;
 
             return View(bVM);
+        }
+
+        public ActionResult Calendar()
+        {
+            return View();
         }
 
     }

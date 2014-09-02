@@ -25,7 +25,7 @@ namespace HR.DataAccess.EF.Mapping
 
             this.Property(c => c.CourseType).HasColumnType("int").IsRequired();
 
-            this.Property(c => c.Document).HasColumnType("binary").IsRequired();
+            this.Property(c => c.Document).HasColumnType("image").IsRequired();
 
             this.Property(c => c.DocumentName).HasColumnType("varchar").HasMaxLength(200).IsRequired();
 

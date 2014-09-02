@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="607e759298fa4ab8837f421c01004362" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="HR_DatabaseModel.C__MigrationHistory" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Account" Width="1.5" PointX="2.375" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.AdditionalInformation" Width="1.5" PointX="6.125" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.BankAccount" Width="1.5" PointX="0.625" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.BenefitsProfit" Width="1.5" PointX="10.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Collage" Width="1.5" PointX="5.875" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.CompaniesDictionary" Width="1.5" PointX="2.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.ContactPerson" Width="1.5" PointX="4" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Contract" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Delegation" Width="1.5" PointX="3.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Employment" Width="1.5" PointX="5.875" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Job" Width="1.5" PointX="9" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.OrganiziationalUnit" Width="1.5" PointX="9" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Person" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Traning" Width="1.5" PointX="9" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Vacation" Width="1.5" PointX="5.875" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.WorkRegistry" Width="1.5" PointX="12" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Bank" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.College" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Position" Width="1.5" PointX="7.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.AccountLog" Width="1.5" PointX="4.125" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.CourseMaterial" Width="1.5" PointX="12" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.Document" Width="1.5" PointX="6.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.PromotialMaterial" Width="1.5" PointX="3.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HR_DatabaseModel.VacationDocument" Width="1.5" PointX="3.625" PointY="17.5" IsExpanded="true" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Accounts_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_LOG_AccountLogs_dbo_Accounts_AccountId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_AdditionalInformations_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Employments_dbo_BankAccounts_BankAccountId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_BenefitsProfits_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Collages_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_ContactPersons_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Employments_dbo_Contracts_ContractId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Delegations_dbo_Persons_IdPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Employments_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Jobs_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Persons_dbo_Persons_ManagerId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Tranings_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Vacations_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_WorkRegistrys_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_REPO_CourseMaterials_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_REPO_Documents_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_REPO_PromotialMaterials_dbo_Persons_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="HR_DatabaseModel.FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

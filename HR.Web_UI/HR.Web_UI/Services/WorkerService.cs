@@ -13,6 +13,7 @@ using HR.DataAccess.GLOBAL.UnityOfWorks;
 using HR.Core.Models;
 using HR.Core.Models.RepoModels;
 using HR.Web_UI.Models.ViewModels.Account;
+using HR.Core.Models.DictionaryModels;
 
 namespace HR.Web_UI.Services
 {
@@ -48,6 +49,9 @@ namespace HR.Web_UI.Services
             EF_R.Repository<Vacation, long>, EF_R.Repository<Delegation, long>, EF_R.Repository<VacationDocument, Guid>,
             EF_U.UnityOfWork> workRegistryUnityOfWork;
 
+        IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
+            EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> dicUnityOfWork;
+
         public WorkerService(IEmploymentUnityOfWork<EF_R.Repository<OrganiziationalUnit, long>, 
             EF_R.Repository<BankAccount, long>, EF_R.Repository<Employment, long>, EF_R.Repository<Contract, long>, 
             EF_R.Repository<ContactPerson, long>, EF_R.Repository<Person, long>, EF_U.UnityOfWork> _employmentUnityOfWork,
@@ -55,11 +59,13 @@ namespace HR.Web_UI.Services
             EF_R.Repository<College, long>, EF_R.Repository<Job, long>, EF_R.Repository<Training, long>,EF_R.Repository<PromotialMaterial, long>,
             EF_R.Repository<Document, long>,EF_U.UnityOfWork> _personUnityOfWork, IWorkRegistryUnityOfWork<EF_R.Repository<Person, long>, EF_R.Repository<BenefitsProfit, long>, EF_R.Repository<WorkRegistry, long>,
             EF_R.Repository<Vacation, long>, EF_R.Repository<Delegation, long>, EF_R.Repository<VacationDocument, Guid>,
-            EF_U.UnityOfWork> _workRegistryUnityOfWork)
+            EF_U.UnityOfWork> _workRegistryUnityOfWork, IDicUnityOfWork<EF_R.Repository<BankDictionary, long>, EF_R.Repository<CollegesDictionary, long>,
+            EF_R.Repository<CompaniesDictionary, long>, EF_R.Repository<Position, long>, EF_U.UnityOfWork> _dicUnityOfWork)
         {
             this.employmentUnityOfWork = _employmentUnityOfWork;
             this.personUnityOfWork = _personUnityOfWork;
             this.workRegistryUnityOfWork = _workRegistryUnityOfWork;
+            this.dicUnityOfWork = _dicUnityOfWork;
         }
 #else
 

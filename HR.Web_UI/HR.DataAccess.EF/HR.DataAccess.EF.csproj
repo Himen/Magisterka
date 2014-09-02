@@ -39,6 +39,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +73,96 @@
     <Compile Include="Mapping\VacationDocumentMapper.cs" />
     <Compile Include="Mapping\VacationMapper.cs" />
     <Compile Include="Mapping\WorkRegistryMapper.cs" />
+    <Compile Include="ModelFirstMapping\Account.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\AccountLog.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\AdditionalInformation.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Bank.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\BankAccount.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\BenefitsProfit.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Collage.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\College.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\CompaniesDictionary.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\ContactPerson.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Contract.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\CourseMaterial.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\C__MigrationHistory.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Delegation.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Document.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Employment.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\HRDatabaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRDatabaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\HRDatabaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\HRDatabaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRDatabaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Job.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\OrganiziationalUnit.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Person.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Position.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\PromotialMaterial.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Traning.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\Vacation.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\VacationDocument.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFirstMapping\WorkRegistry.cs">
+      <DependentUpon>HRDatabaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="UnityOfWorks\UnityOfWork.cs" />
@@ -87,7 +179,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="ModelFirstMapping\HRDatabaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HRDatabaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelFirstMapping\HRDatabaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRDatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>HRDatabaseModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="ModelFirstMapping\HRDatabaseModel.edmx.diagram">
+      <DependentUpon>HRDatabaseModel.edmx</DependentUpon>
+    </None>
+    <None Include="ModelFirstMapping\HRDatabaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRDatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>HRDatabaseModel.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

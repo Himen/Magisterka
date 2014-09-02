@@ -12,7 +12,7 @@ namespace HR.Core.Models
     /// <summary>
     /// Przykad na mapowanie za pomocą atrybutów
     /// </summary>
-    [Table("Collages")]
+    [Table("Collages",Schema="DIC")]
     public class College1
     {
         [Key]
@@ -20,7 +20,7 @@ namespace HR.Core.Models
 
         //public long IdPerson { get; set; }
 
-        [Required]
+        
         [MaxLength(30)]
         [Column("Name", TypeName = "NVARCHAR")]
         public string Name { get; set; }

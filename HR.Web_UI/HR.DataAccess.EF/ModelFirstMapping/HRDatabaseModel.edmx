@@ -1,0 +1,1971 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HR_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="AccountType" Type="int" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdditionalInformations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacebookAccount" Type="varchar" MaxLength="100" />
+          <Property Name="GoogleAccount" Type="varchar" MaxLength="100" />
+          <Property Name="TwitterAccount" Type="varchar" MaxLength="100" />
+          <Property Name="GoldenLineAccount" Type="varchar" MaxLength="100" />
+          <Property Name="LinkInAccount" Type="varchar" MaxLength="100" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BankAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="BenefitsProfits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="BenefitBrutto" Type="float" Nullable="false" />
+          <Property Name="BenefitNetto" Type="float" Nullable="false" />
+          <Property Name="BenefitType" Type="int" Nullable="false" />
+          <Property Name="Retirement" Type="float" Nullable="false" />
+          <Property Name="Disability" Type="float" Nullable="false" />
+          <Property Name="Sikness" Type="float" Nullable="false" />
+          <Property Name="Health" Type="float" Nullable="false" />
+          <Property Name="Taxable" Type="float" Nullable="false" />
+          <Property Name="AdvanceAt_PIT" Type="float" Nullable="false" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Collages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldOfStudy" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Specialization" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="AcademicTitle" Type="int" Nullable="false" />
+          <Property Name="TitleOfResearch" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Progres" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="PersonId" Type="bigint" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="CompaniesDictionaries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="About" Type="nvarchar(max)" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ContactPersons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="BuildingNumber" Type="int" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="int" />
+          <Property Name="Phone" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="ContractType" Type="int" Nullable="false" />
+          <Property Name="ContractDimension" Type="int" Nullable="false" />
+          <Property Name="MonthBenefit" Type="float" />
+          <Property Name="BenefitPerHour" Type="float" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Delegations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+          <Property Name="IdPerson" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="OrganiziationalUnitCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EmploymentType" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+          <Property Name="BankAccountId" Type="bigint" Nullable="false" />
+          <Property Name="ContractId" Type="bigint" Nullable="false" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jobs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="OrganiziationalUnits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+          <Property Name="ManagerId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BuildingNumber" Type="int" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="int" />
+          <Property Name="Phone" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="NIP" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IDCard" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="PESEL" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="ManagerId" Type="bigint" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EditDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Tranings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="DateOfPass" Type="date" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="600" Nullable="false" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Vacations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="VacationType" Type="int" Nullable="false" />
+          <Property Name="VacationAcceptation" Type="tinyint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+          <Property Name="VacationDocumentId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkRegistrys">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="DateIn" Type="time" Precision="7" />
+          <Property Name="DateOut" Type="time" Precision="7" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Colleges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="AccountLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ActionType" Type="int" Nullable="false" />
+          <Property Name="ActionDescription" Type="varchar" MaxLength="100" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="AccountId" Type="bigint" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="CourseMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseType" Type="int" Nullable="false" />
+          <Property Name="DocumentName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Document" Type="image" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="2000" />
+          <Property Name="PersonId" Type="bigint" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Content" Type="image" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="PersonId" Type="bigint" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="PromotialMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Content" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="PersonId" Type="bigint" Nullable="false" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="PhotoTitle" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="VacationDocuments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Content" Type="binary" MaxLength="8000" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="DataState" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <Association Name="FK_dbo_Accounts_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AdditionalInformations_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdditionalInformations" Type="Self.AdditionalInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdditionalInformations">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BenefitsProfits_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BenefitsProfits" Type="Self.BenefitsProfits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BenefitsProfits">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Collages_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Collages" Type="Self.Collages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collages">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ContactPersons_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ContactPersons" Type="Self.ContactPersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersons">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Delegations_dbo_Persons_IdPerson">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Delegations" Type="Self.Delegations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delegations">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employments_dbo_BankAccounts_BankAccountId">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employments" Type="Self.Employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employments">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employments_dbo_Contracts_ContractId">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employments" Type="Self.Employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employments">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employments_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employments" Type="Self.Employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employments">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Jobs_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrganiziationalUnits" Type="Self.OrganiziationalUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrganiziationalUnits">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Persons_dbo_Persons_ManagerId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Persons1" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons1">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Tranings_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tranings" Type="Self.Tranings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tranings">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Vacations_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vacations" Type="Self.Vacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vacations">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId">
+          <End Role="VacationDocuments" Type="Self.VacationDocuments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vacations" Type="Self.Vacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationDocuments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vacations">
+              <PropertyRef Name="VacationDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkRegistrys_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkRegistrys" Type="Self.WorkRegistrys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkRegistrys">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOG_AccountLogs_dbo_Accounts_AccountId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountLogs" Type="Self.AccountLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountLogs">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPO_CourseMaterials_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseMaterials" Type="Self.CourseMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseMaterials">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPO_Documents_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPO_PromotialMaterials_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PromotialMaterials" Type="Self.PromotialMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotialMaterials">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HR_DatabaseModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdditionalInformations" EntityType="Self.AdditionalInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BenefitsProfits" EntityType="Self.BenefitsProfits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collages" EntityType="Self.Collages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompaniesDictionaries" EntityType="Self.CompaniesDictionaries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactPersons" EntityType="Self.ContactPersons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delegations" EntityType="Self.Delegations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employments" EntityType="Self.Employments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganiziationalUnits" EntityType="Self.OrganiziationalUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tranings" EntityType="Self.Tranings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacations" EntityType="Self.Vacations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkRegistrys" EntityType="Self.WorkRegistrys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="DIC" store:Type="Tables" />
+          <EntitySet Name="Colleges" EntityType="Self.Colleges" Schema="DIC" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="DIC" store:Type="Tables" />
+          <EntitySet Name="AccountLogs" EntityType="Self.AccountLogs" Schema="LOG" store:Type="Tables" />
+          <EntitySet Name="CourseMaterials" EntityType="Self.CourseMaterials" Schema="REPO" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="REPO" store:Type="Tables" />
+          <EntitySet Name="PromotialMaterials" EntityType="Self.PromotialMaterials" Schema="REPO" store:Type="Tables" />
+          <EntitySet Name="VacationDocuments" EntityType="Self.VacationDocuments" Schema="REPO" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Accounts_dbo_Persons_PersonId" Association="Self.FK_dbo_Accounts_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AdditionalInformations_dbo_Persons_PersonId" Association="Self.FK_dbo_AdditionalInformations_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="AdditionalInformations" EntitySet="AdditionalInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BenefitsProfits_dbo_Persons_PersonId" Association="Self.FK_dbo_BenefitsProfits_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="BenefitsProfits" EntitySet="BenefitsProfits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Collages_dbo_Persons_PersonId" Association="Self.FK_dbo_Collages_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Collages" EntitySet="Collages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ContactPersons_dbo_Persons_PersonId" Association="Self.FK_dbo_ContactPersons_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="ContactPersons" EntitySet="ContactPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Delegations_dbo_Persons_IdPerson" Association="Self.FK_dbo_Delegations_dbo_Persons_IdPerson">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Delegations" EntitySet="Delegations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employments_dbo_BankAccounts_BankAccountId" Association="Self.FK_dbo_Employments_dbo_BankAccounts_BankAccountId">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Employments" EntitySet="Employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employments_dbo_Contracts_ContractId" Association="Self.FK_dbo_Employments_dbo_Contracts_ContractId">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Employments" EntitySet="Employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employments_dbo_Persons_PersonId" Association="Self.FK_dbo_Employments_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Employments" EntitySet="Employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Jobs_dbo_Persons_PersonId" Association="Self.FK_dbo_Jobs_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId" Association="Self.FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="OrganiziationalUnits" EntitySet="OrganiziationalUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Persons_dbo_Persons_ManagerId" Association="Self.FK_dbo_Persons_dbo_Persons_ManagerId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Persons1" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Tranings_dbo_Persons_PersonId" Association="Self.FK_dbo_Tranings_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Tranings" EntitySet="Tranings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Vacations_dbo_Persons_PersonId" Association="Self.FK_dbo_Vacations_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Vacations" EntitySet="Vacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId" Association="Self.FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId">
+            <End Role="VacationDocuments" EntitySet="VacationDocuments" />
+            <End Role="Vacations" EntitySet="Vacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkRegistrys_dbo_Persons_PersonId" Association="Self.FK_dbo_WorkRegistrys_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="WorkRegistrys" EntitySet="WorkRegistrys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOG_AccountLogs_dbo_Accounts_AccountId" Association="Self.FK_LOG_AccountLogs_dbo_Accounts_AccountId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountLogs" EntitySet="AccountLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPO_CourseMaterials_dbo_Persons_PersonId" Association="Self.FK_REPO_CourseMaterials_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="CourseMaterials" EntitySet="CourseMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPO_Documents_dbo_Persons_PersonId" Association="Self.FK_REPO_Documents_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPO_PromotialMaterials_dbo_Persons_PersonId" Association="Self.FK_REPO_PromotialMaterials_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="PromotialMaterials" EntitySet="PromotialMaterials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HR_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="AccountType" Type="Int32" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Accounts_dbo_Persons_PersonId" FromRole="Accounts" ToRole="Persons" />
+          <NavigationProperty Name="AccountLogs" Relationship="Self.FK_LOG_AccountLogs_dbo_Accounts_AccountId" FromRole="Accounts" ToRole="AccountLogs" />
+        </EntityType>
+        <EntityType Name="AdditionalInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacebookAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GoogleAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TwitterAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GoldenLineAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LinkInAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_AdditionalInformations_dbo_Persons_PersonId" FromRole="AdditionalInformations" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BankAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Employments" Relationship="Self.FK_dbo_Employments_dbo_BankAccounts_BankAccountId" FromRole="BankAccounts" ToRole="Employments" />
+        </EntityType>
+        <EntityType Name="BenefitsProfit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BenefitBrutto" Type="Double" Nullable="false" />
+          <Property Name="BenefitNetto" Type="Double" Nullable="false" />
+          <Property Name="BenefitType" Type="Int32" Nullable="false" />
+          <Property Name="Retirement" Type="Double" Nullable="false" />
+          <Property Name="Disability" Type="Double" Nullable="false" />
+          <Property Name="Sikness" Type="Double" Nullable="false" />
+          <Property Name="Health" Type="Double" Nullable="false" />
+          <Property Name="Taxable" Type="Double" Nullable="false" />
+          <Property Name="AdvanceAt_PIT" Type="Double" Nullable="false" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_BenefitsProfits_dbo_Persons_PersonId" FromRole="BenefitsProfits" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Collage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FieldOfStudy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Specialization" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AcademicTitle" Type="Int32" Nullable="false" />
+          <Property Name="TitleOfResearch" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Progres" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="PersonId" Type="Int64" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Collages_dbo_Persons_PersonId" FromRole="Collages" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="CompaniesDictionary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ContactPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BuildingNumber" Type="Int32" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="Int32" />
+          <Property Name="Phone" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_ContactPersons_dbo_Persons_PersonId" FromRole="ContactPersons" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ContractType" Type="Int32" Nullable="false" />
+          <Property Name="ContractDimension" Type="Int32" Nullable="false" />
+          <Property Name="MonthBenefit" Type="Double" />
+          <Property Name="BenefitPerHour" Type="Double" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Employments" Relationship="Self.FK_dbo_Employments_dbo_Contracts_ContractId" FromRole="Contracts" ToRole="Employments" />
+        </EntityType>
+        <EntityType Name="Delegation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <Property Name="IdPerson" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Delegations_dbo_Persons_IdPerson" FromRole="Delegations" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Employment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrganiziationalUnitCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmploymentType" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <Property Name="BankAccountId" Type="Int64" Nullable="false" />
+          <Property Name="ContractId" Type="Int64" Nullable="false" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.FK_dbo_Employments_dbo_BankAccounts_BankAccountId" FromRole="Employments" ToRole="BankAccounts" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_dbo_Employments_dbo_Contracts_ContractId" FromRole="Employments" ToRole="Contracts" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Employments_dbo_Persons_PersonId" FromRole="Employments" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Jobs_dbo_Persons_PersonId" FromRole="Jobs" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="OrganiziationalUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <Property Name="ManagerId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId" FromRole="OrganiziationalUnits" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BuildingNumber" Type="Int32" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="Int32" />
+          <Property Name="Phone" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NIP" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IDCard" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ManagerId" Type="Int64" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EditDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_Persons_PersonId" FromRole="Persons" ToRole="Accounts" />
+          <NavigationProperty Name="AdditionalInformations" Relationship="Self.FK_dbo_AdditionalInformations_dbo_Persons_PersonId" FromRole="Persons" ToRole="AdditionalInformations" />
+          <NavigationProperty Name="BenefitsProfits" Relationship="Self.FK_dbo_BenefitsProfits_dbo_Persons_PersonId" FromRole="Persons" ToRole="BenefitsProfits" />
+          <NavigationProperty Name="Collages" Relationship="Self.FK_dbo_Collages_dbo_Persons_PersonId" FromRole="Persons" ToRole="Collages" />
+          <NavigationProperty Name="ContactPersons" Relationship="Self.FK_dbo_ContactPersons_dbo_Persons_PersonId" FromRole="Persons" ToRole="ContactPersons" />
+          <NavigationProperty Name="Delegations" Relationship="Self.FK_dbo_Delegations_dbo_Persons_IdPerson" FromRole="Persons" ToRole="Delegations" />
+          <NavigationProperty Name="Employments" Relationship="Self.FK_dbo_Employments_dbo_Persons_PersonId" FromRole="Persons" ToRole="Employments" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_dbo_Jobs_dbo_Persons_PersonId" FromRole="Persons" ToRole="Jobs" />
+          <NavigationProperty Name="OrganiziationalUnits" Relationship="Self.FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId" FromRole="Persons" ToRole="OrganiziationalUnits" />
+          <NavigationProperty Name="Persons1" Relationship="Self.FK_dbo_Persons_dbo_Persons_ManagerId" FromRole="Persons" ToRole="Persons1" />
+          <NavigationProperty Name="Person1" Relationship="Self.FK_dbo_Persons_dbo_Persons_ManagerId" FromRole="Persons1" ToRole="Persons" />
+          <NavigationProperty Name="Tranings" Relationship="Self.FK_dbo_Tranings_dbo_Persons_PersonId" FromRole="Persons" ToRole="Tranings" />
+          <NavigationProperty Name="Vacations" Relationship="Self.FK_dbo_Vacations_dbo_Persons_PersonId" FromRole="Persons" ToRole="Vacations" />
+          <NavigationProperty Name="WorkRegistrys" Relationship="Self.FK_dbo_WorkRegistrys_dbo_Persons_PersonId" FromRole="Persons" ToRole="WorkRegistrys" />
+          <NavigationProperty Name="CourseMaterials" Relationship="Self.FK_REPO_CourseMaterials_dbo_Persons_PersonId" FromRole="Persons" ToRole="CourseMaterials" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_REPO_Documents_dbo_Persons_PersonId" FromRole="Persons" ToRole="Documents" />
+          <NavigationProperty Name="PromotialMaterials" Relationship="Self.FK_REPO_PromotialMaterials_dbo_Persons_PersonId" FromRole="Persons" ToRole="PromotialMaterials" />
+        </EntityType>
+        <EntityType Name="Traning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="DateOfPass" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Tranings_dbo_Persons_PersonId" FromRole="Tranings" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Vacation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VacationType" Type="Int32" Nullable="false" />
+          <Property Name="VacationAcceptation" Type="Byte" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <Property Name="VacationDocumentId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Vacations_dbo_Persons_PersonId" FromRole="Vacations" ToRole="Persons" />
+          <NavigationProperty Name="VacationDocument" Relationship="Self.FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId" FromRole="Vacations" ToRole="VacationDocuments" />
+        </EntityType>
+        <EntityType Name="WorkRegistry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateIn" Type="Time" Precision="7" />
+          <Property Name="DateOut" Type="Time" Precision="7" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_WorkRegistrys_dbo_Persons_PersonId" FromRole="WorkRegistrys" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="College">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="AccountLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ActionType" Type="Int32" Nullable="false" />
+          <Property Name="ActionDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AccountId" Type="Int64" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_LOG_AccountLogs_dbo_Accounts_AccountId" FromRole="AccountLogs" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="CourseMaterial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseType" Type="Int32" Nullable="false" />
+          <Property Name="DocumentName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Document" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="PersonId" Type="Int64" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_REPO_CourseMaterials_dbo_Persons_PersonId" FromRole="CourseMaterials" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonId" Type="Int64" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_REPO_Documents_dbo_Persons_PersonId" FromRole="Documents" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="PromotialMaterial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhotoTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_REPO_PromotialMaterials_dbo_Persons_PersonId" FromRole="PromotialMaterials" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="VacationDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="Binary" MaxLength="8000" FixedLength="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DataState" Type="Byte" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Vacations" Relationship="Self.FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId" FromRole="VacationDocuments" ToRole="Vacations" />
+        </EntityType>
+        <Association Name="FK_dbo_Accounts_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOG_AccountLogs_dbo_Accounts_AccountId">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountLogs" Type="Self.AccountLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountLogs">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AdditionalInformations_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdditionalInformations" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdditionalInformations">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employments_dbo_BankAccounts_BankAccountId">
+          <End Role="BankAccounts" Type="Self.BankAccount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employments" Type="Self.Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employments">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BenefitsProfits_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BenefitsProfits" Type="Self.BenefitsProfit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BenefitsProfits">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Collages_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Collages" Type="Self.Collage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collages">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ContactPersons_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ContactPersons" Type="Self.ContactPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersons">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employments_dbo_Contracts_ContractId">
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employments" Type="Self.Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employments">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Delegations_dbo_Persons_IdPerson">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Delegations" Type="Self.Delegation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delegations">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employments_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employments" Type="Self.Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employments">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Jobs_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Jobs" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrganiziationalUnits" Type="Self.OrganiziationalUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrganiziationalUnits">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Persons_dbo_Persons_ManagerId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Persons1" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons1">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Tranings_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tranings" Type="Self.Traning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tranings">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Vacations_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vacations" Type="Self.Vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vacations">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkRegistrys_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkRegistrys" Type="Self.WorkRegistry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkRegistrys">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPO_CourseMaterials_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseMaterials" Type="Self.CourseMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseMaterials">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPO_Documents_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Documents" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPO_PromotialMaterials_dbo_Persons_PersonId">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PromotialMaterials" Type="Self.PromotialMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotialMaterials">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId">
+          <End Role="VacationDocuments" Type="Self.VacationDocument" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vacations" Type="Self.Vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationDocuments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vacations">
+              <PropertyRef Name="VacationDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AdditionalInformations" EntityType="Self.AdditionalInformation" />
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccount" />
+          <EntitySet Name="BenefitsProfits" EntityType="Self.BenefitsProfit" />
+          <EntitySet Name="Collages" EntityType="Self.Collage" />
+          <EntitySet Name="CompaniesDictionaries" EntityType="Self.CompaniesDictionary" />
+          <EntitySet Name="ContactPersons" EntityType="Self.ContactPerson" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="Delegations" EntityType="Self.Delegation" />
+          <EntitySet Name="Employments" EntityType="Self.Employment" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="OrganiziationalUnits" EntityType="Self.OrganiziationalUnit" />
+          <EntitySet Name="Persons" EntityType="Self.Person" />
+          <EntitySet Name="Tranings" EntityType="Self.Traning" />
+          <EntitySet Name="Vacations" EntityType="Self.Vacation" />
+          <EntitySet Name="WorkRegistrys" EntityType="Self.WorkRegistry" />
+          <EntitySet Name="Banks" EntityType="Self.Bank" />
+          <EntitySet Name="Colleges" EntityType="Self.College" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="AccountLogs" EntityType="Self.AccountLog" />
+          <EntitySet Name="CourseMaterials" EntityType="Self.CourseMaterial" />
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="PromotialMaterials" EntityType="Self.PromotialMaterial" />
+          <EntitySet Name="VacationDocuments" EntityType="Self.VacationDocument" />
+          <AssociationSet Name="FK_dbo_Accounts_dbo_Persons_PersonId" Association="Self.FK_dbo_Accounts_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOG_AccountLogs_dbo_Accounts_AccountId" Association="Self.FK_LOG_AccountLogs_dbo_Accounts_AccountId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountLogs" EntitySet="AccountLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AdditionalInformations_dbo_Persons_PersonId" Association="Self.FK_dbo_AdditionalInformations_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="AdditionalInformations" EntitySet="AdditionalInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employments_dbo_BankAccounts_BankAccountId" Association="Self.FK_dbo_Employments_dbo_BankAccounts_BankAccountId">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Employments" EntitySet="Employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BenefitsProfits_dbo_Persons_PersonId" Association="Self.FK_dbo_BenefitsProfits_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="BenefitsProfits" EntitySet="BenefitsProfits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Collages_dbo_Persons_PersonId" Association="Self.FK_dbo_Collages_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Collages" EntitySet="Collages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ContactPersons_dbo_Persons_PersonId" Association="Self.FK_dbo_ContactPersons_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="ContactPersons" EntitySet="ContactPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employments_dbo_Contracts_ContractId" Association="Self.FK_dbo_Employments_dbo_Contracts_ContractId">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Employments" EntitySet="Employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Delegations_dbo_Persons_IdPerson" Association="Self.FK_dbo_Delegations_dbo_Persons_IdPerson">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Delegations" EntitySet="Delegations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employments_dbo_Persons_PersonId" Association="Self.FK_dbo_Employments_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Employments" EntitySet="Employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Jobs_dbo_Persons_PersonId" Association="Self.FK_dbo_Jobs_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId" Association="Self.FK_dbo_OrganiziationalUnits_dbo_Persons_ManagerId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="OrganiziationalUnits" EntitySet="OrganiziationalUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Persons_dbo_Persons_ManagerId" Association="Self.FK_dbo_Persons_dbo_Persons_ManagerId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Persons1" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Tranings_dbo_Persons_PersonId" Association="Self.FK_dbo_Tranings_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Tranings" EntitySet="Tranings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Vacations_dbo_Persons_PersonId" Association="Self.FK_dbo_Vacations_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Vacations" EntitySet="Vacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkRegistrys_dbo_Persons_PersonId" Association="Self.FK_dbo_WorkRegistrys_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="WorkRegistrys" EntitySet="WorkRegistrys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPO_CourseMaterials_dbo_Persons_PersonId" Association="Self.FK_REPO_CourseMaterials_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="CourseMaterials" EntitySet="CourseMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPO_Documents_dbo_Persons_PersonId" Association="Self.FK_REPO_Documents_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPO_PromotialMaterials_dbo_Persons_PersonId" Association="Self.FK_REPO_PromotialMaterials_dbo_Persons_PersonId">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="PromotialMaterials" EntitySet="PromotialMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId" Association="Self.FK_dbo_Vacations_REPO_VacationDocuments_VacationDocumentId">
+            <End Role="VacationDocuments" EntitySet="VacationDocuments" />
+            <End Role="Vacations" EntitySet="Vacations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HR_DatabaseModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdditionalInformations">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.AdditionalInformation">
+              <MappingFragment StoreEntitySet="AdditionalInformations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FacebookAccount" ColumnName="FacebookAccount" />
+                <ScalarProperty Name="GoogleAccount" ColumnName="GoogleAccount" />
+                <ScalarProperty Name="TwitterAccount" ColumnName="TwitterAccount" />
+                <ScalarProperty Name="GoldenLineAccount" ColumnName="GoldenLineAccount" />
+                <ScalarProperty Name="LinkInAccount" ColumnName="LinkInAccount" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAccounts">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.BankAccount">
+              <MappingFragment StoreEntitySet="BankAccounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankAddress" ColumnName="BankAddress" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BenefitsProfits">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.BenefitsProfit">
+              <MappingFragment StoreEntitySet="BenefitsProfits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BenefitBrutto" ColumnName="BenefitBrutto" />
+                <ScalarProperty Name="BenefitNetto" ColumnName="BenefitNetto" />
+                <ScalarProperty Name="BenefitType" ColumnName="BenefitType" />
+                <ScalarProperty Name="Retirement" ColumnName="Retirement" />
+                <ScalarProperty Name="Disability" ColumnName="Disability" />
+                <ScalarProperty Name="Sikness" ColumnName="Sikness" />
+                <ScalarProperty Name="Health" ColumnName="Health" />
+                <ScalarProperty Name="Taxable" ColumnName="Taxable" />
+                <ScalarProperty Name="AdvanceAt_PIT" ColumnName="AdvanceAt_PIT" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collages">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Collage">
+              <MappingFragment StoreEntitySet="Collages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FieldOfStudy" ColumnName="FieldOfStudy" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="AcademicTitle" ColumnName="AcademicTitle" />
+                <ScalarProperty Name="TitleOfResearch" ColumnName="TitleOfResearch" />
+                <ScalarProperty Name="Progres" ColumnName="Progres" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompaniesDictionaries">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.CompaniesDictionary">
+              <MappingFragment StoreEntitySet="CompaniesDictionaries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactPersons">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.ContactPerson">
+              <MappingFragment StoreEntitySet="ContactPersons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="BuildingNumber" ColumnName="BuildingNumber" />
+                <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Contract">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ContractType" ColumnName="ContractType" />
+                <ScalarProperty Name="ContractDimension" ColumnName="ContractDimension" />
+                <ScalarProperty Name="MonthBenefit" ColumnName="MonthBenefit" />
+                <ScalarProperty Name="BenefitPerHour" ColumnName="BenefitPerHour" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delegations">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Delegation">
+              <MappingFragment StoreEntitySet="Delegations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employments">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Employment">
+              <MappingFragment StoreEntitySet="Employments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PositionCode" ColumnName="PositionCode" />
+                <ScalarProperty Name="OrganiziationalUnitCode" ColumnName="OrganiziationalUnitCode" />
+                <ScalarProperty Name="EmploymentType" ColumnName="EmploymentType" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="BankAccountId" ColumnName="BankAccountId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganiziationalUnits">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.OrganiziationalUnit">
+              <MappingFragment StoreEntitySet="OrganiziationalUnits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="BuildingNumber" ColumnName="BuildingNumber" />
+                <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="IDCard" ColumnName="IDCard" />
+                <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tranings">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Traning">
+              <MappingFragment StoreEntitySet="Tranings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DateOfPass" ColumnName="DateOfPass" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacations">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Vacation">
+              <MappingFragment StoreEntitySet="Vacations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="VacationType" ColumnName="VacationType" />
+                <ScalarProperty Name="VacationAcceptation" ColumnName="VacationAcceptation" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="VacationDocumentId" ColumnName="VacationDocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkRegistrys">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.WorkRegistry">
+              <MappingFragment StoreEntitySet="WorkRegistrys">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DateIn" ColumnName="DateIn" />
+                <ScalarProperty Name="DateOut" ColumnName="DateOut" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Bank">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colleges">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.College">
+              <MappingFragment StoreEntitySet="Colleges">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountLogs">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.AccountLog">
+              <MappingFragment StoreEntitySet="AccountLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="ActionDescription" ColumnName="ActionDescription" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseMaterials">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.CourseMaterial">
+              <MappingFragment StoreEntitySet="CourseMaterials">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CourseType" ColumnName="CourseType" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+                <ScalarProperty Name="Document" ColumnName="Document" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PromotialMaterials">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.PromotialMaterial">
+              <MappingFragment StoreEntitySet="PromotialMaterials">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PhotoTitle" ColumnName="PhotoTitle" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VacationDocuments">
+            <EntityTypeMapping TypeName="HR_DatabaseModel.VacationDocument">
+              <MappingFragment StoreEntitySet="VacationDocuments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

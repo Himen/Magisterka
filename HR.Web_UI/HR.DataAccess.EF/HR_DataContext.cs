@@ -15,7 +15,7 @@ namespace HR.DataAccess.EF
         public HR_DataContext(): base("HR_Database")
         {
             //zeby nie tworzyc kontekstu
-            //Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
+            Database.SetInitializer<HR_DataContext>(new HRDBInitializer());
             
         }
         #region Models
@@ -247,7 +247,7 @@ namespace HR.DataAccess.EF
             #region Godziny pracy
 
             //Stworzenie czasów przyjscia i wyjscia
-            /*List<WorkRegistry> workRegistry = null;
+            List<WorkRegistry> workRegistry = null;
             foreach (var item in context.Persons)
             {
                 context.Persons.Attach(item);
@@ -260,7 +260,11 @@ namespace HR.DataAccess.EF
                 context.WorkRegistrys.Add(item);
             }
 
-            context.SaveChanges();*/
+            context.SaveChanges();
+
+            //delegacje
+
+            //chorobowe
 
             #endregion
 
