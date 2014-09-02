@@ -277,6 +277,19 @@ namespace HR.DataAccess.EF
             #endregion
 
 
+            #region CourseMaterials
+
+            foreach (var item in g.CourseMaterials)
+            {
+                item.Document = g.GenerateMaterialPhoto();
+                item.Person = context.Persons.Local[1];
+                context.CourseMaterials.Add(item);
+            }
+            context.SaveChanges();
+
+            #endregion
+
+
 
         }
     }

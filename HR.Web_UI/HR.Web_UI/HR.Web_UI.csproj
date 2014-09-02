@@ -142,12 +142,11 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\DayPlot\elements.css" />
-    <Content Include="Content\DayPlot\layout.css" />
     <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Images\dokumenty.jpg" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
+    <Content Include="Content\Images\Home_1.jpg" />
     <Content Include="Content\Images\kalendarz.gif" />
     <Content Include="Content\Images\kobieta.jpg" />
     <Content Include="Content\Images\logo.jpg" />
@@ -235,6 +234,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.1.js" />
     <Content Include="Scripts\jquery-ui.min-1.11.1.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -257,6 +258,8 @@
     <Content Include="Views\HR\_EmploymentHistory.cshtml" />
     <Content Include="Views\HR\AddCollage.cshtml" />
     <Content Include="Views\HR\AddDocument.cshtml" />
+    <Content Include="Views\Common\DisplayPromotialMaterials.cshtml" />
+    <Content Include="Views\Common\AboutAuthor.cshtml" />
     <None Include="Views\HR\AddJob.cshtml" />
     <Content Include="Views\HR\DisplayListOfWorkers.cshtml" />
     <Content Include="Views\HR\CandidatList.cshtml" />
@@ -286,14 +289,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HRController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\OrmTestsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\Account\AccountViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\CurrentUserModel.cs" />
     <Compile Include="Models\ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\LogViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\AdditionalInformationViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\BenefitsViewModel.cs" />
     <Compile Include="Models\ViewModels\HR\CollegesViewModel.cs" />
@@ -307,13 +314,17 @@
     <Compile Include="Models\ViewModels\HR\WorkersListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\CommonService.cs" />
     <Compile Include="Services\FileToByte.cs" />
     <Compile Include="Services\HRServices.cs" />
     <Compile Include="Services\HTMLExtension.cs" />
     <Compile Include="Services\ManagerService.cs" />
     <Compile Include="Services\ServicesInferface\IAccountService.cs" />
+    <Compile Include="Services\ServicesInferface\ICommonService.cs" />
     <Compile Include="Services\ServicesInferface\IHRServices.cs" />
     <Compile Include="Services\ServicesInferface\IManagerService.cs" />
+    <Compile Include="Services\ServicesInferface\IWorkerService.cs" />
+    <Compile Include="Services\WorkerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -327,6 +338,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Views\Worker\Index.cshtml" />
+    <Content Include="Views\Worker\ManageAccount.cshtml" />
+    <Content Include="Views\Worker\ChangePassword.cshtml" />
+    <Content Include="Views\Worker\GetLogData.cshtml" />
+    <Content Include="Views\Worker\DisplayWorkBoard.cshtml" />
+    <Content Include="Views\Worker\DisplayBenefits.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -336,6 +352,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\OrmTests\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HR.Core\HR.Core.csproj">

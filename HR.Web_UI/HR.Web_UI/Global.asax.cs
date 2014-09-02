@@ -101,7 +101,7 @@ namespace HR.Web_UI
                             roles += ";" + Enum.GetName(user.AccountType.GetType(), HR.Core.Enums.AccountType.Pracownik);
                         }
                         //let us extract the roles from our own custom cookie
-
+                        //CurrentUser = CurrentUser ?? authService.MapAccount(user);
 
                         //Let us set the Pricipal with our user specific details
                         HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(

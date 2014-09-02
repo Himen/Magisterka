@@ -20,8 +20,8 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.Name).CustomSqlType("varchar").Length(100);
             Map(c => c.CourseType).CustomType<int>().CustomSqlType("int");
             Map(c => c.Document).CustomSqlType("binary");
-            Map(c => c.DocumentName).CustomSqlType("varchar").Length(50);
-            Map(c => c.Description).CustomSqlType("varchar").Length(100).Nullable();
+            Map(c => c.DocumentName).CustomSqlType("varchar").Length(200);
+            Map(c => c.Description).CustomSqlType("varchar").Length(2000).Nullable();
 
             //Map(c => c.PersonId).CustomSqlType("bigint").Nullable();
 

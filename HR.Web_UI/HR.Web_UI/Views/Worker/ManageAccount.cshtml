@@ -1,0 +1,77 @@
+﻿@model HR.Web_UI.Models.ViewModels.Account.AccountViewModel
+@using HR.Web_UI.Services;
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Zarządzaj kontem</h3>
+    </div>
+    <div class="panel-body">
+        
+        <div class="panel panel-title">
+            <div class="panel-heading">Dane osobowe</div>
+            <div class="panel-body">
+                <div class="col-lg-2">
+                    <div class="list-group lis">
+                        <a href="javascript:getUserData();" class="list-group-item active">
+                            Dane pracownika
+                        </a>
+                        <a href="javascript:GetLogData();" class="list-group-item">Sprawdz historie logowań</a>
+                        <a href="javascript:getView();" class="list-group-item">Zmień hasło</a>
+                    </div>
+                </div>
+                <div id="userContener">
+                    <div class="col-lg-offset-1 col-lg-3">
+
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">@Html.LabelFor(p => p.UserName)</span>
+                            @Html.TextBoxFor(p => p.UserName, new { @class = "form-control" })
+                        </div><br />
+
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">@Html.Label("Imię")</span>
+                            @Html.TextBoxFor(p => p.Person.FirstName, new { @class = "form-control", @readonly = "readonly" })
+                        </div><br />
+
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">@Html.Label("Nazwisko")</span>
+                            @Html.TextBoxFor(p => p.Person.Surname, new { @class = "form-control", @readonly = "readonly" })
+                        </div><br />
+
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">@Html.Label("Data urodzenia")</span>
+                            @Html.TextBoxFor(p => p.Person.DateOfBirth, new { @class = "form-control", @readonly = "readonly" })
+                        </div><br />
+
+
+                    </div>
+
+                    <div class="col-lg-5">
+                        <span class="input-group-addon">@Html.LabelFor(p => p.Photo)</span><br />
+                        @Html.Image(Model.Photo, "h_300 w_20 m_l_150")<br /><br /><br />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function getUserData() {
+        $('#userContener').load("@Url.Action("ChangePassword", "Worker", new { Id=Model.Id})");
+    }
+</script>
+
+<script type="text/javascript">
+    function getView() {
+        $('#userContener').load("@Url.Action("ChangePassword", "Worker", new { Id=Model.Id})");
+    }
+</script>
+
+<script type="text/javascript">
+    function GetLogData() {
+        $('#userContener').load("@Url.Action("GetLogData", "Worker", new { Id = Model.Id })");
+    }
+</script>
+

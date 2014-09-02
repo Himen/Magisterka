@@ -9,6 +9,9 @@ using NH_R = HR.DataAccess.NH.Repositories;
 using EF_U = HR.DataAccess.EF.UnityOfWorks;
 using NH_U = HR.DataAccess.NH.UnityOfWorks;
 using HR.Core.Models.RepoModels;
+using HR.Web_UI.Services.ServicesInferface;
+using HR.Web_UI.Models.ViewModels.HR;
+using PagedList;
 
 namespace HR.Web_UI.Controllers
 {
@@ -17,13 +20,12 @@ namespace HR.Web_UI.Controllers
     /// </summary>
     public class CommonController : BaseController
     {
-#warning Zrobic do tego serwis
-        /*IAdminUnityOfWork<EF_R.Repository<PromotialMaterial, long>, EF_U.UnityOfWork> promotialMaterialUnityOfWork;
+        ICommonService commonService;
 
-        public CommonController(IAdminUnityOfWork<EF_R.Repository<PromotialMaterial, long>, EF_U.UnityOfWork> _promotialMaterialUnityOfWork)
+        public CommonController(ICommonService _commonService)
         {
-            promotialMaterialUnityOfWork = _promotialMaterialUnityOfWork;
-        }*/
+            this.commonService = _commonService;
+        }
 
         // GET: Common
         /// <summary>
@@ -38,7 +40,26 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult InformacjeOFirmie()
         {
-            //dodac prosty view model i obrobic widok
+            return View();
+        }
+
+        public ActionResult DisplayPromotialMaterials(string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No, string OrderType)
+        {
+            var materials = commonService.GetAllMaterials();
+
+            int Size_Of_Page = 10;
+            int No_Of_Page = (Page_No ?? 1);
+
+            PromotialMaterialViewModel pVM = new PromotialMaterialViewModel();
+            pVM.Materials = materials.OrderByDescending(p => p.Id).ToPagedList(No_Of_Page, Size_Of_Page);
+            pVM.PageCount = (int)Math.Ceiling((double)materials.Count() / Size_Of_Page);
+            pVM.PageNumber = Page_No ?? 1;
+
+            return View(pVM);
+        }
+
+        public ActionResult AboutAuthor()
+        {
             return View();
         }
 

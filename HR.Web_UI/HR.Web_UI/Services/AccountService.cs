@@ -47,6 +47,7 @@ namespace HR.Web_UI.Services
         {
             try
             {
+                
                 var x = admUnityOfWork.PersonRepo.GetAll().Where(c => c.Account.UserName == name).FirstOrDefault();
                 return x.Account;
             }

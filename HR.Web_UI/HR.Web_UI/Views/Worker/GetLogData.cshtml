@@ -1,0 +1,61 @@
+﻿@model HR.Web_UI.Models.ViewModels.Account.LogViewModel
+@using PagedList.Mvc;
+
+<div class="col-lg-offset-1 col-lg-9">
+    <table class="table">
+        <tr>
+            <th>
+                <label>
+                    Akcja
+                </label>
+            </th>
+            <th>
+                <label>
+                    Opis
+                </label>
+            </th>
+            <th>
+                <label>
+                    Rodzaj akcji
+                </label>
+            </th>
+            <th>
+                <label>
+                    Data rozpoczecia
+                </label>
+            </th>
+            <th>
+                <label>
+                    Data zakonczenia
+                </label>
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model.AccountLogs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Action)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActionDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+            </tr>
+        }
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model.AccountLogs, Page_No => Url.Action("GetLogData",
+        new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }))
+</div>

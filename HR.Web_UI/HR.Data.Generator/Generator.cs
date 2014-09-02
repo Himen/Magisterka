@@ -80,6 +80,18 @@ namespace HR.Data.Generator
             new Training {Name = "Microsoft Office Specialist (MOS) Expert", Type=TrainingType.Certyfikat, Description="Oficialny certyfikat Microsoftu. Osoba posiada duże doświadczenie z korzystania z aplikacji biurowych z pakietu office."}
         };
 
+#warning Dokument i osoba do wygenerowania
+        public List<CourseMaterial> CourseMaterials = new List<CourseMaterial> 
+        {
+            new CourseMaterial {Name = "XSS w aplikacjach webowych", CourseType= CourseType.BezpieczenstwoWAplikacjachWebowych, Description="Szkolenie zawiera podstawy jak zabezpieczyc aplikacje przed XSS", DocumentName="XSS"}, 
+            new CourseMaterial {Name = "Jak ustrzec się przed skachowaniem aplikacji", CourseType= CourseType.BezpieczenstwoWAplikacjachWebowych, Description="Szkolenie zawiera podstawy jak zabezpieczyc aplikacje przed XSS", DocumentName="HACK"}, 
+            new CourseMaterial {Name = "OWASP, czyli czego przestrzegac", CourseType= CourseType.BezpieczenstwoWAplikacjachWebowych, Description="Szkolenie zawiera podstawy jak zabezpieczyc aplikacje przed XSS", DocumentName="OWASP"}, 
+            new CourseMaterial {Name = "Linuk podstawy", CourseType= CourseType.Administracja, Description="Postawowe skrypty w Linuksie", DocumentName="LinuxPodstawy"}, 
+            new CourseMaterial {Name = "Windows wszystko co powinienies wiedziec", CourseType= CourseType.Administracja, Description="Najwazniejsze rzeczy jakie powininen znac programista w Windowsie", DocumentName="WindowsPodstawy"}, 
+            new CourseMaterial {Name = "Jak prowadzić szkolenia i wykłady", CourseType= CourseType.UmiejetnosciMiekie, Description="W jak łatwy sposób mozna przekazywac informacje innym osoba", DocumentName="Szkolenia"}, 
+            new CourseMaterial {Name = "Rozmowa z kilentem", CourseType= CourseType.UmiejetnosciMiekie, Description="Tutorial rozmowy z klientem", DocumentName="RozmowaZKlientem"}
+        };
+
         public List<CollegesDictionary> Colleges = new List<CollegesDictionary>
         {
             new CollegesDictionary{Address="gen. Jana Henryka Dąbrowskiego 69",City="Częstochowa",Country ="Polska",Name="Politechnika Częstochowska"},

@@ -8,11 +8,10 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="~/Content/DayPlot/elements.css" rel="stylesheet" />
-
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
-    <script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
+
 
     <meta name="description" content="HR helper aplication" />
 </head>
@@ -33,14 +32,20 @@
                 <!-- Grupowanie elementów menu w celu lepszego wyświetlania na urządzeniach moblinych -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/User/Index">Panel zadań</a></li>
-                        <li><a href="#">Wyświetl monitor pracy</a></li>
-                        @if(User.IsInRole("HR"))
-                        { 
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="/User/Index">Panel zadań</a></li>
+
+                            <li><a href="#">Wyświetl monitor pracy</a></li>
+                        }
+
+                        @if (User.IsInRole("HR"))
+                        {
                             <li><a href="#">Zarządzaj pracownikami</a></li>
                         }
-                        
+
                     </ul>
+
                     @*<form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Szukaj">
@@ -54,6 +59,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Witaj @User.Identity.Name<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Zarządzaj kontem", "ManageAccount", "Worker")</li>
+                                    <li class="divider"></li>
                                     <li>@Html.ActionLink("Wyloguj", "Logoff", "Account")</li>
                                     <li class="divider"></li>
                                 </ul>
@@ -68,15 +75,16 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Materiały<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Zarządzaj kontem</a></li>
+                                <li><a href="@Url.Action("DisplayPromotialMaterials", "Common")">Materiały promocyjne</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Materiały promocyjne</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="#">Materiały szkoleniowe</a></li>
+                                    <li class="divider"></li>
+                                }
+                                <li><a href="@Url.Action("InformacjeOFirmie", "Common")">Informacje o firmie</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Materiały szkoleniowe</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Informacje o firmie</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Informacje o tworcy</a></li>
+                                <li><a href="@Url.Action("AboutAuthor", "Common")">Informacje o tworcy</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -108,7 +116,9 @@
             $('#loading-indicator').hide();
         });
     </script>
-    <script src="~/Scripts/DayPlot/daypilot-all.min.js"></script>
+
+    <script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
+    
    
 
 </body>

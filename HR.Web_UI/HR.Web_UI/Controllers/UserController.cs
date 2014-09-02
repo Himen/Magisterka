@@ -14,14 +14,16 @@ namespace HR.Web_UI.Controllers
         public UserController()
         {
 #warning Zabezpieczyc jak sie skonczy sesja to ma akcji nie przepuszczac
+            //Currentuser <- pobrac z serwisu dane
 
         }
         // GET: User
         public ActionResult Index()
         {
-            if(CurrentUser.AccountType == AccountType.Pracownik)
+            var User = CurrentUser;
+            if (User.AccountType == AccountType.Pracownik)
                 return RedirectToAction("Index","Worker");
-            else if(CurrentUser.AccountType == AccountType.Kierownik)
+            else if (User.AccountType == AccountType.Kierownik)
                 return RedirectToAction("Index", "Manager");
             else
                 return RedirectToAction("Index", "HR");

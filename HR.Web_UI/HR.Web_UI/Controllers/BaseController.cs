@@ -1,4 +1,5 @@
 ﻿using HR.Web_UI.Models.ViewModels.Account;
+using HR.Web_UI.Services.ServicesInferface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,14 @@ namespace HR.Web_UI.Controllers
 {
     public class BaseController : Controller
     {
+        //http://www.strathweb.com/2012/05/using-ninject-with-the-latest-asp-net-web-api-source/
+        //wstrzyknac servis ninjectem
         public CurrentUserModel CurrentUser
         {
             get
             {
                 var user = Session["CurrentUser"] as CurrentUserModel;
+                //user = user ?? serv
                 return user;
             }
             set

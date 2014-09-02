@@ -117,6 +117,8 @@ using HR.Core.BasicContract;
             kernel.Bind<IHRServices>().To<HRServices>();
             kernel.Bind<IAccountService>().To<AccountService>();
             kernel.Bind<IManagerService>().To<ManagerService>();
+            kernel.Bind<IWorkerService>().To<WorkerService>();
+            kernel.Bind<ICommonService>().To<CommonService>();
 
         }        
     }
