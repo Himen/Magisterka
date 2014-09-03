@@ -65,5 +65,9 @@ namespace HR.Web_UI.Services.ServicesInferface
 
         List<CalendarEvent> GetWorkerEvents(long id);
 
+        bool InsertPersons(List<Person> persons);
+
+        bool InsertEmployees(List<Employment> employees);
+
     }
 }

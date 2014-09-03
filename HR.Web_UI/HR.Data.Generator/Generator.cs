@@ -271,8 +271,8 @@ namespace HR.Data.Generator
         public byte[] GenerateMenPhoto()
         {
             //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");//Assuming Test is your Folder
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");//Assuming Test is your Folder
-            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Mezczyzni");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
             FileInfo fileInfo = Files[r.Next(0, 5)];
@@ -336,9 +336,9 @@ namespace HR.Data.Generator
 
         public byte[] GenerateWomenPhoto()
         {
-            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");//Assuming Test is your Folder
             
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
             //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
@@ -362,9 +362,9 @@ namespace HR.Data.Generator
 
         public byte[] GenerateMaterialPhoto()
         {
-            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Materialy");//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Materialy");//Assuming Test is your Folder
 
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Materialy");
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Materialy");
             //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
@@ -387,9 +387,9 @@ namespace HR.Data.Generator
 
         public byte[] GenerateDocument()
         {
-            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Documents");//Assuming Test is your Folder
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Pawel_Chmielewski@epam.com\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Documents");//Assuming Test is your Folder
 
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
+            //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Desktop\Mgr\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
             //DirectoryInfo d = new DirectoryInfo(@"C:\Users\Hi men\Source\Repos\Magisterka\HR.Web_UI\HR.Data.Generator\Zdjecia\Kobiety");
             FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting Text files
 
@@ -753,6 +753,49 @@ namespace HR.Data.Generator
                             };
 
             if(r.Next(0,2)<1)
+                e.Contract.MonthBenefit = GenerateRandom_Payment();
+            else
+                e.Contract.BenefitPerHour = GenerateRandom_HourPayment();
+
+            return e;
+        }
+
+        public Employment EmployWorkerWithOutManager(Person p, string stanowisko, string dział)
+        {
+            var bank = RandomBank();
+            var date = RandomDay(new DateTime(2012, 1, 1));
+            DateTime? endDate = null;
+
+            if (r.Next(0, 10) > 6)
+            {
+                endDate = DateTime.Now;
+            }
+
+            Employment e = new Employment
+            {
+
+                EmploymentType = Core.Enums.EmploymentType.Zatrudniony,
+                Person = p,
+                BankAccount = new BankAccount()
+                {
+                    AccountNumber = GenerateAccountNumber(),
+                    BankAddress = bank.Address,
+                    BankName = bank.Name
+                },
+                PositionCode = stanowisko,
+                OrganiziationalUnitCode = dział,
+                StartDate = date,
+                EndDate = endDate,
+                Contract = new Contract()
+                {
+                    ContractDimension = ContractDimensionType.CalyEtat,
+                    ContractType = ContractType.Umowa_o_prace,
+                    EndDate = date.AddYears(2),
+                    StartDate = date
+                }
+            };
+
+            if (r.Next(0, 2) < 1)
                 e.Contract.MonthBenefit = GenerateRandom_Payment();
             else
                 e.Contract.BenefitPerHour = GenerateRandom_HourPayment();

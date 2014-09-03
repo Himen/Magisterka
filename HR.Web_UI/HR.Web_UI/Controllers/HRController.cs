@@ -672,15 +672,29 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult ChartTest()
         {
+            Series[] series = new Series[3];
+            series[0] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(new object[] { 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1 }),
+                Name = "Insert 100 Persons"
+            };
+            series[1] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(new object[] { 129.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1 }),
+                Name = "Insert 300 Persons"
+            };
+            series[2] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(new object[] { 29.9, 71.5, 106.4, 329.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1 }),
+                Name = "Insert 1000 Persons"
+            };
+
             Highcharts chart = new Highcharts("chart")
                 .SetXAxis(new XAxis
                 {
                     Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }
                 })
-                .SetSeries(new Series
-                {
-                    Data = new Data(new object[] { 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4 })
-                });
+                .SetSeries(series);
 
             return View(chart);
         }

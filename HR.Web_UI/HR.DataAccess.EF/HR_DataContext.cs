@@ -147,11 +147,10 @@ namespace HR.DataAccess.EF
             context.Persons.Local[0].Manager = context.Persons.Local[0];
 
             context.SaveChanges();
-            
 
 	        #endregion
 
-
+            /*
             #region Pracownicy
             List<Person> pracownicy = g.GeneratePersons(150);
 
@@ -292,8 +291,8 @@ namespace HR.DataAccess.EF
             context.SaveChanges();
 
             #endregion
-
-
+            */
+            
 
         }
     }

@@ -956,5 +956,51 @@ namespace HR.Web_UI.Services
             }
         }
 
+        public bool InsertPersons(List<Person> persons)
+        {
+            try
+            {
+                for (int i = 0; i < persons.Count; i++)
+                {
+                    personUnityOfWork.PersonRepo.Add(persons[i]);
+                }
+                personUnityOfWork.UnityOfWork.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                //personUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+        public bool InsertEmployees(List<Employment> employees)
+        {
+            try
+            {
+                for (int i = 0; i < employees.Count; i++)
+                {
+                    employmentUnityOfWork.EmploymentRepo.Add(employees[i]);
+                }
+                employmentUnityOfWork.UnityOfWork.SaveChanges();
+                return true;
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                //employmentUnityOfWork.UnityOfWork.Dispose();
+            }
+        }
+
+
     }
 }
