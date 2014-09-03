@@ -138,12 +138,12 @@ namespace HR.Web_UI.Controllers
             series[1] = new Series
             {
                 Data = new DotNet.Highcharts.Helpers.Data(series2),
-                Name = "Dla 300 osób"
+                Name = "Dla 200 osób"
             };
             series[2] = new Series
             {
                 Data = new DotNet.Highcharts.Helpers.Data(series3),
-                Name = "Dla 1000 osób"
+                Name = "Dla 300 osób"
             };
 
             var chart = CreateChart(series, "Wstawianie zatrudnionych pracowników do bazy danych. EF.");
@@ -196,7 +196,7 @@ namespace HR.Web_UI.Controllers
             for (int i = 0; i < 9; i++)
             {
                 stopwatch = new Stopwatch();
-                testPersons = g.GeneratePersons(300);
+                testPersons = g.GeneratePersons(200);
                 listWorkersToEmploy = new List<Employment>();
 
                 for (int j = 0; j < testPersons.Count; j = j + 1)
@@ -228,7 +228,7 @@ namespace HR.Web_UI.Controllers
             for (int i = 0; i < 9; i++)
             {
                 stopwatch = new Stopwatch();
-                testPersons = g.GeneratePersons(1000);
+                testPersons = g.GeneratePersons(300);
                 listWorkersToEmploy = new List<Employment>();
 
                 for (int j = 0; j < testPersons.Count; j = j + 1)
@@ -267,12 +267,12 @@ namespace HR.Web_UI.Controllers
             series[1] = new Series
             {
                 Data = new DotNet.Highcharts.Helpers.Data(series2),
-                Name = "Dla 300 pracowników"
+                Name = "Dla 200 pracowników"
             };
             series[2] = new Series
             {
                 Data = new DotNet.Highcharts.Helpers.Data(series3),
-                Name = "Dla 1000 pracowników"
+                Name = "Dla 300 pracowników"
             };
 
             var chart = CreateChart(series, "Wstawianie zatrudnionych pracowników do bazy danych. EF.");
@@ -1090,6 +1090,12 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult ChartTest()
         {
+            HR.DataAccess.Dapper.TemporarySolution.Repository rep = new DataAccess.Dapper.TemporarySolution.Repository();
+
+            List<Person> per = g.GeneratePersons(2);
+
+            rep.InsertPersons(per);
+
             Series[] series = new Series[3];
             series[0] = new Series
             {

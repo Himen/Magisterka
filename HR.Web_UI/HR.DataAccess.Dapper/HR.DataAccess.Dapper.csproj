@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.34.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Dapper.1.34\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DapperExtensions, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,9 +48,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OtherSolution\ReadMe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="READ MEE.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="TemporarySolution\IRepository.cs" />
+    <Compile Include="TemporarySolution\Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HR.Core\HR.Core.csproj">
+      <Project>{1f903fe2-8312-46b7-94d1-404ef3ae251e}</Project>
+      <Name>HR.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HR.Data.Generator\HR.Data.Generator.csproj">
+      <Project>{c1a07caf-87b1-48ec-b73d-822b5e3cec9c}</Project>
+      <Name>HR.Data.Generator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

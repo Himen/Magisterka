@@ -526,6 +526,10 @@
       <Project>{c1a07caf-87b1-48ec-b73d-822b5e3cec9c}</Project>
       <Name>HR.Data.Generator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HR.DataAccess.Dapper\HR.DataAccess.Dapper.csproj">
+      <Project>{b7d0d594-7b3d-4ea5-8383-afe7e36d80ad}</Project>
+      <Name>HR.DataAccess.Dapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HR.DataAccess.EF\HR.DataAccess.EF.csproj">
       <Project>{92f20bab-4478-48d8-bdba-3a16225b4ce8}</Project>
       <Name>HR.DataAccess.EF</Name>
