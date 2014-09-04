@@ -186,5 +186,16 @@ namespace HR.Web_UI.Services
         {
             throw new NotImplementedException();
         }
+
+
+        public bool DeletePersonsEF(List<Employment> employees)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdatePersonsEF(List<Person> persons)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

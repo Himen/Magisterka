@@ -12,6 +12,8 @@ namespace HR.Web_UI.Services.ServicesInferface
         bool InsertPersonsEF(List<Person> persons);
         bool InsertEmployeesEF(List<Employment> employees);
         IEnumerable<Person> GetAllWorkersEF();
+        bool DeletePersonsEF(List<Employment> employees);
+        bool UpdatePersonsEF(List<Person> persons);
 
         bool InsertPersonsNH(List<Person> persons);
         bool InsertEmployeesNH(List<Employment> employees);

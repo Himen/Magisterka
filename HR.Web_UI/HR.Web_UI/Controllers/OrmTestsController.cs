@@ -18,8 +18,8 @@ namespace HR.Web_UI.Controllers
     /// Getiing data
     /// Searching data
     /// Ordering data
-    /// 
-    /// 
+    /// Update data 
+    /// Delete data
     /// 
     /// Kometarz: przy dawaniu 1000 wierszow w forze 10 wystapilo out of memory
     /// </summary>
@@ -560,6 +560,18 @@ namespace HR.Web_UI.Controllers
 
             return View(chart);
         }
+
+        public bool UpdatePersonsEF(List<Person> persons)
+        {
+            return true;
+        }
+
+        public bool DeletePersonsEF(List<Employment> employees)
+        {
+            return true;
+        }
+        
+
 
         #endregion
 
