@@ -39,6 +39,9 @@
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.Mapping.Attributes">
+      <HintPath>..\packages\NHibernate.Mapping.Attributes.3.2.0.0\lib\NHibernate.Mapping.Attributes.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -49,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeMappings\Collage.cs" />
     <Compile Include="Mappings\AccountLogMapper.cs" />
     <Compile Include="Mappings\AccountMapper.cs" />
     <Compile Include="Mappings\AdditionalInformationMapper.cs" />
@@ -87,6 +91,9 @@
       <Project>{1f903fe2-8312-46b7-94d1-404ef3ae251e}</Project>
       <Name>HR.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XMLMapping\Collage.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

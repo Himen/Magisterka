@@ -2,7 +2,6 @@
 @model HR.Web_UI.Models.ViewModels.HR.WorkersListViewModel
 @using PagedList.Mvc;
 
-@Html.ActionLink("Dodaj nowego pracownika", "CreateWorker", null, new { @class = "btn btn-success col-lg-offset-5" })<br />
 @using (Html.BeginForm("DisplayListOfWorkers", "HR", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
 {
     <div class="form-group">
@@ -53,12 +52,7 @@
                 <span class="glyphicon glyphicon-arrow-down"></span>
             </label>
         </th>
-        <th>
-            <label>
-                @Html.ActionLink("Dział", "DisplayListOfWorkers", new { Sorting_Order = "Organization", Filter_Value = ViewBag.FilterValue, OrderType = ViewBag.OrderType }, new { @class = "btn btn-default" })
-                <span class="glyphicon glyphicon-arrow-down"></span>
-            </label>
-        </th>
+
     </tr>
 
     @foreach (var item in Model.Workers)
@@ -83,11 +77,8 @@
                 @Html.DisplayFor(modelItem => item.Manager.FirstName)   @Html.DisplayFor(modelItem => item.Manager.Surname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employment.OrganiziationalUnitCode)
-            </td>
-            <td>
                 @Html.ActionLink("Szczegóły", "WorkerDetails", new { Id = item.Id }, new { @class = "btn btn-warning" })
-                <button class="del btn btn-danger delete" data-toggle="modal" data-target="#myModal" data-id="@item.Id" data-firstname-to-delete="@item.FirstName" data-surname-to-delete="@item.Surname">Usuń</button>
+                <button class="del btn btn-danger delete" data-toggle="modal" data-target="#myModal" data-id="@item.Id" data-firstname-to-delete="@item.FirstName" data-surname-to-delete="@item.Surname">Delegacja</button>
                 @Html.ActionLink("Zwolnij", "DumpEmployee", new { Id = item.Id }, new { @class = "btn btn-info" })
             </td>
         </tr>

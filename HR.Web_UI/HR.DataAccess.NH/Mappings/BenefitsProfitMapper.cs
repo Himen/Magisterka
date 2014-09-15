@@ -26,8 +26,6 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.Taxable).CustomSqlType("float");
             Map(c => c.AdvanceAt_PIT).CustomSqlType("float");
 
-            //Map(c => c.PersonId).Nullable();
-            //Referencja do Person
             References(c => c.Person);
         }
     }

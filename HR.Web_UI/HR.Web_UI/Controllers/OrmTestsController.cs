@@ -5,6 +5,8 @@ using HR.Data.Generator;
 using HR.Web_UI.Services.ServicesInferface;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -27,6 +29,8 @@ namespace HR.Web_UI.Controllers
     {
         IORMTestService service;
         Generator g;
+        SqlConnection con;
+        string connString = ConfigurationManager.ConnectionStrings["HR_Database"].ToString();
 
         public OrmTestsController(IORMTestService service)
         {
@@ -146,7 +150,7 @@ namespace HR.Web_UI.Controllers
                 Name = "Dla 300 osób"
             };
 
-            var chart = CreateChart(series, "Wstawianie zatrudnionych pracowników do bazy danych. EF.");
+            var chart = CreateChart(series, "Wstawianie pracowników do bazy danych. EF.");
 
             return View(chart);
         }
@@ -556,19 +560,225 @@ namespace HR.Web_UI.Controllers
                 Name = "Dla 10000 wierszy"
             };
 
-            var chart = CreateChart(series, "Znalezienie litery 'a' w emailu. EF.");
+            var chart = CreateChart(series, "Znalezienie litery a w emailu. EF.");
 
             return View(chart);
         }
 
-        public bool UpdatePersonsEF(List<Person> persons)
+        public ActionResult UpdatePersonsEF(List<Employment> employees)
         {
-            return true;
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+
+            listOfGeneratedTimes = new List<double>();
+
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesEF().Take(2000).ToList();
+
+                foreach (var item in x)
+                {
+                    item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                    item.EditDate = DateTime.Now;
+                    item.EndDate = DateTime.Now;
+                }
+
+                service.UpdateEmploymentEF(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series1 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series1[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesEF().Take(5000).ToList();
+
+                foreach (var item in x)
+                {
+                    item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                    item.EditDate = DateTime.Now;
+                    item.EndDate = DateTime.Now;
+                }
+
+                service.UpdateEmploymentEF(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series2 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series2[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesEF().Take(10000).ToList();
+
+                foreach (var item in x)
+                {
+                    item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                    item.EditDate = DateTime.Now;
+                    item.EndDate = DateTime.Now;
+                }
+
+                service.UpdateEmploymentEF(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series3 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series3[i] = listOfGeneratedTimes[i];
+            }
+
+            Series[] series = new Series[3];
+            series[0] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series1),
+                Name = "Dla 2000 wierszy"
+            };
+            series[1] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series2),
+                Name = "Dla 5000 wierszy"
+            };
+            series[2] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series3),
+                Name = "Dla 10000 wierszy"
+            };
+
+            var chart = CreateChart(series, "Modyfikacja danych zatrudnienia. EF.");
+
+            return View(chart);
         }
 
-        public bool DeletePersonsEF(List<Employment> employees)
+        public ActionResult DeletePersonsEF(List<Employment> employees)
         {
-            return true;
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+
+            listOfGeneratedTimes = new List<double>();
+
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesEF().Take(2000).ToList();
+                service.DeleteEmploymentEF(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series1 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series1[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesEF().Take(5000).ToList();
+                service.DeleteEmploymentEF(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series2 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series2[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesEF().Take(10000).ToList();
+                service.DeleteEmploymentEF(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series3 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series3[i] = listOfGeneratedTimes[i];
+            }
+
+            Series[] series = new Series[3];
+            series[0] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series1),
+                Name = "Dla 2000 wierszy"
+            };
+            series[1] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series2),
+                Name = "Dla 5000 wierszy"
+            };
+            series[2] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series3),
+                Name = "Dla 10000 wierszy"
+            };
+
+            var chart = CreateChart(series, "Usunięcie pracowników. EF.");
+
+            return View(chart);
         }
         
 
@@ -576,7 +786,7 @@ namespace HR.Web_UI.Controllers
         #endregion
 
 
-
+        #region NHibernate
 
         public ActionResult  NHInsertDataTestUsingForLoop()
         {
@@ -614,7 +824,7 @@ namespace HR.Web_UI.Controllers
             for (int i = 0; i < 9; i++)
             {
                 //dla 10 prob zrobic petle i pobrac wyniki
-                testPersons = g.GeneratePersons(300);
+                testPersons = g.GeneratePersons(200);
 
                 // Begin timing
                 stopwatch = new Stopwatch();
@@ -642,7 +852,7 @@ namespace HR.Web_UI.Controllers
             for (int i = 0; i < 9; i++)
             {
                 //dla 10 prob zrobic petle i pobrac wyniki
-                testPersons = g.GeneratePersons(1000);
+                testPersons = g.GeneratePersons(300);
 
                 // Begin timing
                 stopwatch = new Stopwatch();
@@ -675,15 +885,15 @@ namespace HR.Web_UI.Controllers
             series[1] = new Series
             {
                 Data = new DotNet.Highcharts.Helpers.Data(series2),
-                Name = "Dla 300 osób"
+                Name = "Dla 200 osób"
             };
             series[2] = new Series
             {
                 Data = new DotNet.Highcharts.Helpers.Data(series3),
-                Name = "Dla 1000 osób"
+                Name = "Dla 300 osób"
             };
 
-            var chart = CreateChart(series, "Wstawianie zatrudnionych pracowników do bazy danych. EF.");
+            var chart = CreateChart(series, "Wstawianie pracowników do bazy danych. NH.");
 
             return View(chart);
         }
@@ -812,7 +1022,7 @@ namespace HR.Web_UI.Controllers
                 Name = "Dla 1000 pracowników"
             };
 
-            var chart = CreateChart(series, "Wstawianie zatrudnionych pracowników do bazy danych. EF.");
+            var chart = CreateChart(series, "Wstawianie zatrudnionych pracowników do bazy danych. NH.");
 
             return View(chart);
         }
@@ -906,7 +1116,7 @@ namespace HR.Web_UI.Controllers
                 Name = "Pobieranie 10000 osób"
             };
 
-            var chart = CreateChart(series, "Pobieranie danych pracowników. EF.");
+            var chart = CreateChart(series, "Pobieranie danych pracowników. NH.");
 
             return View(chart);
         }
@@ -1000,7 +1210,7 @@ namespace HR.Web_UI.Controllers
                 Name = "Dla 10000 osób"
             };
 
-            var chart = CreateChart(series, "Sortowanie pracowników po adresie email. EF.");
+            var chart = CreateChart(series, "Sortowanie pracowników po adresie email. NH.");
 
             return View(chart);
         }
@@ -1093,10 +1303,228 @@ namespace HR.Web_UI.Controllers
                 Name = "Dla 10000 wierszy"
             };
 
-            var chart = CreateChart(series, "Znalezienie litery 'a' w emailu. EF.");
+            var chart = CreateChart(series, "Znalezienie litery a w emailu. NH.");
 
             return View(chart);
         }
+
+
+        public ActionResult UpdatePersonsNH()
+        {
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+
+            listOfGeneratedTimes = new List<double>();
+
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesNH().Take(2000).ToList();
+
+                foreach (var item in x)
+                {
+                    item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                    item.EditDate = DateTime.Now;
+                    item.EndDate = DateTime.Now;
+                }
+
+                service.UpdateEmploymentNH(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series1 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series1[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesNH().Take(5000).ToList();
+
+                foreach (var item in x)
+                {
+                    item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                    item.EditDate = DateTime.Now;
+                    item.EndDate = DateTime.Now;
+                }
+
+                service.UpdateEmploymentNH(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series2 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series2[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesNH().Take(10000).ToList();
+
+                foreach (var item in x)
+                {
+                    item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                    item.EditDate = DateTime.Now;
+                    item.EndDate = DateTime.Now;
+                }
+
+                service.UpdateEmploymentNH(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series3 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series3[i] = listOfGeneratedTimes[i];
+            }
+
+            Series[] series = new Series[3];
+            series[0] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series1),
+                Name = "Dla 2000 wierszy"
+            };
+            series[1] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series2),
+                Name = "Dla 5000 wierszy"
+            };
+            series[2] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series3),
+                Name = "Dla 10000 wierszy"
+            };
+
+            var chart = CreateChart(series, "Modyfikacja danych zatrudnienia. NH.");
+
+            return View(chart);
+        }
+
+        public ActionResult DeletePersonsNH()
+        {
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+
+            listOfGeneratedTimes = new List<double>();
+
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesNH().Take(100).ToList();
+                service.DeleteEmploymentNH(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series1 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series1[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesNH().Take(200).ToList();
+                service.DeleteEmploymentNH(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series2 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series2[i] = listOfGeneratedTimes[i];
+            }
+
+            listOfGeneratedTimes = new List<double>();
+            for (int i = 0; i < 9; i++)
+            {
+                stopwatch = new Stopwatch();
+
+
+                stopwatch.Start();
+
+                var x = service.GetAllEmployeesNH().Take(300).ToList();
+                service.DeleteEmploymentNH(x);
+
+                stopwatch.Stop();
+
+                listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+            }
+
+            object[] series3 = new object[9];
+            for (int i = 0; i < 9; i++)
+            {
+                series3[i] = listOfGeneratedTimes[i];
+            }
+
+            Series[] series = new Series[3];
+            series[0] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series1),
+                Name = "Dla 100 wierszy"
+            };
+            series[1] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series2),
+                Name = "Dla 200 wierszy"
+            };
+            series[2] = new Series
+            {
+                Data = new DotNet.Highcharts.Helpers.Data(series3),
+                Name = "Dla 300 wierszy"
+            };
+
+            var chart = CreateChart(series, "Usunięcie pracowników. NH.");
+
+            return View(chart);
+        }
+
 
 
 
@@ -1129,6 +1557,801 @@ namespace HR.Web_UI.Controllers
 
             return View(chart);
         }
+
+        #endregion
+
+        #region Dapper
+        /*public ActionResult DapperTestIns()
+        {
+
+            List<Person> testPersons = g.GeneratePersons(1);
+            using (con = new SqlConnection(connString))
+            {
+            
+                con.Open();
+                service.InsertEmployeesDAP(testPersons,con);
+            }
+            
+            
+
+            return View();
+        }*/
+
+        public ActionResult DAPInsertDataTestUsingForLoop()
+        {
+            Stopwatch stopwatch = null;
+            Series[] series = new Series[3];
+            List<Person> testPersons = null;
+            List<TimeSpan> listOfGeneratedTimes = new List<TimeSpan>();
+
+            using (con =new SqlConnection(connString))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    //dla 10 prob zrobic petle i pobrac wyniki
+                    testPersons = g.GeneratePersons(100);
+
+                    // Begin timing
+                    stopwatch = new Stopwatch();
+                    stopwatch.Start();
+
+                    service.InsertPersonsDAP(testPersons,con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed);
+                    testPersons = null;
+                    stopwatch = null;
+                }
+
+                object[] series1 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series1[i] = listOfGeneratedTimes[i].TotalSeconds;
+                }
+
+                listOfGeneratedTimes = new List<TimeSpan>();
+
+                for (int i = 0; i < 9; i++)
+                {
+                    //dla 10 prob zrobic petle i pobrac wyniki
+                    testPersons = g.GeneratePersons(200);
+
+                    // Begin timing
+                    stopwatch = new Stopwatch();
+                    stopwatch.Start();
+
+                    /*for (int i = 0; i < testPersons.Count; i++)
+                    {*/
+                    service.InsertPersonsDAP(testPersons, con);
+                    /*}*/
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed);
+                    testPersons = null;
+                    stopwatch = null;
+                }
+
+                object[] series2 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series2[i] = listOfGeneratedTimes[i].TotalSeconds;
+                }
+
+                listOfGeneratedTimes = new List<TimeSpan>();
+                for (int i = 0; i < 9; i++)
+                {
+                    //dla 10 prob zrobic petle i pobrac wyniki
+                    testPersons = g.GeneratePersons(300);
+
+                    // Begin timing
+                    stopwatch = new Stopwatch();
+                    stopwatch.Start();
+
+                    /*for (int i = 0; i < testPersons.Count; i++)
+                    {*/
+                    service.InsertPersonsDAP(testPersons, con);
+                    /*}*/
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed);
+                    testPersons = null;
+                    stopwatch = null;
+                }
+            
+
+                object[] series3 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series3[i] = listOfGeneratedTimes[i].TotalSeconds;
+                }
+
+                
+                series[0] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series1),
+                    Name = "Dla 100 osób"
+                };
+                series[1] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series2),
+                    Name = "Dla 200 osób"
+                };
+                series[2] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series3),
+                    Name = "Dla 300 osób"
+                };
+            }
+
+            var chart = CreateChart(series, "Wstawianie pracowników do bazy danych. Dapper.");
+
+            return View(chart);
+        }
+        public ActionResult DapperInsertDataRelatedTestUsingForLoop()
+        {
+            Stopwatch stopwatch = null;
+
+            List<Person> testPersons = null;
+
+            List<Employment> listWorkersToEmploy = null;
+
+            List<TimeSpan> listOfGeneratedTimes = new List<TimeSpan>();
+
+            Series[] series = new Series[3];
+
+            using (con = new SqlConnection(connString))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+                    testPersons = g.GeneratePersons(100);
+                    listWorkersToEmploy = new List<Employment>();
+
+                    for (int j = 0; j < testPersons.Count; j = j + 1)
+                    {
+                        listWorkersToEmploy.Add(g.EmployWorkerWithOutManager(testPersons[j], "MPJ", "DPJ"));
+                    }
+
+                    // Begin timing
+                    stopwatch.Start();
+
+                    service.InsertEmployeesDAP(listWorkersToEmploy, con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed);
+
+                    stopwatch = null;
+                    testPersons = null;
+                    listWorkersToEmploy = null;
+                }
+
+                object[] series1 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series1[i] = listOfGeneratedTimes[i].TotalSeconds;
+                }
+
+                listOfGeneratedTimes = new List<TimeSpan>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+                    testPersons = g.GeneratePersons(200);
+                    listWorkersToEmploy = new List<Employment>();
+
+                    for (int j = 0; j < testPersons.Count; j = j + 1)
+                    {
+                        listWorkersToEmploy.Add(g.EmployWorkerWithOutManager(testPersons[j], "MPJ", "DPJ"));
+                    }
+
+                    // Begin timing
+                    stopwatch.Start();
+
+                    service.InsertEmployeesDAP(listWorkersToEmploy, con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed);
+
+                    stopwatch = null;
+                    testPersons = null;
+                    listWorkersToEmploy = null;
+                }
+
+                object[] series2 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series2[i] = listOfGeneratedTimes[i].TotalSeconds;
+                }
+
+                listOfGeneratedTimes = new List<TimeSpan>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+                    testPersons = g.GeneratePersons(300);
+                    listWorkersToEmploy = new List<Employment>();
+
+                    for (int j = 0; j < testPersons.Count; j = j + 1)
+                    {
+                        listWorkersToEmploy.Add(g.EmployWorkerWithOutManager(testPersons[j], "MPJ", "DPJ"));
+                    }
+
+                    // Begin timing
+                    stopwatch.Start();
+
+                    service.InsertEmployeesDAP(listWorkersToEmploy, con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed);
+
+                    stopwatch = null;
+                    testPersons = null;
+                    listWorkersToEmploy = null;
+                }
+
+                object[] series3 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series3[i] = listOfGeneratedTimes[i].TotalSeconds;
+                }
+
+                // dodac charta
+
+                
+                series[0] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series1),
+                    Name = "Dla 100 pracowników"
+                };
+                series[1] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series2),
+                    Name = "Dla 200 pracowników"
+                };
+                series[2] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series3),
+                    Name = "Dla 300 pracowników"
+                };
+            }
+
+            var chart = CreateChart(series, "Wstawianie zatrudnionych pracowników do bazy danych. Dapper.");
+
+            return View(chart);
+        }
+
+        public ActionResult DAPGetingDataTest()
+        {
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+            Series[] series = new Series[3];
+
+            listOfGeneratedTimes = new List<double>();
+
+            using (con = new SqlConnection(connString))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAP(con, 2000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series1 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series1[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAP(con, 5000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series2 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series2[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAP(con, 5000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series3 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series3[i] = listOfGeneratedTimes[i];
+                }
+
+                
+                series[0] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series1),
+                    Name = "Pobieranie 2000 osób"
+                };
+                series[1] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series2),
+                    Name = "Pobieranie 5000 osób"
+                };
+                series[2] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series3),
+                    Name = "Pobieranie 10000 osób"
+                };
+            }
+            var chart = CreateChart(series, "Pobieranie danych pracowników. Dapper.");
+
+            return View(chart);
+        }
+
+
+        public ActionResult DAPTestOrderByEmailData()
+        {
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+            Series[] series = new Series[3];
+
+            listOfGeneratedTimes = new List<double>();
+
+            using (con = new SqlConnection(connString))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAPOrder(con, "Emapil",2000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series1 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series1[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAPOrder(con, "Emapil", 5000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series2 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series2[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAPOrder(con, "Emapil", 10000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series3 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series3[i] = listOfGeneratedTimes[i];
+                }
+
+                
+                series[0] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series1),
+                    Name = "Dla 2000 osób"
+                };
+                series[1] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series2),
+                    Name = "Dla 5000 osób"
+                };
+                series[2] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series3),
+                    Name = "Dla 10000 osób"
+                };
+            }
+
+            var chart = CreateChart(series, "Sortowanie pracowników po adresie email. Dapper.");
+
+            return View(chart);
+        }
+
+        //problem z dzialaniem
+        public ActionResult DAPTestSearchALetherInEmailData()
+        {
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+            Series[] series = new Series[3];
+
+            listOfGeneratedTimes = new List<double>();
+
+            using (con = new SqlConnection(connString))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAPWhere(con, "", 2000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series1 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series1[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAPWhere(con, "", 5000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series2 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series2[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllWorkersDAPWhere(con, "", 10000);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series3 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series3[i] = listOfGeneratedTimes[i];
+                }
+
+
+                series[0] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series1),
+                    Name = "Dla 2000 wierszy"
+                };
+                series[1] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series2),
+                    Name = "Dla 5000 wierszy"
+                };
+                series[2] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series3),
+                    Name = "Dla 10000 wierszy"
+                };
+            }
+
+            var chart = CreateChart(series, "Znalezienie litery a w emailu. Dapper.");
+
+            return View(chart);
+        }
+
+
+        public ActionResult UpdatePersonsDAP(List<Employment> employees)
+        {
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+
+            Series[] series = new Series[3];
+
+            listOfGeneratedTimes = new List<double>();
+
+            using (con = new SqlConnection(connString))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+
+                    var x = service.GetAllEmployeesEF().Take(2000).ToList();
+
+                    foreach (var item in x)
+                    {
+                        item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                        item.EditDate = DateTime.Now;
+                        item.EndDate = DateTime.Now;
+                    }
+                    stopwatch.Start();
+
+                    service.UpdateEmploymentDAP(x, con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series1 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series1[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+
+
+                    var x = service.GetAllEmployeesEF().Take(5000).ToList();
+
+                    foreach (var item in x)
+                    {
+                        item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                        item.EditDate = DateTime.Now;
+                        item.EndDate = DateTime.Now;
+                    }
+
+                    stopwatch.Start();
+
+                    service.UpdateEmploymentDAP(x, con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series2 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series2[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+
+
+                    var x = service.GetAllEmployeesEF().Take(10000).ToList();
+
+                    foreach (var item in x)
+                    {
+                        item.EmploymentType = Core.Enums.EmploymentType.Zwolniony;
+                        item.EditDate = DateTime.Now;
+                        item.EndDate = DateTime.Now;
+                    }
+
+                    stopwatch.Start();
+
+                    service.UpdateEmploymentDAP(x, con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series3 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series3[i] = listOfGeneratedTimes[i];
+                }
+
+                
+                series[0] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series1),
+                    Name = "Dla 2000 wierszy"
+                };
+                series[1] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series2),
+                    Name = "Dla 5000 wierszy"
+                };
+                series[2] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series3),
+                    Name = "Dla 10000 wierszy"
+                };
+
+            }
+            var chart = CreateChart(series, "Modyfikacja danych zatrudnienia. Dapper.");
+
+            return View(chart);
+        }
+
+
+        //trzeba najperw dane wsadzic rzeby przetestowac bo usniete wszystie
+        public ActionResult DeletePersonsDAP()
+        {
+            Stopwatch stopwatch = null;
+            List<double> listOfGeneratedTimes = null;
+            Series[] series = new Series[3];
+
+            listOfGeneratedTimes = new List<double>();
+
+            using (con = new SqlConnection(connString))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllEmployeesDAP(con, 2000);
+                    service.DeleteEmploymentDAP(x.ToList(), con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series1 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series1[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllEmployeesDAP(con, 5000);
+                    service.DeleteEmploymentDAP(x.ToList(), con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series2 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series2[i] = listOfGeneratedTimes[i];
+                }
+
+                listOfGeneratedTimes = new List<double>();
+                for (int i = 0; i < 9; i++)
+                {
+                    stopwatch = new Stopwatch();
+
+
+                    stopwatch.Start();
+
+                    var x = service.GetAllEmployeesDAP(con, 10000);
+                    service.DeleteEmploymentDAP(x.ToList(), con);
+
+                    stopwatch.Stop();
+
+                    listOfGeneratedTimes.Add(stopwatch.Elapsed.TotalSeconds);
+
+                }
+
+                object[] series3 = new object[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    series3[i] = listOfGeneratedTimes[i];
+                }
+
+                
+                series[0] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series1),
+                    Name = "Dla 2000 wierszy"
+                };
+                series[1] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series2),
+                    Name = "Dla 5000 wierszy"
+                };
+                series[2] = new Series
+                {
+                    Data = new DotNet.Highcharts.Helpers.Data(series3),
+                    Name = "Dla 10000 wierszy"
+                };
+            }
+            var chart = CreateChart(series, "Usunięcie pracowników. Dapper.");
+
+            return View(chart);
+        }
+        
+
+
+        #endregion
+
 
         private Highcharts CreateChart(Series[] series,string chartTitle)
         {

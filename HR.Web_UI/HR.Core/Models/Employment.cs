@@ -9,6 +9,9 @@ namespace HR.Core.Models
     /// </summary>
     public class Employment : BaseEntity<long>
     {
+       /* public virtual long PersonId { get; set; }
+        public virtual long ContractId { get; set; }
+        public virtual long BankAccountId { get; set; }*/
         /// <summary>
         /// Id pozycji ktora się obejmuje
         /// </summary>

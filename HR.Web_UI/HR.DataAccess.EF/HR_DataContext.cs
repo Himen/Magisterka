@@ -150,7 +150,7 @@ namespace HR.DataAccess.EF
 
 	        #endregion
 
-            /*
+            
             #region Pracownicy
             List<Person> pracownicy = g.GeneratePersons(150);
 
@@ -241,8 +241,8 @@ namespace HR.DataAccess.EF
 
             #endregion
 
-
-
+            /*
+            
             #region Godziny pracy
 
             //Stworzenie czasów przyjscia i wyjscia

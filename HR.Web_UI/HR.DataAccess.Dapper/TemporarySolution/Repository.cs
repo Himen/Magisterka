@@ -11,7 +11,7 @@ using Dapper;
 
 namespace HR.DataAccess.Dapper.TemporarySolution
 {
-    public class Repository : IRepository
+    public class Repository //: IRepository
     {
         internal IDbConnection Connection
         {

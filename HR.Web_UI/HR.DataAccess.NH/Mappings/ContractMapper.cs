@@ -21,6 +21,7 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.BenefitPerHour).CustomSqlType("float").Nullable();
             Map(c => c.MonthBenefit).CustomSqlType("float").Nullable();
 
+            //HasOne(c => c.Employment).ForeignKey("ContractId").Cascade.Delete();
         }
     }
 }

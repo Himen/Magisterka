@@ -19,12 +19,15 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.EmploymentType).CustomType<int>().CustomSqlType("int");
             Map(c => c.StartDate).CustomSqlType("date");
             Map(c => c.EndDate).CustomSqlType("date").Nullable();
+            /*Map(c => c.PersonId);
+            Map(c => c.BankAccountId);
+            Map(c => c.ContractId);*/
 
-            References(c => c.Person);//.ForeignKey("PersonId").Cascade.Delete();
+            
 
-            References(c => c.Contract);//.ForeignKey("ContractId").Cascade.Delete();
+            HasOne(c => c.Contract).ForeignKey("Id").Cascade.Delete();
 
-            References(c => c.BankAccount);//.ForeignKey("BankAccountId").Cascade.Delete();
+            HasOne(c => c.BankAccount).ForeignKey("Id").Cascade.Delete();
         }
     }
 }

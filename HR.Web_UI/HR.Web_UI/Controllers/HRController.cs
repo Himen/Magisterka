@@ -32,6 +32,12 @@ namespace HR.Web_UI.Controllers
             return View();
         }
 
+        public ActionResult WorkPanel()
+        {
+            return View();
+        }
+
+
 
         /// <summary>
         /// Caly proces powinien byc odwracalny ale nie mamy na to czasu.

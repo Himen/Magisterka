@@ -95,7 +95,7 @@ namespace HR.DataAccess.NH.Repositories
                 throw new ArgumentNullException("Entity " + typeof(TEntity).Name);
 
             PropertyInfo propertyInfo = entity.GetType().GetProperty("EditDate");
-            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
+            propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, typeof(DateTime)), null);
 
             session.SaveOrUpdate(entity);
         }

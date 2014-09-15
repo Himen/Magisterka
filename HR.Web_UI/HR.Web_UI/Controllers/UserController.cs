@@ -24,7 +24,7 @@ namespace HR.Web_UI.Controllers
             if (User.AccountType == AccountType.Pracownik)
                 return RedirectToAction("Index","Worker");
             else if (User.AccountType == AccountType.Kierownik)
-                return RedirectToAction("Index", "Manager");
+                return RedirectToAction("StartView", "Manager");
             else
                 return RedirectToAction("Index", "HR");
         }

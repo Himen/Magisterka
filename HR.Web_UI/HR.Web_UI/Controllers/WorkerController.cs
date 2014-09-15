@@ -144,6 +144,12 @@ namespace HR.Web_UI.Controllers
 
         public ActionResult Calendar()
         {
+            //dodac dane do ladowania czegos
+            return View();
+        }
+
+        public ActionResult WorkPanel()
+        {
             return View();
         }
 

@@ -28,7 +28,11 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.IDCard).CustomSqlType("varchar").Length(10).Not.Nullable();
             Map(c => c.PESEL).CustomType<string>().Length(11).Not.Nullable();//tez powinno byc uniq
 #warning Problem z wielkoscia stringow taki zapis jest bledny  Map(c => c.Email).CustomSqlType("varchar").Length(80)
-            References(c => c.Manager).ForeignKey("ManagerId").Cascade.Delete();
+            //References(c => c.Manager).ForeignKey("ManagerId").Cascade.Delete();
+            HasOne(c => c.Manager).ForeignKey("ManagerId").Cascade.Delete();
+
+            References(c => c.Employment).Column("Id").ForeignKey("PersonId");
+
         }
     }
 }

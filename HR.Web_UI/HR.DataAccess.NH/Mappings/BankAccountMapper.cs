@@ -16,6 +16,8 @@ namespace HR.DataAccess.NH.Mappings
             Map(c => c.BankName).CustomSqlType("varchar").Length(100);
             Map(c => c.BankAddress).CustomSqlType("varchar").Length(100);
             Map(c => c.AccountNumber).CustomSqlType("varchar").Length(24);
+
+            HasOne(c => c.Employment).ForeignKey("Id").Cascade.Delete();
         }
     }
 }

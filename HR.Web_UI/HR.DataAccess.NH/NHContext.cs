@@ -38,9 +38,9 @@ namespace HR.DataAccess.NH
         {
             sessionFactory = Fluently.Configure()
                             .Database(MsSqlConfiguration.MsSql2008.ConnectionString(c =>
-                                c.FromConnectionStringWithKey("HR_Database1")))
+                                c.FromConnectionStringWithKey("HR_Database")).AdoNetBatchSize(600))
                             .Cache(c => c.UseQueryCache().ProviderClass<HashtableCacheProvider>())
-
+                            
                             .Mappings(m => m.FluentMappings.Add<AccountMapper>())
                             .Mappings(m => m.FluentMappings.Add<AccountLogMapper>())
                             .Mappings(m => m.FluentMappings.Add<AdditionalInformationMapper>())
@@ -65,7 +65,7 @@ namespace HR.DataAccess.NH
                             .Mappings(m => m.FluentMappings.Add<VacationMapper>())
                             .Mappings(m => m.FluentMappings.Add<WorkRegistryMapper>())
 
-                            .ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true, true))
+                            .ExposeConfiguration(cfg => new SchemaExport(cfg).Create(false, false))
                             .BuildConfiguration()
                             .BuildSessionFactory();
         }
